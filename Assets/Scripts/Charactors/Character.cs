@@ -18,10 +18,15 @@ public class Character : MonoBehaviour {
     #region Attack Refer
     private Vector2 attackingDirection;
     [SerializeField] private bool isFixedArrow = false;
-    [SerializeField] private GameObject attackArrow;
+    [SerializeField] public Transform attackDirection;
 
-    public UnityEvent onBasicAttack;
-    #endregion
+    [SerializeField] private Weapon basicWeapon;
+    private List<Weapon> weapons = new List<Weapon>();
+    private List<Accessory> accessories = new List<Accessory>();
+    private const int MAX_WEAPONS_COUNT = 6;
+    private const int MAX_ACCESSORIES_COUNT = 6;
+    [SerializeField] private Transform equipmentsParent;
+    #endregion Attack Refer
 
     State idleState = new State("Idle");
     State moveState = new State("Move");
@@ -31,7 +36,9 @@ public class Character : MonoBehaviour {
         animator = animator ?? GetComponent<Animator>();
 
         InitilizeState();
-        onBasicAttack.AddListener(() => { print("Do Basic Attack!"); });
+    }
+    protected void Start() {
+        AddWeapon(basicWeapon);
     }
     protected void InitilizeState() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
@@ -72,9 +79,7 @@ public class Character : MonoBehaviour {
     private void RotateArrow(Vector2 direction) {
         float rotateSpeed = 720f;
         float rotateDir = 1f;
-        float currentAngle = attackArrow.transform.rotation.eulerAngles.z;
-        // currentAngle = currentAngle <= 180 ? currentAngle : -(360 - currentAngle);
-        // float directionAngle = direction.x<0 ? Vector2.Angle(Vector2.up, direction) : -Vector2.Angle(Vector2.up, direction);
+        float currentAngle = attackDirection.transform.rotation.eulerAngles.z;
         float directionAngle = direction.x>0 ? 360-Vector2.Angle(Vector2.up, direction) : Vector2.Angle(Vector2.up, direction);
         if(Mathf.Abs(currentAngle - directionAngle) > rotateSpeed * Time.deltaTime) {
             float distance = directionAngle - currentAngle;
@@ -82,15 +87,16 @@ public class Character : MonoBehaviour {
             if(distance > 180) {
                 rotateDir = -1f;
             }
-            attackArrow.transform.Rotate(Vector3.forward * rotateSpeed * rotateDir * Time.deltaTime);
+            attackDirection.transform.Rotate(Vector3.forward * rotateSpeed * rotateDir * Time.deltaTime);
         } else {
-            attackArrow.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg);
+            attackDirection.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg);
         }
     }
     public void FixArrow(bool active) {
         isFixedArrow = active;
     }
-    protected virtual void BasciAttack() {
-        onBasicAttack.Invoke();
+    public void AddWeapon(Weapon weapon) {
+        Instantiate(weapon.gameObject, equipmentsParent);
+        weapons.Add(weapon);
     }
 }
