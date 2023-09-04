@@ -18,9 +18,13 @@ public class MonsterSpawner : MonoBehaviour {
         [SerializeField] float time;
         [SerializeField] UnityEvent action;
 
-        public int CompareTo(Scenario other)
-        {
-            throw new NotImplementedException();
+        public int CompareTo(Scenario other) {
+            if(this.time < other.time)
+                return -1;
+            else if(this.time > other.time)
+                return 1;
+            else
+                return 0;
         }
     }
 }
