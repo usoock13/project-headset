@@ -76,5 +76,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0413ccd733e6af4c80e654ed5d6113b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 1709495040}
+  characterSpawnPoint: {fileID: 1709495040}
   __testCharacter: {fileID: 1589356278, guid: 39cc942df7037bd45b07c98172302d66, type: 3}

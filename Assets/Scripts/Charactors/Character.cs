@@ -4,7 +4,10 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Character : MonoBehaviour {
+public class Character : MonoBehaviour, IDamageable {
+    [SerializeField] private float maxHp = 100;
+    [SerializeField] private float currentHp = 0;
+
     [SerializeField] private StateMachine stateMachine;
     [SerializeField] private Animator animator;
 
@@ -28,16 +31,25 @@ public class Character : MonoBehaviour {
     [SerializeField] private Transform equipmentsParent;
     #endregion Attack Refer
 
+    #region States Refer
     State idleState = new State("Idle");
     State moveState = new State("Move");
+    State hitState = new State("Hit");
+    State dieState = new State("Die");
+    #endregion States Refer
+
+    #region Animation Clips
+    const string ANIMATION_IDLE = "Warrior Idle";
+    const string ANIMATION_WALK = "Warrior Walk";
+    #endregion Animation Clips
 
     protected void Awake() {
         movement = movement ?? GetComponent<Movement>();
         animator = animator ?? GetComponent<Animator>();
-
         InitilizeState();
     }
     protected void Start() {
+        currentHp = maxHp;
         AddWeapon(basicWeapon);
     }
     protected void InitilizeState() {
@@ -50,13 +62,13 @@ public class Character : MonoBehaviour {
         idleState.onInactive = (State next) => {
             /* TODO : Release Idle Animation */
         };
-        #endregion
+        #endregion Initilize Idle State
         #region Initilize Move State
         moveState.onActive = (State previous) => {
             /* TODO : Enter Move Animation */
         };
         moveState.onStay = () => {
-            transform.Translate(MoveVector * Time.deltaTime);
+            movement.MoveToward(MoveVector * Time.deltaTime);
             if(!isFixedArrow) {
                 attackingDirection = moveDirection;
                 RotateArrow(moveDirection);
@@ -65,9 +77,15 @@ public class Character : MonoBehaviour {
         moveState.onInactive = (State previous) => {
             /* TODO : Release Move Animation */
         };
+        #endregion Initilize Move State
+        #region Initilize Die State
+        dieState.onActive += (State previous) => {
+            stateMachine.isMuted = true;
+            
+        };
+        #endregion Initilize Die State
 
         stateMachine.SetIntialState(idleState);
-        #endregion
     }
     public void SetMoveDirection(Vector2 direction) {
         moveDirection = direction;
@@ -98,5 +116,21 @@ public class Character : MonoBehaviour {
     public void AddWeapon(Weapon weapon) {
         Instantiate(weapon.gameObject, equipmentsParent);
         weapons.Add(weapon);
+    }
+    public void TakeDamage(float amount) {
+        currentHp -= amount;
+        if(currentHp <= 0) {
+            
+        }
+    }
+    public void TakeAttackDelay(float amount) {
+        throw new System.NotImplementedException();
+    }
+    public void TakeForce(Vector2 force) {
+        throw new System.NotImplementedException();
+    }
+    private void Die() {
+        stateMachine.ChangeState(dieState, false);
+        GameManager.instance.StageManager.GameOver();
     }
 }

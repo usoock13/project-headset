@@ -1,23 +1,29 @@
+using System.Collections;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public abstract class Monster : MonoBehaviour, IDamageable {
-    protected Character targetCharacter;
-
+    private Character targetCharacter;
+    protected Character TargetCharacter {
+        get {
+            targetCharacter ??= GameManager.instance.Character;
+            return targetCharacter;
+        }
+        set { targetCharacter ??= value; }
+    }
     [SerializeField] protected Movement movement;
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected Animator animator;
 
     [SerializeField] protected float moveSpeed = 5f;
-    protected Vector2 TargetDirection {
-        get { return (targetCharacter.transform.position - transform.position).normalized; }
-    }
+    protected Vector2 targetDirection;
     protected Vector2 MoveVector {
-        get { return TargetDirection * moveSpeed; }
+        get { return targetDirection * moveSpeed; }
     }
+    public abstract string MonsterType { get; }
 
     [SerializeField] protected State chaseState = new State("Chase");
-    [SerializeField] protected State hidState = new State("Hit");
+    [SerializeField] protected State hitState = new State("Hit");
     [SerializeField] protected State dieState = new State("Die");
 
     [SerializeField] protected float maxHp = 100;
@@ -34,14 +40,25 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         movement ??= GetComponent<Movement>();
         stateMachine ??= GetComponent<StateMachine>();
         animator ??= GetComponent<Animator>();
+
+        InitializeState();
+    }
+    private void Start() {
+        StartCoroutine(UpdateTargetPoint());
     }
 
-    private void InitializeMonster() {
+    public void InitializeMonster() {
         isArrive = true;
         currentHp = maxHp;
     }
     private void Die() {
         isArrive = false;
     }
-    public abstract void ChaseCharacter(Character target);
+    protected abstract void InitializeState();
+    private IEnumerator UpdateTargetPoint() {
+        while(isArrive) {
+            targetDirection = (TargetCharacter.transform.position - transform.position).normalized;
+            yield return new WaitForSeconds(.4f);
+        }
+    }
 }

@@ -3,18 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Character
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Chracter
   - Water
   - UI
   - Ground
   - Block
-  - 
-  - 
+  - Monster
+  - Effect
   - 
   - 
   - 

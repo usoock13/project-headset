@@ -2,6 +2,10 @@ using UnityEngine;
 
 [System.Serializable]
 public class BoxBounds {
+    [SerializeField] public float width;
+    [SerializeField] public float height;
+    [SerializeField] public Vector2 center;
+    
     public BoxBounds(Vector2 center, Vector2 size) {
         this.center = center;
         width = size.x;
@@ -13,9 +17,6 @@ public class BoxBounds {
         this.height = height;
     }
 
-    [SerializeField] public float width;
-    [SerializeField] public float height;
-    [SerializeField] public Vector2 center;
     public Vector2 Size {
         get { return new Vector2 (width, height); }
     }

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour {
     public Character Character {
         get { return stageManager.Character; }
     }
+    public bool GameIsOver {
+        get { return stageManager.isGameOver; }
+    }
 
     private void Awake() {
         if(instance == null)

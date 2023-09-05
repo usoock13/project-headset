@@ -234,6 +234,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &739212412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1518991961084924916, guid: de3366ee01f7be24f8debaf1c8d29730, type: 3}
+  m_PrefabInstance: {fileID: 1518991962091509312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1055963523
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +355,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2011709206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2011709207}
+  - component: {fileID: 2011709208}
+  m_Layer: 0
+  m_Name: Monster Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2011709207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011709206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 739212412}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2011709208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011709206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc6c35aecb9dcc40b78fbe1faa9234e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMonster: {fileID: 0}
+  defaultSpawncount: 1
+  defaultSpawnInterval: 1
+  monsterWolf: {fileID: -135941615971752392, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  monsterToad: {fileID: 0}
+  monsterUndead: {fileID: 0}
+  monsterWitch: {fileID: 0}
 --- !u!1001 &1518991962091509312
 PrefabInstance:
   m_ObjectHideFlags: 0

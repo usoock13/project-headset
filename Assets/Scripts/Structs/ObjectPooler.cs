@@ -19,6 +19,7 @@ public class ObjectPooler {
         this.poolingObject = poolingObject;
         this.onInPool = onInPool;
         this.onOutPool = onOutPool;
+        this.parent = parent;
         Store(count);
     }
     public void InPool(GameObject target) {
@@ -44,9 +45,10 @@ public class ObjectPooler {
 			Store(restoreCount);
 		}
 		GameObject go = queue.Dequeue();
-        go.transform.SetParent(null);
         go.transform.position = point;
         go.transform.rotation = rotation;
+        go.SetActive(true);
+        go.transform.SetParent(null);
         onOutPool?.Invoke(go);
         return go;
     }
