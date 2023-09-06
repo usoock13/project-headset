@@ -19,7 +19,7 @@ public class MonsterUndead : Monster
         throw new System.NotImplementedException();
     }
 
-    protected override void InitializeState()
+    protected override void InitializeStates()
     {
         throw new System.NotImplementedException();
     }

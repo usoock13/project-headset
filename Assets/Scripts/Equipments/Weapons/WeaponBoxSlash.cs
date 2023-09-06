@@ -12,7 +12,7 @@ public class WeaponBoxSlash : Weapon {
     }
 
     protected override void Attack() {
-        var effect = effectPooler.OutPool(character.attackDirection.position, character.attackDirection.rotation);
+        var effect = effectPooler.OutPool(character.attackArrow.position, character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, effect));
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect) {

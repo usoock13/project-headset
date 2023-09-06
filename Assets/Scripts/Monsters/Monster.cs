@@ -41,7 +41,7 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         stateMachine ??= GetComponent<StateMachine>();
         animator ??= GetComponent<Animator>();
 
-        InitializeState();
+        InitializeStates();
     }
     private void Start() {
         StartCoroutine(UpdateTargetPoint());
@@ -52,9 +52,10 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         currentHp = maxHp;
     }
     private void Die() {
+        stateMachine.ChangeState(dieState);
         isArrive = false;
     }
-    protected abstract void InitializeState();
+    protected abstract void InitializeStates();
     private IEnumerator UpdateTargetPoint() {
         while(isArrive) {
             targetDirection = (TargetCharacter.transform.position - transform.position).normalized;

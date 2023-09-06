@@ -38,12 +38,11 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(0, () => {
             defaultMonster = monsterWolf;
-            defaultSpawncount = 10;
-            defaultSpawnInterval = 1f;
+            defaultSpawncount = 3;
+            defaultSpawnInterval = 2f;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
         }));
     }
-    int count = 0;
 
     protected IEnumerator SpawnDefaultMonster() {
         while(!ScenarioIsEnd) {
@@ -71,7 +70,5 @@ public class ScenarioGrassDirector : ScenarioDirector {
                 m.transform.position = spawnPoint;
             }
         }
-        count += 10;
-        print(count);
     }
 }

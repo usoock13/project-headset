@@ -1,58 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Character : MonoBehaviour, IDamageable {
-    [SerializeField] private float maxHp = 100;
-    [SerializeField] private float currentHp = 0;
+    [SerializeField] protected int level = 0;
+    [SerializeField] protected int MaxExp {
+        get { return 50 + (int)(100 * Mathf.Pow(1.1f, level)); }
+    }
+    [SerializeField] protected int currentExp = 0;
+    [SerializeField] protected float maxHp = 100;
+    [SerializeField] protected float currentHp = 0;
 
-    [SerializeField] private StateMachine stateMachine;
+    [SerializeField] protected StateMachine stateMachine;
+    
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+
     [SerializeField] private Animator animator;
+    private string currentAnimation;
 
-    [SerializeField] private Movement movement;
-    [SerializeField] private float moveSpeed = 5f;
-    private Vector2 moveDirection;
-    private Vector2 MoveVector {
+    [SerializeField] protected Movement movement;
+    [SerializeField] protected float moveSpeed = 5f;
+    protected Vector2 moveDirection;
+    protected Vector2 MoveVector {
         get { return moveDirection.normalized * moveSpeed; }
     }
 
     #region Attack Refer
-    private Vector2 attackingDirection;
-    [SerializeField] private bool isFixedArrow = false;
-    [SerializeField] public Transform attackDirection;
+    protected Vector2 attackingDirection;
+    [SerializeField] protected bool isFixedArrow = false;
+    [SerializeField] public Transform attackArrow;
+    private Vector2 attackDirection;
 
-    [SerializeField] private Weapon basicWeapon;
-    private List<Weapon> weapons = new List<Weapon>();
-    private List<Accessory> accessories = new List<Accessory>();
-    private const int MAX_WEAPONS_COUNT = 6;
-    private const int MAX_ACCESSORIES_COUNT = 6;
-    [SerializeField] private Transform equipmentsParent;
+    [SerializeField] protected Weapon basicWeapon;
+    protected List<Weapon> weapons = new List<Weapon>();
+    protected List<Accessory> accessories = new List<Accessory>();
+    protected const int MAX_WEAPONS_COUNT = 6;
+    protected const int MAX_ACCESSORIES_COUNT = 6;
+    [SerializeField] protected Transform equipmentsParent;
     #endregion Attack Refer
 
     #region States Refer
-    State idleState = new State("Idle");
-    State moveState = new State("Move");
-    State hitState = new State("Hit");
-    State dieState = new State("Die");
+    protected State idleState = new State("Idle");
+    protected State walkState = new State("Walk");
+    protected State hitState = new State("Hit");
+    protected State dieState = new State("Die");
     #endregion States Refer
-
-    #region Animation Clips
-    const string ANIMATION_IDLE = "Warrior Idle";
-    const string ANIMATION_WALK = "Warrior Walk";
-    #endregion Animation Clips
 
     protected void Awake() {
         movement = movement ?? GetComponent<Movement>();
         animator = animator ?? GetComponent<Animator>();
-        InitilizeState();
+        spriteRenderer = spriteRenderer ?? GetComponent<SpriteRenderer>();
+        InitializeStates();
     }
     protected void Start() {
         currentHp = maxHp;
         AddWeapon(basicWeapon);
     }
-    protected void InitilizeState() {
+    protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
 
         #region Initilize Idle State
@@ -64,17 +71,17 @@ public class Character : MonoBehaviour, IDamageable {
         };
         #endregion Initilize Idle State
         #region Initilize Move State
-        moveState.onActive = (State previous) => {
+        walkState.onActive = (State previous) => {
             /* TODO : Enter Move Animation */
         };
-        moveState.onStay = () => {
-            movement.MoveToward(MoveVector * Time.deltaTime);
+        walkState.onStay = () => {
+            MoveToward(MoveVector * Time.deltaTime);
             if(!isFixedArrow) {
                 attackingDirection = moveDirection;
                 RotateArrow(moveDirection);
             }
         };
-        moveState.onInactive = (State previous) => {
+        walkState.onInactive = (State previous) => {
             /* TODO : Release Move Animation */
         };
         #endregion Initilize Move State
@@ -92,12 +99,28 @@ public class Character : MonoBehaviour, IDamageable {
         if(moveDirection == Vector2.zero)
             stateMachine.ChangeState(idleState);
         else
-            stateMachine.ChangeState(moveState);
+            stateMachine.ChangeState(walkState);
+    }
+    private void MoveToward(Vector2 moveVector) {
+        movement.MoveToward(moveVector);
+        if(isFixedArrow) {
+            if(Mathf.Abs(attackDirection.x) > 0.01f) {
+                spriteRenderer.flipX = attackDirection.x<0 ? true : false;
+            }
+            int animationDirection = attackDirection.x<0
+                                        ? (moveDirection.x<0  ?  1 : -1)
+                                        : (moveDirection.x>=0 ?  1 : -1);
+            animator.SetFloat("Move Animation Direction", animationDirection);
+        } else {
+            if(moveVector.x != 0)
+                spriteRenderer.flipX = moveVector.x<0 ? true : false;
+            animator.SetFloat("Move Animation Direction", 1);
+        }
     }
     private void RotateArrow(Vector2 direction) {
-        float rotateSpeed = 720f;
+        float rotateSpeed = 1080f;
         float rotateDir = 1f;
-        float currentAngle = attackDirection.transform.rotation.eulerAngles.z;
+        float currentAngle = attackArrow.transform.rotation.eulerAngles.z;
         float directionAngle = direction.x>0 ? 360-Vector2.Angle(Vector2.up, direction) : Vector2.Angle(Vector2.up, direction);
         if(Mathf.Abs(currentAngle - directionAngle) > rotateSpeed * Time.deltaTime) {
             float distance = directionAngle - currentAngle;
@@ -105,17 +128,20 @@ public class Character : MonoBehaviour, IDamageable {
             if(distance > 180) {
                 rotateDir = -1f;
             }
-            attackDirection.transform.Rotate(Vector3.forward * rotateSpeed * rotateDir * Time.deltaTime);
+            attackArrow.transform.Rotate(Vector3.forward * rotateSpeed * rotateDir * Time.deltaTime);
         } else {
-            attackDirection.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg);
+            attackArrow.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg);
         }
     }
     public void FixArrow(bool active) {
+        if(!isFixedArrow && active)
+            attackDirection = attackArrow.transform.rotation * Vector2.up;
         isFixedArrow = active;
     }
     public void AddWeapon(Weapon weapon) {
-        Instantiate(weapon.gameObject, equipmentsParent);
-        weapons.Add(weapon);
+        GameObject weaponInstance = Instantiate(weapon.gameObject, equipmentsParent);
+        weapons.Add(weaponInstance.GetComponent<Weapon>());
+        weaponInstance.transform.SetParent(equipmentsParent);
     }
     public void TakeDamage(float amount) {
         currentHp -= amount;
@@ -132,5 +158,14 @@ public class Character : MonoBehaviour, IDamageable {
     private void Die() {
         stateMachine.ChangeState(dieState, false);
         GameManager.instance.StageManager.GameOver();
+    }
+    protected void ChangeAnimation(string stateName, bool intoSelf=false) {
+        if(intoSelf || stateName != currentAnimation) {
+            currentAnimation = stateName;
+            animator.Play(stateName);
+        }
+    }
+    protected string CurrentAnimationName {
+        get { return animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; }
     }
 }

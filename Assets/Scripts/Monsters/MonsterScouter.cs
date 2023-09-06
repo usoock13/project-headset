@@ -15,7 +15,7 @@ public class MonsterScouter : Monster {
         throw new System.NotImplementedException();
     }
 
-    protected override void InitializeState() {
+    protected override void InitializeStates() {
         chaseState.onActive += (State previous) => {};
         chaseState.onActive += (State previous) => {
             movement.MoveToward(MoveVector * Time.deltaTime);

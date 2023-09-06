@@ -17,7 +17,7 @@ public class MonsterWolf : Monster {
         throw new System.NotImplementedException();
     }
 
-    protected override void InitializeState() {
+    protected override void InitializeStates() {
         #region Chase State
         chaseState.onActive += (State previous) => {};
         chaseState.onStay += () => {
