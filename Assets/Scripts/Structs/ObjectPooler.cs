@@ -40,8 +40,7 @@ public class ObjectPooler {
         return go;
     }
     public GameObject OutPool(Vector3 point, Quaternion rotation) {
-		if (queue.Count <= 0)
-		{
+		if (queue.Count <= 0) {
 			Store(restoreCount);
 		}
 		GameObject go = queue.Dequeue();

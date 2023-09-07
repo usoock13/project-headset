@@ -21,7 +21,8 @@ public class MonsterWolf : Monster {
         #region Chase State
         chaseState.onActive += (State previous) => {};
         chaseState.onStay += () => {
-            movement.MoveToward(MoveVector * Time.deltaTime);
+            // movement.MoveToward(MoveVector * Time.deltaTime);
+            movement.Translate(MoveVector * Time.deltaTime);
         };
         chaseState.onInactive += (State next) => {};
         #endregion Chase State

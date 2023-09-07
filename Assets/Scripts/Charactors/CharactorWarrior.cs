@@ -18,6 +18,5 @@ public class CharactorWarrior : Character {
     }
     private void OnEnterWalkState(State previous) {
         ChangeAnimation(ANIMATION_WALK);
-        print(CurrentAnimationName);
     }
 }

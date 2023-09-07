@@ -19,7 +19,7 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected SpriteRenderer spriteRenderer;
 
     [SerializeField] private Animator animator;
-    private string currentAnimation;
+    private string nextAnimation;
 
     [SerializeField] protected Movement movement;
     [SerializeField] protected float moveSpeed = 5f;
@@ -50,14 +50,18 @@ public class Character : MonoBehaviour, IDamageable {
     #endregion States Refer
 
     protected void Awake() {
-        movement = movement ?? GetComponent<Movement>();
-        animator = animator ?? GetComponent<Animator>();
+        movement ??= GetComponent<Movement>();
+        animator ??= GetComponent<Animator>();
         spriteRenderer = spriteRenderer ?? GetComponent<SpriteRenderer>();
         InitializeStates();
     }
     protected void Start() {
         currentHp = maxHp;
         AddWeapon(basicWeapon);
+    }
+    protected void Update() {
+        if(CurrentAnimationName != nextAnimation)
+            animator.Play(nextAnimation);
     }
     protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
@@ -160,8 +164,8 @@ public class Character : MonoBehaviour, IDamageable {
         GameManager.instance.StageManager.GameOver();
     }
     protected void ChangeAnimation(string stateName, bool intoSelf=false) {
-        if(intoSelf || stateName != currentAnimation) {
-            currentAnimation = stateName;
+        if(intoSelf || stateName != nextAnimation) {
+            nextAnimation = stateName;
             animator.Play(stateName);
         }
     }

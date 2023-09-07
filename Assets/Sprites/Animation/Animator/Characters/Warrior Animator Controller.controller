@@ -22,7 +22,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: bd2f3447ded287f44a6f23878ac72489, type: 2}
   m_Tag: 
-  m_SpeedParameter: Move Direction
+  m_SpeedParameter: Move Animation Direction
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -61,7 +61,7 @@ AnimatorController:
   m_Name: Warrior Animator Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Move Direction
+  - m_Name: Move Animation Direction
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
