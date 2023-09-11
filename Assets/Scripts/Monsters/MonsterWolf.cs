@@ -1,4 +1,5 @@
-using Unity.VisualScripting;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class MonsterWolf : Monster {
@@ -6,12 +7,26 @@ public class MonsterWolf : Monster {
 
     public override string MonsterType => "Monster Wolf";
 
+    private const string ANIMATION_CHASE = "Wolf Chase";
+    private const string ANIMATION_HIT = "Wolf Hit";
+    private const string ANIMATION_DIE = "Wolf Die";
+
+    private Coroutine takeAttackDelayCoroutine;
+    private Coroutine dieCoroutine;
+
     public override void TakeAttackDelay(float amount) {
-        throw new System.NotImplementedException();
+        takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(amount));
+    }
+    private IEnumerator TakeAttackDelayCoroutine(float second) {
+        stateMachine.ChangeState(hitState);
+        yield return new WaitForSeconds(second);
+        stateMachine.ChangeState(chaseState);
     }
     public override void TakeDamage(float amount) {
         currentHp -= amount;
-        print(currentHp);
+        if(currentHp <= 0) {
+            stateMachine.ChangeState(dieState);
+        }
     }
     public override void TakeForce(Vector2 force) {
         throw new System.NotImplementedException();
@@ -21,22 +36,33 @@ public class MonsterWolf : Monster {
         #region Chase State
         chaseState.onActive += (State previous) => {};
         chaseState.onStay += () => {
-            // movement.MoveToward(MoveVector * Time.deltaTime);
+            spriteAnimator.ChangeAnimation(ANIMATION_CHASE);
             movement.Translate(MoveVector * Time.deltaTime);
+            LookAt2D(targetDirection.x);
         };
         chaseState.onInactive += (State next) => {};
         #endregion Chase State
 
         #region Hit State
-        hitState.onActive += (State previous) => {};
-        hitState.onInactive += (State next) => {};
+        hitState.onActive += (State previous) => {
+            spriteAnimator.ChangeAnimation(ANIMATION_HIT);
+        };
+        hitState.onInactive += (State next) => {
+            StopCoroutine(takeAttackDelayCoroutine);
+        };
         #endregion Hit State
 
         #region Die State
         dieState.onActive += (State previous) => {
+            isArrive = false;
             stateMachine.isMuted = true;
+            spriteAnimator.ChangeAnimation(ANIMATION_DIE);
+            dieCoroutine = StartCoroutine(DieCoroutine());
+            OnDie();
         };
-        dieState.onInactive += (State next) => {};
+        dieState.onInactive += (State next) => {
+            StopCoroutine(dieCoroutine);
+        };
         #endregion Die State
 
         stateMachine.SetIntialState(chaseState);
@@ -49,5 +75,9 @@ public class MonsterWolf : Monster {
     }
     private void HitChracter(Character character) {
         character?.TakeDamage(10f);
+    }
+    private IEnumerator DieCoroutine() {
+        yield return new WaitForSeconds(3f);
+        ownerPooler.InPool(this.gameObject);
     }
 }

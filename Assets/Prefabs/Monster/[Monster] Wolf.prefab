@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6342264030857522984}
   - component: {fileID: 6342264030857522985}
-  - component: {fileID: 8780845750655688551}
+  - component: {fileID: 6342264030857522980}
+  - component: {fileID: 4473507440462479738}
   - component: {fileID: 6342264030857522981}
   - component: {fileID: 6342264030857522982}
   - component: {fileID: 6342264030857522983}
-  - component: {fileID: 6342264030857522980}
+  - component: {fileID: 600749143156082620}
+  - component: {fileID: 2666180196710873429}
   - component: {fileID: 3527790578222439278}
-  - component: {fileID: -135941615971752392}
   m_Layer: 8
   m_Name: '[Monster] Wolf'
   m_TagString: Untagged
@@ -91,8 +92,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8780845750655688551
-BoxCollider2D:
+--- !u!95 &6342264030857522980
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342264030857522990}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c6b39f86b632bc4e92ff4fa7831876b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &4473507440462479738
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,18 +126,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!50 &6342264030857522981
 Rigidbody2D:
   serializedVersion: 4
@@ -163,26 +174,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1478f0d77c2b8447ae4203500217f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6342264030857522980
-Animator:
-  serializedVersion: 4
+  radius: 1
+--- !u!114 &600749143156082620
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6342264030857522990}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483b6bfc4e36bf940bdf66165bf82a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2666180196710873429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342264030857522990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c0a753649de324c85991eb0da0dc10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 6342264030857522983}
+  stateMachine: {fileID: 6342264030857522982}
+  spriteRenderer: {fileID: 6342264030857522985}
+  spriteAnimator: {fileID: 600749143156082620}
+  collider2D: {fileID: 4473507440462479738}
+  rigidbody2D: {fileID: 6342264030857522981}
+  moveSpeed: 2
+  maxHp: 30
+  currentHp: 0
 --- !u!114 &3527790578222439278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,21 +223,3 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
---- !u!114 &-135941615971752392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6342264030857522990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c0a753649de324c85991eb0da0dc10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement: {fileID: 6342264030857522983}
-  stateMachine: {fileID: 6342264030857522982}
-  animator: {fileID: 6342264030857522980}
-  moveSpeed: 1
-  maxHp: 100
-  currentHp: 0

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScenarioGrassDirector : ScenarioDirector {
@@ -16,8 +15,6 @@ public class ScenarioGrassDirector : ScenarioDirector {
     [SerializeField] private MonsterToad monsterToad;
     [SerializeField] private MonsterUndead monsterUndead;
     [SerializeField] private MonsterWitch monsterWitch;
-
-    Dictionary<string, ObjectPooler> monsterPoolerMap;
     
     protected override void InitializeScenario() {
         monsterPoolerMap = new Dictionary<string, ObjectPooler> {
@@ -25,7 +22,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
                 monsterWolf.MonsterType,
                 new ObjectPooler(
                     monsterWolf.gameObject,
-                    (monster) => { monster.GetComponent<Monster>()?.InitializeMonster(); },
+                    null,
                     null,
                     this.transform,
                     200, 10
@@ -36,18 +33,18 @@ public class ScenarioGrassDirector : ScenarioDirector {
         // poolerUndead = new Dictionary<string, ObjectPooler>();
         // poolerWitch = new Dictionary<string, ObjectPooler>();
 
-        scenarios.Add(new Scenario(0, () => {
+        scenarios.Add(new Scenario(1, () => {
             defaultMonster = monsterWolf;
-            defaultSpawncount = 3;
-            defaultSpawnInterval = 2f;
+            defaultSpawncount = 1;
+            defaultSpawnInterval = 10f;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
         }));
     }
 
     protected IEnumerator SpawnDefaultMonster() {
         while(!ScenarioIsEnd) {
-            yield return new WaitForSeconds(defaultSpawnInterval);
             SpawnMonster(defaultMonster, defaultSpawncount);
+            yield return new WaitForSeconds(defaultSpawnInterval);
         }
     }
 
@@ -61,14 +58,20 @@ public class ScenarioGrassDirector : ScenarioDirector {
         StopCoroutine(spawnDefaultMonsterCoroutine);
     }
 
-    protected override void SpawnMonster(Monster monster, int amount) {
+    protected override List<Monster> SpawnMonster(Monster monster, int amount) {
         ObjectPooler pooler;
         if(monsterPoolerMap.TryGetValue(monster.MonsterType, out pooler)) {
+            List<Monster> result = new List<Monster>();
             for(int i=0; i<amount; i++) {
                 Vector2 spawnPoint = RandomDirection * spawnDistance + (Vector2)Character.transform.position;
-                GameObject m = pooler.OutPool();
-                m.transform.position = spawnPoint;
+                GameObject monsterInstance = pooler.OutPool();
+                monsterInstance.transform.position = spawnPoint;
+                Monster m;
+                if(monsterInstance.TryGetComponent<Monster>(out m))
+                    result.Add(monsterInstance.GetComponent<Monster>());
             }
+            return result;
         }
+        return null;
     }
 }

@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Events;
 
+[RequireComponent(typeof(SpriteAnimator))]
+[RequireComponent(typeof(StateMachine))]
 public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected int level = 0;
     [SerializeField] protected int MaxExp {
@@ -17,8 +16,8 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected StateMachine stateMachine;
     
     [SerializeField] protected SpriteRenderer spriteRenderer;
-
-    [SerializeField] private Animator animator;
+    
+    [SerializeField] protected SpriteAnimator spriteAnimator;
     private string nextAnimation;
 
     [SerializeField] protected Movement movement;
@@ -51,17 +50,13 @@ public class Character : MonoBehaviour, IDamageable {
 
     protected void Awake() {
         movement ??= GetComponent<Movement>();
-        animator ??= GetComponent<Animator>();
+        spriteAnimator ??= GetComponent<SpriteAnimator>();
         spriteRenderer = spriteRenderer ?? GetComponent<SpriteRenderer>();
         InitializeStates();
     }
     protected void Start() {
         currentHp = maxHp;
         AddWeapon(basicWeapon);
-    }
-    protected void Update() {
-        if(CurrentAnimationName != nextAnimation)
-            animator.Play(nextAnimation);
     }
     protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
@@ -114,11 +109,11 @@ public class Character : MonoBehaviour, IDamageable {
             int animationDirection = attackDirection.x<0
                                         ? (moveDirection.x<0  ?  1 : -1)
                                         : (moveDirection.x>=0 ?  1 : -1);
-            animator.SetFloat("Move Animation Direction", animationDirection);
+            spriteAnimator.SetFloat("Move Animation Direction", animationDirection);
         } else {
             if(moveVector.x != 0)
                 spriteRenderer.flipX = moveVector.x<0 ? true : false;
-            animator.SetFloat("Move Animation Direction", 1);
+            spriteAnimator.SetFloat("Move Animation Direction", 1);
         }
     }
     private void RotateArrow(Vector2 direction) {
@@ -162,14 +157,5 @@ public class Character : MonoBehaviour, IDamageable {
     private void Die() {
         stateMachine.ChangeState(dieState, false);
         GameManager.instance.StageManager.GameOver();
-    }
-    protected void ChangeAnimation(string stateName, bool intoSelf=false) {
-        if(intoSelf || stateName != nextAnimation) {
-            nextAnimation = stateName;
-            animator.Play(stateName);
-        }
-    }
-    protected string CurrentAnimationName {
-        get { return animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; }
     }
 }

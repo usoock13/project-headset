@@ -1,7 +1,10 @@
 using System.Collections;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.Events;
 
+[RequireComponent(typeof(SpriteAnimator))]
+[RequireComponent(typeof(StateMachine))]
 public abstract class Monster : MonoBehaviour, IDamageable {
     private Character targetCharacter;
     protected Character TargetCharacter {
@@ -13,7 +16,10 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     }
     [SerializeField] protected Movement movement;
     [SerializeField] protected StateMachine stateMachine;
-    [SerializeField] protected Animator animator;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected SpriteAnimator spriteAnimator;
+    [SerializeField] new protected Collider2D collider2D;
+    [SerializeField] new protected Rigidbody2D rigidbody2D;
 
     [SerializeField] protected float moveSpeed = 5f;
     protected Vector2 targetDirection;
@@ -28,7 +34,10 @@ public abstract class Monster : MonoBehaviour, IDamageable {
 
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float currentHp = 0;
-    public bool isArrive { get; private set;} = true;
+    public bool isArrive { get; protected set;} = true;
+    public UnityAction<Monster> onDie;
+
+    [SerializeField] protected ObjectPooler ownerPooler = null;
 
     #region IDamageable Define
     public abstract void TakeAttackDelay(float amount);
@@ -36,24 +45,32 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     public abstract void TakeForce(Vector2 force);
     #endregion IDamageable Define
     
-    private void Awake() {
+    protected void Awake() {
         movement ??= GetComponent<Movement>();
         stateMachine ??= GetComponent<StateMachine>();
-        animator ??= GetComponent<Animator>();
+        spriteRenderer ??= GetComponent<SpriteRenderer>();
+        spriteAnimator ??= GetComponent<SpriteAnimator>();
+        collider2D ??= GetComponent<Collider2D>();
+        rigidbody2D ??= GetComponent<Rigidbody2D>();
 
         InitializeStates();
     }
-    private void Start() {
+    protected void Start() {
         StartCoroutine(UpdateTargetPoint());
     }
-
+    protected void OnEnable() {
+        InitializeMonster();
+    }
     public void InitializeMonster() {
         isArrive = true;
         currentHp = maxHp;
+        rigidbody2D.simulated = true;
+        ownerPooler = GameManager.instance.StageManager.ScenarioDirector.monsterPoolerMap[this.MonsterType];
     }
-    private void Die() {
-        stateMachine.ChangeState(dieState);
+    protected virtual void OnDie() {
         isArrive = false;
+        rigidbody2D.simulated = false;
+        onDie?.Invoke(this);
     }
     protected abstract void InitializeStates();
     private IEnumerator UpdateTargetPoint() {
@@ -61,5 +78,9 @@ public abstract class Monster : MonoBehaviour, IDamageable {
             targetDirection = (TargetCharacter.transform.position - transform.position).normalized;
             yield return new WaitForSeconds(.4f);
         }
+    }
+    protected void LookAt2D(float x) {
+        if(x!=0)
+            spriteRenderer.flipX = x>0 ? true : false;
     }
 }

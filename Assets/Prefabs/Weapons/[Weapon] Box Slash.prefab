@@ -4888,6 +4888,9 @@ MonoBehaviour:
     height: 1.5
     center: {x: 0, y: 1.5}
   particle: {fileID: 716361608}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4673326878481562617
 GameObject:
   m_ObjectHideFlags: 0

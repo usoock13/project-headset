@@ -22,6 +22,8 @@ public abstract class ScenarioDirector : MonoBehaviour {
     protected Vector2 RandomDirection {
         get { return Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward) * Vector2.up; }
     }
+    
+    public Dictionary<string, ObjectPooler> monsterPoolerMap { get; protected set; }
 
     #region Unity Events
     protected virtual void Start() {
@@ -42,7 +44,7 @@ public abstract class ScenarioDirector : MonoBehaviour {
     #endregion Unity Events
     
     protected abstract void InitializeScenario();
-    protected abstract void SpawnMonster(Monster monster, int amount);
+    protected abstract List<Monster> SpawnMonster(Monster monster, int amount);
 
     [Serializable]
     public struct Scenario : IComparable<Scenario> {
