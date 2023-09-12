@@ -41,7 +41,8 @@ public class Movement : MonoBehaviour {
     }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.layer == BLOCK_LAYER) {
-            transform.Translate((transform.position - other.transform.position) * Time.deltaTime);
+            transform.Translate(((Vector2)transform.position - other.ClosestPoint(transform.position)) * Time.deltaTime);
+            print((Vector2)transform.position - other.ClosestPoint(transform.position));
         }
     }
 }

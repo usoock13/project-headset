@@ -4883,9 +4883,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5851903b562f5a6418ac8205a1a34af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originWeapon: {fileID: 0}
   effectBounds:
     width: 3
-    height: 1.5
+    height: 2.2
     center: {x: 0, y: 1.5}
   particle: {fileID: 716361608}
   targetLayer:
@@ -4936,5 +4937,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea451edf4337274199ba48f205fdc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDelay: 2
-  boxEffect: {fileID: 716361605}
+  maxLevel: 3
+  boxEffect: {fileID: 716361609}

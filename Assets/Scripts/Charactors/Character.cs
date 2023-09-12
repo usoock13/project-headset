@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteAnimator))]
@@ -141,6 +142,7 @@ public class Character : MonoBehaviour, IDamageable {
         GameObject weaponInstance = Instantiate(weapon.gameObject, equipmentsParent);
         weapons.Add(weaponInstance.GetComponent<Weapon>());
         weaponInstance.transform.SetParent(equipmentsParent);
+        print(weaponInstance.GetComponent<Weapon>().Description);
     }
     public void TakeDamage(float amount) {
         currentHp -= amount;

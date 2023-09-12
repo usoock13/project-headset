@@ -21,7 +21,7 @@ public class SpriteAnimator : MonoBehaviour {
         _animator = GetComponent<Animator>();
     }
     private void Update() {
-        if(CurrentAnimationIs(_nextAnimationName)
+        if(!CurrentAnimationIs(_nextAnimationName)
         && _nextAnimationName != null)
             _animator.Play(_nextAnimationName);
     }
