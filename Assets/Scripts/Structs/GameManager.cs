@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -19,11 +21,16 @@ public class GameManager : MonoBehaviour {
         get { return stageManager.isGameOver; }
     }
 
+    public Action onLevelUp;
+
     private void Awake() {
         if(instance == null)
             instance = this;
         else
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+    }
+    public void LevelUp() {
+        onLevelUp?.Invoke();
     }
 }

@@ -21,7 +21,7 @@ public class WeaponBoxSlash : Weapon {
     public override Sprite Icon {
         get { throw new System.NotImplementedException(); }
     }
-    public override string WeaponName {
+    public override string Name {
         get { throw new System.NotImplementedException(); }
     }
     public override string Description {

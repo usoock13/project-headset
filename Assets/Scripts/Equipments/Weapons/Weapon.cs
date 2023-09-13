@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public abstract class Weapon : MonoBehaviour {
+public abstract class Weapon : Equipment {
     protected Character character;
     
     #region Weapon Status
@@ -10,12 +10,6 @@ public abstract class Weapon : MonoBehaviour {
     protected abstract int MaxLevel { get; }
     protected abstract float AttackInterval { get; }
     #endregion Weapon Status
-
-    #region Weapon Information
-    public abstract Sprite Icon { get; }
-    public abstract string WeaponName { get; }
-    public abstract string Description { get; }
-    #endregion Weapon Information
 
     protected float currentTime = 0;
 
@@ -37,5 +31,8 @@ public abstract class Weapon : MonoBehaviour {
         } else {
             throw new System.Exception("Level is max.");
         }
+    }
+    public override void OnEquipped() {
+        GameManager.instance.Character.AddWeapon(this);
     }
 }

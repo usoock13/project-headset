@@ -36,7 +36,7 @@ public class Character : MonoBehaviour, IDamageable {
 
     [SerializeField] protected Weapon basicWeapon;
     protected List<Weapon> weapons = new List<Weapon>();
-    protected List<Accessory> accessories = new List<Accessory>();
+    protected List<Artifact> artifacts = new List<Artifact>();
     protected const int MAX_WEAPONS_COUNT = 6;
     protected const int MAX_ACCESSORIES_COUNT = 6;
     [SerializeField] protected Transform equipmentsParent;
@@ -141,8 +141,16 @@ public class Character : MonoBehaviour, IDamageable {
     public void AddWeapon(Weapon weapon) {
         GameObject weaponInstance = Instantiate(weapon.gameObject, equipmentsParent);
         weapons.Add(weaponInstance.GetComponent<Weapon>());
-        weaponInstance.transform.SetParent(equipmentsParent);
-        print(weaponInstance.GetComponent<Weapon>().Description);
+        /* 
+            *** TODO : Update UI that show Chracter information. ***
+         */
+    }
+    public void AddArtifact(Artifact artifact) {
+        GameObject artifactInstance = Instantiate(artifact.gameObject, equipmentsParent);
+        artifacts.Add(artifactInstance.GetComponent<Artifact>());
+        /* 
+            *** TODO : Update UI that show Chracter information. ***
+         */
     }
     public void TakeDamage(float amount) {
         currentHp -= amount;
