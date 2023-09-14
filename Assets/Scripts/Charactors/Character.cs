@@ -6,6 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteAnimator))]
 [RequireComponent(typeof(StateMachine))]
 public class Character : MonoBehaviour, IDamageable {
+    private StageManager StageManager {
+        get { return GameManager.instance.StageManager; }
+    }
+
     [SerializeField] protected int level = 0;
     [SerializeField] protected int MaxExp {
         get { return 50 + (int)(100 * Mathf.Pow(1.1f, level)); }
@@ -19,7 +23,6 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected SpriteRenderer spriteRenderer;
     
     [SerializeField] protected SpriteAnimator spriteAnimator;
-    private string nextAnimation;
 
     [SerializeField] protected Movement movement;
     [SerializeField] protected float moveSpeed = 5f;
@@ -35,11 +38,8 @@ public class Character : MonoBehaviour, IDamageable {
     private Vector2 attackDirection;
 
     [SerializeField] protected Weapon basicWeapon;
-    protected List<Weapon> weapons = new List<Weapon>();
-    protected List<Artifact> artifacts = new List<Artifact>();
-    protected const int MAX_WEAPONS_COUNT = 6;
-    protected const int MAX_ACCESSORIES_COUNT = 6;
-    [SerializeField] protected Transform equipmentsParent;
+    [SerializeField] protected Transform weaponParent;
+    [SerializeField] protected Transform artifactParent;
     #endregion Attack Refer
 
     #region States Refer
@@ -139,18 +139,42 @@ public class Character : MonoBehaviour, IDamageable {
         isFixedArrow = active;
     }
     public void AddWeapon(Weapon weapon) {
-        GameObject weaponInstance = Instantiate(weapon.gameObject, equipmentsParent);
-        weapons.Add(weaponInstance.GetComponent<Weapon>());
+        GameObject weaponInstance = Instantiate(weapon.gameObject, weaponParent);
+        weaponInstance.GetComponent<Weapon>()?.OnEquipped();
         /* 
             *** TODO : Update UI that show Chracter information. ***
          */
     }
     public void AddArtifact(Artifact artifact) {
-        GameObject artifactInstance = Instantiate(artifact.gameObject, equipmentsParent);
-        artifacts.Add(artifactInstance.GetComponent<Artifact>());
+        GameObject artifactInstance = Instantiate(artifact.gameObject, artifactParent);
+        artifactInstance.GetComponent<Artifact>()?.OnEquipped();
         /* 
             *** TODO : Update UI that show Chracter information. ***
          */
+    }
+
+    /* __temporary >> */
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.L))
+            this.LevelUp();
+    }
+    /* << __temporary */
+
+    public void GetExp(float amount) {
+        
+    }
+    private void LevelUp() {
+        currentExp = 0;
+        level ++;
+        /* 
+            *** TODO : Update UI that show Character Level and Exp point. ***
+         */
+        LevelUpUI levelUpUI = StageManager.StageUIManager.LevelUpUI;
+        Weapon[] weapons = StageManager.EquipmentsManager.RandomChoises<Weapon>(2);
+        levelUpUI.SetChoise(0, weapons[0]);
+        levelUpUI.SetChoise(1, weapons[1]);
+        levelUpUI.ActiveUI();
+        GetExp(0); // Check multiple level up. 
     }
     public void TakeDamage(float amount) {
         currentHp -= amount;
@@ -166,6 +190,6 @@ public class Character : MonoBehaviour, IDamageable {
     }
     private void Die() {
         stateMachine.ChangeState(dieState, false);
-        GameManager.instance.StageManager.GameOver();
+        StageManager.GameOver();
     }
 }

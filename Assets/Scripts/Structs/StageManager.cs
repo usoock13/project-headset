@@ -12,10 +12,18 @@ public class StageManager : MonoBehaviour {
         get { return character; }
         set { character ??= value; }
     }
-    private ScenarioDirector scenarioDirector;
+    [SerializeField] private ScenarioDirector scenarioDirector;
     public ScenarioDirector ScenarioDirector {
         get { return scenarioDirector; }
         set { scenarioDirector ??= value; }
+    }
+    [SerializeField] private EquipmentsManager equipmentsManager;
+    public EquipmentsManager EquipmentsManager {
+        get { return equipmentsManager; }
+    }
+    [SerializeField] private StageUIManager stageUIManager;
+    public StageUIManager StageUIManager {
+        get { return stageUIManager; }
     }
 
     private void Awake() {

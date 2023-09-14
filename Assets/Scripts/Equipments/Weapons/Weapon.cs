@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 public abstract class Weapon : Equipment {
-    protected Character character;
+    protected Character Character { get { return GameManager.instance.Character; } }
     
     #region Weapon Status
     protected int level = 0;
@@ -12,10 +12,7 @@ public abstract class Weapon : Equipment {
     #endregion Weapon Status
 
     protected float currentTime = 0;
-
-    protected virtual void Awake() {
-        character = GameManager.instance.Character;
-    }
+    
     protected void Update() {
         if(currentTime > 0) {
             currentTime -= Time.deltaTime;
@@ -32,7 +29,7 @@ public abstract class Weapon : Equipment {
             throw new System.Exception("Level is max.");
         }
     }
-    public override void OnEquipped() {
-        GameManager.instance.Character.AddWeapon(this);
+public override void OnEquipped() {
+        this.gameObject.SetActive(true);
     }
 }

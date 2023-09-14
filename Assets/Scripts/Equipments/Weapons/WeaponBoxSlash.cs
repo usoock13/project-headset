@@ -18,11 +18,13 @@ public class WeaponBoxSlash : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+    [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private string _weaponName;
     public override Sprite Icon {
-        get { throw new System.NotImplementedException(); }
+        get { return _weaponIcon; }
     }
     public override string Name {
-        get { throw new System.NotImplementedException(); }
+        get { return _weaponName; }
     }
     public override string Description {
         get {
@@ -37,15 +39,13 @@ public class WeaponBoxSlash : Weapon {
             }
         }
     }
-
     #endregion Weapon Information
 
-    protected override void Awake() {
-        base.Awake();
+    private void Awake() {
         effectPooler = new ObjectPooler(boxEffect.gameObject, null, null, this.transform, 10, 5);
     }
     protected override void Attack() {
-        GameObject instance = effectPooler.OutPool(character.attackArrow.position, character.attackArrow.rotation);
+        GameObject instance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
         var effect = instance.GetComponent<EffectBoxSlash>();
         effect.originWeapon = this;
         StartCoroutine(InPoolEffect(5f, instance));

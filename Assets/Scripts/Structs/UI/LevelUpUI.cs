@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class LevelUpUI : MonoBehaviour {
-    ChoiseItem[] choiseItems = new ChoiseItem[4];
+    [SerializeField] private ChoiseItem[] choiseItems = new ChoiseItem[4];
+    [SerializeField] private Equipment[] choiseEquipments = new Equipment[4];
 
     public void ActiveUI() {
         this.gameObject.SetActive(true);
@@ -18,37 +18,41 @@ public class LevelUpUI : MonoBehaviour {
         Time.timeScale = 1;
     }
     public void SetChoise(int index, Equipment equipment) {
-        if(index > choiseItems.Length) {
+        if(index > choiseItems.Length)
             throw new Exception($"Index is over the max choises count.\n(max count {index} / received {index})");
-        }
 
         ChoiseInformation info = new ChoiseInformation(
                                     equipment.Icon,
                                     equipment.Name,
                                     equipment.Description);
-        choiseItems[index].button.onClick.AddListener(() => {
-            equipment.OnEquipped();
-            choiseItems[index].button.onClick.RemoveAllListeners();
-        });
-        
+        choiseItems[index].SetItem(info);
+        choiseEquipments[index] = equipment;
+    }
+    public void SelectChoise(int index) {
+        GameManager.instance.StageManager.EquipmentsManager.GivePlayerEquipment(choiseEquipments[index]);
+        this.InactiveUI();
     }
 
     public struct ChoiseInformation {
-        private Sprite _itemIcon;
-        private string _itemName;
-        private string _itemDescription;
+        public Sprite itemIcon;
+        public string itemName;
+        public string itemDescription;
         
         public ChoiseInformation(Sprite icon, string name, string description) {
-            this._itemIcon = icon;
-            this._itemName = name;
-            this._itemDescription = description;
+            this.itemIcon = icon;
+            this.itemName = name;
+            this.itemDescription = description;
         }
     }
     [System.Serializable]
-    public struct ChoiseItem {
-        public Button button;
+    private struct ChoiseItem {
         public Image icon;
-        public TextMeshPro name;
-        public TextMeshPro description;
+        public TMP_Text name;
+        public TMP_Text description;
+        public void SetItem(ChoiseInformation info) {
+            this.icon.sprite = info.itemIcon;
+            this.name.text = info.itemName;
+            this.description.text = info.itemDescription;
+        }
     }
 }

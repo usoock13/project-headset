@@ -516,7 +516,8 @@ MonoBehaviour:
   isFixedArrow: 0
   attackArrow: {fileID: 217193812}
   basicWeapon: {fileID: 974240963, guid: f7d4ad48ca8039d4fbc7e9a3aff1607a, type: 3}
-  equipmentsParent: {fileID: 2319051900747203404}
+  weaponParent: {fileID: 844422355024668823}
+  artifactParent: {fileID: 4180148233844535228}
 --- !u!114 &1589356279
 MonoBehaviour:
   m_ObjectHideFlags: 0
