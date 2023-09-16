@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 6342264030857522983}
   - component: {fileID: 6342264030857522980}
   - component: {fileID: 3527790578222439278}
+  - component: {fileID: 3114513468409270960}
   m_Layer: 8
   m_Name: '[Monster] Scouter'
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,10 +106,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 6342264030857522983}
   stateMachine: {fileID: 6342264030857522982}
-  animator: {fileID: 6342264030857522980}
+  spriteRenderer: {fileID: 0}
+  spriteAnimator: {fileID: 0}
+  collider2D: {fileID: 0}
+  rigidbody2D: {fileID: 0}
   moveSpeed: 5
   maxHp: 100
   currentHp: 0
+  ownerPooler:
+    poolingObject: {fileID: 0}
 --- !u!70 &6342264030857522986
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1478f0d77c2b8447ae4203500217f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 1
 --- !u!95 &6342264030857522980
 Animator:
   serializedVersion: 4
@@ -206,3 +213,15 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
+--- !u!114 &3114513468409270960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342264030857522990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483b6bfc4e36bf940bdf66165bf82a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

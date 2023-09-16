@@ -14,7 +14,7 @@ public class MonsterWolf : Monster {
     private Coroutine takeAttackDelayCoroutine;
     private Coroutine dieCoroutine;
 
-    public override void TakeAttackDelay(float amount) {
+    public override void TakeHittingDelay(float amount) {
         takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(amount));
     }
     private IEnumerator TakeAttackDelayCoroutine(float second) {
@@ -29,7 +29,7 @@ public class MonsterWolf : Monster {
         }
     }
     public override void TakeForce(Vector2 force) {
-        throw new System.NotImplementedException();
+        rigidbody2D.AddForce(force, ForceMode2D.Force);
     }
 
     protected override void InitializeStates() {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e29fdbda45e707e43ad96cc5e62feb91
+guid: 8e900b81386b20749b95534e5ee837fd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_warrior_walk_0
+      name: sprite_wolf_chase_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 48
-        height: 48
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91f0ab0f444f5bd48af0f35227519acd
-      internalID: -259661677
+      spriteID: 8df6e6de926c693429a688c3c10f90b9
+      internalID: -599617825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_1
+      name: sprite_wolf_chase_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 96
-        width: 48
-        height: 48
+        x: 64
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb08d5502e740c840ba3c0f124261775
-      internalID: 175875851
+      spriteID: 2b5310d22166ac44bae69c4dc63453c1
+      internalID: -1143619941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_2
+      name: sprite_wolf_chase_2
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
-        width: 48
-        height: 48
+        x: 128
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d201b1f709cdbd64e8ab5fc103624246
-      internalID: 1140145855
+      spriteID: b7071107ebe30cb4698b4007c0593fda
+      internalID: -411391021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_3
+      name: sprite_wolf_chase_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
-        width: 48
-        height: 48
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fd377161be1a4c4bae68b8df8aabd5f
-      internalID: -344985943
+      spriteID: 12c87fc19e77df24182c3d06959671cc
+      internalID: 549412648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_4
+      name: sprite_wolf_chase_4
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
-        width: 48
-        height: 48
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8124cf7804ac7b642a9decf0cf2d0e94
-      internalID: 1803155598
+      spriteID: 1254ec9d47958424e876ece3783fc306
+      internalID: -250099704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_5
+      name: sprite_wolf_chase_5
       rect:
         serializedVersion: 2
-        x: 96
-        y: 48
-        width: 48
-        height: 48
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60328869287997c4b935d1a379f45af2
-      internalID: 955492108
+      spriteID: 5d64a1a5b7e69ec459ac22dd656ba2a3
+      internalID: 729905821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_6
+      name: sprite_wolf_chase_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 48
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,50 +244,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c78f42eca92dbd46b3ade4c92959f24
-      internalID: -852423807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_warrior_walk_7
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 097514105e797d849bb43dbadcd8d76f
-      internalID: -1301621851
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_warrior_walk_8
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fdb6848739cdf84da34b279e12a095d
-      internalID: -1342013991
+      spriteID: 2970232b8c9d4fd48a32656a0b9e23b5
+      internalID: 1303050202
       vertices: []
       indices: 
       edges: []
@@ -303,15 +261,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_warrior_walk_1: 175875851
-      sprite_warrior_walk_7: -1301621851
-      sprite_warrior_walk_4: 1803155598
-      sprite_warrior_walk_5: 955492108
-      sprite_warrior_walk_8: -1342013991
-      sprite_warrior_walk_2: 1140145855
-      sprite_warrior_walk_3: -344985943
-      sprite_warrior_walk_6: -852423807
-      sprite_warrior_walk_0: -259661677
+      sprite_wolf_chase_3: 549412648
+      sprite_wolf_chase_6: 1303050202
+      sprite_wolf_chase_1: -1143619941
+      sprite_wolf_chase_5: 729905821
+      sprite_wolf_chase_2: -411391021
+      sprite_wolf_chase_0: -599617825
+      sprite_wolf_chase_4: -250099704
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

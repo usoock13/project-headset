@@ -33,10 +33,10 @@ public class ScenarioGrassDirector : ScenarioDirector {
         // poolerUndead = new Dictionary<string, ObjectPooler>();
         // poolerWitch = new Dictionary<string, ObjectPooler>();
 
-        scenarios.Add(new Scenario(1, () => {
+        scenarios.Add(new Scenario(3, () => {
             defaultMonster = monsterWolf;
-            defaultSpawncount = 1;
-            defaultSpawnInterval = 10f;
+            defaultSpawncount = 5;
+            defaultSpawnInterval = 3f;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
         }));
     }
@@ -64,8 +64,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
             List<Monster> result = new List<Monster>();
             for(int i=0; i<amount; i++) {
                 Vector2 spawnPoint = RandomDirection * spawnDistance + (Vector2)Character.transform.position;
-                GameObject monsterInstance = pooler.OutPool();
-                monsterInstance.transform.position = spawnPoint;
+                GameObject monsterInstance = pooler.OutPool(spawnPoint, Quaternion.identity);
                 Monster m;
                 if(monsterInstance.TryGetComponent<Monster>(out m))
                     result.Add(monsterInstance.GetComponent<Monster>());

@@ -4,7 +4,7 @@ public class MonsterWitch : Monster
 {
     public override string MonsterType => throw new System.NotImplementedException();
 
-    public override void TakeAttackDelay(float amount)
+    public override void TakeHittingDelay(float amount)
     {
         throw new System.NotImplementedException();
     }

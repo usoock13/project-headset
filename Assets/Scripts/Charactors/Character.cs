@@ -182,7 +182,7 @@ public class Character : MonoBehaviour, IDamageable {
             
         }
     }
-    public void TakeAttackDelay(float amount) {
+    public void TakeHittingDelay(float amount) {
         throw new System.NotImplementedException();
     }
     public void TakeForce(Vector2 force) {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class EffectBoxSlash : MonoBehaviour {
-    public WeaponBoxSlash originWeapon;
+public class EffectGreatSword : MonoBehaviour {
+    public WeaponGreatSword originWeapon;
     private float damage = 15f;
     private float attackDelay = 0.6f;
     [SerializeField] private BoxBounds effectBounds = new BoxBounds(new Vector2(0, 1.5f), new Vector2(3f, 1.5f));
@@ -21,7 +21,7 @@ public class EffectBoxSlash : MonoBehaviour {
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<IDamageable>();
             target.TakeDamage(damage);
-            target.TakeAttackDelay(attackDelay);
+            target.TakeHittingDelay(attackDelay);
         }
     }
 }

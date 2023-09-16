@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3527790578222439278}
   m_Layer: 8
   m_Name: '[Monster] Wolf'
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.66, y: 0.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -208,6 +208,8 @@ MonoBehaviour:
   moveSpeed: 2
   maxHp: 30
   currentHp: 0
+  ownerPooler:
+    poolingObject: {fileID: 0}
 --- !u!114 &3527790578222439278
 MonoBehaviour:
   m_ObjectHideFlags: 0

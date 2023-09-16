@@ -27,9 +27,6 @@ public abstract class ScenarioDirector : MonoBehaviour {
 
     #region Unity Events
     protected virtual void Start() {
-        if(GameManager.instance.StageManager.ScenarioDirector != null)
-            Destroy(this.gameObject);
-
         character = GameManager.instance.Character;
         InitializeScenario();
         scenarios.Sort();

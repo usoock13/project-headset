@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class WeaponRollingBox : Weapon {
-    [SerializeField] private EffectBoxSlash rollingBoxEffect;
+public class WeaponGreatSword : Weapon {
+    [SerializeField] private EffectGreatSword swordEffect;
     private ObjectPooler effectPooler;
     
     #region Weapon Status
@@ -19,32 +19,34 @@ public class WeaponRollingBox : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    [SerializeField] private string _weaponName;
-    public override Sprite Icon {
-        get { return _weaponIcon; }
-    }
-    public override string Name {
-        get { return _weaponName; }
-    }
+    public override Sprite Icon => _weaponIcon;
+    public override string Name => "바스타드 소드";
     public override string Description {
         get {
             switch(level) {
-                case 4 or 5:
-                    return string.Join(Environment.NewLine,
-                        $"{AttackInterval}초에 한 번 조준 방향으로 적을 관통하는 상자를 던져 적중하는 모든 적에게 {Damage*100}%의 피해를 가합니다.",
-                        $"추가로 범위가 {(AreaScale-1) * 100}% 증가합니다.");
                 default:
                     return
-                        $"{AttackInterval}초에 한 번 조준 방향으로 상자를 던져 처음 적중하는 적 다섯에게 {Damage*100}%의 피해를 가합니다.";
+                        $"{AttackInterval}초에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 {Damage*100}%의 피해를 가합니다.";
+                case 4 or 5:
+                    return string.Join(Environment.NewLine,
+                        $"{AttackInterval}초에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 {Damage*100}%의 피해를 가합니다.",
+                        $"추가로 범위가 {(AreaScale-1) * 100}% 증가합니다.");
             }
         }
     }
+    #endregion Weapon Information
+
+    private void Awake() {
+        effectPooler = new ObjectPooler(swordEffect.gameObject, null, null, this.transform, 10, 5);
+    }
     protected override void Attack() {
-        throw new NotImplementedException();
+        GameObject instance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        var effect = instance.GetComponent<EffectGreatSword>();
+        effect.originWeapon = this;
+        StartCoroutine(InPoolEffect(5f, instance));
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect) {
         yield return new WaitForSeconds(delay);
         effectPooler.InPool(effect);
     }
-    #endregion Weapon Information
 }

@@ -37,7 +37,7 @@ public class LevelUpUI : MonoBehaviour {
         public Sprite itemIcon;
         public string itemName;
         public string itemDescription;
-        
+
         public ChoiseInformation(Sprite icon, string name, string description) {
             this.itemIcon = icon;
             this.itemName = name;

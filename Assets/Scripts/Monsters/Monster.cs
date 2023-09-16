@@ -40,7 +40,7 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     [SerializeField] protected ObjectPooler ownerPooler = null;
 
     #region IDamageable Define
-    public abstract void TakeAttackDelay(float amount);
+    public abstract void TakeHittingDelay(float amount);
     public abstract void TakeDamage(float amount);
     public abstract void TakeForce(Vector2 force);
     #endregion IDamageable Define
@@ -59,13 +59,14 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         StartCoroutine(UpdateTargetPoint());
     }
     protected void OnEnable() {
-        InitializeMonster();
+        OnSpawn();
     }
-    public void InitializeMonster() {
+    public void OnSpawn() {
         isArrive = true;
         currentHp = maxHp;
         rigidbody2D.simulated = true;
         ownerPooler = GameManager.instance.StageManager.ScenarioDirector.monsterPoolerMap[this.MonsterType];
+        stateMachine.ChangeState(chaseState);
     }
     protected virtual void OnDie() {
         isArrive = false;
