@@ -19,8 +19,7 @@ public class EffectLongbow : MonoBehaviour {
         transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        print(other.gameObject.layer);
-        if(other.gameObject.layer == targetLayer) {
+        if(1<<other.gameObject.layer == targetLayer.value) {
             Monster target;
             if(other.TryGetComponent<Monster>(out target)) {
                 target.TakeDamage(Damage);

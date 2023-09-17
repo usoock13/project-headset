@@ -1,8 +1,5 @@
 using System;
-using System.Xml.Schema;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Movement : MonoBehaviour {
     [SerializeField] private float radius = 1;
