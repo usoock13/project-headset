@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviour {
-    [SerializeField] private GameObject characterSelectUI;
-    [SerializeField] private GameObject introUI;
+    [SerializeField] private CharacterSelectUI characterSelectUI;
+    [SerializeField] private GameObject introUIGobj;
     
     public void OnClickIntroUI() {
-
+        ShowIntroUI(false);
+        ShowCharacterSelectUI(true);
     }
     private void ShowCharacterSelectUI(bool visibility) {
-        characterSelectUI.SetActive(visibility);
+        characterSelectUI.gameObject.SetActive(visibility);
     }
     private void ShowIntroUI(bool visibility) {
-        introUI.SetActive(visibility);
+        introUIGobj.SetActive(visibility);
     }
 }

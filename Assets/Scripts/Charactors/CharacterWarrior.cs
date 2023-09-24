@@ -19,4 +19,11 @@ public class CharacterWarrior : Character {
     private void OnEnterWalkState(State previous) {
         spriteAnimator.ChangeAnimation(ANIMATION_WALK);
     }
+
+    private class HeadAbilityWarrior : HeadAbility {
+        
+        public override void OnJoinParty() {
+            character
+        }
+    }
 }

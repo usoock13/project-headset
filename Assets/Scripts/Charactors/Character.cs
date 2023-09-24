@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteAnimator))]
@@ -31,7 +31,16 @@ public class Character : MonoBehaviour, IDamageable {
         get { return moveDirection.normalized * moveSpeed; }
     }
 
-    #region Attack Refer
+    #region Status
+    // |
+    #region Additional Status
+    public Func<float> additionalPower;
+    public Func<float> additionalSpeed;
+    public Func<float> additionalArmor;
+    #endregion Additional Status
+    // |
+    #endregion Status
+
     protected Vector2 attackingDirection;
     [SerializeField] protected bool isFixedArrow = false;
     [SerializeField] public Transform attackArrow;
@@ -40,7 +49,6 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected Weapon basicWeapon;
     [SerializeField] protected Transform weaponParent;
     [SerializeField] protected Transform artifactParent;
-    #endregion Attack Refer
 
     #region States Refer
     protected State idleState = new State("Idle");
@@ -191,5 +199,10 @@ public class Character : MonoBehaviour, IDamageable {
     private void Die() {
         stateMachine.ChangeState(dieState, false);
         StageManager.GameOver();
+    }
+
+    public class HeadAbility {
+        
+        public Action<Character> onJoinParty;
     }
 }
