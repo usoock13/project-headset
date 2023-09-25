@@ -9,7 +9,7 @@ public class CharacterInputSystem : MonoBehaviour {
     private void Awake() {
         character = GetComponent<Character>();
         if(character == null) {
-            Debug.LogError("Character Input System failed get Character Component.");
+            Debug.LogError("Character Input System failed to get a Character Component.");
         }
     }
     public void OnMove(InputAction.CallbackContext context) {

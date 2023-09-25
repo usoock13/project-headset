@@ -528,20 +528,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48de5bedd2b864e449069b0908c3b4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 1
   currentExp: 0
-  maxHp: 100
-  currentHp: 0
+  maxHp: 105
   stateMachine: {fileID: 1316246117}
   spriteRenderer: {fileID: 3708817249502812632}
   spriteAnimator: {fileID: 0}
   movement: {fileID: 1589356279}
   moveSpeed: 4
-  isFixedArrow: 0
+  statusDefaultPower: 15
+  statusDefaultSpeed: 4
+  statusDefaultArmor: 10
   attackArrow: {fileID: 217193812}
   basicWeapon: {fileID: 974240963, guid: f7d4ad48ca8039d4fbc7e9a3aff1607a, type: 3}
   weaponParent: {fileID: 844422355024668823}
   artifactParent: {fileID: 4180148233844535228}
+  headAbility:
+    icon: {fileID: 0}
+    name: "\uC778\uB0B4"
+    description: "\uCCB4\uB825\uC774 \uC801\uC73C\uBA74 \uBC1B\uB294 \uD53C\uD574\uB7C9\uC774
+      \uAC10\uC18C\uD569\uB2C8\uB2E4."
 --- !u!114 &1589356279
 MonoBehaviour:
   m_ObjectHideFlags: 0

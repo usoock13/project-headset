@@ -28,8 +28,8 @@ public class MonsterWolf : Monster {
             stateMachine.ChangeState(dieState);
         }
     }
-    public override void TakeForce(Vector2 force) {
-        rigidbody2D.AddForce(force, ForceMode2D.Force);
+    public override void TakeForce(Vector2 force, float duration=.25f) {
+        base.TakeForce(force);
     }
 
     protected override void InitializeStates() {

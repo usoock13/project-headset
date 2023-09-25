@@ -7,6 +7,17 @@ public class CharacterWarrior : Character {
     const string ANIMATION_IDLE = "Warrior Idle";
     const string ANIMATION_WALK = "Warrior Walk";
     #endregion Animation Clips
+
+    public HeadAbility headAbility = new HeadAbility {
+        name = "인내",
+        description = "체력이 적으면 받는 피해량이 감소합니다.",
+        onJoinParty = (Character character) => {
+            character.additionalArmor += () => {
+                float hpRatio = character.currentHp / character.MaxHp;
+                return 15 * (1-hpRatio);
+            };
+        }
+    };
     
     protected override void InitializeStates() {
         base.InitializeStates();
@@ -18,12 +29,5 @@ public class CharacterWarrior : Character {
     }
     private void OnEnterWalkState(State previous) {
         spriteAnimator.ChangeAnimation(ANIMATION_WALK);
-    }
-
-    private class HeadAbilityWarrior : HeadAbility {
-        
-        public override void OnJoinParty() {
-            character
-        }
     }
 }

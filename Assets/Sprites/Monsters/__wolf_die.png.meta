@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temporary_die_0
+      name: __wolf_die_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 194254e7c7ff4f947bd987ce50f5a00b
-      internalID: 1043474007
+      spriteID: 644d8949e474a7e46831e16e9e932520
+      internalID: 560160359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: temporary_die_1
+      name: __wolf_die_1
       rect:
         serializedVersion: 2
         x: 48
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9989211c502fd6b45ac89a06183adb45
-      internalID: -2102616416
+      spriteID: 742eaa9ddfa9b75419d84350f477e275
+      internalID: -1378852868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: temporary_die_2
+      name: __wolf_die_2
       rect:
         serializedVersion: 2
         x: 96
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e009454515d55f458ebc2b529843ebd
-      internalID: -2119439458
+      spriteID: fd58d60fc0bb1e74da57a6f11f4a9740
+      internalID: 1126776471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: temporary_die_3
+      name: __wolf_die_3
       rect:
         serializedVersion: 2
         x: 0
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 421b54a4b73e6e546bf6bae414e59d1e
-      internalID: 1220936976
+      spriteID: e628fda232c0d4948ba5e3805ee6eeb2
+      internalID: -2030391024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: temporary_die_4
+      name: __wolf_die_4
       rect:
         serializedVersion: 2
         x: 48
@@ -202,8 +202,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9af5a6a9def617644849a62cc2dcdf65
-      internalID: 753139776
+      spriteID: 2abf8a03a7c415943a31f4725475c61b
+      internalID: -86016702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: __wolf_die_5
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74be8239d8cabd5488190b91cc6e1d1e
+      internalID: -2112905006
       vertices: []
       indices: 
       edges: []
@@ -219,11 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      temporary_die_0: 1043474007
-      temporary_die_1: -2102616416
-      temporary_die_2: -2119439458
-      temporary_die_3: 1220936976
-      temporary_die_4: 753139776
+      __wolf_die_2: 1126776471
+      __wolf_die_3: -2030391024
+      __wolf_die_1: -1378852868
+      __wolf_die_5: -2112905006
+      __wolf_die_0: 560160359
+      __wolf_die_4: -86016702
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

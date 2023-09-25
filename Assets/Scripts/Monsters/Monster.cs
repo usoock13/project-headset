@@ -42,7 +42,18 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     #region IDamageable Define
     public abstract void TakeHittingDelay(float amount);
     public abstract void TakeDamage(float amount);
-    public abstract void TakeForce(Vector2 force);
+    public virtual void TakeForce(Vector2 force, float duration=.25f) {
+        StartCoroutine(TakeForceCoroutine(force, duration));
+    }
+    private IEnumerator TakeForceCoroutine(Vector2 force, float duration) {
+        float offset = 0;
+        float step = 1 / duration;
+        while(offset < 1) {
+            movement.MoveToward(force * Time.deltaTime);
+            offset += Time.deltaTime * step;
+            yield return null;
+        }
+    }
     #endregion IDamageable Define
     
     protected void Awake() {

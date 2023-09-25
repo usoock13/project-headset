@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteAnimator))]
@@ -10,40 +12,71 @@ public class Character : MonoBehaviour, IDamageable {
         get { return GameManager.instance.StageManager; }
     }
 
-    [SerializeField] protected int level = 0;
+    [SerializeField] protected int level = 1;
     [SerializeField] protected int MaxExp {
         get { return 50 + (int)(100 * Mathf.Pow(1.1f, level)); }
     }
     [SerializeField] protected int currentExp = 0;
     [SerializeField] protected float maxHp = 100;
-    [SerializeField] protected float currentHp = 0;
+    [SerializeField] public float MaxHp { get; }
+    [SerializeField] public float currentHp { get; protected set; }
 
     [SerializeField] protected StateMachine stateMachine;
-    
     [SerializeField] protected SpriteRenderer spriteRenderer;
-    
     [SerializeField] protected SpriteAnimator spriteAnimator;
-
     [SerializeField] protected Movement movement;
-    [SerializeField] protected float moveSpeed = 5f;
-    protected Vector2 moveDirection;
-    protected Vector2 MoveVector {
-        get { return moveDirection.normalized * moveSpeed; }
-    }
 
     #region Status
+    [SerializeField] protected float statusDefaultPower = 10;
+    [SerializeField] protected float statusDefaultMoveSpeed = 5;
+    [SerializeField] protected float statusDefaultArmor = 10;
     // |
     #region Additional Status
     public Func<float> additionalPower;
-    public Func<float> additionalSpeed;
+    public Func<float> additionalMoveSpeed;
     public Func<float> additionalArmor;
     #endregion Additional Status
     // |
+    [SerializeField] public float Power {
+        get {
+            float final = statusDefaultPower;
+            Delegate[] additions = additionalPower?.GetInvocationList();
+            if(additions != null)
+                for(int i=0; i<additions.Length; i++)
+                    final += ((Func<float>) additions[i])?.Invoke() ?? 0;
+            return final;
+        }
+    }
+    [SerializeField] protected float MoveSpeed {
+        get {
+            float final = statusDefaultMoveSpeed;
+            Delegate[] additions = additionalMoveSpeed?.GetInvocationList();
+            if(additions != null)
+                for(int i=0; i<additions.Length; i++)
+                    final += ((Func<float>) additions[i])?.Invoke() ?? 0;
+            return final;
+        }
+    }
+    [SerializeField] protected float Armor {
+        get {
+            float final = statusDefaultArmor;
+            Delegate[] additions = additionalArmor?.GetInvocationList();
+            if(additions != null)
+                for(int i=0; i<additions.Length; i++)
+                    final += ((Func<float>) additions[i])?.Invoke() ?? 0;
+            return final;
+        }
+    }
     #endregion Status
 
+    protected Vector2 moveDirection;
+    protected Vector2 MoveVector {
+        get { return moveDirection.normalized * MoveSpeed; }
+    }
+
     protected Vector2 attackingDirection;
-    [SerializeField] protected bool isFixedArrow = false;
-    [SerializeField] public Transform attackArrow;
+    public bool arrowIsFixed { get; protected set; } = false;
+    public Transform attackArrow;
     private Vector2 attackDirection;
 
     [SerializeField] protected Weapon basicWeapon;
@@ -70,33 +103,18 @@ public class Character : MonoBehaviour, IDamageable {
     protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
 
-        #region Initilize Idle State
-        idleState.onActive = (State previous) => {
-            /* TODO : Enter Idle Animation */
-        };
-        idleState.onInactive = (State next) => {
-            /* TODO : Release Idle Animation */
-        };
-        #endregion Initilize Idle State
         #region Initilize Move State
-        walkState.onActive = (State previous) => {
-            /* TODO : Enter Move Animation */
-        };
         walkState.onStay = () => {
             MoveToward(MoveVector * Time.deltaTime);
-            if(!isFixedArrow) {
+            if(!arrowIsFixed) {
                 attackingDirection = moveDirection;
                 RotateArrow(moveDirection);
             }
-        };
-        walkState.onInactive = (State previous) => {
-            /* TODO : Release Move Animation */
         };
         #endregion Initilize Move State
         #region Initilize Die State
         dieState.onActive += (State previous) => {
             stateMachine.isMuted = true;
-            
         };
         #endregion Initilize Die State
 
@@ -111,7 +129,7 @@ public class Character : MonoBehaviour, IDamageable {
     }
     private void MoveToward(Vector2 moveVector) {
         movement.MoveToward(moveVector);
-        if(isFixedArrow) {
+        if(arrowIsFixed) {
             if(Mathf.Abs(attackDirection.x) > 0.01f) {
                 spriteRenderer.flipX = attackDirection.x<0 ? true : false;
             }
@@ -142,9 +160,9 @@ public class Character : MonoBehaviour, IDamageable {
         }
     }
     public void FixArrow(bool active) {
-        if(!isFixedArrow && active)
+        if(!arrowIsFixed && active)
             attackDirection = attackArrow.transform.rotation * Vector2.up;
-        isFixedArrow = active;
+        arrowIsFixed = active;
     }
     public void AddWeapon(Weapon weapon) {
         GameObject weaponInstance = Instantiate(weapon.gameObject, weaponParent);
@@ -187,13 +205,13 @@ public class Character : MonoBehaviour, IDamageable {
     public void TakeDamage(float amount) {
         currentHp -= amount;
         if(currentHp <= 0) {
-            
+            Die();
         }
     }
     public void TakeHittingDelay(float amount) {
         throw new System.NotImplementedException();
     }
-    public void TakeForce(Vector2 force) {
+    public void TakeForce(Vector2 force, float duration=.25f) {
         throw new System.NotImplementedException();
     }
     private void Die() {
@@ -201,8 +219,11 @@ public class Character : MonoBehaviour, IDamageable {
         StageManager.GameOver();
     }
 
+    [System.Serializable]
     public class HeadAbility {
-        
+        public Sprite icon;
+        public string name;
+        public string description;
         public Action<Character> onJoinParty;
     }
 }

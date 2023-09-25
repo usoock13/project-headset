@@ -20,7 +20,7 @@ public class WeaponGreatSword : Weapon {
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
     public override Sprite Icon => _weaponIcon;
-    public override string Name => "바스타드 소드";
+    public override string Name => "그레이트 소드";
     public override string Description {
         get {
             switch(level) {
@@ -37,12 +37,13 @@ public class WeaponGreatSword : Weapon {
     #endregion Weapon Information
 
     private void Awake() {
-        effectPooler = new ObjectPooler(swordEffect.gameObject, null, null, this.transform, 10, 5);
+        effectPooler = new ObjectPooler(swordEffect.gameObject, (GameObject instance) => {
+            var effect = instance.GetComponent<EffectGreatSword>();
+            effect.originWeapon = this;
+        }, null, this.transform, 10, 5);
     }
     protected override void Attack() {
         GameObject instance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-        var effect = instance.GetComponent<EffectGreatSword>();
-        effect.originWeapon = this;
         StartCoroutine(InPoolEffect(5f, instance));
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect) {
