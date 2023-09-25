@@ -22,15 +22,6 @@ public class MonsterWolf : Monster {
         yield return new WaitForSeconds(second);
         stateMachine.ChangeState(chaseState);
     }
-    public override void TakeDamage(float amount) {
-        currentHp -= amount;
-        if(currentHp <= 0) {
-            stateMachine.ChangeState(dieState);
-        }
-    }
-    public override void TakeForce(Vector2 force, float duration=.25f) {
-        base.TakeForce(force);
-    }
 
     protected override void InitializeStates() {
         #region Chase State

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -37,22 +39,39 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     public bool isArrive { get; protected set;} = true;
     public UnityAction<Monster> onDie;
 
+    private Coroutine takeHittingDelayCoroutine;
+
     [SerializeField] protected ObjectPooler ownerPooler = null;
 
     #region IDamageable Define
-    public abstract void TakeHittingDelay(float amount);
-    public abstract void TakeDamage(float amount);
+    public virtual void TakeDamage(float amount) {
+        currentHp -= amount;
+        if(currentHp <= 0) {
+            stateMachine.ChangeState(dieState);
+        }
+    }
     public virtual void TakeForce(Vector2 force, float duration=.25f) {
         StartCoroutine(TakeForceCoroutine(force, duration));
     }
     private IEnumerator TakeForceCoroutine(Vector2 force, float duration) {
         float offset = 0;
         float step = 1 / duration;
-        while(offset < 1) {
-            movement.MoveToward(force * Time.deltaTime);
+        Vector2 current = force;
+        while(offset <= 1) {
+            Vector2 next = Vector2.Lerp(Vector2.zero, force, Mathf.Pow(1-offset, 5));
+            movement.MoveToward(current - next);
+            current = next;
             offset += Time.deltaTime * step;
             yield return null;
         }
+    }
+    public virtual void TakeHittingDelay(float second) {
+        takeHittingDelayCoroutine = StartCoroutine(TakeHittingDelayCoroutine(second));
+    }
+    private IEnumerator TakeHittingDelayCoroutine(float second) {
+        stateMachine.ChangeState(hitState);
+        yield return new WaitForSeconds(second);
+        stateMachine.ChangeState(chaseState);
     }
     #endregion IDamageable Define
     

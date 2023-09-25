@@ -4,7 +4,7 @@ public class EffectGreatSword : MonoBehaviour {
     public WeaponGreatSword originWeapon;
     private float damage = 15f;
     private float attackDelay = 0.6f;
-    private float attackForceScalar = 10f;
+    private float attackForceScalar = 2f;
     [SerializeField] private BoxBounds effectBounds = new BoxBounds(new Vector2(0, 1.5f), new Vector2(3f, 1.5f));
     [SerializeField] private ParticleSystem particle;
     [SerializeField] LayerMask targetLayer;
@@ -23,7 +23,7 @@ public class EffectGreatSword : MonoBehaviour {
             var target = inner.GetComponent<IDamageable>();
             target.TakeDamage(damage);
             target.TakeHittingDelay(attackDelay);
-            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar);
+            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, attackDelay);
         }
     }
 }

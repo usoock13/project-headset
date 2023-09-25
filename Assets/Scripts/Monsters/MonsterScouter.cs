@@ -3,18 +3,6 @@ using UnityEngine;
 public class MonsterScouter : Monster {
     public override string MonsterType => throw new System.NotImplementedException();
 
-    public override void TakeHittingDelay(float amount) {
-        throw new System.NotImplementedException();
-    }
-
-    public override void TakeDamage(float amount) {
-        print($"Damaged as much as {amount}");
-    }
-
-    public override void TakeForce(Vector2 force) {
-        throw new System.NotImplementedException();
-    }
-
     protected override void InitializeStates() {
         chaseState.onActive += (State previous) => {};
         chaseState.onActive += (State previous) => {
