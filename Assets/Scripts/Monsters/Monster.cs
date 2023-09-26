@@ -39,7 +39,10 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     public bool isArrive { get; protected set;} = true;
     public UnityAction<Monster> onDie;
 
+    [SerializeField] protected float givingExp = 10;
+
     private Coroutine takeHittingDelayCoroutine;
+    private Coroutine updateTargetDirectionCoroutine;
 
     [SerializeField] protected ObjectPooler ownerPooler = null;
 
@@ -64,6 +67,8 @@ public abstract class Monster : MonoBehaviour, IDamageable {
             offset += Time.deltaTime * step;
             yield return null;
         }
+        if(takeHittingDelayCoroutine != null)
+            StopCoroutine(takeHittingDelayCoroutine);
     }
     public virtual void TakeHittingDelay(float second) {
         takeHittingDelayCoroutine = StartCoroutine(TakeHittingDelayCoroutine(second));
@@ -86,7 +91,6 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         InitializeStates();
     }
     protected void Start() {
-        StartCoroutine(UpdateTargetPoint());
     }
     protected void OnEnable() {
         OnSpawn();
@@ -96,12 +100,19 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         currentHp = maxHp;
         rigidbody2D.simulated = true;
         ownerPooler = GameManager.instance.StageManager.ScenarioDirector.monsterPoolerMap[this.MonsterType];
+        updateTargetDirectionCoroutine = StartCoroutine(UpdateTargetPoint());
+        stateMachine.isMuted = false;
         stateMachine.ChangeState(chaseState);
     }
     protected virtual void OnDie() {
         isArrive = false;
         rigidbody2D.simulated = false;
+        DropExp();
         onDie?.Invoke(this);
+        StopCoroutine(updateTargetDirectionCoroutine);
+    }
+    protected void DropExp() {
+        GameManager.instance.StageManager.CreateExp(transform.position, givingExp);
     }
     protected abstract void InitializeStates();
     private IEnumerator UpdateTargetPoint() {

@@ -196,9 +196,11 @@ public class Character : MonoBehaviour, IDamageable {
             *** TODO : Update UI that show Character Level and Exp point. ***
          */
         LevelUpUI levelUpUI = StageManager.StageUIManager.LevelUpUI;
-        Weapon[] weapons = StageManager.EquipmentsManager.RandomChoises<Weapon>(2);
+        Weapon[] weapons = StageManager.EquipmentsManager.RandomChoises<Weapon>(4);
         levelUpUI.SetChoise(0, weapons[0]);
         levelUpUI.SetChoise(1, weapons[1]);
+        levelUpUI.SetChoise(2, weapons[2]);
+        levelUpUI.SetChoise(3, weapons[3]);
         levelUpUI.ActiveUI();
         GetExp(0); // Check multiple level up. 
     }

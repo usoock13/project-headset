@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.InputSystem.Interactions;
 
 [System.Serializable]
 public class ObjectPooler {
@@ -14,11 +15,20 @@ public class ObjectPooler {
 
     public Action<GameObject> onInPool;
     public Action<GameObject> onOutPool;
+    public Action<GameObject> onCreated;
     
     public ObjectPooler(GameObject poolingObject, Action<GameObject> onInPool=null, Action<GameObject> onOutPool=null, Transform parent=null, int count=10, int restoreCount=5) {
         this.poolingObject = poolingObject;
         this.onInPool = onInPool;
         this.onOutPool = onOutPool;
+        this.parent = parent;
+        Store(count);
+    }
+    public ObjectPooler(GameObject poolingObject, Action<GameObject> onInPool=null, Action<GameObject> onOutPool=null, Action<GameObject> onCreated=null, Transform parent=null, int count=10, int restoreCount=5) {
+        this.poolingObject = poolingObject;
+        this.onInPool = onInPool;
+        this.onOutPool = onOutPool;
+        this.onCreated = onCreated;
         this.parent = parent;
         Store(count);
     }
@@ -29,8 +39,7 @@ public class ObjectPooler {
 		queue.Enqueue(target);
     }
     public GameObject OutPool() {
-		if (queue.Count <= 0)
-		{
+		if (queue.Count <= 0) {
 			Store(restoreCount);
 		}
 		GameObject go = queue.Dequeue();
@@ -54,6 +63,8 @@ public class ObjectPooler {
     private void Store(int count) {
         for(int i=0; i<count; i++) {
             GameObject go = GameObject.Instantiate(poolingObject, parent);
+            go.SetActive(false);
+            onCreated?.Invoke(go);
             onInPool?.Invoke(go);
             queue.Enqueue(go);
         }

@@ -25,6 +25,10 @@ public class StageManager : MonoBehaviour {
     public StageUIManager StageUIManager {
         get { return stageUIManager; }
     }
+    
+    [SerializeField] private Sprite[] expSprites = new Sprite[2];
+    [SerializeField] private ExpJewel expJewel;
+    private ObjectPooler expPooler;
 
     private void Awake() {
         if(GameManager.instance.StageManager == null)
@@ -35,9 +39,17 @@ public class StageManager : MonoBehaviour {
     private void Start() {
         character = Instantiate(__testCharacter.gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
+        expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
     }
     public void GameOver() {
         isGameOver = true;
         scenarioDirector.OnEndsScenario();
+    }
+    public void CreateExp(Vector2 point, float expAmount) {
+        var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
+        if(exp != null) {
+            exp.givingExp = expAmount;
+            exp.Drop();
+        }
     }
 }

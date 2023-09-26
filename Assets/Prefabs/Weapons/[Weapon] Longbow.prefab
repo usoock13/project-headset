@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acdc132bfc5e5c428b651f9e921f198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  flyingTime: 3
+  lifetime: 0
   originWeapon: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -174,5 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86dbebb0acc436e4291af29c66d3bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   longbowEffect: {fileID: 6071213726339756985}
-  _weaponIcon: {fileID: 21300000, guid: e79a9e9d6396eba438900afb0357e808, type: 3}
+  _weaponIcon: {fileID: 21300000, guid: d0127f9e8ae85b04ea708643d73f2e90, type: 3}

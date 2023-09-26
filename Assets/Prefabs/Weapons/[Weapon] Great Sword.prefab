@@ -4937,6 +4937,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea451edf4337274199ba48f205fdc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   swordEffect: {fileID: 716361609}
-  _weaponIcon: {fileID: 21300000, guid: 660fd4583cd859b498e76e9a51e00c24, type: 3}
-  _weaponName: "\uC0C1\uC790 \uBCA0\uAE30"
+  _weaponIcon: {fileID: 136583627, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}

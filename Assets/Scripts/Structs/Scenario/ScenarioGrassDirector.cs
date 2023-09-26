@@ -25,7 +25,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
                     null,
                     null,
                     this.transform,
-                    200, 10
+                    10, 20
                 )
             },
         };

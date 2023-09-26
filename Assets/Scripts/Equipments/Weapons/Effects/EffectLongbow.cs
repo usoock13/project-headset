@@ -1,13 +1,14 @@
-using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectLongbow : MonoBehaviour {
-    public bool isActive = false;
+public class EffectLongbow : EffectProjectile {
     public WeaponLongbow originWeapon;
     private float Damage => originWeapon.Damage;
-    private float flyingSpeed = 10f;
-    private float hittingkDelay = 0.4f;
+    private float flyingSpeed = 18f;
+    private float hittingDelay = 0.4f;
+    private const float FLYING_TIME = 3;
     [SerializeField] LayerMask targetLayer = 8;
+    private List<GameObject> hitMonsters = new List<GameObject>();
 
     private void Start() {
         if(originWeapon == null) {
@@ -15,16 +16,18 @@ public class EffectLongbow : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-    private void Update() {
+    protected override void Update() {
         transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(1<<other.gameObject.layer == targetLayer.value) {
+        if(1<<other.gameObject.layer == targetLayer.value
+        && !hitMonsters.Contains(other.gameObject)) {
             Monster target;
             if(other.TryGetComponent<Monster>(out target)) {
                 target.TakeDamage(Damage);
-                target.TakeHittingDelay(hittingkDelay);
-                target.TakeForce(transform.up * 5f);
+                target.TakeHittingDelay(hittingDelay);
+                target.TakeForce(transform.up * 1f, hittingDelay);
+                hitMonsters.Add(other.gameObject);
             }
         }
     }

@@ -6,7 +6,7 @@ public abstract class Weapon : Equipment {
     protected Character Character { get { return GameManager.instance.Character; } }
     
     #region Weapon Status
-    protected int level = 0;
+    [SerializeField] protected int level = 0;
     protected abstract int MaxLevel { get; }
     protected abstract float AttackInterval { get; }
     #endregion Weapon Status

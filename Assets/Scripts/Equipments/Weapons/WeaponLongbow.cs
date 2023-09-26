@@ -15,7 +15,7 @@ public class WeaponLongbow : Weapon {
     private int[] arrowQuantity = new int[MAX_LEVEL]    {  1,        1,     1,       1,     3 };  // 투사체 수
     protected override float AttackInterval => intervals[level];
     public float HittingDelay => hittingDelay[level];
-    public float Damage => damageCoef[level];
+    public float Damage => damageCoef[level] * Character.Power;
     public float ArrowQuantity => arrowQuantity[level];
     #endregion Weapon Status
 
@@ -25,21 +25,23 @@ public class WeaponLongbow : Weapon {
     public override string Name => "장궁";
     public override string Description => 
         level switch {
-            _ => $"{AttackInterval}초에 한 번 조준 방향으로 화살을 {ArrowQuantity}발 발사해 관통하는 모든 적에게 {Damage*100}%의 피해를 가하고 {HittingDelay}초 동안 경직시킵니다.",
+            _ => $"{AttackInterval}초에 한 번 조준 방향으로 화살을 발사해 관통하는 모든 적에게 {Damage*100}%의 피해를 가하고 {HittingDelay}초 동안 경직시킵니다.",
         };
 
     private void Awake() {
-        effectPooler = new ObjectPooler(longbowEffect.gameObject, null, null, this.transform);
+        effectPooler = new ObjectPooler(longbowEffect.gameObject, null, null,
+        (gobj) => {
+            gobj.GetComponent<EffectShortbow>().onDisapear += (projectile) => {
+                effectPooler.InPool(projectile.gameObject);
+            };
+        },
+        this.transform);
     }
     protected override void Attack() {
         GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
         var effect = arrowInstance.GetComponent<EffectLongbow>();
         effect.originWeapon = this;
-        StartCoroutine(InPoolEffect(10, arrowInstance));
-    }
-    private IEnumerator InPoolEffect(float delay, GameObject effect) {
-        yield return new WaitForSeconds(delay);
-        effectPooler.InPool(effect);
+        effect.onDisapear += (projectile) => { effectPooler.InPool(arrowInstance); };
     }
     #endregion Weapon Information
 }
