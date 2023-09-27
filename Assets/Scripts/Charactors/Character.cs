@@ -13,9 +13,7 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     [SerializeField] protected int level = 1;
-    [SerializeField] protected int MaxExp {
-        get { return 50 + (int)(100 * Mathf.Pow(1.1f, level)); }
-    }
+    [SerializeField] protected int MaxExp => 50 + (int)(100 * Mathf.Pow(1.1f, level));
     [SerializeField] protected int currentExp = 0;
     [SerializeField] protected float maxHp = 100;
     [SerializeField] public float MaxHp { get; }
@@ -186,6 +184,9 @@ public class Character : MonoBehaviour, IDamageable {
     }
     /* << __temporary */
 
+    public void GetItem(Item item) {
+        item.OnGetItem();
+    }
     public void GetExp(float amount) {
         
     }
@@ -196,11 +197,11 @@ public class Character : MonoBehaviour, IDamageable {
             *** TODO : Update UI that show Character Level and Exp point. ***
          */
         LevelUpUI levelUpUI = StageManager.StageUIManager.LevelUpUI;
-        Weapon[] weapons = StageManager.EquipmentsManager.RandomChoises<Weapon>(4);
-        levelUpUI.SetChoise(0, weapons[0]);
-        levelUpUI.SetChoise(1, weapons[1]);
-        levelUpUI.SetChoise(2, weapons[2]);
-        levelUpUI.SetChoise(3, weapons[3]);
+        Equipment[] equipment = StageManager.EquipmentsManager.RandomChoises(4);
+        levelUpUI.SetChoise(0, equipment[0]);
+        levelUpUI.SetChoise(1, equipment[1]);
+        levelUpUI.SetChoise(2, equipment[2]);
+        levelUpUI.SetChoise(3, equipment[3]);
         levelUpUI.ActiveUI();
         GetExp(0); // Check multiple level up. 
     }

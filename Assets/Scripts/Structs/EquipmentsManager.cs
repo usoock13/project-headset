@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,30 +14,31 @@ public class EquipmentsManager : MonoBehaviour {
     [SerializeField] private List<Artifact> havingArtifact;
     protected const int MAX_ACCESSORIES_COUNT = 6;
 
+    [SerializeField] private Equipment bonusItem;
+
     private void Awake() {
         remainingWeapon = transform.GetComponentsInChildren<Weapon>(true).ToList();
         remainingArtifact = transform.GetComponentsInChildren<Artifact>(true).ToList();
         havingWeapon = new List<Weapon>();
         havingArtifact = new List<Artifact>();
     }
-    public T[] RandomChoises<T>(int number) where T : Equipment {
-        List<T> targetList;
+    public Equipment[] RandomChoises(int number) {
+        List<Equipment> result = new List<Equipment>();
 
-        if(typeof(T) == typeof(Weapon))
-            targetList = remainingWeapon as List<T>;
-        else if(typeof(T) == typeof(Artifact))
-            targetList = remainingArtifact as List<T>;
-        else return null;
-        int n = Mathf.Min(number, targetList.Count);
-            
-        targetList.Sort((a, b) => {
-            return UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1;
-        });
-        T[] result = new T[number];
-        for(int i=0; i<n; i++) {
-            result[i] = targetList[i];
+        if(havingWeapon.Any()) {
+            result.Add(havingWeapon[UnityEngine.Random.Range(0, havingWeapon.Count)]);
         }
-        return result;
+        if(havingArtifact.Any() && result.Count < number) {
+            result.Add(havingArtifact[UnityEngine.Random.Range(0, havingArtifact.Count)]);
+        }
+        List<Equipment> allEquipments = (List<Equipment>) remainingWeapon.Concat<Equipment>(remainingArtifact);
+        while(result.Count < number) {
+            allEquipments.Sort((a, b) => {
+                return UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1;
+            });
+            result.Add(allEquipments[UnityEngine.Random.Range(0, allEquipments.Count)]);
+        }
+        return result.ToArray();
     }
     
     public void GivePlayerEquipment(Equipment equipment) {

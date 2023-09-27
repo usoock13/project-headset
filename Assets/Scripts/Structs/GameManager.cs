@@ -30,7 +30,4 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
-    public void LevelUp() {
-        onLevelUp?.Invoke();
-    }
 }

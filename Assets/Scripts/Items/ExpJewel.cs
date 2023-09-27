@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class ExpJewel : Item {
     public float givingExp = 0;
+    private Coroutine dropCoroutine;
 
     public override void Drop() {
         base.Drop();
         gameObject.SetActive(true);
-        StartCoroutine(DropCoroutine());
+        dropCoroutine = StartCoroutine(DropCoroutine());
+    }
+    public override void PickUpItem(Transform getter) {
+        base.PickUpItem(getter);
+        if(dropCoroutine != null)
+            StopCoroutine(dropCoroutine);
     }
     private IEnumerator DropCoroutine() {
         float randomAngle = Random.Range(0, 360);
@@ -19,5 +25,9 @@ public class ExpJewel : Item {
             offset += Time.deltaTime;
             yield return null;
         }
+    }
+    public override void OnGetItem() {
+        base.OnGetItem();
+        GameManager.instance.Character.GetExp(givingExp);
     }
 }

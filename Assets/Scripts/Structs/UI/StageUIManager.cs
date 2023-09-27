@@ -5,10 +5,4 @@ public class StageUIManager : MonoBehaviour {
     public LevelUpUI LevelUpUI {
         get { return levelUpUI; }
     }
-
-    private void Start() {
-        GameManager.instance.onLevelUp += () => {
-            
-        };
-    }
 }

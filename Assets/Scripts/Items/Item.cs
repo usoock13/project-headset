@@ -2,28 +2,38 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
-    protected bool isActive = false;
+public abstract class Item : MonoBehaviour {
+    protected bool isDropped = false;
+    protected bool hasPickUp = false;
     public Action<Item> onGetItem;
 
     public virtual void Drop() {
-        isActive = true;
+        isDropped = false;
     }
     public virtual void PickUpItem(Transform getter) {
-        if(!isActive)
-            StartCoroutine(AbsorbedCoroutine(getter));
+        if(!isDropped) {
+            isDropped = true;
+            StartCoroutine(PickUpCoroutine(getter));
+        }
     }
-    private IEnumerator AbsorbedCoroutine(Transform target) {
+    private IEnumerator PickUpCoroutine(Transform target) {
         Vector2 origin = (Vector2) transform.position;
         float offset = 0;
-        while(offset < 1) {
+        while(offset < 2) {
             transform.position = Vector2.Lerp(origin, target.position, offset*offset);
             offset += Time.deltaTime;
             yield return null;
         }
-        gameObject.SetActive(false);
+        isDropped = false;
     }
-    protected virtual void OnGetItem() {
+    public virtual void OnGetItem() {
         onGetItem?.Invoke(this);
+        this.gameObject.SetActive(false);
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        Character character;
+        if(other.TryGetComponent<Character>(out character)) {
+            character.GetItem(this);
+        }
     }
 }
