@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,57 +8,102 @@ public class EquipmentsManager : MonoBehaviour {
         get { return GameManager.instance.StageManager.Character; }
     }
 
-    [SerializeField] private List<Weapon> remainingWeapon;
-    [SerializeField] private List<Weapon> havingWeapon;
+    [SerializeField] private List<Weapon> remainingWeapons;
+    [SerializeField] private List<Weapon> havingWeapons;
     protected const int MAX_WEAPONS_COUNT = 6;
-    [SerializeField] private List<Artifact> remainingArtifact;
-    [SerializeField] private List<Artifact> havingArtifact;
-    protected const int MAX_ACCESSORIES_COUNT = 6;
+    [SerializeField] private List<Artifact> remainingArtifacts;
+    [SerializeField] private List<Artifact> havingArtifacts;
+    protected const int MAX_ARTIFACTS_COUNT = 6;
 
-    [SerializeField] private Equipment bonusItem;
+    [SerializeField] private Transform bonusChoisesParent;
+    [SerializeField] private Item[] bonusChoises;
 
     private void Awake() {
-        remainingWeapon = transform.GetComponentsInChildren<Weapon>(true).ToList();
-        remainingArtifact = transform.GetComponentsInChildren<Artifact>(true).ToList();
-        havingWeapon = new List<Weapon>();
-        havingArtifact = new List<Artifact>();
-    }
-    public Equipment[] RandomChoises(int number) {
-        List<Equipment> result = new List<Equipment>();
+        remainingWeapons = transform.GetComponentsInChildren<Weapon>(true).ToList();
+        remainingArtifacts = transform.GetComponentsInChildren<Artifact>(true).ToList();
+        havingWeapons = new List<Weapon>();
+        havingArtifacts = new List<Artifact>();
 
-        if(havingWeapon.Any()) {
-            result.Add(havingWeapon[UnityEngine.Random.Range(0, havingWeapon.Count)]);
+        bonusChoises = bonusChoisesParent.GetComponentsInChildren<Item>(true);
+    }
+    public IPlayerGettable[] RandomChoises(int number) {
+        List<IPlayerGettable> candidates = new List<IPlayerGettable>();
+
+        List<Weapon> weaponCandidates = new List<Weapon>(); // weapons character is having
+        List<Artifact> artifactCandidates = new List<Artifact>(); // artifacts character is having
+        List<Equipment> remainingEquipments = new List<Equipment>(); // all equipments character is not having
+
+        if(havingWeapons.Count<MAX_WEAPONS_COUNT) {
+            weaponCandidates = havingWeapons.Where((Weapon weapon) => {
+                return weapon.CurrentLevel+1 < weapon.MaxLevel;
+            }).ToList();
+            remainingEquipments.AddRange(remainingWeapons);
         }
-        if(havingArtifact.Any() && result.Count < number) {
-            result.Add(havingArtifact[UnityEngine.Random.Range(0, havingArtifact.Count)]);
+        if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT) {
+            artifactCandidates = havingArtifacts.Where((Artifact artifact) => {
+                return artifact.CurrentLevel+1 < artifact.MaxLevel;
+            }).ToList();
+            remainingEquipments.AddRange(remainingArtifacts);
         }
-        List<Equipment> allEquipments = (List<Equipment>) remainingWeapon.Concat<Equipment>(remainingArtifact);
-        while(result.Count < number) {
-            allEquipments.Sort((a, b) => {
-                return UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1;
-            });
-            result.Add(allEquipments[UnityEngine.Random.Range(0, allEquipments.Count)]);
+        weaponCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
+        artifactCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
+        remainingEquipments.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
+
+        candidates.AddRange(weaponCandidates.GetRange(0, Math.Min(weaponCandidates.Count, number)));
+        candidates.AddRange(artifactCandidates.GetRange(0, Math.Min(artifactCandidates.Count, number)));
+        candidates.AddRange(remainingEquipments.GetRange(0, Math.Min(remainingEquipments.Count, number)));
+
+        while(candidates.Count < number) {
+            candidates.Add(bonusChoises[UnityEngine.Random.Range(0, bonusChoises.Length)]);
         }
-        return result.ToArray();
+        
+        candidates.Sort((a, b) => {
+            return UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1;
+        });
+        return candidates.GetRange(0, 4).ToArray();
     }
     
-    public void GivePlayerEquipment(Equipment equipment) {
-        if(equipment is Weapon) {
-            int targetIndex = remainingWeapon.IndexOf(equipment as Weapon);
+    public void GivePlayerItem(IPlayerGettable item) {
+        if(item is Weapon) {
+            int targetIndex = remainingWeapons.IndexOf(item as Weapon);
             if(targetIndex >= 0) {
-                Weapon target = remainingWeapon[targetIndex];
-                havingWeapon.Add(target);
-                remainingWeapon.Remove(target);
+                Weapon target = remainingWeapons[targetIndex];
+                remainingWeapons.Remove(target);
+                havingWeapons.Add(target);
                 Character.AddWeapon(target);
+                item.OnGotten();
+            } else {
+                targetIndex = havingWeapons.IndexOf(item as Weapon);
+                if(targetIndex >= 0)
+                    havingWeapons[targetIndex].LevelUp();
             }
-        } else if(equipment is Artifact) {
-            int targetIndex = remainingArtifact.IndexOf(equipment as Artifact);
+        } else if(item is Artifact) {
+            int targetIndex = remainingArtifacts.IndexOf(item as Artifact);
             if(targetIndex >= 0) {
-                Artifact target = remainingArtifact[targetIndex];
-                havingArtifact.Add(target);
-                remainingArtifact.Remove(target);
+                Artifact target = remainingArtifacts[targetIndex];
+                remainingArtifacts.Remove(target);
+                havingArtifacts.Add(target);
                 Character.AddArtifact(target);
+                item.OnGotten();
+            } else {
+                targetIndex = havingArtifacts.IndexOf(item as Artifact);
+                if(targetIndex >= 0)
+                    havingArtifacts[targetIndex].LevelUp();
             }
+        } else {
+            item.OnGotten();
         }
+    }
+    public void AddBasicWeapon(Weapon basicWeapon) {
+        Weapon target = remainingWeapons.Find((Weapon weapon) => {
+            return basicWeapon.EquipmentType == weapon.EquipmentType;
+        });
+        GivePlayerItem(target);
+    }
+    public void AddBasicArtifact(Artifact basicArtifact) {
+        Artifact target = remainingArtifacts.Find((Artifact artifact) => {
+            return basicArtifact.EquipmentType == artifact.EquipmentType;
+        });
+        GivePlayerItem(target);
     }
 }

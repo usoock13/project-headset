@@ -5,12 +5,7 @@ using UnityEngine.Timeline;
 public abstract class Weapon : Equipment {
     protected Character Character { get { return GameManager.instance.Character; } }
     
-    #region Weapon Status
-    [SerializeField] protected int level = 0;
-    protected abstract int MaxLevel { get; }
     protected abstract float AttackInterval { get; }
-    #endregion Weapon Status
-
     protected float currentTime = 0;
     
     protected void Update() {
@@ -22,14 +17,10 @@ public abstract class Weapon : Equipment {
         }
     }
     protected abstract void Attack();
-    public virtual void LevelUp() {
-        if(level < MaxLevel) {
-            level++;
-        } else {
-            throw new System.Exception("Level is max.");
-        }
+    public override void OnGotten() {
+        OnEquipped();
     }
-public override void OnEquipped() {
+    public override void OnEquipped() {
         this.gameObject.SetActive(true);
     }
 }

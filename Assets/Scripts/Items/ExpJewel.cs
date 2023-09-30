@@ -2,8 +2,13 @@ using System.Collections;
 using UnityEngine;
 
 public class ExpJewel : Item {
-    public float givingExp = 0;
+    public int givingExp = 0;
     private Coroutine dropCoroutine;
+
+    [SerializeField] private Sprite icon;
+    public override Sprite Icon => icon;
+    public override string Name => "경험의 보석";
+    public override string Description => $" 강해지기 위한 경험치를 {givingExp}만큼 얻을 수 있는 보석입니다.";
 
     public override void Drop() {
         base.Drop();
@@ -26,8 +31,8 @@ public class ExpJewel : Item {
             yield return null;
         }
     }
-    public override void OnGetItem() {
-        base.OnGetItem();
+    public override void OnGotten() {
+        base.OnGotten();
         GameManager.instance.Character.GetExp(givingExp);
     }
 }

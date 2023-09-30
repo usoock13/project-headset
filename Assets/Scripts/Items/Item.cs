@@ -1,19 +1,52 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour {
-    protected bool isDropped = false;
-    protected bool hasPickUp = false;
+[RequireComponent(typeof(StateMachine))]
+public abstract class Item : MonoBehaviour, IPlayerGettable {
     public Action<Item> onGetItem;
 
+    public abstract Sprite Icon { get; }
+    public abstract string Name { get; }
+    public abstract string Description { get; }
+
+    private StateMachine stateMachine;
+    private SpriteRenderer spriteRenderer;
+
+    #region States
+    private State inactiveState = new State("Inactive");
+    private State droppedState = new State("Dropped");
+    private State pickingUpState = new State("Picking Up");
+    private State storedState = new State("Stores");
+    #endregion States
+
+    private Coroutine pickUpCoroutine;
+
+    protected void Awake() {
+        stateMachine = GetComponent<StateMachine>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        InitializeStates();
+    }
+    protected virtual void InitializeStates() {
+        stateMachine.SetIntialState(inactiveState);
+        droppedState.onActive += (State previous) => {
+            spriteRenderer.enabled = true;
+        };
+        pickingUpState.onInactive += (State next) => {
+            StopCoroutine(pickUpCoroutine);
+        };
+        storedState.onActive += (State previous) => {
+            spriteRenderer.enabled = false;
+        };
+    }
     public virtual void Drop() {
-        isDropped = false;
+        stateMachine.ChangeState(droppedState);
     }
     public virtual void PickUpItem(Transform getter) {
-        if(!isDropped) {
-            isDropped = true;
-            StartCoroutine(PickUpCoroutine(getter));
+        if(stateMachine.Compare(droppedState)) {
+            stateMachine.ChangeState(pickingUpState);
+            pickUpCoroutine = StartCoroutine(PickUpCoroutine(getter));
         }
     }
     private IEnumerator PickUpCoroutine(Transform target) {
@@ -24,16 +57,20 @@ public abstract class Item : MonoBehaviour {
             offset += Time.deltaTime;
             yield return null;
         }
-        isDropped = false;
+        stateMachine.ChangeState(droppedState);
     }
-    public virtual void OnGetItem() {
+    public virtual void OnGotten() {
         onGetItem?.Invoke(this);
-        this.gameObject.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Character character;
-        if(other.TryGetComponent<Character>(out character)) {
-            character.GetItem(this);
+        if(stateMachine.Compare(droppedState)
+        || stateMachine.Compare(pickingUpState)) {
+            Character character;
+            if(other.TryGetComponent<Character>(out character)) {
+                OnGotten();
+                stateMachine.ChangeState(storedState);
+                spriteRenderer.enabled = false;
+            }
         }
     }
 }

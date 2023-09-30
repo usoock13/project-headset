@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class LevelUpUI : MonoBehaviour {
-    [SerializeField] private ChoiseItem[] choiseItems = new ChoiseItem[4];
-    [SerializeField] private Equipment[] choiseEquipments = new Equipment[4];
+    [SerializeField] private ChoiseItem[] choiseItemUIs = new ChoiseItem[4];
+    [SerializeField] private IPlayerGettable[] choises = new IPlayerGettable[4];
 
     public void ActiveUI() {
         this.gameObject.SetActive(true);
@@ -17,42 +17,31 @@ public class LevelUpUI : MonoBehaviour {
         this.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
-    public void SetChoise(int index, Equipment equipment) {
-        if(index > choiseItems.Length)
+    public void SetChoise(int index, IPlayerGettable choise) {
+        if(index > choiseItemUIs.Length)
             throw new Exception($"Index is over the max choises count.\n(max count {index} / received {index})");
 
-        ChoiseInformation info = new ChoiseInformation(
-                                    equipment.Icon,
-                                    equipment.Name,
-                                    equipment.Description);
-        choiseItems[index].SetItem(info);
-        choiseEquipments[index] = equipment;
+        choiseItemUIs[index].SetItem(choise);
+        choises[index] = choise;
     }
     public void SelectChoise(int index) {
-        GameManager.instance.StageManager.EquipmentsManager.GivePlayerEquipment(choiseEquipments[index]);
+        var character = GameManager.instance.Character;
+        var stageManager = GameManager.instance.StageManager;
+        stageManager.EquipmentsManager.GivePlayerItem(choises[index]);
         this.InactiveUI();
-    }
-
-    public struct ChoiseInformation {
-        public Sprite itemIcon;
-        public string itemName;
-        public string itemDescription;
-
-        public ChoiseInformation(Sprite icon, string name, string description) {
-            this.itemIcon = icon;
-            this.itemName = name;
-            this.itemDescription = description;
-        }
+        if(++character.levelRewardCount < character.level-1)
+            stageManager.OnCharacterLevelUp();
+            
     }
     [System.Serializable]
     private struct ChoiseItem {
         public Image icon;
         public TMP_Text name;
         public TMP_Text description;
-        public void SetItem(ChoiseInformation info) {
-            this.icon.sprite = info.itemIcon;
-            this.name.text = info.itemName;
-            this.description.text = info.itemDescription;
+        public void SetItem(IPlayerGettable info) {
+            this.icon.sprite = info.Icon;
+            this.name.text = info.Name;
+            this.description.text = info.Description;
         }
     }
 }

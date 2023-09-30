@@ -9,7 +9,7 @@ public class WeaponShortbow : Weapon {
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
-    protected override int MaxLevel { get { return MAX_LEVEL; } }
+    public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] intervals = new float[MAX_LEVEL]    {   .5f,     .5f,     .3f,      .3f,    .04f };  // 공격 간격
     private float[] damageCoef = new float[MAX_LEVEL]   {   .3f,     .3f,     .4f,      .4f,     .4f };  // 피해계수
     private float[] hittingDelay = new float[MAX_LEVEL] {  .25f,    .25f,    .25f,     .25f,    .25f };  // 경직 시간
@@ -26,7 +26,7 @@ public class WeaponShortbow : Weapon {
     public override string Name => "단궁";
     public override string Description => 
         level switch {
-            _ => $"{AttackInterval}초에 한 번 조준 방향으로 화살을 {ArrowQuantity}발 발사해 관통하는 모든 적에게 {Damage*100}%의 피해를 가하고 {HittingDelay}초 동안 경직시킵니다.",
+            _ => $"{AttackInterval}초에 한 번 조준 방향으로 화살을 {ArrowQuantity}발 발사해 관통하는 모든 적에게 {damageCoef[level]*100}%의 피해를 가하고 {HittingDelay}초 동안 경직시킵니다.",
         };
 
     private void Awake() {

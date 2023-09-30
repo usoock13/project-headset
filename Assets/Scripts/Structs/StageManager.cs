@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class StageManager : MonoBehaviour {
     internal bool isGameOver = false;
@@ -25,6 +22,8 @@ public class StageManager : MonoBehaviour {
     public StageUIManager StageUIManager {
         get { return stageUIManager; }
     }
+
+    [SerializeField] private Camera mainCamera;
     
     [SerializeField] private Sprite[] expSprites = new Sprite[2];
     [SerializeField] private ExpJewel expJewel;
@@ -38,14 +37,25 @@ public class StageManager : MonoBehaviour {
     }
     private void Start() {
         character = Instantiate(__testCharacter.gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
+        mainCamera.transform.SetParent(character.transform);
+        mainCamera.transform.localPosition = new Vector3(0, 0, mainCamera.transform.position.z);
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
+    }
+    public void OnCharacterLevelUp() {
+        LevelUpUI levelUpUI = StageUIManager.LevelUpUI;
+        IPlayerGettable[] choises = EquipmentsManager.RandomChoises(4);
+        levelUpUI.SetChoise(0, choises[0]);
+        levelUpUI.SetChoise(1, choises[1]);
+        levelUpUI.SetChoise(2, choises[2]);
+        levelUpUI.SetChoise(3, choises[3]);
+        levelUpUI.ActiveUI();
     }
     public void GameOver() {
         isGameOver = true;
         scenarioDirector.OnEndsScenario();
     }
-    public void CreateExp(Vector2 point, float expAmount) {
+    public void CreateExp(Vector2 point, int expAmount) {
         var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
         if(exp != null) {
             exp.givingExp = expAmount;

@@ -11,10 +11,14 @@ public class Character : MonoBehaviour, IDamageable {
     private StageManager StageManager {
         get { return GameManager.instance.StageManager; }
     }
+    private CharacterStatusUI _characterStatusUI;
+    private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
 
-    [SerializeField] protected int level = 1;
+    public int level { get; protected set; } = 1;
     [SerializeField] protected int MaxExp => 50 + (int)(100 * Mathf.Pow(1.1f, level));
     [SerializeField] protected int currentExp = 0;
+    public int levelRewardCount = 0;
+
     [SerializeField] protected float maxHp = 100;
     [SerializeField] public float MaxHp { get; }
     [SerializeField] public float currentHp { get; protected set; }
@@ -96,7 +100,7 @@ public class Character : MonoBehaviour, IDamageable {
     }
     protected void Start() {
         currentHp = maxHp;
-        AddWeapon(basicWeapon);
+        StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);
     }
     protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
@@ -163,46 +167,38 @@ public class Character : MonoBehaviour, IDamageable {
         arrowIsFixed = active;
     }
     public void AddWeapon(Weapon weapon) {
-        GameObject weaponInstance = Instantiate(weapon.gameObject, weaponParent);
-        weaponInstance.GetComponent<Weapon>()?.OnEquipped();
+        weapon.transform.SetParent(weaponParent);
         /* 
             *** TODO : Update UI that show Chracter information. ***
-         */
+        */
     }
     public void AddArtifact(Artifact artifact) {
-        GameObject artifactInstance = Instantiate(artifact.gameObject, artifactParent);
-        artifactInstance.GetComponent<Artifact>()?.OnEquipped();
+        artifact.transform.SetParent(artifactParent);
         /* 
             *** TODO : Update UI that show Chracter information. ***
-         */
+        */
     }
 
     /* __temporary >> */
     private void Update() {
         if(Input.GetKeyDown(KeyCode.L))
-            this.LevelUp();
+            this.GetExp(100);
     }
     /* << __temporary */
-
-    public void GetItem(Item item) {
-        item.OnGetItem();
-    }
-    public void GetExp(float amount) {
-        
+    
+    public void GetExp(int amount) {
+        currentExp += amount;
+        if(currentExp >= MaxExp)
+            LevelUp();
+        StatusUI.UpdateExpSlider((float)currentExp / MaxExp);
     }
     private void LevelUp() {
-        currentExp = 0;
+        currentExp = currentExp - MaxExp;
         level ++;
         /* 
             *** TODO : Update UI that show Character Level and Exp point. ***
-         */
-        LevelUpUI levelUpUI = StageManager.StageUIManager.LevelUpUI;
-        Equipment[] equipment = StageManager.EquipmentsManager.RandomChoises(4);
-        levelUpUI.SetChoise(0, equipment[0]);
-        levelUpUI.SetChoise(1, equipment[1]);
-        levelUpUI.SetChoise(2, equipment[2]);
-        levelUpUI.SetChoise(3, equipment[3]);
-        levelUpUI.ActiveUI();
+        */
+        StageManager.OnCharacterLevelUp();
         GetExp(0); // Check multiple level up. 
     }
     public void TakeDamage(float amount) {

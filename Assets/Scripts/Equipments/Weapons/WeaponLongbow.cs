@@ -8,7 +8,7 @@ public class WeaponLongbow : Weapon {
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
-    protected override int MaxLevel { get { return MAX_LEVEL; } }
+    public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] intervals = new float[MAX_LEVEL]    {  1f,      1f,    1f,      1f,    1f };  // 공격 간격
     private float[] damageCoef = new float[MAX_LEVEL]   {  2f,    2.5f,    3f,    3.5f,    3f };  // 피해계수
     private float[] hittingDelay = new float[MAX_LEVEL] {  1f,      1f,    1f,      2f,    2f };  // 경직 시간
@@ -25,13 +25,13 @@ public class WeaponLongbow : Weapon {
     public override string Name => "장궁";
     public override string Description => 
         level switch {
-            _ => $"{AttackInterval}초에 한 번 조준 방향으로 화살을 발사해 관통하는 모든 적에게 {Damage*100}%의 피해를 가하고 {HittingDelay}초 동안 경직시킵니다.",
+            _ => $"{AttackInterval}초에 한 번 조준 방향으로 화살을 발사해 관통하는 모든 적에게 {damageCoef[level]*100}%의 피해를 가하고 {HittingDelay}초 동안 경직시킵니다.",
         };
 
     private void Awake() {
         effectPooler = new ObjectPooler(longbowEffect.gameObject, null, null,
         (gobj) => {
-            gobj.GetComponent<EffectShortbow>().onDisapear += (projectile) => {
+            gobj.GetComponent<EffectLongbow>().onDisapear += (projectile) => {
                 effectPooler.InPool(projectile.gameObject);
             };
         },

@@ -39,7 +39,7 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     public bool isArrive { get; protected set;} = true;
     public UnityAction<Monster> onDie;
 
-    [SerializeField] protected float givingExp = 10;
+    [SerializeField] protected int givingExp = 10;
 
     private Coroutine takeHittingDelayCoroutine;
     private Coroutine updateTargetDirectionCoroutine;

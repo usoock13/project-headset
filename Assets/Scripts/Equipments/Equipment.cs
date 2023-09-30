@@ -1,9 +1,25 @@
 using UnityEngine;
 
-public abstract class Equipment : MonoBehaviour, IDisplayOnUI {
+public abstract class Equipment : MonoBehaviour, IPlayerGettable {
+    public string EquipmentType => this.GetType().ToString();
+
+    #region Level
+    [SerializeField] protected int level = 0;
+    public int CurrentLevel => level;
+    public abstract int MaxLevel { get; }
+    #endregion Level
+
     public abstract Sprite Icon { get; }
     public abstract string Name { get; }
     public abstract string Description { get; }
-    
+
+    public virtual void LevelUp() {
+        if(level < MaxLevel) {
+            level++;
+        } else {
+            throw new System.Exception("Level is max.");
+        }
+    }
+    public abstract void OnGotten();
     public abstract void OnEquipped();
 }
