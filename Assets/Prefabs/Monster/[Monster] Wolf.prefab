@@ -208,6 +208,7 @@ MonoBehaviour:
   moveSpeed: 2
   maxHp: 30
   currentHp: 0
+  givingExp: 50
   ownerPooler:
     poolingObject: {fileID: 0}
 --- !u!114 &3527790578222439278

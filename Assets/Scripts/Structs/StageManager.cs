@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour {
@@ -24,6 +25,8 @@ public class StageManager : MonoBehaviour {
     }
 
     [SerializeField] private Camera mainCamera;
+
+    [SerializeField] private ItemCollector itemCollector;
     
     [SerializeField] private Sprite[] expSprites = new Sprite[2];
     [SerializeField] private ExpJewel expJewel;
@@ -37,8 +40,14 @@ public class StageManager : MonoBehaviour {
     }
     private void Start() {
         character = Instantiate(__testCharacter.gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
+        
         mainCamera.transform.SetParent(character.transform);
         mainCamera.transform.localPosition = new Vector3(0, 0, mainCamera.transform.position.z);
+        // Set Camera
+        
+        character.ItemCollector = itemCollector;
+        // Set the object that get item to chase a character.
+
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
     }

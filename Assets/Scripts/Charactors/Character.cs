@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteAnimator))]
 [RequireComponent(typeof(StateMachine))]
-public class Character : MonoBehaviour, IDamageable {
+public abstract class Character : MonoBehaviour, IDamageable {
     private StageManager StageManager {
         get { return GameManager.instance.StageManager; }
     }
     private CharacterStatusUI _characterStatusUI;
     private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
 
+    #region Character Status
     public int level { get; protected set; } = 1;
     [SerializeField] protected int MaxExp => 50 + (int)(100 * Mathf.Pow(1.1f, level));
     [SerializeField] protected int currentExp = 0;
@@ -22,6 +24,28 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected float maxHp = 100;
     [SerializeField] public float MaxHp { get; }
     [SerializeField] public float currentHp { get; protected set; }
+    #endregion Character Status
+
+    #region Character Information
+    [SerializeField] private Sprite defaultSprite;
+
+    public Sprite DefaultSprite => defaultSprite;
+    public abstract string CharacterName { get; }
+
+    [SerializeField] private HeadmountCharacter headmountCharacter;
+    [SerializeField] public HeadmountCharacter HeadmountCharacter => headmountCharacter;
+    [SerializeField] public abstract Ability HeadAbility { get; }
+    #endregion Character Information
+
+    private ItemCollector itemCollector;
+    public ItemCollector ItemCollector {
+        get { return itemCollector; }
+        set { 
+            itemCollector = value;
+            itemCollector.transform.SetParent(null);
+            itemCollector.target = this.transform;
+        }
+    }
 
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected SpriteRenderer spriteRenderer;
@@ -30,13 +54,13 @@ public class Character : MonoBehaviour, IDamageable {
 
     #region Status
     [SerializeField] protected float statusDefaultPower = 10;
-    [SerializeField] protected float statusDefaultMoveSpeed = 5;
+    [SerializeField] protected float statusDefaultMoveSpeed = 2.5f;
     [SerializeField] protected float statusDefaultArmor = 10;
     // |
     #region Additional Status
-    public Func<float> additionalPower;
-    public Func<float> additionalMoveSpeed;
-    public Func<float> additionalArmor;
+    public Func<Character, float> additionalPower;
+    public Func<Character, float> additionalMoveSpeed;
+    public Func<Character, float> additionalArmor;
     #endregion Additional Status
     // |
     [SerializeField] public float Power {
@@ -85,6 +109,8 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected Transform weaponParent;
     [SerializeField] protected Transform artifactParent;
 
+    [SerializeField] public Transform headmountPoint;
+
     #region States Refer
     protected State idleState = new State("Idle");
     protected State walkState = new State("Walk");
@@ -92,6 +118,7 @@ public class Character : MonoBehaviour, IDamageable {
     protected State dieState = new State("Die");
     #endregion States Refer
 
+    #region Unity Events
     protected void Awake() {
         movement ??= GetComponent<Movement>();
         spriteAnimator ??= GetComponent<SpriteAnimator>();
@@ -102,6 +129,14 @@ public class Character : MonoBehaviour, IDamageable {
         currentHp = maxHp;
         StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);
     }
+    /* __temporary >> */
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.L))
+            this.GetExp(100);
+    }
+    /* << __temporary */
+    #endregion Unity Events
+
     protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
 
@@ -178,13 +213,6 @@ public class Character : MonoBehaviour, IDamageable {
             *** TODO : Update UI that show Chracter information. ***
         */
     }
-
-    /* __temporary >> */
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.L))
-            this.GetExp(100);
-    }
-    /* << __temporary */
     
     public void GetExp(int amount) {
         currentExp += amount;
@@ -216,13 +244,5 @@ public class Character : MonoBehaviour, IDamageable {
     private void Die() {
         stateMachine.ChangeState(dieState, false);
         StageManager.GameOver();
-    }
-
-    [System.Serializable]
-    public class HeadAbility {
-        public Sprite icon;
-        public string name;
-        public string description;
-        public Action<Character> onJoinParty;
     }
 }

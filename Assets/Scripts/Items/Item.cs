@@ -65,8 +65,7 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     private void OnTriggerEnter2D(Collider2D other) {
         if(stateMachine.Compare(droppedState)
         || stateMachine.Compare(pickingUpState)) {
-            Character character;
-            if(other.TryGetComponent<Character>(out character)) {
+            if(other.TryGetComponent<Character>(out _)) {
                 OnGotten();
                 stateMachine.ChangeState(storedState);
                 spriteRenderer.enabled = false;

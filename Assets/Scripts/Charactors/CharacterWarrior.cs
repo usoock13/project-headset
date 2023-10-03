@@ -8,17 +8,13 @@ public class CharacterWarrior : Character {
     const string ANIMATION_WALK = "Warrior Walk";
     #endregion Animation Clips
 
-    public HeadAbility headAbility = new HeadAbility {
-        name = "인내",
-        description = "체력이 적으면 받는 피해량이 감소합니다.",
-        onJoinParty = (Character character) => {
-            character.additionalArmor += () => {
-                float hpRatio = character.currentHp / character.MaxHp;
-                return 15 * (1-hpRatio);
-            };
-        }
-    };
+    #region Character Information
+    public override string CharacterName => "워리어";
     
+    [SerializeField] private AbilityWarriors _headAiblity;
+    public override Ability HeadAbility => _headAiblity;
+    #endregion Character Information
+
     protected override void InitializeStates() {
         base.InitializeStates();
         idleState.onActive = OnEnterIdleState;

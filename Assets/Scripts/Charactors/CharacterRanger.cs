@@ -8,14 +8,10 @@ public class CharacterRanger : Character {
     const string ANIMATION_WALK = "Ranger Walk";
     #endregion Animation Clips
 
-    public HeadAbility headAbility = new HeadAbility {
-        name = "기동전",
-        description = "이동속도가 증가합니다.",
-        onJoinParty = (Character character) => {
-            character.additionalMoveSpeed += () => 0.5f;
-        }
-    };
-    
+    public override string CharacterName => "레인저";
+
+    public override Ability HeadAbility => throw new System.NotImplementedException();
+
     protected override void InitializeStates() {
         base.InitializeStates();
         idleState.onActive = OnEnterIdleState;
