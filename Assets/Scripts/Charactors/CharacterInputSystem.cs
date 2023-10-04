@@ -11,6 +11,7 @@ public class CharacterInputSystem : MonoBehaviour {
         if(character == null) {
             Debug.LogError("Character Input System failed to get a Character Component.");
         }
+        character.characterInputSystem = this;
     }
     public void OnMove(InputAction.CallbackContext context) {
         character.SetMoveDirection(context.ReadValue<Vector2>());

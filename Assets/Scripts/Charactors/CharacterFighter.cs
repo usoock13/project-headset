@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CharacterFighter : Character {
     #region Animation Clips
-    const string ANIMATION_IDLE = "Fighter Idle";
-    const string ANIMATION_WALK = "Fighter Walk";
+    protected const string ANIMATION_IDLE = "Fighter Idle";
+    protected const string ANIMATION_WALK = "Fighter Walk";
     #endregion Animation Clips
 
     #region Character Information

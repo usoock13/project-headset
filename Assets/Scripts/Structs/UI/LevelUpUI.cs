@@ -11,11 +11,11 @@ public class LevelUpUI : MonoBehaviour {
 
     public void ActiveUI() {
         this.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        GameManager.instance.StageManager.PauseGame(true);
     }
     public void InactiveUI() {
         this.gameObject.SetActive(false);
-        Time.timeScale = 1;
+        GameManager.instance.StageManager.PauseGame(false);
     }
     public void SetChoise(int index, IPlayerGettable choise) {
         if(index > choiseItemUIs.Length)

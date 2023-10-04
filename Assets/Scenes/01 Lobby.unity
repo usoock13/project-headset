@@ -2392,9 +2392,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterList:
-  - {fileID: 1589356278, guid: 39cc942df7037bd45b07c98172302d66, type: 3}
-  - {fileID: 3606824265307012506, guid: 42a1ccb0d87f76a4dbaefeb7d0fe28a4, type: 3}
-  - {fileID: 2469946907581847715, guid: caa6b69922df9ad4fa4c1843739cb4ac, type: 3}
+  - {fileID: 1189640632873005873, guid: 47d0b1a81d1e54d44826403822e8b456, type: 3}
+  - {fileID: 1854368909079229216, guid: 4d4647aa93d35a24eb2558635ce3f30e, type: 3}
+  - {fileID: 3436822020272946154, guid: 76c9d2544cc0e314586e7b177ecc04be, type: 3}
   selectedCharacters: []
   choiseItemButtons:
   - {fileID: 1923761560}

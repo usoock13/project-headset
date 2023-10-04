@@ -18,19 +18,27 @@ PrefabInstance:
     - target: {fileID: 261295332503420724, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 3af530c84c1437540a4b315e76eceb5c, type: 2}
+      objectReference: {fileID: 9100000, guid: 43519d1094a05694f9f6ab8b235f86dd, type: 2}
+    - target: {fileID: 331828236441914241, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1428873711, guid: b1f380571660e5c4d8801686725058ef, type: 3}
     - target: {fileID: 331828236441914241, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 854544164502958177, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Name
-      value: '[Headmount Character] Warrior'
+      value: '[Headmount Character] Ranger'
       objectReference: {fileID: 0}
     - target: {fileID: 1034480974895068840, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1872326095936006358, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 640829448, guid: b1f380571660e5c4d8801686725058ef, type: 3}
     - target: {fileID: 1872326095936006358, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
@@ -81,12 +89,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3708817249502812639, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Name
-      value: '[Character] Warrior'
+      value: '[Character] Ranger'
       objectReference: {fileID: 0}
     - target: {fileID: 5596541835235343379, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a8c6a201e4b004b4791de86d001c7344, type: 3}
+      objectReference: {fileID: 21300000, guid: 49251e57d13460d4288f6bf4bdb50c0d, type: 3}
     - target: {fileID: 5596541835235343379, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -111,7 +119,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3708817249502812639, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
   m_PrefabInstance: {fileID: 3973744096251248710}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1189640632873005873
+--- !u!114 &1854368909079229216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +128,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 314634670080285081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48de5bedd2b864e449069b0908c3b4cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aac68005af39f0479e6433051861f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterInputSystem: {fileID: 0}
@@ -134,13 +142,12 @@ MonoBehaviour:
   weaponParent: {fileID: 4364672604279695569}
   artifactParent: {fileID: 947811563956023290}
   headmountPoint: {fileID: 9218828611891435066}
-  maxHp: 110
-  statusDefaultPower: 20
-  statusDefaultMoveSpeed: 2.2
-  statusDefaultArmor: 10
-  basicWeapon: {fileID: 974240963, guid: f7d4ad48ca8039d4fbc7e9a3aff1607a, type: 3}
-  defaultSprite: {fileID: 21300000, guid: a8c6a201e4b004b4791de86d001c7344, type: 3}
-  _headAiblity: {fileID: 0}
+  maxHp: 95
+  statusDefaultPower: 15
+  statusDefaultMoveSpeed: 2.5
+  statusDefaultArmor: 8
+  basicWeapon: {fileID: -3919815677109160991, guid: a0741043c1d8ed244889e2c4f9a7ea6f, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 49251e57d13460d4288f6bf4bdb50c0d, type: 3}
 --- !u!114 &946146715573687474 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4180730646570767604, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}

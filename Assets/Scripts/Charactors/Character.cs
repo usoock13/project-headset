@@ -6,7 +6,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteAnimator))]
 [RequireComponent(typeof(StateMachine))]
 public abstract class Character : MonoBehaviour, IDamageable {
     private StageManager StageManager {
@@ -15,20 +14,19 @@ public abstract class Character : MonoBehaviour, IDamageable {
     private CharacterStatusUI _characterStatusUI;
     private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
 
+    public CharacterInputSystem characterInputSystem;
+
     #region Character Status
     public int level { get; protected set; } = 1;
     [SerializeField] protected int MaxExp => 50 + (int)(100 * Mathf.Pow(1.1f, level));
-    [SerializeField] protected int currentExp = 0;
-    public int levelRewardCount = 0;
+    protected int currentExp = 0;
+    [HideInInspector] public int levelRewardCount = 0;
 
-    [SerializeField] protected float maxHp = 100;
     [SerializeField] public float MaxHp { get; }
     [SerializeField] public float currentHp { get; protected set; }
     #endregion Character Status
 
     #region Character Information
-    [SerializeField] private Sprite defaultSprite;
-
     public Sprite DefaultSprite => defaultSprite;
     public abstract string CharacterName { get; }
 
@@ -48,21 +46,18 @@ public abstract class Character : MonoBehaviour, IDamageable {
     }
 
     [SerializeField] protected StateMachine stateMachine;
-    [SerializeField] protected SpriteRenderer spriteRenderer;
-    [SerializeField] protected SpriteAnimator spriteAnimator;
     [SerializeField] protected Movement movement;
 
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)> hmcSpriteRenderers;
+    [SerializeField] protected SpriteAnimator spriteAnimator;
+
     #region Status
-    [SerializeField] protected float statusDefaultPower = 10;
-    [SerializeField] protected float statusDefaultMoveSpeed = 2.5f;
-    [SerializeField] protected float statusDefaultArmor = 10;
-    // |
     #region Additional Status
     public Func<Character, float> additionalPower;
     public Func<Character, float> additionalMoveSpeed;
     public Func<Character, float> additionalArmor;
     #endregion Additional Status
-    // |
     [SerializeField] public float Power {
         get {
             float final = statusDefaultPower;
@@ -105,7 +100,6 @@ public abstract class Character : MonoBehaviour, IDamageable {
     public Transform attackArrow;
     private Vector2 attackDirection;
 
-    [SerializeField] protected Weapon basicWeapon;
     [SerializeField] protected Transform weaponParent;
     [SerializeField] protected Transform artifactParent;
 
@@ -118,11 +112,18 @@ public abstract class Character : MonoBehaviour, IDamageable {
     protected State dieState = new State("Die");
     #endregion States Refer
 
+    [Header("Individual Properties")]
+    [SerializeField] protected float maxHp = 100;
+    [SerializeField] protected float statusDefaultPower = 10;
+    [SerializeField] protected float statusDefaultMoveSpeed = 2.5f;
+    [SerializeField] protected float statusDefaultArmor = 10;
+    [SerializeField] protected Weapon basicWeapon;
+    [SerializeField] private Sprite defaultSprite;
+
     #region Unity Events
     protected void Awake() {
         movement ??= GetComponent<Movement>();
-        spriteAnimator ??= GetComponent<SpriteAnimator>();
-        spriteRenderer = spriteRenderer ?? GetComponent<SpriteRenderer>();
+        hmcSpriteRenderers = new List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)>();
         InitializeStates();
     }
     protected void Start() {
@@ -168,17 +169,22 @@ public abstract class Character : MonoBehaviour, IDamageable {
         movement.MoveToward(moveVector);
         if(arrowIsFixed) {
             if(Mathf.Abs(attackDirection.x) > 0.01f) {
-                spriteRenderer.flipX = attackDirection.x<0 ? true : false;
+                FlipSprites(attackDirection.x<0 ? true : false);
             }
             int animationDirection = attackDirection.x<0
                                         ? (moveDirection.x<0  ?  1 : -1)
                                         : (moveDirection.x>=0 ?  1 : -1);
             spriteAnimator.SetFloat("Move Animation Direction", animationDirection);
         } else {
-            if(moveVector.x != 0)
-                spriteRenderer.flipX = moveVector.x<0 ? true : false;
+            if(moveVector.x != 0) {
+                FlipSprites(moveVector.x<0 ? true : false);
+            }
             spriteAnimator.SetFloat("Move Animation Direction", 1);
         }
+    }
+    private void FlipSprites(bool flip) {
+        Vector3 org = spriteRenderer.transform.localScale;
+        spriteRenderer.transform.localScale =  new Vector3(flip? -1 : 1, org.y, org.z);
     }
     private void RotateArrow(Vector2 direction) {
         float rotateSpeed = 1080f;
@@ -200,6 +206,13 @@ public abstract class Character : MonoBehaviour, IDamageable {
         if(!arrowIsFixed && active)
             attackDirection = attackArrow.transform.rotation * Vector2.up;
         arrowIsFixed = active;
+    }
+    public void MountCharacter(HeadmountCharacter headmountCharacter) {
+        HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
+        hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
+        headmountPoint = hmc.headmountPoint;
+        hmcSpriteRenderers.Add((hmc.HandsSprite, hmc.FrontSprite, hmc.BackSprite));
+        hmc.gameObject.SetActive(true);
     }
     public void AddWeapon(Weapon weapon) {
         weapon.transform.SetParent(weaponParent);

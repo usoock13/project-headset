@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StageManager : MonoBehaviour {
     internal bool isGameOver = false;
+    static public bool isGamePause = false;
     [SerializeField] private Transform characterSpawnPoint;
     [SerializeField] private Character __testCharacter;
     private Character character;
@@ -11,6 +12,7 @@ public class StageManager : MonoBehaviour {
         get { return character; }
         set { character ??= value; }
     }
+    private PlayerInput PlayerInput => character.GetComponent<PlayerInput>();
     [SerializeField] private ScenarioDirector scenarioDirector;
     public ScenarioDirector ScenarioDirector {
         get { return scenarioDirector; }
@@ -56,11 +58,8 @@ public class StageManager : MonoBehaviour {
         List<Character> selectedCharacter = GameManager.instance.selectedCharacters ?? new List<Character>() { __testCharacter };
         character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
 
-        Transform headmountPoint = character.headmountPoint;
         for(int i=1; i<selectedCharacter.Count; i++) {
-            HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(selectedCharacter[i].HeadmountCharacter, headmountPoint);
-            headmountPoint = hmc.headmountPoint;
-            hmc.gameObject.SetActive(true);
+            character.MountCharacter(selectedCharacter[i].HeadmountCharacter);
         }
     }
     public void OnCharacterLevelUp() {
@@ -82,5 +81,13 @@ public class StageManager : MonoBehaviour {
             exp.givingExp = expAmount;
             exp.Drop();
         }
+    }
+    public void PauseGame(bool pause) {
+        Time.timeScale = pause ? 0 : 1;
+        // if(pause)
+        //     PlayerInput.actions.actionMaps[0].Disable();
+        // else
+        //     PlayerInput.actions.actionMaps[0].Enable();
+        isGamePause = pause;
     }
 }

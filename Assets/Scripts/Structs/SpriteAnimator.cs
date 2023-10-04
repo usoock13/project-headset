@@ -23,12 +23,15 @@ public class SpriteAnimator : MonoBehaviour {
     private void Update() {
         if(!CurrentAnimationIs(_nextAnimationName)
         && _nextAnimationName != null)
-            _animator.Play(_nextAnimationName);
+            if(!StageManager.isGamePause)
+                _animator.Play(_nextAnimationName);
     }
     public void ChangeAnimation(string stateName, bool intoSelf=false) {
         if(intoSelf || stateName != _nextAnimationName) {
             _nextAnimationName = stateName;
-            _animator.Play(stateName);
+            
+            if(!StageManager.isGamePause)
+                _animator.Play(stateName);
         }
     }
     public void SetFloat(string name, float value) {
