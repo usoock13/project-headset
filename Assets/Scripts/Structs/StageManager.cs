@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class StageManager : MonoBehaviour {
             Destroy(gameObject);
     }
     private void Start() {
-        character = Instantiate(__testCharacter.gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
+        SpawnCharacter();
         
         mainCamera.transform.SetParent(character.transform);
         mainCamera.transform.localPosition = new Vector3(0, 0, mainCamera.transform.position.z);
@@ -50,6 +51,17 @@ public class StageManager : MonoBehaviour {
 
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
+    }
+    private void SpawnCharacter() {
+        List<Character> selectedCharacter = GameManager.instance.selectedCharacters ?? new List<Character>() { __testCharacter };
+        character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
+
+        Transform headmountPoint = character.headmountPoint;
+        for(int i=1; i<selectedCharacter.Count; i++) {
+            HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(selectedCharacter[i].HeadmountCharacter, headmountPoint);
+            headmountPoint = hmc.headmountPoint;
+            hmc.gameObject.SetActive(true);
+        }
     }
     public void OnCharacterLevelUp() {
         LevelUpUI levelUpUI = StageUIManager.LevelUpUI;

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
         get { return stageManager.isGameOver; }
     }
 
+    public List<Character> selectedCharacters;
+
     public Action onLevelUp;
 
     private void Awake() {
