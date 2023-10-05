@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Video;
 
 [RequireComponent(typeof(StateMachine))]
 public abstract class Character : MonoBehaviour, IDamageable {
@@ -209,7 +210,9 @@ public abstract class Character : MonoBehaviour, IDamageable {
     }
     public void MountCharacter(HeadmountCharacter headmountCharacter) {
         HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
-        hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
+        // hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
+        hmc.SetRenderPointAnchor(headmountPoint, hmcSpriteRenderers.Count);
+
         headmountPoint = hmc.headmountPoint;
         hmcSpriteRenderers.Add((hmc.HandsSprite, hmc.FrontSprite, hmc.BackSprite));
         hmc.gameObject.SetActive(true);

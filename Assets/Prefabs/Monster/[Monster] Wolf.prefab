@@ -86,7 +86,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -208,7 +208,7 @@ MonoBehaviour:
   moveSpeed: 2
   maxHp: 30
   currentHp: 0
-  givingExp: 50
+  givingExp: 10
   ownerPooler:
     poolingObject: {fileID: 0}
 --- !u!114 &3527790578222439278

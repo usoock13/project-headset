@@ -90,8 +90,7 @@ public abstract class Monster : MonoBehaviour, IDamageable {
 
         InitializeStates();
     }
-    protected void Start() {
-    }
+    protected void Start() {}
     protected void OnEnable() {
         OnSpawn();
     }
