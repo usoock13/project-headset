@@ -104,190 +104,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_warrior_walk_0
+      name: sprite_character_warrior_walk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91f0ab0f444f5bd48af0f35227519acd
-      internalID: -259661677
+      spriteID: 5f8c105addc3dfb45b01383c0a40e313
+      internalID: 991128533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_1
+      name: sprite_character_warrior_walk_1
       rect:
         serializedVersion: 2
         x: 48
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb08d5502e740c840ba3c0f124261775
-      internalID: 175875851
+      spriteID: 625ecf4e0af205f48980fded7192685e
+      internalID: 287098753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_2
+      name: sprite_character_warrior_walk_2
       rect:
         serializedVersion: 2
         x: 96
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d201b1f709cdbd64e8ab5fc103624246
-      internalID: 1140145855
+      spriteID: e60145ce76ba70b4d8803408e43487a8
+      internalID: -183804098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_3
+      name: sprite_character_warrior_walk_3
       rect:
         serializedVersion: 2
         x: 0
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fd377161be1a4c4bae68b8df8aabd5f
-      internalID: -344985943
+      spriteID: 6251cf8549eb6384a9c5da025c24b1a7
+      internalID: -146174899
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_4
+      name: sprite_character_warrior_walk_4
       rect:
         serializedVersion: 2
         x: 48
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8124cf7804ac7b642a9decf0cf2d0e94
-      internalID: 1803155598
+      spriteID: aa4da4b07e8b7414abc5dffad84bbd55
+      internalID: 1939247986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_5
+      name: sprite_character_warrior_walk_5
       rect:
         serializedVersion: 2
         x: 96
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60328869287997c4b935d1a379f45af2
-      internalID: 955492108
+      spriteID: c45746dcc229874419713bfba0c8992b
+      internalID: -166596441
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_6
+      name: sprite_character_warrior_walk_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c78f42eca92dbd46b3ade4c92959f24
-      internalID: -852423807
+      spriteID: 68cf989ac53bc7245a8e7b901ea07202
+      internalID: 148787682
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_7
+      name: sprite_character_warrior_walk_7
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 097514105e797d849bb43dbadcd8d76f
-      internalID: -1301621851
+      spriteID: 665735fb4d1bf9c4ea816d2854c6dec7
+      internalID: 340608041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_warrior_walk_8
+      name: sprite_character_warrior_walk_8
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fdb6848739cdf84da34b279e12a095d
-      internalID: -1342013991
+      spriteID: 88841909b9817f7409cd4a77f067f88f
+      internalID: -1374973292
       vertices: []
       indices: 
       edges: []
@@ -303,15 +303,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_warrior_walk_1: 175875851
-      sprite_warrior_walk_7: -1301621851
-      sprite_warrior_walk_4: 1803155598
-      sprite_warrior_walk_5: 955492108
-      sprite_warrior_walk_8: -1342013991
-      sprite_warrior_walk_2: 1140145855
-      sprite_warrior_walk_3: -344985943
-      sprite_warrior_walk_6: -852423807
-      sprite_warrior_walk_0: -259661677
+      sprite_character_warrior_walk_6: 148787682
+      sprite_character_warrior_walk_1: 287098753
+      sprite_character_warrior_walk_3: -146174899
+      sprite_character_warrior_walk_2: -183804098
+      sprite_character_warrior_walk_5: -166596441
+      sprite_character_warrior_walk_4: 1939247986
+      sprite_character_warrior_walk_8: -1374973292
+      sprite_character_warrior_walk_7: 340608041
+      sprite_character_warrior_walk_0: 991128533
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

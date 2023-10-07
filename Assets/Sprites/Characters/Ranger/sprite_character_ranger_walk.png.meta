@@ -104,190 +104,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_rager_walk_0
+      name: sprite_character_ranger_walk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b5123666fea5a142acdd0ce02d2ba99
-      internalID: 986209513
+      spriteID: 9d3c13a17172fa543afabd2e5a9639a5
+      internalID: 951310608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_1
+      name: sprite_character_ranger_walk_1
       rect:
         serializedVersion: 2
         x: 48
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3f2933461f078142a9a1562705c22a7
-      internalID: 1985203629
+      spriteID: d7de5000eca62b94c88eb60a8ccfb635
+      internalID: 758257587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_2
+      name: sprite_character_ranger_walk_2
       rect:
         serializedVersion: 2
         x: 96
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 474f9e1a4926d934c994f4d5c61fa00f
-      internalID: -1717707184
+      spriteID: 1f6ad98dc9f01e544861cea718e2eb7b
+      internalID: 1235961236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_3
+      name: sprite_character_ranger_walk_3
       rect:
         serializedVersion: 2
         x: 0
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e0fc47927ae7554b90e700f594d472b
-      internalID: 920396712
+      spriteID: e9822b2b388551c43a71a8d0a6860792
+      internalID: 2110119440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_4
+      name: sprite_character_ranger_walk_4
       rect:
         serializedVersion: 2
         x: 48
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ec2220cdeb1a5d4ab1dfb022516b3d4
-      internalID: -561976022
+      spriteID: 03945a8ffbd90de4eba90ff7f51d3d73
+      internalID: 1325040454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_5
+      name: sprite_character_ranger_walk_5
       rect:
         serializedVersion: 2
         x: 96
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7258672c7c98bb47ac6ae57747ebd48
-      internalID: 1621280300
+      spriteID: 020ec37289899d74a821334322038117
+      internalID: 2029892616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_6
+      name: sprite_character_ranger_walk_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff51613d738877e4b9c5e161869412d3
-      internalID: -834099509
+      spriteID: 4c3226d5af471bb429f9a2c09b085fc0
+      internalID: -2016172179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_7
+      name: sprite_character_ranger_walk_7
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 824cd5bf42baf8349a19753adcae8811
-      internalID: -1106577956
+      spriteID: 9d092c87f56ea26488843b6e314b61d6
+      internalID: -1683111231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_rager_walk_8
+      name: sprite_character_ranger_walk_8
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5f0a4e4616e4f54295d29a66d22043f
-      internalID: 2069030200
+      spriteID: 760ad112b72300b4d82f4252e4847420
+      internalID: -1543938265
       vertices: []
       indices: 
       edges: []
@@ -303,15 +303,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_rager_walk_1: 1985203629
-      sprite_rager_walk_3: 920396712
-      sprite_rager_walk_0: 986209513
-      sprite_rager_walk_2: -1717707184
-      sprite_rager_walk_5: 1621280300
-      sprite_rager_walk_4: -561976022
-      sprite_rager_walk_8: 2069030200
-      sprite_rager_walk_6: -834099509
-      sprite_rager_walk_7: -1106577956
+      sprite_character_ranger_walk_4: 1325040454
+      sprite_character_ranger_walk_2: 1235961236
+      sprite_character_ranger_walk_8: -1543938265
+      sprite_character_ranger_walk_6: -2016172179
+      sprite_character_ranger_walk_1: 758257587
+      sprite_character_ranger_walk_0: 951310608
+      sprite_character_ranger_walk_5: 2029892616
+      sprite_character_ranger_walk_3: 2110119440
+      sprite_character_ranger_walk_7: -1683111231
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

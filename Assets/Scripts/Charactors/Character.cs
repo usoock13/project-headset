@@ -52,6 +52,7 @@ public abstract class Character : MonoBehaviour, IDamageable {
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)> hmcSpriteRenderers;
     [SerializeField] protected SpriteAnimator spriteAnimator;
+    [SerializeField] protected Transform spritesParent;
 
     #region Status
     #region Additional Status
@@ -184,8 +185,8 @@ public abstract class Character : MonoBehaviour, IDamageable {
         }
     }
     private void FlipSprites(bool flip) {
-        Vector3 org = spriteRenderer.transform.localScale;
-        spriteRenderer.transform.localScale =  new Vector3(flip? -1 : 1, org.y, org.z);
+        Vector3 org = spritesParent.transform.localScale;
+        spritesParent.localScale =  new Vector3(flip? -1 : 1, org.y, org.z);
     }
     private void RotateArrow(Vector2 direction) {
         float rotateSpeed = 1080f;
