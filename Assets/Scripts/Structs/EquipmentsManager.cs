@@ -35,13 +35,13 @@ public class EquipmentsManager : MonoBehaviour {
 
         if(havingWeapons.Count<MAX_WEAPONS_COUNT) {
             weaponCandidates = havingWeapons.Where((Weapon weapon) => {
-                return weapon.CurrentLevel+1 < weapon.MaxLevel;
+                return weapon.CurrentLevel < weapon.MaxLevel;
             }).ToList();
             remainingEquipments.AddRange(remainingWeapons);
         }
         if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT) {
             artifactCandidates = havingArtifacts.Where((Artifact artifact) => {
-                return artifact.CurrentLevel+1 < artifact.MaxLevel;
+                return artifact.CurrentLevel < artifact.MaxLevel;
             }).ToList();
             remainingEquipments.AddRange(remainingArtifacts);
         }
@@ -72,11 +72,10 @@ public class EquipmentsManager : MonoBehaviour {
                 havingWeapons.Add(target);
                 Character.AddWeapon(target);
                 item.OnGotten();
-            } else {
-                targetIndex = havingWeapons.IndexOf(item as Weapon);
-                if(targetIndex >= 0)
-                    havingWeapons[targetIndex].LevelUp();
             }
+            targetIndex = havingWeapons.IndexOf(item as Weapon);
+            if(targetIndex >= 0)
+                havingWeapons[targetIndex].LevelUp();
         } else if(item is Artifact) {
             int targetIndex = remainingArtifacts.IndexOf(item as Artifact);
             if(targetIndex >= 0) {
@@ -85,11 +84,10 @@ public class EquipmentsManager : MonoBehaviour {
                 havingArtifacts.Add(target);
                 Character.AddArtifact(target);
                 item.OnGotten();
-            } else {
-                targetIndex = havingArtifacts.IndexOf(item as Artifact);
-                if(targetIndex >= 0)
-                    havingArtifacts[targetIndex].LevelUp();
             }
+            targetIndex = havingArtifacts.IndexOf(item as Artifact);
+            if(targetIndex >= 0)
+                havingArtifacts[targetIndex].LevelUp();
         } else {
             item.OnGotten();
         }

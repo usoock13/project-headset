@@ -49,8 +49,16 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     #region IDamageable Define
     public virtual void TakeDamage(float amount) {
         currentHp -= amount;
-        if(currentHp <= 0) {
+        if(currentHp <= 0)
             stateMachine.ChangeState(dieState);
+        PrintDamageNumber((int) amount);
+    }
+    protected virtual void PrintDamageNumber(int amount) {
+        try {
+            Vector2 point = (Vector2)transform.position + new Vector2(UnityEngine.Random.Range(-.3f, .3f), 0);
+            GameManager.instance.StageManager.PrintDamageNumber(point, amount.ToString());
+        } catch(Exception e) {
+            Debug.LogError(e.StackTrace);
         }
     }
     public virtual void TakeForce(Vector2 force, float duration=.25f) {

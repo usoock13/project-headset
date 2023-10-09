@@ -6,13 +6,6 @@ public class HeadmountCharacter : MonoBehaviour {
 
     public void SetRenderPointAnchor(Transform anchor, int order) {
         this.anchor = anchor;
-        // transform.position -= anchor.localPosition;
-        // headmountPoint.position += anchor.localPosition;
-    }
-    private void Update() {
-        // handsSprite.material.SetVector("_Additional_Point", anchor.transform.localPosition);
-        // frontSprite.material.SetVector("_Additional_Point", anchor.transform.localPosition);
-        // backSprite.material.SetVector("_Additional_Point", anchor.transform.localPosition);
     }
 
     [SerializeField] private SpriteRenderer handsSprite;

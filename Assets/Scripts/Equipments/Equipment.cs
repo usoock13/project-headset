@@ -14,7 +14,7 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     public abstract string Description { get; }
 
     public virtual void LevelUp() {
-        if(level < MaxLevel) {
+        if(level <= MaxLevel) {
             level++;
         } else {
             throw new System.Exception("Level is max.");

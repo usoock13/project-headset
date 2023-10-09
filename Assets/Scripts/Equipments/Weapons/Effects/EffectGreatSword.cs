@@ -21,7 +21,7 @@ public class EffectGreatSword : MonoBehaviour {
         Collider2D[] inners = Physics2D.OverlapBoxAll(transform.position, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<IDamageable>();
-            target.TakeDamage(damage);
+            target.TakeDamage(originWeapon.Damage);
             target.TakeHittingDelay(attackDelay);
             target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, attackDelay);
         }

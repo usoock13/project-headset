@@ -35,6 +35,8 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private ExpJewel expJewel;
     private ObjectPooler expPooler;
 
+    [SerializeField] private DamagePrinter damagePrinter;
+
     private void Awake() {
         if(GameManager.instance.StageManager == null)
             GameManager.instance.StageManager = this;
@@ -89,5 +91,11 @@ public class StageManager : MonoBehaviour {
         // else
         //     PlayerInput.actions.actionMaps[0].Enable();
         isGamePause = pause;
+    }
+    public void PrintDamageNumber(Vector2 point, string number) {
+        this.PrintDamageNumber(point, number, Color.white);
+    }
+    public void PrintDamageNumber(Vector2 point, string number, Color color) {
+        damagePrinter.PrintDamage(point, number, color);
     }
 }
