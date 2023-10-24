@@ -5,13 +5,14 @@ using UnityEngine;
 public class WeaponGreatSword : Weapon {
     [SerializeField] private EffectGreatSword swordEffect;
     private ObjectPooler effectPooler;
+    [SerializeField] private float attackRange = .5f;
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]    {  2f,    2f,   1.2f,    1.2f,   1.2f }; // 공격 간격
-    private float[] damageCoef = new float[MAX_LEVEL]   { 1f,   1.5f,   1.5f,      2f,   4.5f }; // 피해계수
-    private float[] areaScale = new float[MAX_LEVEL]    {  1f,    1f,     1f,   1.25f,   1.5f }; // 공격 범위 축척
+    private float[] interval = new float[MAX_LEVEL]     {  2f,     2f,   1.2f,    1.2f,   1.2f }; // 공격 간격
+    private float[] damageCoef = new float[MAX_LEVEL]   {  1f,   1.5f,   1.5f,      2f,   4.5f }; // 피해계수
+    private float[] areaScale = new float[MAX_LEVEL]    {  1f,     1f,     1f,   1.25f,   1.5f }; // 공격 범위 축척
     protected override float AttackInterval => interval[level-1];
     public float Damage => damageCoef[level-1] * Character.Power;
     public float AreaScale => areaScale[level-1];
@@ -43,7 +44,8 @@ public class WeaponGreatSword : Weapon {
         }, null, this.transform, 10, 5);
     }
     protected override void Attack() {
-        GameObject instance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        Vector3 effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
+        GameObject instance = effectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance));
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect) {

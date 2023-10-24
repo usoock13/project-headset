@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class EffectGreatSword : MonoBehaviour {
     public WeaponGreatSword originWeapon;
-    private float damage = 15f;
-    private float attackDelay = 0.6f;
+    private float hitDelay = 0.6f;
     private float attackForceScalar = 2f;
-    [SerializeField] private BoxBounds effectBounds = new BoxBounds(new Vector2(0, 1.5f), new Vector2(3f, 1.5f));
+    [SerializeField] private BoxBounds effectBounds = new BoxBounds(new Vector2(0, 0), new Vector2(3f, 1.5f));
     [SerializeField] private ParticleSystem particle;
     [SerializeField] LayerMask targetLayer;
 
@@ -22,8 +21,12 @@ public class EffectGreatSword : MonoBehaviour {
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<IDamageable>();
             target.TakeDamage(originWeapon.Damage);
-            target.TakeHittingDelay(attackDelay);
-            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, attackDelay);
+            target.TakeHittingDelay(hitDelay);
+            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
         }
+    }
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(effectBounds.center, effectBounds.Size);
     }
 }

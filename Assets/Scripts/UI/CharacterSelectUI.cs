@@ -53,7 +53,7 @@ public class CharacterSelectUI : MonoBehaviour {
         } else {
             selectedCharacters.Remove(target);
         }
-        GameManager.instance.selectedCharacters = selectedCharacters;
+        GameManager.instance.SelectedCharacters = selectedCharacters;
         UpdateSelectedCharacterViewer();
     }
 

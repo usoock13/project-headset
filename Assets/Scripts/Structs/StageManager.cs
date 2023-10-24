@@ -6,7 +6,7 @@ public class StageManager : MonoBehaviour {
     internal bool isGameOver = false;
     static public bool isGamePause = false;
     [SerializeField] private Transform characterSpawnPoint;
-    [SerializeField] private Character __testCharacter;
+    [SerializeField] private List<Character> __testCharacters;
     private Character character;
     public Character Character {
         get { return character; }
@@ -57,7 +57,7 @@ public class StageManager : MonoBehaviour {
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
     }
     private void SpawnCharacter() {
-        List<Character> selectedCharacter = GameManager.instance.selectedCharacters ?? new List<Character>() { __testCharacter };
+        List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
         character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
 
         for(int i=1; i<selectedCharacter.Count; i++) {

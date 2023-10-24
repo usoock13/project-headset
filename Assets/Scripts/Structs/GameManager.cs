@@ -20,7 +20,11 @@ public class GameManager : MonoBehaviour {
         get { return stageManager.isGameOver; }
     }
 
-    public List<Character> selectedCharacters;
+    private List<Character> selectedCharacters;
+    public List<Character> SelectedCharacters {
+        get { return selectedCharacters; }
+        set { selectedCharacters = value; }
+    }
 
     public Action onLevelUp;
 
