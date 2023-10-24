@@ -15,14 +15,14 @@ public class EffectOnePunch : MonoBehaviour {
         }
     }
     private void OnEnable() {
-        transform.Translate(effectBounds.center);
         particle.Play();
-        Collider2D[] inners = Physics2D.OverlapBoxAll(transform.position, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
+        Vector3 center = transform.position + (Vector3)(transform.localToWorldMatrix * effectBounds.center);
+        Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<IDamageable>();
             target.TakeDamage(originWeapon.DamageOfOne);
-            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
             target.TakeHittingDelay(hitDelay);
+            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
         }
     }
     private void OnDrawGizmosSelected() {

@@ -17,15 +17,8 @@ public class Movement : MonoBehaviour {
         Vector2 normal = moveVector.normalized;
         foreach(RaycastHit2D hit in hits) {
             if(hit.transform.gameObject != gameObject) {
-                // float xx = Mathf.Abs(normal.x)>Mathf.Abs(hit.normal.x) ? normal.x+hit.normal.x : 0;
-                // float yy = Mathf.Abs(normal.y)>Mathf.Abs(hit.normal.y) ? normal.y+hit.normal.y : 0;
-                // print(Mathf.Atan2(normal.x*hit.normal.y - normal.y*hit.normal.x, normal.x*hit.normal.x + normal.y*hit.normal.y)*Mathf.Rad2Deg);
                 float xx = normal.x + hit.normal.x;
                 float yy = normal.y + hit.normal.y;
-                
-                // float ag = Mathf.Atan2(normal.x*hit.normal.y - normal.y*hit.normal.x, normal.x*hit.normal.x + normal.y*hit.normal.y);
-                // Vector2 next = new Vector2(xx, yy).magnitude * (Quaternion.AngleAxis(ag<0 ? 90 : -90, Vector3.forward) * hit.normal);
-                // normal = next;
                 normal = new Vector3(xx, yy);
             }
         }
@@ -39,7 +32,7 @@ public class Movement : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.layer == BLOCK_LAYER) {
             transform.Translate(((Vector2)transform.position - other.ClosestPoint(transform.position)) * Time.deltaTime);
-            print((Vector2)transform.position - other.ClosestPoint(transform.position));
+            print("Character in the collider that has block layer");
         }
     }
 }

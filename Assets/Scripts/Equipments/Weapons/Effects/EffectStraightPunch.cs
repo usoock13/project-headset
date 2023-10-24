@@ -15,9 +15,8 @@ public class EffectStraightPunch : MonoBehaviour {
         }
     }
     private void OnEnable() {
-        transform.Translate(effectBounds.center);
-        Vector3 center = transform.position + (Vector3)(transform.worldToLocalMatrix * effectBounds.center);
         particle.Play();
+        Vector3 center = transform.position + (Vector3)(transform.localToWorldMatrix * effectBounds.center);
         Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<IDamageable>();
