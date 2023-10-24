@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Video;
 
 [RequireComponent(typeof(StateMachine))]
@@ -212,10 +213,12 @@ public abstract class Character : MonoBehaviour, IDamageable {
     public void MountCharacter(HeadmountCharacter headmountCharacter) {
         HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
         // hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
-        hmc.SetRenderPointAnchor(headmountPoint, hmcSpriteRenderers.Count);
 
         headmountPoint = hmc.headmountPoint;
         hmcSpriteRenderers.Add((hmc.HandsSprite, hmc.FrontSprite, hmc.BackSprite));
+        hmc.HandsSprite.sortingOrder = hmcSpriteRenderers.Count * 2;
+        hmc.FrontSprite.sortingOrder = hmcSpriteRenderers.Count;
+        hmc.BackSprite.sortingOrder = -hmcSpriteRenderers.Count;
         hmc.gameObject.SetActive(true);
     }
     public void AddWeapon(Weapon weapon) {

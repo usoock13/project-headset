@@ -31,6 +31,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Headmount Character] Warrior'
       objectReference: {fileID: 0}
+    - target: {fileID: 854544164502958177, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1034480974895068840, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
