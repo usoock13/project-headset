@@ -57,14 +57,14 @@ public class WeaponOrthodox : Weapon {
         GameObject instance = onePunchEffectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance, onePunchEffectPooler));
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.15f);
 
         effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
         instance = twoPunchEffectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance, twoPunchEffectPooler));
 
         if(level >= 5) {
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.15f);
             effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
             instance = straightPunchEffectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
             StartCoroutine(InPoolEffect(5f, instance, straightPunchEffectPooler));

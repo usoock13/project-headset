@@ -1,17 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class LevelUpUI : MonoBehaviour {
     [SerializeField] private ChoiseItem[] choiseItemUIs = new ChoiseItem[4];
     [SerializeField] private IPlayerGettable[] choises = new IPlayerGettable[4];
+    public UnityEvent onActive;
 
     public void ActiveUI() {
         this.gameObject.SetActive(true);
         GameManager.instance.StageManager.PauseGame(true);
+        onActive?.Invoke();
     }
     public void InactiveUI() {
         this.gameObject.SetActive(false);
