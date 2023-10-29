@@ -205,7 +205,8 @@ MonoBehaviour:
   spriteAnimator: {fileID: 600749143156082620}
   collider2D: {fileID: 4473507440462479738}
   rigidbody2D: {fileID: 6342264030857522981}
-  moveSpeed: 2
+  defaultMoveSpeed: 2.5
+  moveSpeedScales: []
   maxHp: 30
   currentHp: 0
   givingExp: 10

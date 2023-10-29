@@ -41,7 +41,6 @@ public class WeaponRifle : Weapon {
         GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
         var effect = arrowInstance.GetComponent<EffectRifleBullet>();
         effect.originWeapon = this;
-        effect.onDisapear += (projectile) => { effectPooler.InPool(arrowInstance); };
     }
     #endregion Weapon Information
 }

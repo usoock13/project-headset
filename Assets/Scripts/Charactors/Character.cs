@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Video;
 
 [RequireComponent(typeof(StateMachine))]
-public abstract class Character : MonoBehaviour, IDamageable {
+public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeable {
     private StageManager StageManager {
         get { return GameManager.instance.StageManager; }
     }
@@ -17,6 +17,7 @@ public abstract class Character : MonoBehaviour, IDamageable {
     private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
 
     public CharacterInputSystem characterInputSystem;
+    public GameObject GameObject => this.gameObject;
 
     #region Character Status
     public int level { get; protected set; } = 1;
@@ -26,6 +27,7 @@ public abstract class Character : MonoBehaviour, IDamageable {
 
     [SerializeField] public float MaxHp { get; }
     [SerializeField] public float currentHp { get; protected set; }
+    private List<Attachment> havingAttachment;
     #endregion Character Status
 
     #region Character Information
@@ -61,33 +63,30 @@ public abstract class Character : MonoBehaviour, IDamageable {
     public Func<Character, float> additionalMoveSpeed;
     public Func<Character, float> additionalArmor;
     #endregion Additional Status
-    [SerializeField] public float Power {
-        get {
+    public float Power { get {
             float final = statusDefaultPower;
             Delegate[] additions = additionalPower?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
-                    final += ((Func<float>) additions[i])?.Invoke() ?? 0;
+                    final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
             return final;
         }
     }
-    [SerializeField] protected float MoveSpeed {
-        get {
+    protected float MoveSpeed { get {
             float final = statusDefaultMoveSpeed;
             Delegate[] additions = additionalMoveSpeed?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
-                    final += ((Func<float>) additions[i])?.Invoke() ?? 0;
+                    final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
             return final;
         }
     }
-    [SerializeField] protected float Armor {
-        get {
+    protected float Armor { get {
             float final = statusDefaultArmor;
             Delegate[] additions = additionalArmor?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
-                    final += ((Func<float>) additions[i])?.Invoke() ?? 0;
+                    final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
             return final;
         }
     }
@@ -132,6 +131,7 @@ public abstract class Character : MonoBehaviour, IDamageable {
     protected void Start() {
         currentHp = maxHp;
         StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);
+        havingAttachment = new List<Attachment>();
     }
     /* __temporary >> */
     private void Update() {
@@ -265,4 +265,21 @@ public abstract class Character : MonoBehaviour, IDamageable {
         stateMachine.ChangeState(dieState, false);
         StageManager.GameOver();
     }
+
+    #region IAttachmentsTakeable Implements
+    public void TakeAttachment(Attachment attachment) {
+        attachment.OnAttached(this);
+        havingAttachment.Add(attachment);
+    }
+    public void ReleaseAttachment(Attachment attachment) {
+        attachment.OnDetached(this);
+        havingAttachment.Remove(attachment);
+    }
+    public bool TryGetAttachment(string attachmentType, out Attachment attachment) {
+        attachment = havingAttachment.Find((item) => {
+            return attachmentType == item.AttachmentType;
+        });
+        return attachment==null ? false : true;
+    }
+    #endregion IAttachmentsTakeable Implements
 }

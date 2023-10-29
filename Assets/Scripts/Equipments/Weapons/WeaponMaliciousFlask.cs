@@ -3,18 +3,19 @@ using System.Collections;
 using UnityEngine;
 
 public class WeaponMaliciousFlask : Weapon {
-    [SerializeField] private EffectMaliciousFlask longbowEffect;
+    [SerializeField] private EffectMaliciousFlask flaskEffect;
+    [SerializeField] private AttachmentSlowPoison attachmentSlowPoison;
     private ObjectPooler effectPooler;
+    private ObjectPooler attachmentPooler;
+    public AttachmentSlowPoison AfterAttahcment => attachmentPooler.OutPool().GetComponent<AttachmentSlowPoison>();
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]    {  1f,      1f,    1f,      1f,    1f };  // 공격 간격
-    private float[] damageCoef = new float[MAX_LEVEL]   {  2f,    2.5f,    3f,    3.5f,    3f };  // 피해계수
-    private float[] hittingDelay = new float[MAX_LEVEL] {  1f,      1f,    1f,      2f,    2f };  // 경직 시간
-    private int[] arrowQuantity = new int[MAX_LEVEL]    {  1,        1,     1,       1,     3 };  // 투사체 수
+    private float[] interval = new float[MAX_LEVEL]     {  0.2f,    0.2f,   0.2f,     0.2f,   0.2f };  // 공격 간격
+    private float[] damageCoef = new float[MAX_LEVEL]   {   2f,     2.5f,     3f,     3.5f,     3f };  // 피해계수
+    private int[] arrowQuantity = new int[MAX_LEVEL]    {    1,        1,      1,        1,      3 };  // 투사체 수
     protected override float AttackInterval => interval[level-1];
-    public float HittingDelay => hittingDelay[level-1];
     public float Damage => damageCoef[level-1] * Character.Power;
     public float ArrowQuantity => arrowQuantity[level-1];
     #endregion Weapon Status
@@ -22,26 +23,41 @@ public class WeaponMaliciousFlask : Weapon {
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
     public override Sprite Icon => _weaponIcon;
-    public override string Name => "극지 저격술";
+    public override string Name => "마이나스크";
     public override string Description => 
         level switch {
-            _ => $"{interval[level]}초에 한 번 조준 방향으로 북극의 쓴맛을 발사해 관통하는 모든 적에게 {damageCoef[level]*100}%의 피해를 가하고 {hittingDelay[level]}초 동안 경직시킵니다.",
+            _ => string.Join(System.Environment.NewLine, 
+                $"{interval[level]}초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다.",
+                $"약병은 적에게 닿으면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 {damageCoef[level]*100}%의 피해를 가합니다."
+            )
         };
 
     private void Awake() {
-        effectPooler = new ObjectPooler(longbowEffect.gameObject, null, null,
-        (gobj) => {
-            gobj.GetComponent<EffectMaliciousFlask>().onDisapear += (projectile) => {
-                effectPooler.InPool(projectile.gameObject);
-            };
-        },
-        this.transform);
+        effectPooler = new ObjectPooler(
+            poolingObject: flaskEffect.gameObject,
+            parent: this.transform,
+            onCreated: (gobj) => {
+                gobj.GetComponent<EffectMaliciousFlask>().onDisapear += (projectile) => {
+                    StartCoroutine(InPoolCoroutine(effectPooler, projectile.gameObject));
+                };
+        });
+        attachmentPooler = new ObjectPooler(
+            poolingObject: attachmentSlowPoison.gameObject,
+            parent: this.transform,
+            onCreated: (gobj) => {
+                gobj.GetComponent<AttachmentSlowPoison>().onDetached += (attachment) => {
+                    attachmentPooler.InPool(gobj);
+                };
+            });
+    }
+    private IEnumerator InPoolCoroutine(ObjectPooler pooler, GameObject effect) {
+        yield return new WaitForSeconds(5f);
+        pooler.InPool(effect);
     }
     protected override void Attack() {
-        GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-        var effect = arrowInstance.GetComponent<EffectMaliciousFlask>();
+        GameObject flaskInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        var effect = flaskInstance.GetComponent<EffectMaliciousFlask>();
         effect.originWeapon = this;
-        effect.onDisapear += (projectile) => { effectPooler.InPool(arrowInstance); };
     }
     #endregion Weapon Information
 }

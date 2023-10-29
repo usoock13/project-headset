@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using UnityEngine.InputSystem.Interactions;
 
 [System.Serializable]
 public class ObjectPooler {
@@ -33,6 +30,10 @@ public class ObjectPooler {
         Store(count);
     }
     public void InPool(GameObject target) {
+        if(queue.Contains(target)) {
+            Debug.LogWarning("Pooling target is already in the pooling queue.");
+            return;
+        }
         onInPool?.Invoke(target);
 		target.transform.SetParent(parent);
 		target.SetActive(false);

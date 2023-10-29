@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteAnimator))]
 [RequireComponent(typeof(StateMachine))]
-public abstract class Monster : MonoBehaviour, IDamageable {
+public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable {
     private Character targetCharacter;
     protected Character TargetCharacter {
         get {
@@ -16,6 +16,8 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         }
         set { targetCharacter ??= value; }
     }
+    public GameObject GameObject => this.gameObject;
+
     [SerializeField] protected Movement movement;
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected SpriteRenderer spriteRenderer;
@@ -23,10 +25,27 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     [SerializeField] new protected Collider2D collider2D;
     [SerializeField] new protected Rigidbody2D rigidbody2D;
 
-    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float defaultMoveSpeed = 5f;
+    public Func<Monster, float> moveSpeedScales;
+    public float MoveSpeed { get {
+        float final = defaultMoveSpeed;
+        float max = 1f;
+        float min = 1f;
+        Delegate[] scales = moveSpeedScales?.GetInvocationList();
+        if(scales != null)
+            for(int i=0; i<scales.Length; i++) {
+                Func<Monster, float> f = (Func<Monster, float>) scales[i];
+                if(f(this) < min)
+                    min = f(this);
+                if(f(this) > max)
+                    max = f(this);
+            }
+        final *= min * max;
+        return final>0 ? final : 0;
+    }}
     protected Vector2 targetDirection;
     protected Vector2 MoveVector {
-        get { return targetDirection * moveSpeed; }
+        get { return targetDirection * MoveSpeed; }
     }
     public abstract string MonsterType { get; }
 
@@ -34,9 +53,12 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     [SerializeField] protected State hitState = new State("Hit");
     [SerializeField] protected State dieState = new State("Die");
 
+    public bool isArrive { get; protected set;} = true;
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float currentHp = 0;
-    public bool isArrive { get; protected set;} = true;
+    private List<Attachment> havingAttachment = new List<Attachment>();
+    public List<Attachment> H => havingAttachment;
+
     public UnityAction<Monster> onDie;
 
     [SerializeField] protected int givingExp = 10;
@@ -116,6 +138,7 @@ public abstract class Monster : MonoBehaviour, IDamageable {
         rigidbody2D.simulated = false;
         DropExp();
         onDie?.Invoke(this);
+        ClearAttachments();
         StopCoroutine(updateTargetDirectionCoroutine);
     }
     protected void DropExp() {
@@ -131,5 +154,31 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     protected void LookAt2D(float x) {
         if(x!=0)
             spriteRenderer.flipX = x>0 ? true : false;
+    }
+
+    #region IAttachmentsTakeable Implements
+    public void TakeAttachment(Attachment attachment) {
+        attachment.OnAttached(this);
+        attachment.transform.SetParent(this.transform);
+        attachment.transform.localPosition = Vector2.zero;
+        havingAttachment.Add(attachment);
+    }
+    public void ReleaseAttachment(Attachment attachment) {
+        attachment.OnDetached(this);
+        havingAttachment.Remove(attachment);
+    }
+    public bool TryGetAttachment(string attachmentType, out Attachment attachment) {
+        attachment = havingAttachment.Find((item) => {
+            return attachmentType == item.AttachmentType;
+        });
+        return attachment==null ? false : true;
+    }
+    #endregion IAttachmentsTakeable Implements
+    
+    private void ClearAttachments() {
+        for(int i=0; i<havingAttachment.Count; i++) {
+            havingAttachment[i].OnDetached(this);
+        }
+        havingAttachment = new List<Attachment>();
     }
 }
