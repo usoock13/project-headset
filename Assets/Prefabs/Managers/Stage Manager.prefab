@@ -3090,7 +3090,7 @@ MonoBehaviour:
   defaultMonster: {fileID: 0}
   defaultSpawncount: 1
   defaultSpawnInterval: 1
-  monsterWolf: {fileID: 2666180196710873429, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  monsterWolf: {fileID: 7174606288095932575, guid: a864c26925de80044bc03d090f0fee3f, type: 3}
   monsterToad: {fileID: 0}
   monsterUndead: {fileID: 0}
   monsterWitch: {fileID: 0}

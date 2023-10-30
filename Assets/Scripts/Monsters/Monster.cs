@@ -158,14 +158,14 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
 
     #region IAttachmentsTakeable Implements
     public void TakeAttachment(Attachment attachment) {
-        attachment.OnAttached(this);
         attachment.transform.SetParent(this.transform);
         attachment.transform.localPosition = Vector2.zero;
         havingAttachment.Add(attachment);
+        attachment.OnAttached(this);
     }
     public void ReleaseAttachment(Attachment attachment) {
-        attachment.OnDetached(this);
         havingAttachment.Remove(attachment);
+        attachment.OnDetached(this);
     }
     public bool TryGetAttachment(string attachmentType, out Attachment attachment) {
         attachment = havingAttachment.Find((item) => {

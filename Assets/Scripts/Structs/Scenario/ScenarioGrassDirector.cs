@@ -35,8 +35,8 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(3, () => {
             defaultMonster = monsterWolf;
-            defaultSpawnInterval = 300f;
-            defaultSpawncount = 1;
+            defaultSpawnInterval = 3f;
+            defaultSpawncount = 3;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
         }));
     }
