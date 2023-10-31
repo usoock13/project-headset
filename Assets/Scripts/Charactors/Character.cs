@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 using UnityEngine.Rendering;
 using UnityEngine.Video;
 
@@ -128,10 +129,12 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         hmcSpriteRenderers = new List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)>();
         InitializeStates();
     }
+
     protected void Start() {
         currentHp = maxHp;
         StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);
         havingAttachment = new List<Attachment>();
+        InitializeUI();
     }
     /* __temporary >> */
     private void Update() {
@@ -234,6 +237,12 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         */
     }
     
+
+    private void InitializeUI() {
+        StatusUI.UpdateExpSlider(0);
+        StatusUI.UpdateHpSlider(currentHp / maxHp);
+        StatusUI.UpdateLevel(level);
+    }
     public void GetExp(int amount) {
         currentExp += amount;
         if(currentExp >= MaxExp)
@@ -243,17 +252,15 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     private void LevelUp() {
         currentExp = currentExp - MaxExp;
         level ++;
-        /* 
-            *** TODO : Update UI that show Character Level and Exp point. ***
-        */
+        StatusUI.UpdateLevel(level);
         StageManager.OnCharacterLevelUp();
         GetExp(0); // Check multiple level up. 
     }
     public void TakeDamage(float amount) {
         currentHp -= amount;
-        if(currentHp <= 0) {
+        StatusUI.UpdateHpSlider(currentHp / maxHp);
+        if(currentHp <= 0)
             Die();
-        }
     }
     public void TakeHittingDelay(float amount) {
         throw new System.NotImplementedException();

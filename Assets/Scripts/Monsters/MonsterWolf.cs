@@ -14,6 +14,17 @@ public class MonsterWolf : Monster {
     private Coroutine takeAttackDelayCoroutine;
     private Coroutine dieCoroutine;
 
+    private float attackInterval = 1f;
+    private float currentAttackCooldown = 1f;
+
+    #region Unity Events
+    private void Update() {
+        if(currentAttackCooldown < attackInterval) {
+            currentAttackCooldown += Time.deltaTime;
+        }
+    }
+    #endregion Unity Events
+
     public override void TakeHittingDelay(float amount) {
         takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(amount));
     }
@@ -58,14 +69,17 @@ public class MonsterWolf : Monster {
 
         stateMachine.SetIntialState(chaseState);
     }
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == TargetCharacter.tag) {
             var character = other.gameObject.GetComponent<Character>();
             HitChracter(character);
         }
     }
     private void HitChracter(Character character) {
-        character?.TakeDamage(10f);
+        if(currentAttackCooldown >= attackInterval) {
+            character?.TakeDamage(10f);
+            currentAttackCooldown = 0;
+        }
     }
     private IEnumerator DieCoroutine() {
         yield return new WaitForSeconds(3f);
