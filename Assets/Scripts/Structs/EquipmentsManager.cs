@@ -96,12 +96,16 @@ public class EquipmentsManager : MonoBehaviour {
         Weapon target = remainingWeapons.Find((Weapon weapon) => {
             return basicWeapon.EquipmentType == weapon.EquipmentType;
         });
+        if(target == null)
+            Debug.LogWarning("Weapon that was returned by find is null.\nEqupment Manager may doesn't have that.");
         GivePlayerItem(target);
     }
     public void AddBasicArtifact(Artifact basicArtifact) {
         Artifact target = remainingArtifacts.Find((Artifact artifact) => {
             return basicArtifact.EquipmentType == artifact.EquipmentType;
         });
+        if(target == null)
+            Debug.LogWarning("Artifact that was returned by find is null.\nEqupment Manager may doesn't have that.");
         GivePlayerItem(target);
     }
 }

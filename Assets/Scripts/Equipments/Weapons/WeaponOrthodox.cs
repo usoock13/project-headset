@@ -30,7 +30,7 @@ public class WeaponOrthodox : Weapon {
     public override string Name => "오소독스";
     public override string Description => 
         level switch {
-            >=5 => $"{interval[level]}초에 한 번 조준 방향을 향해 원 투 스트레이트 펀치를 날려 각각 {damageOfOneScale[level]*100}% / {damageOfTwoScale[level]*100}% / {damageOfStraightScale[level]*100}%의 피해를 가합니다.",
+            4 => $"{interval[level]}초에 한 번 조준 방향을 향해 원 투 스트레이트 펀치를 날려 각각 {damageOfOneScale[level]*100}% / {damageOfTwoScale[level]*100}% / {damageOfStraightScale[level]*100}%의 피해를 가합니다.",
             _   => $"{interval[level]}초에 한 번 조준 방향을 향해 원 투 펀치를 날려 각각 {damageOfOneScale[level]*100}% / {damageOfTwoScale[level]*100}%의 피해를 가합니다.",
         };
     #endregion Weapon Information
