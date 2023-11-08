@@ -6,7 +6,6 @@ public class EffectSideSpear : MonoBehaviour {
     private float hitDelay = 1f;
     private float attackForce = .4f;
     private float Damage => originWeapon.SideDamage;
-    private float AreaScale => originWeapon.AreaScale;
     [SerializeField] private BoxBounds effectBounds;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private LayerMask targetLayer;
@@ -20,7 +19,7 @@ public class EffectSideSpear : MonoBehaviour {
     private void OnEnable() {
         particle.Play();
         Vector3 center = transform.position + (Vector3)(transform.localToWorldMatrix * effectBounds.center);
-        Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size * AreaScale, transform.rotation.eulerAngles.z, targetLayer);
+        Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<IDamageable>();
             target.TakeDamage(Damage);

@@ -17,6 +17,7 @@ public class EffectRifleBullet : EffectProjectile {
         }
     }
     protected override void Update() {
+        base.Update();
         transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other) {

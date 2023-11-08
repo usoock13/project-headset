@@ -13,12 +13,15 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     public abstract string Name { get; }
     public abstract string Description { get; }
 
-    public virtual void LevelUp() {
+    public void LevelUp() {
         if(level <= MaxLevel) {
-            level++;
+            OnLevelUp();
         } else {
             throw new System.Exception("Level is max.");
         }
+    }
+    protected virtual void OnLevelUp() {
+        level ++;
     }
     public abstract void OnGotten();
     public abstract void OnEquipped();

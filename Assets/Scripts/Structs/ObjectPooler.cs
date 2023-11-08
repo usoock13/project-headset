@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -78,6 +79,7 @@ public class ObjectPooler {
 		}
 		return temp;
 	}
+    public IEnumerator<GameObject> GetEnumerator() => queue.GetEnumerator();
 }
 class NotMatchWithPrefabException : Exception {
     public string message = "Inpooling GameObject is not matched to prefab GameObject.";
