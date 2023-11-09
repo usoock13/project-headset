@@ -14,6 +14,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     private StageManager StageManager {
         get { return GameManager.instance.StageManager; }
     }
+    StageUIManager StageUIManager => GameManager.instance.StageManager.StageUIManager;
+    
     private CharacterStatusUI _characterStatusUI;
     private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
 
@@ -229,6 +231,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         /* 
             *** TODO : Update UI that show Chracter information. ***
         */
+        StageUIManager.UpdateWeaponList();
     }
     public void AddArtifact(Artifact artifact) {
         artifact.transform.SetParent(artifactParent);

@@ -2,17 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentsManager : MonoBehaviour {
-    Character Character {
-        get { return GameManager.instance.StageManager.Character; }
-    }
+    Character Character => GameManager.instance.StageManager.Character;
 
     [SerializeField] private List<Weapon> remainingWeapons;
     [SerializeField] private List<Weapon> havingWeapons;
+    public IEnumerable<Weapon> WeaponsEnumerator {
+        get {
+            for(int i=0; i<havingWeapons.Count; i++)
+                yield return havingWeapons[i];
+        }
+    }
     protected const int MAX_WEAPONS_COUNT = 6;
+
     [SerializeField] private List<Artifact> remainingArtifacts;
     [SerializeField] private List<Artifact> havingArtifacts;
+    public IEnumerable<Artifact> ArtifactsEnumerator {
+        get {
+            for(int i=0; i<havingArtifacts.Count; i++)
+                yield return havingArtifacts[i];
+        }
+    }
     protected const int MAX_ARTIFACTS_COUNT = 6;
 
     [SerializeField] private Transform bonusChoisesParent;
@@ -29,9 +41,9 @@ public class EquipmentsManager : MonoBehaviour {
     public IPlayerGettable[] RandomChoises(int number) {
         List<IPlayerGettable> candidates = new List<IPlayerGettable>();
 
-        List<Weapon> weaponCandidates = new List<Weapon>(); // weapons character is having
-        List<Artifact> artifactCandidates = new List<Artifact>(); // artifacts character is having
-        List<Equipment> remainingEquipments = new List<Equipment>(); // all equipments character is not having
+        List<Weapon> weaponCandidates = new List<Weapon>();             // weapons character is having
+        List<Artifact> artifactCandidates = new List<Artifact>();       // artifacts character is having
+        List<Equipment> remainingEquipments = new List<Equipment>();    // all equipments character is not having
 
         if(havingWeapons.Count<MAX_WEAPONS_COUNT) {
             weaponCandidates = havingWeapons.Where((Weapon weapon) => {

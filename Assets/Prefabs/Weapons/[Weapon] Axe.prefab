@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   projectile: {fileID: 7761718321036466269}
-  _weaponIcon: {fileID: 0}
+  _weaponIcon: {fileID: 21300000, guid: a316efb64451025448c0c8f1fd3c9000, type: 3}
 --- !u!1 &3334924724209516986
 GameObject:
   m_ObjectHideFlags: 0

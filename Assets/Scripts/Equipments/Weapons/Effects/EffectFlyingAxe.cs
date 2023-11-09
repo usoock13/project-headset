@@ -28,6 +28,7 @@ public class EffectFlyingAxe : EffectProjectile {
     }
     protected override void OnEnable() {
         base.OnEnable();
+        hitMonsters.Clear();
         if(currentLevel != originWeapon.CurrentLevel) {
             currentLevel = originWeapon.CurrentLevel;
             circleCollider.radius = DefaultColliderRadius * Scale;
