@@ -31,7 +31,9 @@ public class WeaponRifle : Weapon {
     private void Awake() {
         effectPooler = new ObjectPooler(rifleEffect.gameObject, null, null,
         (gobj) => {
-            gobj.GetComponent<EffectRifleBullet>().onDisapear += (projectile) => {
+            var effect = gobj.GetComponent<EffectRifleBullet>();
+            effect.originWeapon = this;
+            effect.onDisapear += (projectile) => {
                 effectPooler.InPool(projectile.gameObject);
             };
         },
@@ -39,8 +41,6 @@ public class WeaponRifle : Weapon {
     }
     protected override void Attack() {
         GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-        var effect = arrowInstance.GetComponent<EffectRifleBullet>();
-        effect.originWeapon = this;
     }
     #endregion Weapon Information
 }

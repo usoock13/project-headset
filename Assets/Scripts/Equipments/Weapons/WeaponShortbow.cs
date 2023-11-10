@@ -32,7 +32,9 @@ public class WeaponShortbow : Weapon {
     private void Awake() {
         effectPooler = new ObjectPooler(shortbowEffect.gameObject, null, null,
         (gobj) => {
-            gobj.GetComponent<EffectShortbow>().onDisapear += (projectile) => {
+            var effect = gobj.GetComponent<EffectShortbow>();
+            effect.originWeapon = this;
+            effect.onDisapear += (projectile) => {
                 effectPooler.InPool(projectile.gameObject);
             };
         },
@@ -41,8 +43,6 @@ public class WeaponShortbow : Weapon {
     protected override void Attack() {
         for(int i=0; i<ArrowQuantity; i++) {
             GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-            var effect = arrowInstance.GetComponent<EffectShortbow>();
-            effect.originWeapon = this;
 
             float aimJitter = UnityEngine.Random.Range(-7f, 7f);
             arrowInstance.transform.Rotate(Vector3.forward, aimJitter);

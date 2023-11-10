@@ -28,7 +28,7 @@ public class WeaponGreatSword : Weapon {
                 default:
                     return
                         $"{interval[level]}초에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 {damageCoef[level]*100}%의 피해를 가합니다.";
-                case 4 or 5:
+                case 3 or 4:
                     return string.Join(Environment.NewLine,
                         $"{interval[level]}초에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 {damageCoef[level]*100}%의 피해를 가합니다.",
                         $"추가로 범위가 {(areaScale[level]-1) * 100}% 증가합니다.");
