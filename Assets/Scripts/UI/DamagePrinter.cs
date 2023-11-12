@@ -11,10 +11,10 @@ public class DamagePrinter : MonoBehaviour {
     }
     public void PrintDamage(Vector2 point, string number, Color color) {
         GameObject instance = numbersPooler.OutPool(point, Quaternion.identity);
-        InPoolCoroutine(instance, 5);
         TMPro.TMP_Text tmp = instance.GetComponentInChildren<TMPro.TMP_Text>();
         tmp.text = number;
         tmp.color = color;
+        InPoolCoroutine(instance, 5);
     }
     private IEnumerator InPoolCoroutine(GameObject target, float second) {
         yield return new WaitForSeconds(second);

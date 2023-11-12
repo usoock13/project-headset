@@ -15,6 +15,10 @@ public class StageUIManager : MonoBehaviour {
     [SerializeField] private List<Image> weaponsAbstracts;
     [SerializeField] private List<Image> artifactAbstracts;
     #endregion Equipments UI
+
+    #region Visual Effect UIs
+    [SerializeField] private Animation hitEffectUIAnimation;
+    #endregion Visual Effect UIs
     
     public void Start() {
         UpdateWeaponList();
@@ -43,5 +47,9 @@ public class StageUIManager : MonoBehaviour {
                 image.color = new Color(0, 0, 0, 0.3f);
             }
         }
+    }
+    public void ActiveHitEffectUI() {
+        hitEffectUIAnimation.Stop();
+        hitEffectUIAnimation.Play();
     }
 }

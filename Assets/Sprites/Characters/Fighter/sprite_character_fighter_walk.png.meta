@@ -108,11 +108,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 96
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,11 +129,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 0
+        y: 96
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,11 +150,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 96
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: sprite_character_fighter_walk_3
       rect:
         serializedVersion: 2
-        x: 144
-        y: 0
+        x: 0
+        y: 48
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -191,12 +191,12 @@ TextureImporter:
       name: sprite_character_fighter_walk_4
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
+        x: 48
+        y: 48
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -212,12 +212,12 @@ TextureImporter:
       name: sprite_character_fighter_walk_5
       rect:
         serializedVersion: 2
-        x: 240
-        y: 0
+        x: 96
+        y: 48
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -233,12 +233,12 @@ TextureImporter:
       name: sprite_character_fighter_walk_6
       rect:
         serializedVersion: 2
-        x: 288
+        x: 0
         y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -254,12 +254,12 @@ TextureImporter:
       name: sprite_character_fighter_walk_7
       rect:
         serializedVersion: 2
-        x: 336
+        x: 48
         y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -275,12 +275,12 @@ TextureImporter:
       name: sprite_character_fighter_walk_8
       rect:
         serializedVersion: 2
-        x: 384
+        x: 96
         y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.041666668}
+      pivot: {x: 0.5, y: 0.04166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

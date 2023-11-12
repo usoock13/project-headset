@@ -11,8 +11,6 @@ public class CharacterMercenary : Character {
 
     #region Character Information
     public override string CharacterName => "용병";
-    
-    public override Ability HeadAbility => throw new NotImplementedException();
     #endregion Character Information
 
     protected override void InitializeStates() {

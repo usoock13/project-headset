@@ -8,5 +8,8 @@ public class HeadmountCharacter : MonoBehaviour {
     [SerializeField] private SpriteRenderer backSprite;
     public SpriteRenderer HandsSprite => handsSprite;
     public SpriteRenderer FrontSprite => frontSprite;
-    public SpriteRenderer BackSprite => backSprite; 
+    public SpriteRenderer BackSprite => backSprite;
+
+    [SerializeField] private Ability headAbility;
+    public Ability HeadAbility => headAbility;
 }

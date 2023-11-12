@@ -11,8 +11,6 @@ public class CharacterWarrior : Character {
     #region Character Information
     public override string CharacterName => "워리어";
     
-    [SerializeField] private AbilityWarriors _headAiblity;
-    public override Ability HeadAbility => _headAiblity;
     #endregion Character Information
 
     protected override void InitializeStates() {

@@ -10,9 +10,7 @@ public class CharacterFighter : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "파이터";
-    
-    public override Ability HeadAbility => throw new NotImplementedException();
+    public override string CharacterName => "무투가";
     #endregion Character Information
 
     protected override void InitializeStates() {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -96,6 +97,7 @@ public class StageManager : MonoBehaviour {
         this.PrintDamageNumber(point, number, Color.white);
     }
     public void PrintDamageNumber(Vector2 point, string number, Color color) {
+        Vector2 pos = (Vector2)point + new Vector2(UnityEngine.Random.Range(-.3f, .3f), 0);
         damagePrinter.PrintDamage(point, number, color);
     }
 }

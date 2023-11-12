@@ -28,7 +28,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     protected int currentExp = 0;
     [HideInInspector] public int levelRewardCount = 0;
 
-    [SerializeField] public float MaxHp { get; }
+    [SerializeField] public float MaxHp => maxHp;
     [SerializeField] public float currentHp { get; protected set; }
     private List<Attachment> havingAttachment;
     #endregion Character Status
@@ -39,7 +39,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     [SerializeField] private HeadmountCharacter headmountCharacter;
     [SerializeField] public HeadmountCharacter HeadmountCharacter => headmountCharacter;
-    [SerializeField] public abstract Ability HeadAbility { get; }
     #endregion Character Information
 
     private ItemCollector itemCollector;
@@ -61,14 +60,15 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] protected Transform spritesParent;
 
     #region Status
-    #region Additional Status
-    public Func<Character, float> additionalPower;
-    public Func<Character, float> additionalMoveSpeed;
-    public Func<Character, float> additionalArmor;
-    #endregion Additional Status
+    #region Extra Status
+    public Func<Character, float> extraPower;
+    public Func<Character, float> extraMoveSpeed;
+    public Func<Character, float> extraAttackSpeed;
+    public Func<Character, float> extraArmor;
+    #endregion Extra Status
     public float Power { get {
             float final = statusDefaultPower;
-            Delegate[] additions = additionalPower?.GetInvocationList();
+            Delegate[] additions = extraPower?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
                     final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
@@ -77,28 +77,34 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     protected float MoveSpeed { get {
             float final = statusDefaultMoveSpeed;
-            Delegate[] additions = additionalMoveSpeed?.GetInvocationList();
+            Delegate[] additions = extraMoveSpeed?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
                     final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
             return final;
-        }
-    }
+    }}
+    protected float AttackSpeed { get {
+        float final = 1;
+        Delegate[] additions = extraAttackSpeed?.GetInvocationList();
+        if(additions != null)
+            for(int i=0; i<additions.Length; i++)
+                final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
+        return final;
+    }}
+    private const float MAX_ARMOR = 80;
     protected float Armor { get {
             float final = statusDefaultArmor;
-            Delegate[] additions = additionalArmor?.GetInvocationList();
+            Delegate[] additions = extraArmor?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
                     final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
-            return final;
+            return Mathf.Min(final, MAX_ARMOR);
         }
     }
     #endregion Status
 
     protected Vector2 moveDirection;
-    protected Vector2 MoveVector {
-        get { return moveDirection.normalized * MoveSpeed; }
-    }
+    protected Vector2 MoveVector => moveDirection.normalized * MoveSpeed;
 
     protected Vector2 attackingDirection;
     public bool arrowIsFixed { get; protected set; } = false;
@@ -124,6 +130,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] protected float statusDefaultArmor = 10;
     [SerializeField] protected Weapon basicWeapon;
     [SerializeField] private Sprite defaultSprite;
+
+    #region Character Events
+    public Action<Character, float> onTakeDamage;
+    #endregion Character Events
 
     #region Unity Events
     protected void Awake() {
@@ -218,6 +228,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public void MountCharacter(HeadmountCharacter headmountCharacter) {
         HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
         // hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
+        hmc.HeadAbility.OnTaken(this);
 
         headmountPoint = hmc.headmountPoint;
         hmcSpriteRenderers.Add((hmc.HandsSprite, hmc.FrontSprite, hmc.BackSprite));
@@ -260,10 +271,14 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         GetExp(0); // Check multiple level up. 
     }
     public void TakeDamage(float amount) {
-        currentHp -= amount;
+        float finalDamage = (100 - Armor)/100 * amount;
+        currentHp -= finalDamage;
         StatusUI.UpdateHpSlider(currentHp / maxHp);
+        onTakeDamage?.Invoke(this, finalDamage);
         if(currentHp <= 0)
             Die();
+        StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
+        StageUIManager.ActiveHitEffectUI();
     }
     public void TakeHittingDelay(float amount) {
         throw new System.NotImplementedException();

@@ -10,9 +10,7 @@ public class CharacterAlchemist : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "알케미스트";
-    
-    public override Ability HeadAbility => throw new NotImplementedException();
+    public override string CharacterName => "연금술사";
     #endregion Character Information
 
     protected override void InitializeStates() {

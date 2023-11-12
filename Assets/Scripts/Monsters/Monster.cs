@@ -16,6 +16,8 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         }
         set { targetCharacter ??= value; }
     }
+    private StageManager _StageManager => GameManager.instance.StageManager;
+    
     public GameObject GameObject => this.gameObject;
 
     [SerializeField] protected Movement movement;
@@ -44,22 +46,24 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         return final>0 ? final : 0;
     }}
     protected Vector2 targetDirection;
-    protected Vector2 MoveVector {
-        get { return targetDirection * MoveSpeed; }
-    }
+    protected Vector2 MoveVector => targetDirection * MoveSpeed;
     public abstract string MonsterType { get; }
 
+    #region States
     [SerializeField] protected State chaseState = new State("Chase");
     [SerializeField] protected State hitState = new State("Hit");
     [SerializeField] protected State dieState = new State("Die");
+    #endregion States
 
+    #region Status About Life
     public bool isArrive { get; protected set;} = true;
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float currentHp = 0;
+    public UnityAction<Monster> onDie;
+    #endregion Status About Life
+
     private List<Attachment> havingAttachment = new List<Attachment>();
     public List<Attachment> H => havingAttachment;
-
-    public UnityAction<Monster> onDie;
 
     [SerializeField] protected int givingExp = 10;
 
@@ -73,15 +77,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         currentHp -= amount;
         if(currentHp <= 0)
             stateMachine.ChangeState(dieState);
-        PrintDamageNumber((int) amount);
-    }
-    protected virtual void PrintDamageNumber(int amount) {
-        try {
-            Vector2 point = (Vector2)transform.position + new Vector2(UnityEngine.Random.Range(-.3f, .3f), 0);
-            GameManager.instance.StageManager.PrintDamageNumber(point, amount.ToString());
-        } catch(Exception e) {
-            Debug.LogError(e.StackTrace);
-        }
+        _StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString());
     }
     public virtual void TakeForce(Vector2 force, float duration=.25f) {
         StartCoroutine(TakeForceCoroutine(force, duration));

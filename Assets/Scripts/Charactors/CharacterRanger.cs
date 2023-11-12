@@ -10,8 +10,6 @@ public class CharacterRanger : Character {
 
     public override string CharacterName => "레인저";
 
-    public override Ability HeadAbility => throw new System.NotImplementedException();
-
     protected override void InitializeStates() {
         base.InitializeStates();
         idleState.onActive = OnEnterIdleState;

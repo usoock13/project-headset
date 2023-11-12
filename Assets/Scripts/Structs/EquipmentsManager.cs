@@ -47,7 +47,9 @@ public class EquipmentsManager : MonoBehaviour {
 
         if(havingWeapons.Count<MAX_WEAPONS_COUNT) {
             weaponCandidates = havingWeapons.Where((Weapon weapon) => {
-                return weapon.CurrentLevel < weapon.MaxLevel;
+                return weapon.CurrentLevel < weapon.MaxLevel
+                    && (havingWeapons.Count <  MAX_WEAPONS_COUNT
+                    ||  havingWeapons.Count >= MAX_WEAPONS_COUNT  &&  havingWeapons.Contains(weapon));
             }).ToList();
             remainingEquipments.AddRange(remainingWeapons);
         }
@@ -57,6 +59,7 @@ public class EquipmentsManager : MonoBehaviour {
             }).ToList();
             remainingEquipments.AddRange(remainingArtifacts);
         }
+
         weaponCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
         artifactCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
         remainingEquipments.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);

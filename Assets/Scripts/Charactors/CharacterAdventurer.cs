@@ -11,8 +11,6 @@ public class CharacterAdventurer : Character {
 
     #region Character Information
     public override string CharacterName => "모험가";
-    
-    public override Ability HeadAbility => throw new NotImplementedException();
     #endregion Character Information
 
     protected override void InitializeStates() {
