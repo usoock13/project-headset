@@ -9,7 +9,7 @@ public class CharacterWarrior : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "워리어";
+    public override string CharacterName => "전사";
     
     #endregion Character Information
 

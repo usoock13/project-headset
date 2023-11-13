@@ -12,7 +12,7 @@ public class EffectFlyingAxe : EffectProjectile {
     [SerializeField] LayerMask targetLayer = 1<<8;
 
     private float DefaultColliderRadius => circleCollider.radius;
-    [SerializeField] private ParticleSystem particle;
+    [SerializeField] private SpriteRenderer flyingAxeSprite;
     [SerializeField] private CircleCollider2D circleCollider;
     public Action onDisable;
     private int currentLevel = 0;
@@ -32,7 +32,7 @@ public class EffectFlyingAxe : EffectProjectile {
         if(currentLevel != originWeapon.CurrentLevel) {
             currentLevel = originWeapon.CurrentLevel;
             circleCollider.radius = DefaultColliderRadius * Scale;
-            particle.transform.localScale = new Vector3(Scale, Scale, Scale);
+            flyingAxeSprite.transform.localScale = new Vector3(Scale, Scale, Scale);
         }
         velocity = ((Vector2)transform.up + Vector2.up) * flyingSpeed;
     }
