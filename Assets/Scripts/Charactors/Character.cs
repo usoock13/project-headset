@@ -26,6 +26,15 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public int level { get; protected set; } = 1;
     [SerializeField] protected int MaxExp => 50 + (int)(100 * Mathf.Pow(1.1f, level));
     protected int currentExp = 0;
+    public Func<Character, float> extraExpScale;
+    public float GettingExpScale { get {
+        float final = 1;
+        Delegate[] additions = extraExpScale.GetInvocationList();
+        if(additions != null)
+            for(int i=0; i<additions.Length; i++)
+                final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
+        return final;
+    }}
     [HideInInspector] public int levelRewardCount = 0;
 
     [SerializeField] public float MaxHp => maxHp;
@@ -75,7 +84,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             return final;
         }
     }
-    protected float MoveSpeed { get {
+    public float MoveSpeed { get {
             float final = statusDefaultMoveSpeed;
             Delegate[] additions = extraMoveSpeed?.GetInvocationList();
             if(additions != null)
@@ -83,7 +92,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
                     final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
             return final;
     }}
-    protected float AttackSpeed { get {
+    public float AttackSpeed { get {
         float final = 1;
         Delegate[] additions = extraAttackSpeed?.GetInvocationList();
         if(additions != null)
@@ -92,7 +101,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         return final;
     }}
     private const float MAX_ARMOR = 80;
-    protected float Armor { get {
+    public float Armor { get {
             float final = statusDefaultArmor;
             Delegate[] additions = extraArmor?.GetInvocationList();
             if(additions != null)

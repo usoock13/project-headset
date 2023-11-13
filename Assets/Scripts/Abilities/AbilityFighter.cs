@@ -5,13 +5,19 @@ public class AbilityFighter : Ability
 {
     [SerializeField] private Sprite icon;
     public override Sprite Icon => icon;
-    public override string Name => "맨몸 주의";
+    public override string Name => "활동성 중시";
     public override string Description => "<nbr>받는 피해가 증거하지만 공격 속도도 함께 증가합니다.</nbr>";
 
-    public override void OnReleased(Character character) {
-        throw new NotImplementedException();
-    }
     public override void OnTaken(Character character) {
-        throw new NotImplementedException();
+        character.extraArmor += GetDebuff;
+        character.extraAttackSpeed += GetExtraAttackSpeed;
     }
+    public override void OnReleased(Character character) {
+        character.extraArmor -= GetDebuff;
+        character.extraAttackSpeed -= GetExtraAttackSpeed;
+        print(GetExtraAttackSpeed(null));
+    }
+
+    private float GetExtraAttackSpeed(Character character) => 0.2f;
+    public float GetDebuff(Character character) => -0.2f;
 }

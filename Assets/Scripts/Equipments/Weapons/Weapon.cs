@@ -10,10 +10,16 @@ public abstract class Weapon : Equipment {
     
     protected void Update() {
         if(currentTime > 0) {
-            currentTime -= Time.deltaTime;
+                currentTime -= Time.deltaTime * Character.AttackSpeed;
         } else {
-            currentTime = AttackInterval;
-            Attack();
+            while(currentTime <= 0) {
+                currentTime += AttackInterval;
+                Attack();
+                if(AttackInterval <= 0) {
+                    Debug.LogWarning("Check the weapon that has 0 attack interval.");
+                    break;
+                }
+            }
         }
     }
     protected abstract void Attack();
