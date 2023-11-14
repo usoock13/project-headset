@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(StateMachine))]
@@ -11,14 +10,14 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     public abstract string Name { get; }
     public abstract string Description { get; }
 
-    private StateMachine stateMachine;
+    protected StateMachine stateMachine;
     private SpriteRenderer spriteRenderer;
 
     #region States
-    private State inactiveState = new State("Inactive");
-    private State droppedState = new State("Dropped");
-    private State pickingUpState = new State("Picking Up");
-    private State storedState = new State("Stores");
+    protected State inactiveState = new State("Inactive");
+    protected State droppedState = new State("Dropped");
+    protected State pickingUpState = new State("Picking Up");
+    protected State storedState = new State("Stores");
     #endregion States
 
     private Coroutine pickUpCoroutine;
@@ -62,13 +61,12 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     public virtual void OnGotten() {
         onGetItem?.Invoke(this);
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    protected virtual void OnTriggerEnter2D(Collider2D other) {
         if(stateMachine.Compare(droppedState)
         || stateMachine.Compare(pickingUpState)) {
             if(other.TryGetComponent<Character>(out _)) {
                 OnGotten();
                 stateMachine.ChangeState(storedState);
-                spriteRenderer.enabled = false;
             }
         }
     }

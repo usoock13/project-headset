@@ -29,13 +29,13 @@ public class EffectShortbow : EffectProjectile {
     private void OnTriggerEnter2D(Collider2D other) {
         if(isActive
         && 1<<other.gameObject.layer == targetLayer.value) {
-            Monster target;
-            if(other.TryGetComponent<Monster>(out target)) {
+            if(other.TryGetComponent<Monster>(out Monster target)) {
                 target.TakeDamage(Damage);
                 target.TakeHittingDelay(hittingDelay);
                 target.TakeForce(transform.up * .2f, hittingDelay);
                 isActive = false;
                 Disapear();
+                GameManager.instance.Character.OnAttackMonster(target);
             }
         }
     }

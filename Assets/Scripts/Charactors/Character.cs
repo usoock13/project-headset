@@ -75,6 +75,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Func<Character, float> extraAttackSpeed;
     public Func<Character, float> extraArmor;
     #endregion Extra Status
+
     public float Power { get {
             float final = statusDefaultPower;
             Delegate[] additions = extraPower?.GetInvocationList();
@@ -122,7 +123,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     [SerializeField] protected Transform weaponParent;
     [SerializeField] protected Transform artifactParent;
-
     [SerializeField] public Transform headmountPoint;
 
     #region States Refer
@@ -141,7 +141,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] private Sprite defaultSprite;
 
     #region Character Events
+    public Action<Character, Monster, float> onTakeAttack;
     public Action<Character, float> onTakeDamage;
+    public Action<Character> onAttack;
+    public Action<Character, Monster> onAttackMonster;
     #endregion Character Events
 
     #region Unity Events
@@ -158,11 +161,13 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         InitializeUI();
     }
     /* __temporary >> */
+    #if UNITY_EDITOR
     private void Update() {
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp(100);
     }
     /* << __temporary */
+    #endif
     #endregion Unity Events
 
     protected virtual void InitializeStates() {
@@ -180,6 +185,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #region Initilize Die State
         dieState.onActive += (State previous) => {
             stateMachine.isMuted = true;
+            itemCollector.enabled = false;
         };
         #endregion Initilize Die State
 
@@ -279,6 +285,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StageManager.OnCharacterLevelUp();
         GetExp(0); // Check multiple level up. 
     }
+    public void TakeAttack(Monster origin, float amount) {
+        TakeDamage(amount);
+        onTakeAttack?.Invoke(this, origin, amount);
+    }
     public void TakeDamage(float amount) {
         float finalDamage = (100 - Armor)/100 * amount;
         currentHp -= finalDamage;
@@ -315,5 +325,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         });
         return attachment==null ? false : true;
     }
+    public void OnAttack() => onAttack?.Invoke(this);
+    public void OnAttackMonster(Monster target) => onAttackMonster?.Invoke(this, target);
     #endregion IAttachmentsTakeable Implements
 }

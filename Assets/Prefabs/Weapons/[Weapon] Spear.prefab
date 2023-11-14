@@ -49,7 +49,7 @@ MonoBehaviour:
   level: 0
   spearEffect: {fileID: 2633602286047343299}
   sideSpearEffect: {fileID: 2633602284507182221}
-  _weaponIcon: {fileID: 0}
+  _weaponIcon: {fileID: 86461542, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
 --- !u!1 &2633602284536739383
 GameObject:
   m_ObjectHideFlags: 0

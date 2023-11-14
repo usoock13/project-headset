@@ -5030,7 +5030,7 @@ MonoBehaviour:
   twoPunchEffect: {fileID: 4633928203518257936}
   straightPunchEffect: {fileID: 1760822178873343309}
   attackRange: 0.5
-  _weaponIcon: {fileID: 0}
+  _weaponIcon: {fileID: 1962270415, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
 --- !u!1 &5035323479013241440
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,6 +60,7 @@ public class EffectMaliciousFlask : EffectProjectile {
                 if(target.TryGetAttachment(attachment.AttachmentType, out Attachment already))
                     target.ReleaseAttachment(already);
                 target.TakeAttachment(attachment);
+                GameManager.instance.Character.OnAttackMonster(target);
             }
         }
     }

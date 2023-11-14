@@ -43,9 +43,9 @@ public class WeaponShortbow : Weapon {
     protected override void Attack() {
         for(int i=0; i<ArrowQuantity; i++) {
             GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-
             float aimJitter = UnityEngine.Random.Range(-7f, 7f);
             arrowInstance.transform.Rotate(Vector3.forward, aimJitter);
+            Character.OnAttack();
         }
     }
     #endregion Weapon Information

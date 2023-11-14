@@ -19,10 +19,11 @@ public class EffectGreatSword : MonoBehaviour {
         Vector3 center = transform.position + (Vector3)(transform.localToWorldMatrix * effectBounds.center);
         Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
-            var target = inner.GetComponent<IDamageable>();
+            var target = inner.GetComponent<Monster>();
             target.TakeDamage(originWeapon.Damage);
             target.TakeHittingDelay(hitDelay);
             target.TakeForce(transform.up * attackForceScalar, hitDelay);
+            GameManager.instance.Character.OnAttackMonster(target);
         }
     }
     private void OnDrawGizmosSelected() {

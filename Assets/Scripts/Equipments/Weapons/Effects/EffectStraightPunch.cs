@@ -19,10 +19,12 @@ public class EffectStraightPunch : MonoBehaviour {
         Vector3 center = transform.position + (Vector3)(transform.localToWorldMatrix * effectBounds.center);
         Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
-            var target = inner.GetComponent<IDamageable>();
-            target.TakeDamage(originWeapon.DamageOfStraight);
-            target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
-            target.TakeHittingDelay(hitDelay);
+            if(inner.TryGetComponent(out Monster target)) {
+                target.TakeDamage(originWeapon.DamageOfStraight);
+                target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
+                target.TakeHittingDelay(hitDelay);
+                GameManager.instance.Character.OnAttackMonster(target);
+            }
         }
     }
     private void OnDrawGizmosSelected() {

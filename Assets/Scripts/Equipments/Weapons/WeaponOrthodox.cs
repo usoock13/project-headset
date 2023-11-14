@@ -51,6 +51,7 @@ public class WeaponOrthodox : Weapon {
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());
+        Character.OnAttack();
     }
     private IEnumerator AttackCoroutine() {
         Vector3 effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;

@@ -41,6 +41,7 @@ public class WeaponRifle : Weapon {
     }
     protected override void Attack() {
         GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        Character.OnAttack();
     }
     #endregion Weapon Information
 }

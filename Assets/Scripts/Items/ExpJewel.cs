@@ -4,6 +4,8 @@ using UnityEngine;
 public class ExpJewel : Item {
     public int givingExp = 0;
     private Coroutine dropCoroutine;
+    private bool isGround = false;
+    private Transform getter = null;
 
     [SerializeField] private Sprite icon;
     public override Sprite Icon => icon;
@@ -16,9 +18,10 @@ public class ExpJewel : Item {
         dropCoroutine = StartCoroutine(DropCoroutine());
     }
     public override void PickUpItem(Transform getter) {
-        base.PickUpItem(getter);
-        if(dropCoroutine != null)
-            StopCoroutine(dropCoroutine);
+        if(isGround)
+            base.PickUpItem(getter);
+        else
+            this.getter = getter;
     }
     private IEnumerator DropCoroutine() {
         float randomAngle = Random.Range(0, 360);
@@ -26,13 +29,22 @@ public class ExpJewel : Item {
         Vector2 dest = Quaternion.AngleAxis(randomAngle, Vector3.forward) * Vector2.up * Random.Range(.5f, 1.5f);
         float offset = 0;
         while(offset < 1) {
-            transform.position = Vector2.Lerp(transform.position, origin + dest, offset);
-            offset += Time.deltaTime;
+            transform.position = Vector2.Lerp(origin, origin + dest, offset);
+            offset += Time.deltaTime * 4f;
             yield return null;
         }
+        isGround = true;
+        if(getter is not null)
+            this.PickUpItem(this.getter);
     }
     public override void OnGotten() {
         base.OnGotten();
         GameManager.instance.Character.GetExp(givingExp);
+        isGround = false;
+        getter = null;
+    }
+    protected override void OnTriggerEnter2D(Collider2D other) {
+        if(isGround)
+            base.OnTriggerEnter2D(other);
     }
 }

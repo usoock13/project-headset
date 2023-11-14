@@ -54,6 +54,7 @@ public class EffectFlyingAxe : EffectProjectile {
                 target.TakeHittingDelay(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
+                GameManager.instance.Character.OnAttackMonster(target);
             }
         }
     }

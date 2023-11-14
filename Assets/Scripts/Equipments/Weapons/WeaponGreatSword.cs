@@ -47,6 +47,7 @@ public class WeaponGreatSword : Weapon {
         Vector3 effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
         GameObject instance = effectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance));
+        Character.OnAttack();
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect) {
         yield return new WaitForSeconds(delay);

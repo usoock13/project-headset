@@ -58,6 +58,7 @@ public class WeaponMaliciousFlask : Weapon {
         GameObject flaskInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
         var effect = flaskInstance.GetComponent<EffectMaliciousFlask>();
         effect.originWeapon = this;
+        Character.OnAttack();
     }
     #endregion Weapon Information
 }

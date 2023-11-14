@@ -108,7 +108,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 48
         width: 48
         height: 48
       alignment: 0
@@ -129,7 +129,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 0
+        y: 48
         width: 48
         height: 48
       alignment: 0
@@ -150,7 +150,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 48
         width: 48
         height: 48
       alignment: 0
@@ -162,6 +162,27 @@ TextureImporter:
       bones: []
       spriteID: a11d1af5e75d1f945a2a169132e7bbea
       internalID: 1094833510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_commons_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b49c6174ff198014a9b220cbdc5073cb
+      internalID: 1981910703
       vertices: []
       indices: 
       edges: []
@@ -180,6 +201,7 @@ TextureImporter:
       sprite_commons_1: 2134087002
       sprite_commons_0: 1513753180
       sprite_commons_2: 1094833510
+      sprite_commons_3: 1981910703
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

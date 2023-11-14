@@ -85,6 +85,13 @@ public class StageManager : MonoBehaviour {
             exp.Drop();
         }
     }
+    public void ApearExp(Vector2 point, int expAmount) {
+        var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
+        if(exp != null) {
+            exp.givingExp = expAmount;
+            exp.Drop();
+        }
+    }
     public void PauseGame(bool pause) {
         Time.timeScale = pause ? 0 : 1;
         // if(pause)
@@ -97,7 +104,7 @@ public class StageManager : MonoBehaviour {
         this.PrintDamageNumber(point, number, Color.white);
     }
     public void PrintDamageNumber(Vector2 point, string number, Color color) {
-        Vector2 pos = (Vector2)point + new Vector2(UnityEngine.Random.Range(-.3f, .3f), 0);
-        damagePrinter.PrintDamage(point, number, color);
+        Vector2 pos = point + new Vector2(UnityEngine.Random.Range(-.3f, .3f), 0);
+        damagePrinter.PrintDamage(pos, number, color);
     }
 }

@@ -7,25 +7,21 @@ using UnityEngine.UI;
 public class EquipmentsManager : MonoBehaviour {
     Character Character => GameManager.instance.StageManager.Character;
 
+    protected const int MAX_WEAPONS_COUNT = 6;
+    protected const int MAX_ARTIFACTS_COUNT = 6;
     [SerializeField] private List<Weapon> remainingWeapons;
     [SerializeField] private List<Weapon> havingWeapons;
-    public IEnumerable<Weapon> WeaponsEnumerator {
-        get {
-            for(int i=0; i<havingWeapons.Count; i++)
-                yield return havingWeapons[i];
-        }
-    }
-    protected const int MAX_WEAPONS_COUNT = 6;
+    public IEnumerable<Weapon> WeaponsEnumerator { get {
+        for(int i=0; i<havingWeapons.Count; i++)
+            yield return havingWeapons[i];
+    }}
 
     [SerializeField] private List<Artifact> remainingArtifacts;
     [SerializeField] private List<Artifact> havingArtifacts;
-    public IEnumerable<Artifact> ArtifactsEnumerator {
-        get {
-            for(int i=0; i<havingArtifacts.Count; i++)
-                yield return havingArtifacts[i];
-        }
-    }
-    protected const int MAX_ARTIFACTS_COUNT = 6;
+    public IEnumerable<Artifact> ArtifactsEnumerator { get {
+        for(int i=0; i<havingArtifacts.Count; i++)
+            yield return havingArtifacts[i];
+    }}
 
     [SerializeField] private Transform bonusChoisesParent;
     [SerializeField] private Item[] bonusChoises;
@@ -45,20 +41,17 @@ public class EquipmentsManager : MonoBehaviour {
         List<Artifact> artifactCandidates = new List<Artifact>();       // artifacts character is having
         List<Equipment> remainingEquipments = new List<Equipment>();    // all equipments character is not having
 
-        if(havingWeapons.Count<MAX_WEAPONS_COUNT) {
-            weaponCandidates = havingWeapons.Where((Weapon weapon) => {
-                return weapon.CurrentLevel < weapon.MaxLevel
-                    && (havingWeapons.Count <  MAX_WEAPONS_COUNT
-                    ||  havingWeapons.Count >= MAX_WEAPONS_COUNT  &&  havingWeapons.Contains(weapon));
-            }).ToList();
+        weaponCandidates = havingWeapons.Where((Weapon weapon) => {
+            return weapon.CurrentLevel < weapon.MaxLevel;
+        }).ToList();
+        if(havingWeapons.Count<MAX_ARTIFACTS_COUNT)
             remainingEquipments.AddRange(remainingWeapons);
-        }
-        if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT) {
-            artifactCandidates = havingArtifacts.Where((Artifact artifact) => {
-                return artifact.CurrentLevel < artifact.MaxLevel;
-            }).ToList();
+
+        artifactCandidates = havingArtifacts.Where((Artifact artifact) => {
+            return artifact.CurrentLevel < artifact.MaxLevel;
+        }).ToList();
+        if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT)
             remainingEquipments.AddRange(remainingArtifacts);
-        }
 
         weaponCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
         artifactCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);

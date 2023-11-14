@@ -78,7 +78,7 @@ public class MonsterWolf : Monster {
     private void HitChracter(Character character) {
         if(currentAttackCooldown >= attackInterval) {
             currentAttackCooldown = 0;
-            character?.TakeDamage(10f);
+            character?.TakeAttack(this, 10f);
         }
     }
     private IEnumerator DieCoroutine() {

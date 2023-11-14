@@ -47,5 +47,6 @@ public class WeaponAxe : Weapon {
     }
     protected override void Attack() {
         effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        Character.OnAttack();
     }
 }

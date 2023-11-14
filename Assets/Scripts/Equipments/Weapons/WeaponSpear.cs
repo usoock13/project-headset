@@ -42,6 +42,7 @@ public class WeaponSpear : Weapon {
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());
+        Character.OnAttack();
     }
     private IEnumerator AttackCoroutine() {
         Vector3 effectPoint = Character.attackArrow.position;

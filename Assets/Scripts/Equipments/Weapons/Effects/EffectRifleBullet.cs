@@ -23,12 +23,12 @@ public class EffectRifleBullet : EffectProjectile {
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value
         && !hitMonsters.Contains(other.gameObject)) {
-            Monster target;
-            if(other.TryGetComponent<Monster>(out target)) {
+            if(other.TryGetComponent<Monster>(out Monster target)) {
                 target.TakeDamage(Damage);
                 target.TakeHittingDelay(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
+                GameManager.instance.Character.OnAttackMonster(target);
             }
         }
     }
