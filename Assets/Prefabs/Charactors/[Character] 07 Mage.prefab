@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 854544164502958177, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Name
-      value: '[Headmount Character] Priest'
+      value: '[Headmount Character] Mage'
       objectReference: {fileID: 0}
     - target: {fileID: 854544164502958177, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_IsActive
@@ -117,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3708817249502812639, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Name
-      value: '[Character] 07 Priest'
+      value: '[Character] 07 Mage'
       objectReference: {fileID: 0}
     - target: {fileID: 5596541835235343379, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
       propertyPath: m_Sprite
@@ -152,7 +152,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3708817249502812639, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
   m_PrefabInstance: {fileID: 3973744096251248710}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1679132990418732944
+--- !u!114 &2390226520052719078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 314634670080285081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a359ba16a7ceea438ba7c603371bc10, type: 3}
+  m_Script: {fileID: 11500000, guid: af72231ccb4bcd941b228f626bf3922b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterInputSystem: {fileID: 1559421102479851112}
@@ -176,11 +176,11 @@ MonoBehaviour:
   weaponParent: {fileID: 4364672604279695569}
   artifactParent: {fileID: 947811563956023290}
   headmountPoint: {fileID: 9218828611891435066}
-  maxHp: 85
-  statusDefaultPower: 8
-  statusDefaultMoveSpeed: 2.6
-  statusDefaultArmor: 12
-  basicWeapon: {fileID: 2740440719906952877, guid: 99205e9800d4c9b4980e7ab0ad681d39, type: 3}
+  maxHp: 75
+  statusDefaultPower: 11
+  statusDefaultMoveSpeed: 2.3
+  statusDefaultArmor: 9
+  basicWeapon: {fileID: 4608071478447801991, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
   defaultSprite: {fileID: 21300000, guid: 6dc3074441d24e444a31f5b3346f319d, type: 3}
 --- !u!4 &947811563956023290 stripped
 Transform:

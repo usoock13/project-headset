@@ -5,6 +5,10 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
 
     #region Level
     [SerializeField] protected int level = 0;
+    /* 
+        When a equipment is gotten, equipment manager increase one its level.
+        So Equipment's level is one when their is gotten.
+     */
     public int CurrentLevel => level;
     public abstract int MaxLevel { get; }
     #endregion Level

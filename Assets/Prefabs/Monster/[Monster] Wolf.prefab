@@ -59,5 +59,85 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Monster] Wolf'
       objectReference: {fileID: 0}
+    - target: {fileID: 6342264030857522990, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+--- !u!212 &2203739214735206115 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2203739214735206116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6342264030857522990, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6736325236809837497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203739214735206116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c0a753649de324c85991eb0da0dc10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 2203739214735206125}
+  stateMachine: {fileID: 2203739214735206124}
+  spriteRenderer: {fileID: 2203739214735206115}
+  spriteAnimator: {fileID: 5676563592131661430}
+  collider2D: {fileID: 8684182510546536624}
+  rigidbody2D: {fileID: 2203739214735206127}
+  defaultMoveSpeed: 1.5
+  maxHp: 65
+  givingExp: 10
+  ownerPooler:
+    poolingObject: {fileID: 0}
+--- !u!114 &2203739214735206124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6342264030857522982, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203739214735206116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd27feed64870d4a8cbbc6b10b3409d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2203739214735206125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6342264030857522983, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203739214735206116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1478f0d77c2b8447ae4203500217f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &2203739214735206127 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6342264030857522981, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5676563592131661430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 600749143156082620, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203739214735206116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483b6bfc4e36bf940bdf66165bf82a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &8684182510546536624 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4473507440462479738, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5084984728409082314}
+  m_PrefabAsset: {fileID: 0}

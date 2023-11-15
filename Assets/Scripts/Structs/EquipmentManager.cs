@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EquipmentsManager : MonoBehaviour {
+public class EquipmentManager : MonoBehaviour {
     Character Character => GameManager.instance.StageManager.Character;
 
     protected const int MAX_WEAPONS_COUNT = 6;

@@ -4,11 +4,10 @@ using UnityEngine;
 public class WeaponAxe : Weapon {
     [SerializeField] private EffectFlyingAxe projectile;
     private ObjectPooler effectPooler;
-    private ObjectPooler sideEffectPooler;
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
-    public override int MaxLevel { get { return MAX_LEVEL; } }
+    public override int MaxLevel => MAX_LEVEL;
     private float[] interval = new float[MAX_LEVEL]         {   1.4f,    1.4f,    1.4f,    1.4f,    1.4f,  }; // 공격 간격
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.9f,    1.2f,    1.2f,    1.7f,    1.7f,  }; // 피해계수
     private float[] projectileScale = new float[MAX_LEVEL]  {   1.0f,    1.0f,    1.5f,    1.5f,    2.0f,  };

@@ -979,6 +979,7 @@ Transform:
   - {fileID: 4163894341397867212}
   - {fileID: 1854155227690996846}
   - {fileID: 4163894342983767936}
+  - {fileID: 6183008174837948117}
   m_Father: {fileID: 645271449}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3513,11 +3514,11 @@ Animation:
   m_GameObject: {fileID: 1685749928}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 1611611b79f071646b190c1ecfb3c213, type: 2}
+  m_Animation: {fileID: 7400000, guid: 0cdc78a877464174d85aee58d558c08e, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 1611611b79f071646b190c1ecfb3c213, type: 2}
+  - {fileID: 7400000, guid: 0cdc78a877464174d85aee58d558c08e, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &1685749933
@@ -3878,7 +3879,7 @@ MonoBehaviour:
   defaultMonster: {fileID: 0}
   defaultSpawncount: 1
   defaultSpawnInterval: 1
-  monsterWolf: {fileID: 7174606288095932575, guid: a864c26925de80044bc03d090f0fee3f, type: 3}
+  monsterWolf: {fileID: 6736325236809837497, guid: a864c26925de80044bc03d090f0fee3f, type: 3}
   monsterToad: {fileID: 0}
   monsterUndead: {fileID: 0}
   monsterWitch: {fileID: 0}
@@ -4801,9 +4802,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSpawnPoint: {fileID: 1709495040}
   __testCharacters:
-  - {fileID: 6386881509918179354, guid: 9469f718936b8984a9c7bf84aa6d9f6b, type: 3}
-  - {fileID: 6386881509918179354, guid: 9469f718936b8984a9c7bf84aa6d9f6b, type: 3}
   - {fileID: 6215241322940970394, guid: 9d6a242972dc0224f8d1a9cdab8da8f6, type: 3}
+  - {fileID: 1854368909079229216, guid: 4d4647aa93d35a24eb2558635ce3f30e, type: 3}
+  - {fileID: 6386881509918179354, guid: 9469f718936b8984a9c7bf84aa6d9f6b, type: 3}
   scenarioDirector: {fileID: 2011709208}
   equipmentsManager: {fileID: 645271450}
   stageUIManager: {fileID: 1528812583}
@@ -7231,6 +7232,72 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &1518991961327985967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 618784043}
+    m_Modifications:
+    - target: {fileID: 4673326878481562617, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_Name
+      value: '[Weapon] Fire Ring'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562617, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+--- !u!4 &6183008174837948117 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4673326878481562618, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
+  m_PrefabInstance: {fileID: 1518991961327985967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1518991961604756833
 PrefabInstance:
   m_ObjectHideFlags: 0

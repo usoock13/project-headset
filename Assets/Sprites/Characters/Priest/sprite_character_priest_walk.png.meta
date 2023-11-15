@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3724359289c75f247b1f0bb394f3d316
+guid: c7ecdf1cc9ed5dd48972d40b54823024
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_character_priest_walk_0
+      name: Cha_Priest-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eb49dd28c27dc542a0cc22abffada08
-      internalID: -1388493942
+      spriteID: 23770702dc893634ca767fd66a5d4715
+      internalID: -351468179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_1
+      name: Cha_Priest-Sheet_1
       rect:
         serializedVersion: 2
         x: 48
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1ca15895559a1949b0a4e1975045e3e
-      internalID: 1214664616
+      spriteID: 1f56ada4dca471d409d6005483b3c40d
+      internalID: -283185512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_2
+      name: Cha_Priest-Sheet_2
       rect:
         serializedVersion: 2
         x: 96
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c485c73fbc811134ba84b39aeaea0034
-      internalID: -979631442
+      spriteID: af75285f0d14c314bbbedfa02d0ad905
+      internalID: 1626792223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_3
+      name: Cha_Priest-Sheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75cc43d4868e21c42974fa5be27fbdf6
-      internalID: -740659809
+      spriteID: 98c890d26f3900e47b874a75fe3e06d4
+      internalID: -1945705793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_4
+      name: Cha_Priest-Sheet_4
       rect:
         serializedVersion: 2
         x: 48
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d38d9c88fdbc38f4d83af1cdbcfbe2d3
-      internalID: -1624822420
+      spriteID: fefb2776951a8ea4a8632951274efe8f
+      internalID: 910395306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_5
+      name: Cha_Priest-Sheet_5
       rect:
         serializedVersion: 2
         x: 96
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45667da9a333b494cb1397525275d131
-      internalID: 1176348215
+      spriteID: 5fb6f5d4371b43e4dab23b90a6145691
+      internalID: -1167557343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_6
+      name: Cha_Priest-Sheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e9768fdee028334185b9bb688044acb
-      internalID: -2054705562
+      spriteID: d86f95c6e429d904ca3c676a41bbf7e2
+      internalID: 949707327
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_7
+      name: Cha_Priest-Sheet_7
       rect:
         serializedVersion: 2
         x: 48
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3805e31a7f683e44b98d12d0854d51ea
-      internalID: 1593445463
+      spriteID: ccdf66083c24b7c4ba88d080b7908586
+      internalID: -1203985757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_character_priest_walk_8
+      name: Cha_Priest-Sheet_8
       rect:
         serializedVersion: 2
         x: 96
@@ -286,8 +286,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 748ef17a7942fb246ade2da312b98dfb
-      internalID: 1190849875
+      spriteID: d0a4021df3b6ffc4b8a62e7ce2c8d9c3
+      internalID: 986122303
       vertices: []
       indices: 
       edges: []
@@ -303,15 +303,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_character_priest_walk_4: -1624822420
-      sprite_character_priest_walk_6: -2054705562
-      sprite_character_priest_walk_5: 1176348215
-      sprite_character_priest_walk_1: 1214664616
-      sprite_character_priest_walk_2: -979631442
-      sprite_character_priest_walk_7: 1593445463
-      sprite_character_priest_walk_8: 1190849875
-      sprite_character_priest_walk_3: -740659809
-      sprite_character_priest_walk_0: -1388493942
+      Cha_Priest-Sheet_0: -351468179
+      Cha_Priest-Sheet_6: 949707327
+      Cha_Priest-Sheet_3: -1945705793
+      Cha_Priest-Sheet_8: 986122303
+      Cha_Priest-Sheet_1: -283185512
+      Cha_Priest-Sheet_5: -1167557343
+      Cha_Priest-Sheet_2: 1626792223
+      Cha_Priest-Sheet_7: -1203985757
+      Cha_Priest-Sheet_4: 910395306
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

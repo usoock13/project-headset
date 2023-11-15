@@ -9,7 +9,7 @@ public class StageUIManager : MonoBehaviour {
     [SerializeField] private CharacterStatusUI characterUI;
     public CharacterStatusUI CharacterStatusUI => characterUI;
 
-    private EquipmentsManager _EquipmentsManager => GameManager.instance.StageManager.EquipmentsManager;
+    private EquipmentManager _EquipmentsManager => GameManager.instance.StageManager.EquipmentsManager;
 
     #region Equipments UI
     [SerializeField] private List<Image> weaponsAbstracts;

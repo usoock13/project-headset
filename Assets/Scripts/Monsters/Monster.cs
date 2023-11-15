@@ -28,21 +28,15 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] new protected Rigidbody2D rigidbody2D;
 
     [SerializeField] protected float defaultMoveSpeed = 5f;
-    public Func<Monster, float> moveSpeedScales;
+    public Func<Monster, float> speedModifier;
     public float MoveSpeed { get {
         float final = defaultMoveSpeed;
-        float max = 1f;
-        float min = 1f;
-        Delegate[] scales = moveSpeedScales?.GetInvocationList();
-        if(scales != null)
-            for(int i=0; i<scales.Length; i++) {
-                Func<Monster, float> f = (Func<Monster, float>) scales[i];
-                if(f(this) < min)
-                    min = f(this);
-                if(f(this) > max)
-                    max = f(this);
+        Delegate[] m = speedModifier?.GetInvocationList();
+        if(m != null)
+            for(int i=0; i<m.Length; i++) {
+                Func<Monster, float> f = (Func<Monster, float>) m[i];
+                final *= f(this);
             }
-        final *= min * max;
         return final>0 ? final : 0;
     }}
     protected Vector2 targetDirection;
@@ -58,7 +52,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     #region Status About Life
     public bool isArrive { get; protected set;} = true;
     [SerializeField] protected float maxHp = 100;
-    [SerializeField] protected float currentHp = 0;
+    protected float currentHp = 0;
     public UnityAction<Monster> onDie;
     #endregion Status About Life
 
@@ -73,12 +67,29 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] protected ObjectPooler ownerPooler = null;
 
     #region IDamageable Define
+    // When call these three methods, keep below order.
+    /* 
+        monster.TakeDamage(Damage);
+        monster.TakeHittingDelay(hittingDelay);
+        monster.TakeForce(transform.up * 1f, hittingDelay);
+        
+    */
     public virtual void TakeDamage(float amount) {
         currentHp -= amount;
         if(currentHp <= 0)
             stateMachine.ChangeState(dieState);
         _StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString());
     }
+    
+    public virtual void TakeHittingDelay(float second) {
+        takeHittingDelayCoroutine = StartCoroutine(TakeHittingDelayCoroutine(second));
+    }
+    private IEnumerator TakeHittingDelayCoroutine(float second) {
+        stateMachine.ChangeState(hitState);
+        yield return new WaitForSeconds(second);
+        stateMachine.ChangeState(chaseState);
+    }
+    
     public virtual void TakeForce(Vector2 force, float duration=.25f) {
         StartCoroutine(TakeForceCoroutine(force, duration));
     }
@@ -95,14 +106,6 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         }
         if(takeHittingDelayCoroutine != null)
             StopCoroutine(takeHittingDelayCoroutine);
-    }
-    public virtual void TakeHittingDelay(float second) {
-        takeHittingDelayCoroutine = StartCoroutine(TakeHittingDelayCoroutine(second));
-    }
-    private IEnumerator TakeHittingDelayCoroutine(float second) {
-        stateMachine.ChangeState(hitState);
-        yield return new WaitForSeconds(second);
-        stateMachine.ChangeState(chaseState);
     }
     #endregion IDamageable Define
     

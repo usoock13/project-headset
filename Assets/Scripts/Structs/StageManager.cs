@@ -19,8 +19,8 @@ public class StageManager : MonoBehaviour {
         get { return scenarioDirector; }
         set { scenarioDirector ??= value; }
     }
-    [SerializeField] private EquipmentsManager equipmentsManager;
-    public EquipmentsManager EquipmentsManager {
+    [SerializeField] private EquipmentManager equipmentsManager;
+    public EquipmentManager EquipmentsManager {
         get { return equipmentsManager; }
     }
     [SerializeField] private StageUIManager stageUIManager;

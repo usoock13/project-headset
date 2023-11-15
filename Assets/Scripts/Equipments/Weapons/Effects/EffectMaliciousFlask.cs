@@ -4,7 +4,6 @@ using UnityEngine;
 public class EffectMaliciousFlask : EffectProjectile {
     private bool isActive = false;
     public WeaponMaliciousFlask originWeapon;
-    private float Damage => originWeapon.Damage;
     private float flyingSpeed = 45f;
     private float currentSpeed = 0;
     [SerializeField] private LayerMask targetLayer = 8;
@@ -57,7 +56,7 @@ public class EffectMaliciousFlask : EffectProjectile {
             if(inners[i].TryGetComponent(out Monster target)
             && target.isArrive) {
                 AttachmentSlowPoison attachment = originWeapon.AfterAttahcment;
-                if(target.TryGetAttachment(attachment.AttachmentType, out Attachment already))
+                if(target.TryGetAttachment(attachment.AttachmentType, out Attachment already)) // Duplicate Attaching
                     target.ReleaseAttachment(already);
                 target.TakeAttachment(attachment);
                 GameManager.instance.Character.OnAttackMonster(target);

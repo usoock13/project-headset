@@ -5,9 +5,11 @@ using UnityEngine;
 public class AttachmentSlowPoison : Attachment {
     public override string AttachmentType => "Slow Poison";
 
-    private float damage = 2f;
-    private Func<Monster, float> SlowAmount = (monster) => 0.5f;
+    public WeaponMaliciousFlask originWeapon;
     private float duration = 3f;
+    public int attachmentLevel = 1;
+    private float Damage => originWeapon.GetDamage(attachmentLevel);
+
     private float damageInterval = .5f;
     private float lifetime = 0;
     private Color attachedColor = new Color(.75f, 0, 1, 1);
@@ -17,10 +19,11 @@ public class AttachmentSlowPoison : Attachment {
     public override void OnAttached(IAttachmentsTakeable target) {
         base.OnAttached(target);
         lifetime = 0;
+        attachmentLevel = originWeapon.CurrentLevel;
 
         #region Monster Target Implements
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
-            targetMonster.moveSpeedScales += SlowAmount;
+            targetMonster.speedModifier += GetSpeedModifier;
             targetMonster.GetComponent<SpriteColorManager>()?.AddColor(attachedColor);
             damageCoroutine = StartCoroutine(DamageCoroutine(targetMonster));
         }
@@ -30,17 +33,20 @@ public class AttachmentSlowPoison : Attachment {
         base.OnDetached(target);
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
             targetMonster.GetComponent<SpriteColorManager>()?.RemoveColor(attachedColor);
-            targetMonster.moveSpeedScales -= SlowAmount;
+            targetMonster.speedModifier -= GetSpeedModifier;
         }
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);
     }
     private IEnumerator DamageCoroutine(Monster target) {
         while(lifetime < duration) {
-            target.TakeDamage(damage);
+            target.TakeDamage(Damage);
             lifetime += damageInterval;
             yield return new WaitForSeconds(damageInterval);
         }
         target.ReleaseAttachment(this);
+    }
+    private float GetSpeedModifier(Monster monster) {
+        return 1-originWeapon.GetSlowAmount(attachmentLevel);
     }
 }

@@ -8,7 +8,7 @@ public abstract class Weapon : Equipment {
     protected abstract float AttackInterval { get; }
     protected float currentTime = 0;
     
-    protected void Update() {
+    protected virtual void Update() {
         if(currentTime > 0) {
                 currentTime -= Time.deltaTime * Character.AttackSpeed;
         } else {
