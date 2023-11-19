@@ -22,10 +22,10 @@ public class WeaponRifle : Weapon {
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
     public override Sprite Icon => _weaponIcon;
-    public override string Name => "극지 저격술";
+    public override string Name => "철갑상어탄";
     public override string Description => 
         level switch {
-            _ => $"{interval[level]}초에 한 번 조준 방향으로 북극의 쓴맛을 발사해 관통하는 모든 적에게 {damageCoef[level]*100}%의 피해를 가하고 {hittingDelay[level]}초 동안 경직시킵니다.",
+            _ => $"{interval[level]}초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 {damageCoef[level]*100}%의 피해를 가하고 {hittingDelay[level]}초 동안 경직시킵니다.",
         };
 
     private void Awake() {

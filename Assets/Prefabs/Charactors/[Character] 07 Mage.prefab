@@ -152,7 +152,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3708817249502812639, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}
   m_PrefabInstance: {fileID: 3973744096251248710}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2390226520052719078
+--- !u!114 &1896202708467878094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,12 +176,12 @@ MonoBehaviour:
   weaponParent: {fileID: 4364672604279695569}
   artifactParent: {fileID: 947811563956023290}
   headmountPoint: {fileID: 9218828611891435066}
-  maxHp: 75
-  statusDefaultPower: 11
-  statusDefaultMoveSpeed: 2.3
-  statusDefaultArmor: 9
+  maxHp: 100
+  statusDefaultPower: 10
+  statusDefaultMoveSpeed: 2.5
+  statusDefaultArmor: 10
   basicWeapon: {fileID: 4608071478447801991, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
-  defaultSprite: {fileID: 21300000, guid: 6dc3074441d24e444a31f5b3346f319d, type: 3}
+  defaultSprite: {fileID: 0}
 --- !u!4 &947811563956023290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4180148233844535228, guid: 41f9481cc51b5b04499c0fa743bce970, type: 3}

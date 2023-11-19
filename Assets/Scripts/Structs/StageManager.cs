@@ -60,6 +60,7 @@ public class StageManager : MonoBehaviour {
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
         character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
+        character.HeadmountCharacter.HeadAbility?.OnTaken(character);
 
         for(int i=1; i<selectedCharacter.Count; i++) {
             character.MountCharacter(selectedCharacter[i].HeadmountCharacter);
