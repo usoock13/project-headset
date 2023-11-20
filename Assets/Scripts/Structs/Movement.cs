@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    [SerializeField] private float radius = 1;
+    private float radius = -1;
     private const int BLOCK_LAYER = 7;
 
     public void Start() {
@@ -12,7 +12,6 @@ public class Movement : MonoBehaviour {
         if(Physics2D.OverlapCircle(transform.position, radius, 1<<BLOCK_LAYER))
             return;
 
-        float angle = Vector3.Angle(Vector3.up, moveVector);
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius*1.1f, moveVector, moveVector.magnitude, 1<<BLOCK_LAYER);
         Vector2 normal = moveVector.normalized;
         foreach(RaycastHit2D hit in hits) {

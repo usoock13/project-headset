@@ -20,6 +20,10 @@ public class EffectRifleBullet : EffectProjectile {
         base.Update();
         transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
     }
+    protected override void OnEnable() {
+        base.OnEnable();
+        hitMonsters.Clear();
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value
         && !hitMonsters.Contains(other.gameObject)) {

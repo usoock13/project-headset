@@ -14,7 +14,7 @@ public class DamagePrinter : MonoBehaviour {
         TMPro.TMP_Text tmp = instance.GetComponentInChildren<TMPro.TMP_Text>();
         tmp.text = number;
         tmp.color = color;
-        InPoolCoroutine(instance, 5);
+        StartCoroutine( InPoolCoroutine(instance, 5) );
     }
     private IEnumerator InPoolCoroutine(GameObject target, float second) {
         yield return new WaitForSeconds(second);

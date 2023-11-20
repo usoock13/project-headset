@@ -30,15 +30,25 @@ public class WeaponShortbow : Weapon {
         };
 
     private void Awake() {
-        effectPooler = new ObjectPooler(shortbowEffect.gameObject, null, null,
-        (gobj) => {
-            var effect = gobj.GetComponent<EffectShortbow>();
-            effect.originWeapon = this;
-            effect.onDisapear += (projectile) => {
-                effectPooler.InPool(projectile.gameObject);
-            };
-        },
-        this.transform, 100, 50);
+        effectPooler = new ObjectPooler(
+            poolingObject: shortbowEffect.gameObject,
+            onInPool: (gobj) => {
+                if(gobj.TryGetComponent<TrailRenderer>(out var tr))
+                    tr.enabled = false;
+            },
+            onOutPool: (gobj) => {
+                if(gobj.TryGetComponent<TrailRenderer>(out var tr))
+                    tr.enabled = true;
+            },
+            onCreated: (gobj) => {
+                var effect = gobj.GetComponent<EffectShortbow>();
+                effect.originWeapon = this;
+                effect.onDisapear += (projectile) => {
+                    effectPooler.InPool(projectile.gameObject);
+                };
+            },
+            this.transform, 100, 50
+        );
     }
     protected override void Attack() {
         for(int i=0; i<ArrowQuantity; i++) {

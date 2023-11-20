@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8746856776550012981}
   - component: {fileID: 6342264030857522985}
   - component: {fileID: 6342264030857522980}
-  - component: {fileID: 4473507440462479738}
+  - component: {fileID: 2490272933369885350}
   - component: {fileID: 6342264030857522981}
   - component: {fileID: 6342264030857522982}
   - component: {fileID: 6342264030857522983}
@@ -117,8 +117,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &4473507440462479738
-CircleCollider2D:
+--- !u!60 &2490272933369885350
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -130,9 +130,29 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.35}
-  serializedVersion: 2
-  m_Radius: 0.35
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.3125}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.68337274, y: 0.4375}
+      - {x: 0.49483353, y: 0.5771532}
+      - {x: 0.25, y: 0.71875}
+      - {x: -0.045309015, y: 0.6700573}
+      - {x: -0.34722456, y: 0.7743919}
+      - {x: -0.78125, y: 0.59375}
+      - {x: -0.78125, y: 0.46875}
+      - {x: -0.33917785, y: 0.0888353}
+      - {x: 0.34349835, y: 0.029215634}
+      - {x: 0.6003566, y: 0.22416808}
+      - {x: 0.36704415, y: 0.31876397}
 --- !u!50 &6342264030857522981
 Rigidbody2D:
   serializedVersion: 4

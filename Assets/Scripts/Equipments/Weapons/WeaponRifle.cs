@@ -29,18 +29,32 @@ public class WeaponRifle : Weapon {
         };
 
     private void Awake() {
-        effectPooler = new ObjectPooler(rifleEffect.gameObject, null, null,
-        (gobj) => {
-            var effect = gobj.GetComponent<EffectRifleBullet>();
-            effect.originWeapon = this;
-            effect.onDisapear += (projectile) => {
-                effectPooler.InPool(projectile.gameObject);
-            };
-        },
-        this.transform);
+        effectPooler = new ObjectPooler(
+            poolingObject: rifleEffect.gameObject,
+            onInPool: (gobj) => {
+                var tr = gobj.GetComponentInChildren<TrailRenderer>();
+                if(tr is not null) {
+                    tr.enabled = false;
+                }
+            },
+            onOutPool: (gobj) => {
+                var tr = gobj.GetComponentInChildren<TrailRenderer>();
+                if(tr is not null) {
+                    tr.enabled = true;
+                }
+            },
+            onCreated: (gobj) => {
+                var effect = gobj.GetComponent<EffectRifleBullet>();
+                effect.originWeapon = this;
+                effect.onDisapear += (projectile) => {
+                    effectPooler.InPool(projectile.gameObject);
+                };
+            },
+            parent: this.transform
+        );
     }
     protected override void Attack() {
-        GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        GameObject bulletInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
         Character.OnAttack();
     }
     #endregion Weapon Information
