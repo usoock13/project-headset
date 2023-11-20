@@ -7,8 +7,9 @@ public class EffectRifleBullet : EffectProjectile {
     private float flyingSpeed = 36f;
     private float hittingDelay = 0.4f;
     private const float FLYING_TIME = 3;
-    [SerializeField] LayerMask targetLayer = 8;
     private List<GameObject> hitMonsters = new List<GameObject>();
+    [SerializeField] LayerMask targetLayer = 8;
+    [SerializeField] TrailRenderer trailRenderer;
 
     private void Start() {
         if(originWeapon == null) {
@@ -23,6 +24,7 @@ public class EffectRifleBullet : EffectProjectile {
     protected override void OnEnable() {
         base.OnEnable();
         hitMonsters.Clear();
+        trailRenderer.Clear();
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value

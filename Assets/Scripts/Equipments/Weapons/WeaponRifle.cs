@@ -31,18 +31,6 @@ public class WeaponRifle : Weapon {
     private void Awake() {
         effectPooler = new ObjectPooler(
             poolingObject: rifleEffect.gameObject,
-            onInPool: (gobj) => {
-                var tr = gobj.GetComponentInChildren<TrailRenderer>();
-                if(tr is not null) {
-                    tr.enabled = false;
-                }
-            },
-            onOutPool: (gobj) => {
-                var tr = gobj.GetComponentInChildren<TrailRenderer>();
-                if(tr is not null) {
-                    tr.enabled = true;
-                }
-            },
             onCreated: (gobj) => {
                 var effect = gobj.GetComponent<EffectRifleBullet>();
                 effect.originWeapon = this;

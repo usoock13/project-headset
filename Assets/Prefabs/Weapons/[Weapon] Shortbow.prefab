@@ -49,10 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flyingTime: 3
   lifetime: 0
-  originWeapon: {fileID: 0}
+  originWeapon: {fileID: -3919815677109160991}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  trailRenderer: {fileID: 814569904815817092}
 --- !u!61 &7938138119135422662
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696095827275055218}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -170,8 +171,8 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2028446011
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Time: 0.12
   m_Parameters:

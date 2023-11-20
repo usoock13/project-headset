@@ -26,19 +26,22 @@ public class WeaponShortbow : Weapon {
     public override string Name => "단궁";
     public override string Description => 
         level switch {
-            _ => $"{interval[level]}초에 한 번 조준 방향으로 화살을 {arrowQuantity[level]}발 발사해 관통하는 모든 적에게 {damageCoef[level]*100}%의 피해를 가하고 {hittingDelay[level]}초 동안 경직시킵니다.",
+            _ => $"{interval[level]}초에 한 번 조준 방향으로 화살을 {arrowQuantity[level]}발 발사해 적중한 적에게 {damageCoef[level]*100}%의 피해를 가합니다.",
         };
 
     private void Awake() {
         effectPooler = new ObjectPooler(
             poolingObject: shortbowEffect.gameObject,
             onInPool: (gobj) => {
-                if(gobj.TryGetComponent<TrailRenderer>(out var tr))
-                    tr.enabled = false;
+                // if(gobj.TryGetComponent<TrailRenderer>(out var tr))
+                //     tr.enabled = false;
+                //     tr.time = 0;
             },
             onOutPool: (gobj) => {
-                if(gobj.TryGetComponent<TrailRenderer>(out var tr))
-                    tr.enabled = true;
+                // if(gobj.TryGetComponent<TrailRenderer>(out var tr)) {
+                //     tr.enabled = true;
+                //     tr.time = 0.12f;
+                // }
             },
             onCreated: (gobj) => {
                 var effect = gobj.GetComponent<EffectShortbow>();

@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class EffectShortbow : EffectProjectile {
@@ -11,6 +11,7 @@ public class EffectShortbow : EffectProjectile {
         get => originWeapon.HittingDelay;
     }
     [SerializeField] LayerMask targetLayer = 8;
+    [SerializeField] TrailRenderer trailRenderer;
 
     private void Start() {
         if(originWeapon == null) {
@@ -25,11 +26,12 @@ public class EffectShortbow : EffectProjectile {
     protected override void OnEnable() {
         base.OnEnable();
         isActive = true;
+        trailRenderer.Clear();
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(isActive
         && 1<<other.gameObject.layer == targetLayer.value) {
-            if(other.TryGetComponent<Monster>(out Monster target)) {
+            if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
                 target.TakeHittingDelay(hittingDelay);
                 target.TakeForce(transform.up * .2f, hittingDelay);

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    private float radius = -1;
+    private float radius;
     private const int BLOCK_LAYER = 7;
 
     public void Start() {
