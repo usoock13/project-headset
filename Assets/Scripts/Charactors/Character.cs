@@ -141,6 +141,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] protected Weapon basicWeapon;
     [SerializeField] private Sprite defaultSprite;
 
+    public float DefaultPower => statusDefaultPower;
+    public float DefaultMoveSpeed => statusDefaultMoveSpeed;
+    public float DefaultArmor => statusDefaultArmor;
+
     #region Character Events
     public Action<Character, Monster, float> onTakeAttack;
     public Action<Character, float> onTakeDamage;

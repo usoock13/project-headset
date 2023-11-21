@@ -26,6 +26,8 @@ public class EquipmentManager : MonoBehaviour {
     [SerializeField] private Transform bonusChoisesParent;
     [SerializeField] private Item[] bonusChoises;
 
+    [SerializeField] private Artifact __testItem;
+
     private void Awake() {
         remainingWeapons = transform.GetComponentsInChildren<Weapon>(true).ToList();
         remainingArtifacts = transform.GetComponentsInChildren<Artifact>(true).ToList();
@@ -34,6 +36,12 @@ public class EquipmentManager : MonoBehaviour {
 
         bonusChoises = bonusChoisesParent.GetComponentsInChildren<Item>(true);
     }
+    #if UNITY_EDITOR
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.G))
+            GivePlayerItem(__testItem);
+    }
+    #endif
     public IPlayerGettable[] RandomChoises(int number) {
         List<IPlayerGettable> candidates = new List<IPlayerGettable>();
 
