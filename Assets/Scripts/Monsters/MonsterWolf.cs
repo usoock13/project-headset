@@ -11,7 +11,7 @@ public class MonsterWolf : Monster {
     private const string ANIMATION_HIT = "Wolf Hit";
     private const string ANIMATION_DIE = "Wolf Die";
 
-    private Coroutine takeAttackDelayCoroutine;
+    private Coroutine takeHittingDelayCoroutine;
     private Coroutine dieCoroutine;
 
     private float attackInterval = 1f;
@@ -26,7 +26,7 @@ public class MonsterWolf : Monster {
     #endregion Unity Events
 
     public override void TakeHittingDelay(float amount) {
-        takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(amount));
+        takeHittingDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(amount));
     }
     private IEnumerator TakeAttackDelayCoroutine(float second) {
         stateMachine.ChangeState(hitState);
@@ -50,7 +50,7 @@ public class MonsterWolf : Monster {
             spriteAnimator.ChangeAnimation(ANIMATION_HIT);
         };
         hitState.onInactive += (State next) => {
-            StopCoroutine(takeAttackDelayCoroutine);
+            StopCoroutine(takeHittingDelayCoroutine);
         };
         #endregion Hit State
 

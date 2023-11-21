@@ -80,7 +80,6 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
             stateMachine.ChangeState(dieState);
         _StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString());
     }
-    
     public virtual void TakeHittingDelay(float second) {
         takeHittingDelayCoroutine = StartCoroutine(TakeHittingDelayCoroutine(second));
     }

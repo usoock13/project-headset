@@ -62,6 +62,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected Movement movement;
+    public State CurrentState => stateMachine.currentState;
 
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)> hmcSpriteRenderers;
@@ -126,10 +127,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] public Transform headmountPoint;
 
     #region States Refer
-    protected State idleState = new State("Idle");
-    protected State walkState = new State("Walk");
-    protected State hitState = new State("Hit");
-    protected State dieState = new State("Die");
+    public State idleState { get; protected set; } = new State("Idle");
+    public State walkState { get; protected set; } = new State("Walk");
+    public State hitState { get; protected set; } = new State("Hit");
+    public State dieState { get; protected set; } = new State("Die");
     #endregion States Refer
 
     [Header("Individual Properties")]
@@ -254,18 +255,18 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     public void AddWeapon(Weapon weapon) {
         weapon.transform.SetParent(weaponParent);
+        StageUIManager.UpdateWeaponList();
         /* 
             *** TODO : Update UI that show Chracter information. ***
         */
-        StageUIManager.UpdateWeaponList();
     }
     public void AddArtifact(Artifact artifact) {
         artifact.transform.SetParent(artifactParent);
+        StageUIManager.UpdateArtifactList();
         /* 
             *** TODO : Update UI that show Chracter information. ***
         */
     }
-    
 
     private void InitializeUI() {
         StatusUI.UpdateExpSlider(0);
@@ -304,6 +305,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     public void TakeForce(Vector2 force, float duration=.25f) {
         throw new System.NotImplementedException();
+    }
+    public void TakeHeal(float amount) {
+        currentHp = Mathf.Min(currentHp + amount, maxHp);
+        StatusUI.UpdateHpSlider(currentHp / maxHp);
+        StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString(), Color.green);
     }
     private void Die() {
         stateMachine.ChangeState(dieState, false);

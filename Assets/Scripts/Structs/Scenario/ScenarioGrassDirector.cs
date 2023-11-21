@@ -64,10 +64,11 @@ public class ScenarioGrassDirector : ScenarioDirector {
             List<Monster> result = new List<Monster>();
             for(int i=0; i<amount; i++) {
                 Vector2 spawnPoint = RandomDirection * spawnDistance + (Vector2)Character.transform.position;
+                spawnPoint.x = Mathf.Clamp(spawnPoint.x, mapLeftBottom.x, mapRightTop.x);
+                spawnPoint.y = Mathf.Clamp(spawnPoint.y, mapLeftBottom.y, mapRightTop.y);
                 GameObject monsterInstance = pooler.OutPool(spawnPoint, Quaternion.identity);
-                Monster m;
-                if(monsterInstance.TryGetComponent<Monster>(out m))
-                    result.Add(monsterInstance.GetComponent<Monster>());
+                if(monsterInstance.TryGetComponent(out Monster m))
+                    result.Add(m);
             }
             return result;
         }

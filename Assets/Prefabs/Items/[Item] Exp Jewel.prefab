@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4080156060269761910}
   - component: {fileID: 6142748802175813169}
   - component: {fileID: 3210024812300288431}
+  - component: {fileID: 5243743987479785776}
+  - component: {fileID: 4065695254931838501}
   m_Layer: 10
   m_Name: '[Item] Exp Jewel'
   m_TagString: Item
@@ -48,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   givingExp: 0
+  icon: {fileID: 0}
 --- !u!212 &4080156060269761910
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86,8 +89,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1722209711
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1094833510, guid: 4a4f746faedd5d045883f4e48deb2731, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -137,3 +140,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &5243743987479785776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4080156060269761907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd27feed64870d4a8cbbc6b10b3409d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMuted: 0
+--- !u!114 &4065695254931838501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4080156060269761907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []

@@ -19,7 +19,7 @@ TagManager:
   - Monster
   - Effect
   - Item
-  - 
+  - Background
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Back Effect
+    uniqueID: 2462354571
     locked: 0
   - name: Object
     uniqueID: 2572757585

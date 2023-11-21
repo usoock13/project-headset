@@ -25,6 +25,9 @@ public abstract class ScenarioDirector : MonoBehaviour {
     
     public Dictionary<string, ObjectPooler> monsterPoolerMap { get; protected set; }
 
+    [SerializeField] protected Vector2 mapLeftBottom;
+    [SerializeField] protected Vector2 mapRightTop;
+
     #region Unity Events
     protected virtual void Start() {
         character = GameManager.instance.Character;
