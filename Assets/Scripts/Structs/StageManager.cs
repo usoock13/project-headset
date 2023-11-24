@@ -36,6 +36,9 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private ExpJewel expJewel;
     private ObjectPooler expPooler;
 
+    [SerializeField] private Potion potionOrigin;
+    private ObjectPooler potionPooler;
+
     [SerializeField] private DamagePrinter damagePrinter;
 
     private void Awake() {
@@ -57,6 +60,7 @@ public class StageManager : MonoBehaviour {
 
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
+        potionPooler = new ObjectPooler(potionOrigin.gameObject, null, null, this.transform, 50, 20);
     }
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
@@ -90,12 +94,14 @@ public class StageManager : MonoBehaviour {
             exp.Drop();
         }
     }
-    public void ApearExp(Vector2 point, int expAmount) {
-        var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
-        if(exp != null) {
-            exp.givingExp = expAmount;
-            exp.Drop();
+    public void CreatePotion(Vector2 point) {
+        GameObject instance = potionPooler.OutPool(point, Quaternion.identity);
+        if(instance.TryGetComponent(out Potion potion)) {
+            potion.Drop();
         }
+    }
+    public void OnMonsterDie(Monster monster) {
+        character.OnKillMonster(monster);
     }
     public void PauseGame(bool pause) {
         Time.timeScale = pause ? 0 : 1;

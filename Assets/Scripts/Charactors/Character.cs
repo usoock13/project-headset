@@ -174,6 +174,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Action<Character, float> onTakeDamage;
     public Action<Character> onAttack;
     public Action<Character, Monster> onAttackMonster;
+    public Action<Character, Monster> onKillMonster;
     #endregion Character Events
 
     #region Unity Events
@@ -182,7 +183,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         hmcSpriteRenderers = new List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)>();
         InitializeStates();
     }
-
     protected void Start() {
         currentHp = maxHp;
         currentStamina = maxStamina;
@@ -226,6 +226,21 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
         stateMachine.SetIntialState(idleState);
     }
+    
+    
+    public void MountCharacter(HeadmountCharacter headmountCharacter) {
+        HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
+        // hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
+        hmc.HeadAbility.OnTaken(this);
+
+        headmountPoint = hmc.headmountPoint;
+        hmcSpriteRenderers.Add((hmc.HandsSprite, hmc.FrontSprite, hmc.BackSprite));
+        hmc.HandsSprite.sortingOrder = hmcSpriteRenderers.Count * 2;
+        hmc.FrontSprite.sortingOrder = hmcSpriteRenderers.Count;
+        hmc.BackSprite.sortingOrder = -hmcSpriteRenderers.Count;
+        hmc.gameObject.SetActive(true);
+    }
+    
     public void SetMoveDirection(Vector2 direction) {
         moveDirection = direction;
         if(!CurrentState.Compare(dodgeState))
@@ -272,6 +287,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             attackDirection = attackArrow.transform.rotation * Vector2.up;
         arrowIsFixed = active;
     }
+    
     public void DodgeToward() {
         if(currentStamina < staminaForDodge)
             return;
@@ -295,18 +311,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         }
         stateMachine.ChangeState(BasicState);
     }
-    public void MountCharacter(HeadmountCharacter headmountCharacter) {
-        HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
-        // hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
-        hmc.HeadAbility.OnTaken(this);
-
-        headmountPoint = hmc.headmountPoint;
-        hmcSpriteRenderers.Add((hmc.HandsSprite, hmc.FrontSprite, hmc.BackSprite));
-        hmc.HandsSprite.sortingOrder = hmcSpriteRenderers.Count * 2;
-        hmc.FrontSprite.sortingOrder = hmcSpriteRenderers.Count;
-        hmc.BackSprite.sortingOrder = -hmcSpriteRenderers.Count;
-        hmc.gameObject.SetActive(true);
-    }
+    
     public void AddWeapon(Weapon weapon) {
         weapon.transform.SetParent(weaponParent);
         weapon.transform.localPosition = Vector2.zero;
@@ -333,6 +338,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             currentStamina = Mathf.Min(currentStamina + Time.deltaTime * recoveringStaminaPerSecond, maxStamina);
         StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
     }
+    
     public void GetExp(int amount) {
         currentExp += amount;
         if(currentExp >= MaxExp)
@@ -346,6 +352,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StageManager.OnCharacterLevelUp();
         GetExp(0); // Check multiple level up. 
     }
+    
+    public void OnKillMonster(Monster monster) {
+        onKillMonster?.Invoke(this, monster);
+    }
+
     public void TakeAttack(Monster origin, float amount) {
         if(CanBlockAttack(origin, amount))
             return;

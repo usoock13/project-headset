@@ -13,8 +13,14 @@ public class StageUIManager : MonoBehaviour {
     private EquipmentManager _EquipmentsManager => GameManager.instance.StageManager.EquipmentsManager;
 
     #region Equipments UI
-    [SerializeField] private List<Image> weaponsAbstracts;
-    [SerializeField] private List<Image> artifactAbstracts;
+    [System.Serializable]
+    private class EquipmentAbstract {
+        public Image icon;
+        public TMPro.TMP_Text information;
+        public Slider levelSlider;
+    }
+    [SerializeField] private List<EquipmentAbstract> weaponsAbstracts;
+    [SerializeField] private List<EquipmentAbstract> artifactAbstracts;
     #endregion Equipments UI
 
     #region Visual Effect UIs
@@ -32,25 +38,33 @@ public class StageUIManager : MonoBehaviour {
     }
     public void UpdateWeaponList() {
         var enumerator = _EquipmentsManager.WeaponsEnumerator.GetEnumerator();
-        foreach(Image image in weaponsAbstracts) {
+        foreach(EquipmentAbstract item in weaponsAbstracts) {
             if(enumerator.MoveNext()) {
-                image.sprite = enumerator.Current?.Icon;
-                image.color = new Color(1, 1, 1, 1.0f);
+                item.icon.sprite = enumerator.Current?.Icon;
+                item.icon.color = new Color(1, 1, 1, 1.0f);
+                item.information.text = enumerator.Current.extraInformation;
+                item.levelSlider.value = enumerator.Current.CurrentLevel;
             } else {
-                image.sprite = null;
-                image.color = new Color(0, 0, 0, 0.3f);
+                item.icon.sprite = null;
+                item.icon.color = new Color(0, 0, 0, 0f);
+                item.information.text = "";
+                item.levelSlider.value = 0;
             }
         }
     }
     public void UpdateArtifactList() {
         var enumerator = _EquipmentsManager.ArtifactsEnumerator.GetEnumerator();
-        foreach(Image image in artifactAbstracts) {
+        foreach(EquipmentAbstract item in artifactAbstracts) {
             if(enumerator.MoveNext()) {
-                image.sprite = enumerator.MoveNext() ? enumerator.Current?.Icon : null;
-                image.color = new Color(1, 1, 1, 1.0f);
+                item.icon.sprite = enumerator.Current?.Icon;
+                item.icon.color = new Color(1, 1, 1, 1.0f);
+                item.information.text = enumerator.Current.extraInformation;
+                item.levelSlider.value = enumerator.Current.CurrentLevel;
             } else {
-                image.sprite = null;
-                image.color = new Color(0, 0, 0, 0.3f);
+                item.icon.sprite = null;
+                item.icon.color = new Color(0, 0, 0, 0f);
+                item.information.text = "";
+                item.levelSlider.value = 0;
             }
         }
     }

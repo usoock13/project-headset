@@ -88,7 +88,6 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         yield return new WaitForSeconds(second);
         stateMachine.ChangeState(chaseState);
     }
-    
     public virtual void TakeForce(Vector2 force, float duration=.25f) {
         StartCoroutine(TakeForceCoroutine(force, duration));
     }
@@ -134,13 +133,21 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     protected virtual void OnDie() {
         isArrive = false;
         rigidbody2D.simulated = false;
-        DropExp();
         onDie?.Invoke(this);
-        ClearAttachments();
         StopCoroutine(updateTargetDirectionCoroutine);
+        ClearAttachments();
+        _StageManager.OnMonsterDie(this);
+        DropExp();
+        DropPotion();
     }
     protected void DropExp() {
-        GameManager.instance.StageManager.CreateExp(transform.position, givingExp);
+        _StageManager.CreateExp(transform.position, givingExp);
+    }
+    protected void DropPotion() {
+        float ratio = 0.02f;
+        float next = UnityEngine.Random.Range(0f, 1f);
+        if(next < ratio)
+            _StageManager.CreatePotion(transform.position);
     }
     protected abstract void InitializeStates();
     private IEnumerator UpdateTargetPoint() {

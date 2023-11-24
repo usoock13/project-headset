@@ -16,9 +16,10 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     public abstract Sprite Icon { get; }
     public abstract string Name { get; }
     public abstract string Description { get; }
+    public string extraInformation = "";
 
     public void LevelUp() {
-        if(level <= MaxLevel) {
+        if(level < MaxLevel) {
             OnLevelUp();
         } else {
             throw new System.Exception("Level is max.");
