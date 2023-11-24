@@ -8,7 +8,7 @@ public class CharacterRanger : Character {
     const string ANIMATION_WALK = "Ranger Walk";
     #endregion Animation Clips
 
-    public override string CharacterName => "정찰대";
+    public override string CharacterName => "정찰대원";
 
     protected override void InitializeStates() {
         base.InitializeStates();

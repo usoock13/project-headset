@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7052259632966506093}
   - component: {fileID: 2947276492698702738}
   - component: {fileID: 7646554343292359711}
+  - component: {fileID: 677119048686205139}
   m_Layer: 0
   m_Name: '[Effect] Holy Area'
   m_TagString: Untagged
@@ -102,6 +103,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   spriteRenderer: {fileID: 2947276492698702738}
+--- !u!111 &677119048686205139
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696095827275055218}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 77f4089f3c15c3340bd0e27a8492d977, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 77f4089f3c15c3340bd0e27a8492d977, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3232903881723159893
 GameObject:
   m_ObjectHideFlags: 0

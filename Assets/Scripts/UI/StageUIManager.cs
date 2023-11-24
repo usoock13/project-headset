@@ -6,6 +6,7 @@ public class StageUIManager : MonoBehaviour {
     [SerializeField] private LevelUpUI levelUpUI;
     public LevelUpUI LevelUpUI => levelUpUI;
     
+    private Character _Character => GameManager.instance.Character;
     [SerializeField] private CharacterStatusUI characterUI;
     public CharacterStatusUI CharacterStatusUI => characterUI;
 
@@ -20,9 +21,14 @@ public class StageUIManager : MonoBehaviour {
     [SerializeField] private Animation hitEffectUIAnimation;
     #endregion Visual Effect UIs
     
-    public void Start() {
+    public void InitializeStatusUI() {
         UpdateWeaponList();
         UpdateArtifactList();
+        characterUI.hpSlider = _Character.hpSlider;
+        characterUI.staminaSlider = _Character.staminaSlider;
+        characterUI.UpdateExpSlider(0);
+        characterUI.UpdateHpSlider(_Character.currentHp / _Character.MaxHp);
+        characterUI.UpdateLevel(_Character.level);
     }
     public void UpdateWeaponList() {
         var enumerator = _EquipmentsManager.WeaponsEnumerator.GetEnumerator();

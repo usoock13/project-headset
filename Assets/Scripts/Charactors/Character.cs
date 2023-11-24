@@ -1,23 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Networking.Types;
-using UnityEngine.Rendering;
-using UnityEngine.Video;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(StateMachine))]
 public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeable {
     private StageManager StageManager {
         get { return GameManager.instance.StageManager; }
     }
-    StageUIManager StageUIManager => GameManager.instance.StageManager.StageUIManager;
+    StageUIManager StageUIManager => GameManager.instance.StageManager._StageUIManager;
     
     private CharacterStatusUI _characterStatusUI;
-    private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
+    private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager._StageUIManager.CharacterStatusUI;
+
+    [SerializeField] public Slider hpSlider;
+    [SerializeField] public Slider staminaSlider;
 
     public CharacterInputSystem characterInputSystem;
     public GameObject GameObject => this.gameObject;
@@ -35,17 +33,26 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
                 final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
         return final;
     }}
+    public float MaxHp => maxHp;
+    public float currentHp { get; protected set; }
+
+    public float MaxStamina => maxStamina;
+    public float currentStamina { get; protected set; }
+    protected float recoveringStaminaPerSecond = 20f;
+    protected float staminaForDodge = 100f;
+
+    public float MaxSkillGauge => maxSkillGauge;
+    public float currentSkillGauge { get; protected set; }
+    protected float recoveringSkillGaugePerSecond = 1f;
+
     [HideInInspector] public int levelRewardCount = 0;
 
-    [SerializeField] public float MaxHp => maxHp;
-    [SerializeField] public float currentHp { get; protected set; }
     private List<Attachment> havingAttachment;
     #endregion Character Status
 
     #region Character Information
     public Sprite DefaultSprite => defaultSprite;
     public abstract string CharacterName { get; }
-
     [SerializeField] private HeadmountCharacter headmountCharacter;
     [SerializeField] public HeadmountCharacter HeadmountCharacter => headmountCharacter;
     #endregion Character Information
@@ -61,8 +68,14 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
 
     [SerializeField] protected StateMachine stateMachine;
-    [SerializeField] protected Movement movement;
     public State CurrentState => stateMachine.currentState;
+
+    [SerializeField] protected Movement movement;
+
+    private float dodgePower = 7f;
+    private float dodgeDuration = .3f;
+    private Coroutine dodgeCoroutine;
+    [SerializeField] ParticleSystem dodgeParticle;
 
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)> hmcSpriteRenderers;
@@ -75,6 +88,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Func<Character, float> extraMoveSpeed;
     public Func<Character, float> extraAttackSpeed;
     public Func<Character, float> extraArmor;
+
+    public Func<Monster, float, bool> attackBlocker; // Monster : Origin of attack // float : Damage amount
     #endregion Extra Status
 
     public float Power { get {
@@ -129,12 +144,21 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     #region States Refer
     public State idleState { get; protected set; } = new State("Idle");
     public State walkState { get; protected set; } = new State("Walk");
+    public State dodgeState {get; protected set; } = new State("Dodge");
     public State hitState { get; protected set; } = new State("Hit");
     public State dieState { get; protected set; } = new State("Die");
+    public State BasicState { get {
+        if(moveDirection == Vector2.zero)
+            return idleState;
+        else
+            return walkState;
+    }}
     #endregion States Refer
 
     [Header("Individual Properties")]
     [SerializeField] protected float maxHp = 100;
+    [SerializeField] protected float maxStamina = 100;
+    [SerializeField] protected float maxSkillGauge = 100;
     [SerializeField] protected float statusDefaultPower = 10;
     [SerializeField] protected float statusDefaultMoveSpeed = 2.5f;
     [SerializeField] protected float statusDefaultArmor = 10;
@@ -161,24 +185,25 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     protected void Start() {
         currentHp = maxHp;
+        currentStamina = maxStamina;
         StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);
         havingAttachment = new List<Attachment>();
-        InitializeUI();
     }
-    /* __temporary >> */
-    #if UNITY_EDITOR
     private void Update() {
+        /* FOR TEST >> */
+        #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp(100);
+        #endif
+        /* << FOR TEST */
+        RecoverStamina();
     }
-    /* << __temporary */
-    #endif
     #endregion Unity Events
 
     protected virtual void InitializeStates() {
         stateMachine = stateMachine ?? GetComponent<StateMachine>();
 
-        #region Initilize Move State
+        #region Initialize Move State
         walkState.onStay = () => {
             MoveToward(MoveVector * Time.deltaTime);
             if(!arrowIsFixed) {
@@ -186,22 +211,25 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
                 RotateArrow(moveDirection);
             }
         };
-        #endregion Initilize Move State
-        #region Initilize Die State
+        #endregion Initialize Move State
+        #region Initialize Dodge State
+        #endregion Initialize Dodge State
+        dodgeState.onActive += (prev) => {
+            dodgeParticle.Play();
+        };
+        #region Initialize Die State
         dieState.onActive += (State previous) => {
             stateMachine.isMuted = true;
             itemCollector.enabled = false;
         };
-        #endregion Initilize Die State
+        #endregion Initialize Die State
 
         stateMachine.SetIntialState(idleState);
     }
     public void SetMoveDirection(Vector2 direction) {
         moveDirection = direction;
-        if(moveDirection == Vector2.zero)
-            stateMachine.ChangeState(idleState);
-        else
-            stateMachine.ChangeState(walkState);
+        if(!CurrentState.Compare(dodgeState))
+            stateMachine.ChangeState(BasicState);
     }
     private void MoveToward(Vector2 moveVector) {
         movement.MoveToward(moveVector);
@@ -214,9 +242,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
                                         : (moveDirection.x>=0 ?  1 : -1);
             spriteAnimator.SetFloat("Move Animation Direction", animationDirection);
         } else {
-            if(moveVector.x != 0) {
+            if(moveVector.x != 0)
                 FlipSprites(moveVector.x<0 ? true : false);
-            }
             spriteAnimator.SetFloat("Move Animation Direction", 1);
         }
     }
@@ -245,6 +272,29 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             attackDirection = attackArrow.transform.rotation * Vector2.up;
         arrowIsFixed = active;
     }
+    public void DodgeToward() {
+        if(currentStamina < staminaForDodge)
+            return;
+        if(dodgeCoroutine != null)
+            StopCoroutine(dodgeCoroutine);
+        ConsumeStamina(staminaForDodge);
+        StartCoroutine(DodgeCoroutine());
+    }
+    private IEnumerator DodgeCoroutine() {
+        stateMachine.ChangeState(dodgeState);
+        float offset = 0;
+        float t = 0;
+        Vector2 step;
+        Vector2 dir = moveDirection;
+        while (offset < 1) {
+            offset = Mathf.Min(offset + Time.deltaTime/dodgeDuration, 1);
+            t = Mathf.Sin(Mathf.PI * offset * 0.5f);
+            step = Vector2.Lerp(Vector2.zero, dir.normalized, 1-t) * dodgePower * (Time.deltaTime/dodgeDuration);
+            movement.MoveToward(step);
+            yield return null;
+        }
+        stateMachine.ChangeState(BasicState);
+    }
     public void MountCharacter(HeadmountCharacter headmountCharacter) {
         HeadmountCharacter hmc = Instantiate<HeadmountCharacter>(headmountCharacter, headmountPoint);
         // hmc.headmountPoint.localScale = new Vector3(headmountPoint.localScale.x, headmountPoint.localScale.y, headmountPoint.localScale.z*2);
@@ -259,6 +309,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     public void AddWeapon(Weapon weapon) {
         weapon.transform.SetParent(weaponParent);
+        weapon.transform.localPosition = Vector2.zero;
         StageUIManager.UpdateWeaponList();
         /* 
             *** TODO : Update UI that show Chracter information. ***
@@ -266,16 +317,21 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     public void AddArtifact(Artifact artifact) {
         artifact.transform.SetParent(artifactParent);
+        artifact.transform.localPosition = Vector2.zero;
         StageUIManager.UpdateArtifactList();
         /* 
             *** TODO : Update UI that show Chracter information. ***
         */
     }
-
-    private void InitializeUI() {
-        StatusUI.UpdateExpSlider(0);
-        StatusUI.UpdateHpSlider(currentHp / maxHp);
-        StatusUI.UpdateLevel(level);
+    
+    private void ConsumeStamina(float amount) {
+        currentStamina = Mathf.Max(currentStamina - amount, 0);
+        StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
+    }
+    private void RecoverStamina() {
+        if(currentStamina < maxStamina)
+            currentStamina = Mathf.Min(currentStamina + Time.deltaTime * recoveringStaminaPerSecond, maxStamina);
+        StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
     }
     public void GetExp(int amount) {
         currentExp += amount;
@@ -291,8 +347,19 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         GetExp(0); // Check multiple level up. 
     }
     public void TakeAttack(Monster origin, float amount) {
+        if(CanBlockAttack(origin, amount))
+            return;
         TakeDamage(amount);
         onTakeAttack?.Invoke(this, origin, amount);
+    }
+    private bool CanBlockAttack(Monster origin, float amount) {
+        Delegate[] blockers = attackBlocker?.GetInvocationList();
+        if(blockers != null)
+            for(int i=0; i<blockers.Length; i++) {
+                if(((Func<Monster, float, bool>) blockers[i]).Invoke(origin, amount))
+                    return true;
+            }
+        return false;
     }
     public void TakeDamage(float amount) {
         float finalDamage = (100 - Armor)/100 * amount;
@@ -305,10 +372,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StageUIManager.ActiveHitEffectUI();
     }
     public void TakeHittingDelay(float amount) {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
     public void TakeForce(Vector2 force, float duration=.25f) {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
     public void TakeHeal(float amount) {
         currentHp = Mathf.Min(currentHp + amount, maxHp);

@@ -29,7 +29,16 @@
                     "id": "f53e799f-1194-49e6-a36e-eee53c9fa69e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "e433615a-0a07-4b1e-9d32-cb01bcccc23e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -103,11 +112,22 @@
                 {
                     "name": "",
                     "id": "c3fa05bf-9c53-4f96-b3af-fee8c082e557",
-                    "path": "<NimbusGamepadHid>/buttonWest",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Active Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6646fbc0-2b22-4e99-93a1-bf58879eaf3a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

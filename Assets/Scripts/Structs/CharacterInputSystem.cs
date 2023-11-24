@@ -1,15 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class CharacterInputSystem : MonoBehaviour {
     [SerializeField] private Character character;
 
     private void Awake() {
-        character = GetComponent<Character>();
+        character ??= GetComponent<Character>();
         if(character == null) {
-            Debug.LogError("Character Input System failed to get a Character Component.");
+            Debug.LogError("'Character Input System' failed to get a Character Component.");
         }
         character.characterInputSystem = this;
     }
@@ -22,5 +21,9 @@ public class CharacterInputSystem : MonoBehaviour {
         } else if(context.canceled) {
             character.FixArrow(false);
         }
+    }
+    public void OnDodge(InputAction.CallbackContext context) {
+        if(context.performed)
+            character.DodgeToward();
     }
 }

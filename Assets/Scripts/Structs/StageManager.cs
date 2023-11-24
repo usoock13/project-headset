@@ -24,7 +24,7 @@ public class StageManager : MonoBehaviour {
         get { return equipmentsManager; }
     }
     [SerializeField] private StageUIManager stageUIManager;
-    public StageUIManager StageUIManager {
+    public StageUIManager _StageUIManager {
         get { return stageUIManager; }
     }
 
@@ -46,6 +46,7 @@ public class StageManager : MonoBehaviour {
     }
     private void Start() {
         SpawnCharacter();
+        InitializeUI();
         
         mainCamera.transform.SetParent(character.transform);
         mainCamera.transform.localPosition = new Vector3(0, 0, mainCamera.transform.position.z);
@@ -66,8 +67,11 @@ public class StageManager : MonoBehaviour {
             character.MountCharacter(selectedCharacter[i].HeadmountCharacter);
         }
     }
+    private void InitializeUI() {
+        stageUIManager.InitializeStatusUI();
+    }
     public void OnCharacterLevelUp() {
-        LevelUpUI levelUpUI = StageUIManager.LevelUpUI;
+        LevelUpUI levelUpUI = _StageUIManager.LevelUpUI;
         IPlayerGettable[] choises = EquipmentsManager.RandomChoises(4);
         levelUpUI.SetChoise(0, choises[0]);
         levelUpUI.SetChoise(1, choises[1]);
