@@ -178,4 +178,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   effects: {fileID: 7646554343292359711}
-  _weaponIcon: {fileID: 21300000, guid: 4bf0a0a4d5006fe49a16161bfddc0f09, type: 3}
+  _weaponIcon: {fileID: 1205168664, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
