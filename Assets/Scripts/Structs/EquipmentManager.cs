@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+using Utility;
 
 public class EquipmentManager : MonoBehaviour {
     Character Character => GameManager.instance.StageManager.Character;
@@ -60,10 +60,11 @@ public class EquipmentManager : MonoBehaviour {
         }).ToList();
         if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT)
             remainingEquipments.AddRange(remainingArtifacts);
-
-        weaponCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
-        artifactCandidates.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
-        remainingEquipments.Sort((a, b) => UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1);
+            
+        var rand = new System.Random();
+        weaponCandidates.Shuffle();
+        artifactCandidates.Shuffle();
+        remainingEquipments.Shuffle();
 
         candidates.AddRange(weaponCandidates.GetRange(0, Math.Min(weaponCandidates.Count, number)));
         candidates.AddRange(artifactCandidates.GetRange(0, Math.Min(artifactCandidates.Count, number)));
@@ -72,10 +73,7 @@ public class EquipmentManager : MonoBehaviour {
         while(candidates.Count < number) {
             candidates.Add(bonusChoises[UnityEngine.Random.Range(0, bonusChoises.Length)]);
         }
-        
-        candidates.Sort((a, b) => {
-            return UnityEngine.Random.Range(-1, 1)<0 ? -1 : 1;
-        });
+        candidates.Shuffle();
         return candidates.GetRange(0, 4).ToArray();
     }
     
