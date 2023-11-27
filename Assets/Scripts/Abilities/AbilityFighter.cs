@@ -15,7 +15,6 @@ public class AbilityFighter : Ability
     public override void OnReleased(Character character) {
         character.extraArmor -= GetDebuff;
         character.extraAttackSpeed -= GetExtraAttackSpeed;
-        print(GetExtraAttackSpeed(null));
     }
 
     private float GetExtraAttackSpeed(Character character) => 0.2f;

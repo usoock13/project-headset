@@ -30,4 +30,7 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     }
     public abstract void OnGotten();   // This method is called when Play get this. It's necessary for be displayed on UI.
     public abstract void OnEquipped(); // This method is called by 'OnGotten' method.
+    public override string ToString() {
+        return this.Name;
+    }
 }

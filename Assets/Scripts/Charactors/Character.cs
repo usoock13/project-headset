@@ -38,7 +38,16 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     public float MaxStamina => maxStamina;
     public float currentStamina { get; protected set; }
-    protected float recoveringStaminaPerSecond = 20f;
+    protected float defaultRecoveringStamina = 20f;
+    public Func<Character, float> extraRecoveringStamina;
+    protected float RecoveringStaminaPerSecond { get {
+        float final = defaultRecoveringStamina;
+        Delegate[] additions = extraRecoveringStamina.GetInvocationList();
+        if(additions != null)
+            for(int i=0; i<additions.Length; i++)
+                final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
+        return final;
+    }}
     protected float staminaForDodge = 100f;
 
     public float MaxSkillGauge => maxSkillGauge;
@@ -335,7 +344,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     private void RecoverStamina() {
         if(currentStamina < maxStamina)
-            currentStamina = Mathf.Min(currentStamina + Time.deltaTime * recoveringStaminaPerSecond, maxStamina);
+            currentStamina = Mathf.Min(currentStamina + Time.deltaTime * RecoveringStaminaPerSecond, maxStamina);
         StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
     }
     

@@ -24,7 +24,7 @@ public class EquipmentManager : MonoBehaviour {
     }}
 
     [SerializeField] private Transform bonusChoisesParent;
-    [SerializeField] private Item[] bonusChoises;
+    [SerializeField] private List<Item> bonusChoises;
 
     [SerializeField] private Artifact __testItem;
 
@@ -34,7 +34,7 @@ public class EquipmentManager : MonoBehaviour {
         havingWeapons = new List<Weapon>();
         havingArtifacts = new List<Artifact>();
 
-        bonusChoises = bonusChoisesParent.GetComponentsInChildren<Item>(true);
+        bonusChoises = bonusChoisesParent.GetComponentsInChildren<Item>(true).ToList();
     }
     #if UNITY_EDITOR
     private void Update() {
@@ -61,17 +61,23 @@ public class EquipmentManager : MonoBehaviour {
         if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT)
             remainingEquipments.AddRange(remainingArtifacts);
             
-        var rand = new System.Random();
         weaponCandidates.Shuffle();
         artifactCandidates.Shuffle();
         remainingEquipments.Shuffle();
+
+        print(remainingEquipments.ItemList());
 
         candidates.AddRange(weaponCandidates.GetRange(0, Math.Min(weaponCandidates.Count, number)));
         candidates.AddRange(artifactCandidates.GetRange(0, Math.Min(artifactCandidates.Count, number)));
         candidates.AddRange(remainingEquipments.GetRange(0, Math.Min(remainingEquipments.Count, number)));
 
-        while(candidates.Count < number) {
-            candidates.Add(bonusChoises[UnityEngine.Random.Range(0, bonusChoises.Length)]);
+        bonusChoises.Shuffle();
+        candidates.Add(bonusChoises[0]);
+
+        while(candidates.Count < number) { // Fill as much item as lack into the candidate list.
+            candidates.Add(bonusChoises[0]);
+            bonusChoises.Add(bonusChoises[0]);
+            bonusChoises.RemoveAt(0);
         }
         candidates.Shuffle();
         return candidates.GetRange(0, 4).ToArray();

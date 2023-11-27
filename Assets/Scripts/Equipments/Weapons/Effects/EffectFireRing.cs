@@ -18,7 +18,6 @@ public class EffectFireRing : MonoBehaviour {
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip explosionSound;
-    [SerializeField] private AudioClip generationSound;
 
     private float reactiveCountdown = 0;
 
@@ -27,7 +26,6 @@ public class EffectFireRing : MonoBehaviour {
         trailParticle.gameObject.SetActive(true);
         particle.Play();
         trailParticle.Play();
-        audioSource.PlayOneShot(generationSound);
         isActive = true;
     }
     private void Inactive() {

@@ -10,12 +10,11 @@ public class WeaponShortbow : Weapon {
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]     {   .5f,     .5f,     .3f,      .3f,    .08f };  // 공격 간격
-    private float[] damageCoef = new float[MAX_LEVEL]   {  .30f,    .30f,    .45f,     .45f,    .45f };  // 피해계수
-    private float[] hittingDelay = new float[MAX_LEVEL] {  .25f,    .25f,    .25f,     .25f,    .25f };  // 경직 시간
-    private int[] arrowQuantity = new int[MAX_LEVEL]    {     1,       2,       2,        3,       1 };  // 투사체 수
+    private float[] interval = new float[MAX_LEVEL]     {   .5f,     .5f,     .3f,      .3f,     .3f };  // 공격 간격
+    private float[] damageCoef = new float[MAX_LEVEL]   {  .30f,    .30f,    .45f,     .45f,    .55f };  // 피해계수
+    private int[] arrowQuantity = new int[MAX_LEVEL]    {     1,       2,       2,        3,       5 };  // 투사체 수
     protected override float AttackInterval => interval[level-1];
-    public float HittingDelay => hittingDelay[level-1];
+    public float HittingDelay => 0.25f;
     public float Damage => damageCoef[level-1] * Character.Power;
     public float ArrowQuantity => arrowQuantity[level-1];
     #endregion Weapon Status
@@ -32,17 +31,6 @@ public class WeaponShortbow : Weapon {
     private void Awake() {
         effectPooler = new ObjectPooler(
             poolingObject: shortbowEffect.gameObject,
-            onInPool: (gobj) => {
-                // if(gobj.TryGetComponent<TrailRenderer>(out var tr))
-                //     tr.enabled = false;
-                //     tr.time = 0;
-            },
-            onOutPool: (gobj) => {
-                // if(gobj.TryGetComponent<TrailRenderer>(out var tr)) {
-                //     tr.enabled = true;
-                //     tr.time = 0.12f;
-                // }
-            },
             onCreated: (gobj) => {
                 var effect = gobj.GetComponent<EffectShortbow>();
                 effect.originWeapon = this;
@@ -50,7 +38,9 @@ public class WeaponShortbow : Weapon {
                     effectPooler.InPool(projectile.gameObject);
                 };
             },
-            this.transform, 100, 50
+            parent: this.transform,
+            count: 100, 
+            restoreCount: 50
         );
     }
     protected override void Attack() {

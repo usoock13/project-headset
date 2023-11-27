@@ -18,21 +18,11 @@ public class ArtifactSandbag : Artifact {
     public override string Description => 
         level switch {
             _ =>  $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
-                + $"적을 처치할 마다 이동 속도/공격 속도가 {moveSpeedPerStack[level-1] * 100}%/{attackSpeedPerStack[level-1] * 100}% 증가하여"
-                + $"최대 {moveSpeedPerStack[level-1] * 10_000}%/{attackSpeedPerStack[level-1] * 10_000}%까지 증가합니다."
-                + $"(최종 이동 속도/공격 속도({moveSpeedPerStack[level-1] * 10_000 - 30}%/{attackSpeedPerStack[level-1] * 10_000 - 40}%)</nobr>"
+                + $"적을 처치할 마다 이동 속도/공격 속도가 {moveSpeedPerStack[level] * 100}%/{attackSpeedPerStack[level] * 100}% 증가하여"
+                + $"최대 {moveSpeedPerStack[level] * 10_000}%/{attackSpeedPerStack[level] * 10_000}%까지 증가합니다."
+                + $"(최종 이동 속도/공격 속도({moveSpeedPerStack[level] * 10_000 - 30}%/{attackSpeedPerStack[level] * 10_000 - 40}%)</nobr>"
         };
     #endregion Artifact Information
-
-    private void Update() {
-        #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.V)){
-            currentStack += 100;
-            extraInformation = currentStack.ToString();
-            GameManager.instance.StageManager._StageUIManager.UpdateArtifactList();
-        }
-        #endif
-    }
 
     public override void OnEquipped() {
         base.OnEquipped();
