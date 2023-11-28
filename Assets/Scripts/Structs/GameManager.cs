@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour {
     static public GameManager instance;
@@ -12,6 +11,8 @@ public class GameManager : MonoBehaviour {
         get { return stageManager; }
         set { stageManager ??= value; }
     }
+    private UserProfileManager userProfileManager;
+    public UserProfileManager UserManager => userProfileManager;
     
     public Character Character {
         get { return stageManager.Character; }
