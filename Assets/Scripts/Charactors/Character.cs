@@ -42,7 +42,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Func<Character, float> extraRecoveringStamina;
     protected float RecoveringStaminaPerSecond { get {
         float final = defaultRecoveringStamina;
-        Delegate[] additions = extraRecoveringStamina.GetInvocationList();
+        Delegate[] additions = extraRecoveringStamina?.GetInvocationList();
         if(additions != null)
             for(int i=0; i<additions.Length; i++)
                 final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
@@ -184,6 +184,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Action<Character> onAttack;
     public Action<Character, Monster> onAttackMonster;
     public Action<Character, Monster> onKillMonster;
+    public Action<Item> onGetItem;
     #endregion Character Events
 
     #region Unity Events
@@ -192,7 +193,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         hmcSpriteRenderers = new List<(SpriteRenderer hands, SpriteRenderer front, SpriteRenderer back)>();
         InitializeStates();
     }
-    protected void Start() {
+    public void InitializeCharacter() {
         currentHp = maxHp;
         currentStamina = maxStamina;
         StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);

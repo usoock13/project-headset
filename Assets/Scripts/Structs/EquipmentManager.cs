@@ -65,8 +65,6 @@ public class EquipmentManager : MonoBehaviour {
         artifactCandidates.Shuffle();
         remainingEquipments.Shuffle();
 
-        print(remainingEquipments.ItemList());
-
         candidates.AddRange(weaponCandidates.GetRange(0, Math.Min(weaponCandidates.Count, number)));
         candidates.AddRange(artifactCandidates.GetRange(0, Math.Min(artifactCandidates.Count, number)));
         candidates.AddRange(remainingEquipments.GetRange(0, Math.Min(remainingEquipments.Count, number)));

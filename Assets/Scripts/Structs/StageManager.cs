@@ -49,6 +49,7 @@ public class StageManager : MonoBehaviour {
     }
     private void Start() {
         SpawnCharacter();
+        character.InitializeCharacter();
         InitializeUI();
         
         mainCamera.transform.SetParent(character.transform);

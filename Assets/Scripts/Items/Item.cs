@@ -30,13 +30,15 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     protected virtual void InitializeStates() {
         stateMachine.SetIntialState(inactiveState);
         droppedState.onActive += (State previous) => {
-            spriteRenderer.enabled = true;
+            // spriteRenderer.enabled = true;
+            gameObject.SetActive(true);
         };
         pickingUpState.onInactive += (State next) => {
             StopCoroutine(pickUpCoroutine);
         };
         storedState.onActive += (State previous) => {
-            spriteRenderer.enabled = false;
+            // spriteRenderer.enabled = false;
+            gameObject.SetActive(false);
         };
     }
     public virtual void Drop() {

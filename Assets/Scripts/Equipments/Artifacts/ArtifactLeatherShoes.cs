@@ -15,7 +15,7 @@ public class ArtifactLeatherShoes : Artifact {
     public override string Name => "가죽 장화";
     public override string Description => 
         level switch {
-            _ => $"<nobr>이동속도가 {extraSpeed[level]}만큼 증가합니다..</nobr>"
+            _ => $"<nobr>이동속도가 {extraSpeed[level]}만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 

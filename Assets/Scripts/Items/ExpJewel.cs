@@ -14,7 +14,6 @@ public class ExpJewel : Item {
 
     public override void Drop() {
         base.Drop();
-        gameObject.SetActive(true);
         dropCoroutine = StartCoroutine(DropCoroutine());
     }
     public override void PickUpItem(Transform getter) {

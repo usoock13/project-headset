@@ -20,6 +20,7 @@ public class ItemCollector : MonoBehaviour {
         if(other.tag == "Item"
         && other.TryGetComponent<Item>(out item)) {
             item.PickUpItem(transform);
+            GameManager.instance.Character.onGetItem?.Invoke(item);
         }
     }
 }
