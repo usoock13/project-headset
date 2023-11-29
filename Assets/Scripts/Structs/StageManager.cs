@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -32,14 +33,19 @@ public class StageManager : MonoBehaviour {
 
     [SerializeField] private ItemCollector itemCollector;
     
-    [SerializeField] private Sprite[] expSprites = new Sprite[2];
     [SerializeField] private ExpJewel expJewel;
     private ObjectPooler expPooler;
 
-    [SerializeField] private Potion potionOrigin;
-    private ObjectPooler potionPooler;
+    [SerializeField] private Meat meatOrigin;
+    private ObjectPooler MeatPooler;
+
+    [SerializeField] private Keso kesoOrigin;
+    private ObjectPooler kesoPooler;
 
     [SerializeField] private DamagePrinter damagePrinter;
+
+    public int KillScore { get; private set; } = 0;
+    public int KesoEarned { get; private set; } = 0;
 
     private void Awake() {
         if(GameManager.instance.StageManager == null)
@@ -61,7 +67,8 @@ public class StageManager : MonoBehaviour {
 
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
-        potionPooler = new ObjectPooler(potionOrigin.gameObject, null, null, this.transform, 50, 20);
+        MeatPooler = new ObjectPooler(meatOrigin.gameObject, null, null, this.transform, 50, 20);
+        kesoPooler = new ObjectPooler(kesoOrigin.gameObject, null, null, null, this.transform, 50, 20);
     }
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
@@ -76,6 +83,9 @@ public class StageManager : MonoBehaviour {
         stageUIManager.InitializeStatusUI();
     }
     public void OnCharacterLevelUp() {
+        if(character.CurrentState.Compare(character.dieState))
+            return;
+            
         LevelUpUI levelUpUI = _StageUIManager.LevelUpUI;
         IPlayerGettable[] choises = EquipmentsManager.RandomChoises(4);
         levelUpUI.SetChoise(0, choises[0]);
@@ -87,6 +97,7 @@ public class StageManager : MonoBehaviour {
     public void GameOver() {
         isGameOver = true;
         scenarioDirector.OnEndsScenario();
+        GameManager.instance.ProfileManager.IncreaseKeso(KesoEarned);
     }
     public void CreateExp(Vector2 point, int expAmount) {
         var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
@@ -96,13 +107,21 @@ public class StageManager : MonoBehaviour {
         }
     }
     public void CreatePotion(Vector2 point) {
-        GameObject instance = potionPooler.OutPool(point, Quaternion.identity);
-        if(instance.TryGetComponent(out Potion potion)) {
+        GameObject instance = MeatPooler.OutPool(point, Quaternion.identity);
+        if(instance.TryGetComponent(out Meat potion)) {
             potion.Drop();
+        }
+    }
+    public void CreateKeso(Vector2 point, int kesoAmount) {
+        GameObject instan = kesoPooler.OutPool(point, Quaternion.identity);
+        if(instan.TryGetComponent(out Keso keso)) {
+            keso.Amount = kesoAmount;
+            keso.Drop();
         }
     }
     public void OnMonsterDie(Monster monster) {
         character.OnKillMonster(monster);
+        IncreaseKillScore();
     }
     public void PauseGame(bool pause) {
         Time.timeScale = pause ? 0 : 1;
@@ -118,5 +137,13 @@ public class StageManager : MonoBehaviour {
     public void PrintDamageNumber(Vector2 point, string number, Color color) {
         Vector2 pos = point + new Vector2(UnityEngine.Random.Range(-.3f, .3f), 0);
         damagePrinter.PrintDamage(pos, number, color);
+    }
+    private void IncreaseKillScore() {
+        KillScore ++;
+        stageUIManager.UpdateProgressingBoard();
+    }
+    public void IncreaseKesoEarned(int amount) {
+        KesoEarned += amount;
+        stageUIManager.UpdateProgressingBoard();
     }
 }

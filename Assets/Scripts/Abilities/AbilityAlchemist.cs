@@ -8,12 +8,14 @@ public class AbilityAlchemist : Ability {
     public override string Description => "<nbr>케소를 획득하면 금액에 비례하여 경험치를 획득합니다.</nbr>";
 
     public override void OnTaken(Character character) {
-        
+        character.onGetItem += OnGetItem;
     }
     public override void OnReleased(Character character) {
-        
+        character.onGetItem -= OnGetItem;
     }
-    private float GetBonusExp(Item item) {
-        throw new System.NotImplementedException();
+    private void OnGetItem(Item item) {
+        if(item.TryGetComponent<Keso>(out var keso)) {
+            GameManager.instance.Character.GetExp((int) (keso.Amount * 0.2f));
+        }
     }
 }

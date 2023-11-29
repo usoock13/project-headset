@@ -72,7 +72,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         set { 
             itemCollector = value;
             itemCollector.transform.SetParent(null);
-            itemCollector.target = this.transform;
+            itemCollector.owner = this.transform;
         }
     }
 
@@ -230,7 +230,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #region Initialize Die State
         dieState.onActive += (State previous) => {
             stateMachine.isMuted = true;
-            itemCollector.enabled = false;
+            itemCollector.gameObject.SetActive(false);
         };
         #endregion Initialize Die State
 
@@ -368,7 +368,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
 
     public void TakeAttack(Monster origin, float amount) {
-        if(CanBlockAttack(origin, amount))
+        if(CurrentState.Compare(dieState)
+        || CanBlockAttack(origin, amount))
             return;
         TakeDamage(amount);
         onTakeAttack?.Invoke(this, origin, amount);
@@ -394,9 +395,13 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     public void TakeHittingDelay(float amount) {
         throw new NotImplementedException();
+        if(CurrentState.Compare(dieState))
+            return;
     }
     public void TakeForce(Vector2 force, float duration=.25f) {
         throw new NotImplementedException();
+        if(CurrentState.Compare(dieState))
+            return;
     }
     public void TakeHeal(float amount) {
         currentHp = Mathf.Min(currentHp + amount, maxHp);

@@ -11,7 +11,7 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     public abstract string Description { get; }
 
     protected StateMachine stateMachine;
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     #region States
     protected State inactiveState = new State("Inactive");
@@ -30,14 +30,12 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     protected virtual void InitializeStates() {
         stateMachine.SetIntialState(inactiveState);
         droppedState.onActive += (State previous) => {
-            // spriteRenderer.enabled = true;
             gameObject.SetActive(true);
         };
         pickingUpState.onInactive += (State next) => {
             StopCoroutine(pickUpCoroutine);
         };
         storedState.onActive += (State previous) => {
-            // spriteRenderer.enabled = false;
             gameObject.SetActive(false);
         };
     }
@@ -62,11 +60,14 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     }
     public virtual void OnGotten() {
         onGetItem?.Invoke(this);
+        GameManager.instance.Character.onGetItem?.Invoke(this);
     }
     protected virtual void OnTriggerEnter2D(Collider2D other) {
         if(stateMachine.Compare(droppedState)
         || stateMachine.Compare(pickingUpState)) {
-            if(other.TryGetComponent<Character>(out _)) {
+            if(other.TryGetComponent<Character>(out var ch)) {
+                if(ch.CurrentState.Compare(ch.dieState))
+                    return;
                 OnGotten();
                 stateMachine.ChangeState(storedState);
             }

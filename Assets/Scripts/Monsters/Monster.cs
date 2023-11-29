@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -60,6 +59,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     public List<Attachment> H => havingAttachment;
 
     [SerializeField] protected int givingExp = 10;
+    [SerializeField] protected int givingKeso = 20;
 
     private Coroutine takeHittingDelayCoroutine;
     private Coroutine updateTargetDirectionCoroutine;
@@ -139,6 +139,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         _StageManager.OnMonsterDie(this);
         DropExp();
         DropPotion();
+        DropKeso();
     }
     protected void DropExp() {
         _StageManager.CreateExp(transform.position, givingExp);
@@ -148,6 +149,14 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         float next = UnityEngine.Random.Range(0f, 1f);
         if(next < ratio)
             _StageManager.CreatePotion(transform.position);
+    }
+    protected void DropKeso() {
+        // float ratio = 0.02f;
+        float ratio = 1.00f;
+        float next = UnityEngine.Random.Range(0f, 1f);
+        int amount = (int)(givingKeso * UnityEngine.Random.Range(0.8f, 1.2f));
+        if(next < ratio)
+            _StageManager.CreateKeso(transform.position, amount);
     }
     protected abstract void InitializeStates();
     private IEnumerator UpdateTargetPoint() {

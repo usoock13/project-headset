@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour {
         get { return stageManager; }
         set { stageManager ??= value; }
     }
-    private UserProfileManager userProfileManager;
-    public UserProfileManager UserManager => userProfileManager;
+    private UserProfileManager _userProfileManager;
+    public UserProfileManager ProfileManager => _userProfileManager;
     
     public Character Character {
         get { return stageManager.Character; }
@@ -35,5 +35,8 @@ public class GameManager : MonoBehaviour {
         else
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+        if(_userProfileManager == null)
+            _userProfileManager = new UserProfileManager();
     }
 }

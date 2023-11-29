@@ -2,6 +2,8 @@ namespace Utility {
     using System.Collections.Generic;
     static class List {
         static public void Shuffle<T>(this List<T> list) {
+            if(list.Count == 0)
+                return;
             int c = list.Count;
             var rand = new System.Random();
             for(int i=c; i>0; i--) {
