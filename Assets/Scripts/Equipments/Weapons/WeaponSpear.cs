@@ -31,14 +31,8 @@ public class WeaponSpear : Weapon {
     #endregion Weapon Information
 
     private void Awake() {
-        effectPooler = new ObjectPooler(spearEffect.gameObject, (GameObject instance) => {
-            var effect = instance.GetComponent<EffectSpear>();
-            effect.originWeapon = this;
-        }, null, this.transform, 10, 5);
-        sideEffectPooler = new ObjectPooler(sideSpearEffect.gameObject, (GameObject instance) => {
-            var effect = instance.GetComponent<EffectSideSpear>();
-            effect.originWeapon = this;
-        }, null, this.transform, 10, 5);
+        effectPooler = new ObjectPooler(poolingObject: spearEffect.gameObject, parent: this.transform);
+        sideEffectPooler = new ObjectPooler(poolingObject: sideSpearEffect.gameObject, parent: this.transform);
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());

@@ -26,7 +26,7 @@ public class EquipmentManager : MonoBehaviour {
     [SerializeField] private Transform bonusChoisesParent;
     [SerializeField] private List<Item> bonusChoises;
 
-    [SerializeField] private Artifact __testItem;
+    [SerializeField] private Weapon __testItem;
 
     private void Awake() {
         remainingWeapons = transform.GetComponentsInChildren<Weapon>(true).ToList();

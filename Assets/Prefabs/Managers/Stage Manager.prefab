@@ -1216,6 +1216,7 @@ Transform:
   - {fileID: 1518991961312277271}
   - {fileID: 1518991962535433871}
   - {fileID: 1518991961947658285}
+  - {fileID: 4163894342060826839}
   m_Father: {fileID: 645271449}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3707,7 +3708,7 @@ MonoBehaviour:
   characterPortrait: {fileID: 652292253}
   hpSlider: {fileID: 0}
   staminaSlider: {fileID: 0}
-  skillGaugeSlider: {fileID: 2112179100}
+  spSlider: {fileID: 2112179100}
   expSlider: {fileID: 1363070211}
   levelTexts:
   - {fileID: 1396017097}
@@ -4580,7 +4581,7 @@ GameObject:
   - component: {fileID: 2112179099}
   - component: {fileID: 2112179100}
   m_Layer: 0
-  m_Name: '[Slider] Skill Gauge'
+  m_Name: '[Slider] SP Slider'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6126,7 +6127,7 @@ MonoBehaviour:
   __testCharacters:
   - {fileID: 1896202708467878094, guid: 4a641fc13db6eec47a8678338b3945f1, type: 3}
   - {fileID: 1854368909079229216, guid: 4d4647aa93d35a24eb2558635ce3f30e, type: 3}
-  - {fileID: 6215241322940970394, guid: 9d6a242972dc0224f8d1a9cdab8da8f6, type: 3}
+  - {fileID: 1679132990418732944, guid: 99d27420e93610547883acc86984455b, type: 3}
   scenarioDirector: {fileID: 2011709208}
   equipmentsManager: {fileID: 645271450}
   stageUIManager: {fileID: 1528812583}
@@ -13973,6 +13974,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3232903881723159892, guid: 99205e9800d4c9b4980e7ab0ad681d39, type: 3}
   m_PrefabInstance: {fileID: 1518991962623537876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1518991962741163395
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 618784043}
+    m_Modifications:
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159893, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_Name
+      value: '[Weapon] Cold Spear'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232903881723159893, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+--- !u!4 &4163894342060826839 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3232903881723159892, guid: 05ec6f39fbe32474aaabce3343e69ff7, type: 3}
+  m_PrefabInstance: {fileID: 1518991962741163395}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1518991963025181244
 PrefabInstance:

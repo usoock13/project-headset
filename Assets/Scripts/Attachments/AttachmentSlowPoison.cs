@@ -23,7 +23,7 @@ public class AttachmentSlowPoison : Attachment {
 
         #region Monster Target Implements
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
-            targetMonster.speedModifier += GetSpeedModifier;
+            targetMonster.AddSpeedModifier(GetSpeedModifier);
             targetMonster.GetComponent<SpriteColorManager>()?.AddColor(attachedColor);
             damageCoroutine = StartCoroutine(DamageCoroutine(targetMonster));
         }
@@ -33,7 +33,7 @@ public class AttachmentSlowPoison : Attachment {
         base.OnDetached(target);
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
             targetMonster.GetComponent<SpriteColorManager>()?.RemoveColor(attachedColor);
-            targetMonster.speedModifier -= GetSpeedModifier;
+            targetMonster.RemoveSpeedModifier(GetSpeedModifier);
         }
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);

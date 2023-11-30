@@ -7,7 +7,7 @@ public class DamagePrinter : MonoBehaviour {
     private ObjectPooler numbersPooler;
     
     private void Start() {
-        numbersPooler = new ObjectPooler(damageNumber, null, (number) => { number.transform.SetParent(canvas); }, canvas.transform, 100, 25);
+        numbersPooler = new ObjectPooler(damageNumber, null, (number) => { number.transform.SetParent(canvas); }, parent: canvas.transform);
     }
     public void PrintDamage(Vector2 point, string number, Color color) {
         GameObject instance = numbersPooler.OutPool(point, Quaternion.identity);

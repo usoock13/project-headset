@@ -38,10 +38,7 @@ public class WeaponGreatSword : Weapon {
     #endregion Weapon Information
 
     private void Awake() {
-        effectPooler = new ObjectPooler(swordEffect.gameObject, (GameObject instance) => {
-            var effect = instance.GetComponent<EffectGreatSword>();
-            effect.originWeapon = this;
-        }, null, this.transform, 10, 5);
+        effectPooler = new ObjectPooler(poolingObject: swordEffect.gameObject, parent: this.transform);
     }
     protected override void Attack() {
         Vector3 effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;

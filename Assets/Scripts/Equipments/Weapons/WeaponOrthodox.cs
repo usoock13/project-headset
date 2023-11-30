@@ -36,18 +36,9 @@ public class WeaponOrthodox : Weapon {
     #endregion Weapon Information
 
     private void Awake() {
-        onePunchEffectPooler = new ObjectPooler(onePunchEffect.gameObject, (GameObject instance) => {
-            var effect = instance.GetComponent<EffectOnePunch>();
-            effect.originWeapon = this;
-        }, null, this.transform, 10, 5);
-        twoPunchEffectPooler = new ObjectPooler(twoPunchEffect.gameObject, (GameObject instance) => {
-            var effect = instance.GetComponent<EffectTwoPunch>();
-            effect.originWeapon = this;
-        }, null, this.transform, 10, 5);
-        straightPunchEffectPooler = new ObjectPooler(straightPunchEffect.gameObject, (GameObject instance) => {
-            var effect = instance.GetComponent<EffectStraightPunch>();
-            effect.originWeapon = this;
-        }, null, this.transform, 10, 5);
+        onePunchEffectPooler = new ObjectPooler(poolingObject: onePunchEffect.gameObject, parent: this.transform);
+        twoPunchEffectPooler = new ObjectPooler(poolingObject: twoPunchEffect.gameObject, parent: this.transform);
+        straightPunchEffectPooler = new ObjectPooler(poolingObject: straightPunchEffect.gameObject, parent: this.transform);
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());

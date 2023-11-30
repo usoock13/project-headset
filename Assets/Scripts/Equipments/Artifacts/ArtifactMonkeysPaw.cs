@@ -27,7 +27,7 @@ public class ArtifactMonkeysPaw : Artifact {
 
     public override void OnEquipped() {
         base.OnEquipped();
-        explosionPooler = new ObjectPooler(explosionOrigin.gameObject, null, null, this.transform, 50, 10);
+        explosionPooler = new ObjectPooler(poolingObject: explosionOrigin.gameObject, parent: this.transform);
         _Character.onKillMonster += GenerateBoom;
     }
     private void GenerateBoom(Character character, Monster deadMonster) {

@@ -27,7 +27,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] new protected Rigidbody2D rigidbody2D;
 
     [SerializeField] protected float defaultMoveSpeed = 5f;
-    public Func<Monster, float> speedModifier;
+    private Func<Monster, float> speedModifier;
     public float MoveSpeed { get {
         float final = defaultMoveSpeed;
         Delegate[] m = speedModifier?.GetInvocationList();
@@ -194,5 +194,13 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
             havingAttachment[i].OnDetached(this);
         }
         havingAttachment = new List<Attachment>();
+    }
+    public void AddSpeedModifier(Func<Monster, float> modifier) {
+        this.speedModifier += modifier;
+        spriteAnimator.Animator.SetFloat("Moving Scale", MoveSpeed / defaultMoveSpeed);
+    }
+    public void RemoveSpeedModifier(Func<Monster, float> modifier) {
+        this.speedModifier -= modifier;
+        spriteAnimator.Animator.SetFloat("Moving Scale", MoveSpeed / defaultMoveSpeed);
     }
 }

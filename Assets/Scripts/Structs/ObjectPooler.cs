@@ -15,13 +15,13 @@ public class ObjectPooler {
     public Action<GameObject> onOutPool;
     public Action<GameObject> onCreated;
     
-    public ObjectPooler(GameObject poolingObject, Action<GameObject> onInPool=null, Action<GameObject> onOutPool=null, Transform parent=null, int count=10, int restoreCount=5) {
-        this.poolingObject = poolingObject;
-        this.onInPool = onInPool;
-        this.onOutPool = onOutPool;
-        this.parent = parent;
-        Store(count);
-    }
+    // public ObjectPooler(GameObject poolingObject, Action<GameObject> onInPool=null, Action<GameObject> onOutPool=null, Transform parent=null, int count=10, int restoreCount=5) {
+    //     this.poolingObject = poolingObject;
+    //     this.onInPool = onInPool;
+    //     this.onOutPool = onOutPool;
+    //     this.parent = parent;
+    //     Store(count);
+    // }
     public ObjectPooler(GameObject poolingObject, Action<GameObject> onInPool=null, Action<GameObject> onOutPool=null, Action<GameObject> onCreated=null, Transform parent=null, int count=10, int restoreCount=5) {
         this.poolingObject = poolingObject;
         this.onInPool = onInPool;

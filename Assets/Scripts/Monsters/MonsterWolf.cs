@@ -7,9 +7,9 @@ public class MonsterWolf : Monster {
 
     public override string MonsterType => "Monster Wolf";
 
-    private const string ANIMATION_CHASE = "Wolf Chase";
-    private const string ANIMATION_HIT = "Wolf Hit";
-    private const string ANIMATION_DIE = "Wolf Die";
+    private const string ANIMATION_CHASE = "Chase";
+    private const string ANIMATION_HIT = "Hit";
+    private const string ANIMATION_DIE = "Die";
 
     private Coroutine takeHittingDelayCoroutine;
     private Coroutine dieCoroutine;

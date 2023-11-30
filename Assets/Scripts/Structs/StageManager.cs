@@ -66,9 +66,9 @@ public class StageManager : MonoBehaviour {
         // Set the object that get item to chase a character.
 
         scenarioDirector ??= FindObjectOfType<ScenarioDirector>();
-        expPooler = new ObjectPooler(expJewel.gameObject, null, null, this.transform, 100, 50);
-        MeatPooler = new ObjectPooler(meatOrigin.gameObject, null, null, this.transform, 50, 20);
-        kesoPooler = new ObjectPooler(kesoOrigin.gameObject, null, null, null, this.transform, 50, 20);
+        expPooler = new ObjectPooler(expJewel.gameObject, null, null, parent: this.transform);
+        MeatPooler = new ObjectPooler(meatOrigin.gameObject, null, null, parent: this.transform);
+        kesoPooler = new ObjectPooler(kesoOrigin.gameObject, null, null, null, parent: this.transform);
     }
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;

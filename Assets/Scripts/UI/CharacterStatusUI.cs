@@ -7,7 +7,7 @@ public class CharacterStatusUI : MonoBehaviour {
     [SerializeField] private Image characterPortrait;
     public Slider hpSlider;
     public Slider staminaSlider;
-    public Slider skillGaugeSlider;
+    public Slider spSlider;
     public Slider expSlider;
     [SerializeField] private TMP_Text[] levelTexts;
     
@@ -19,6 +19,9 @@ public class CharacterStatusUI : MonoBehaviour {
     }
     public void UpdateExpSlider(float ratio) {
         expSlider.value = ratio;
+    }
+    public void UpdateSpSlider(float ratio) {
+        spSlider.value = ratio;
     }
     public void UpdateLevel(int level) {
         foreach(TMP_Text t in levelTexts) {

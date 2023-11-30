@@ -37,7 +37,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public float currentHp { get; protected set; }
 
     public float MaxStamina => maxStamina;
-    public float currentStamina { get; protected set; }
+    public float currentStamina { get; protected set; } = 0;
     protected float defaultRecoveringStamina = 20f;
     public Func<Character, float> extraRecoveringStamina;
     protected float RecoveringStaminaPerSecond { get {
@@ -50,9 +50,18 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }}
     protected float staminaForDodge = 100f;
 
-    public float MaxSkillGauge => maxSkillGauge;
-    public float currentSkillGauge { get; protected set; }
-    protected float recoveringSkillGaugePerSecond = 1f;
+    public float MaxSp => maxSp;
+    public float currentSP { get; protected set; } = 0;
+    protected float defaultRecoverimgSP = 1f;
+    public Func<Character, float> extraRecoveringSp;
+    protected float RecoveringSpPerSecond { get {
+        float final = defaultRecoverimgSP;
+        Delegate[] additions = extraRecoveringSp?.GetInvocationList();
+        if(additions != null)
+            for(int i=0; i<additions.Length; i++)
+                final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
+        return final;
+    }}
 
     [HideInInspector] public int levelRewardCount = 0;
 
@@ -167,7 +176,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [Header("Individual Properties")]
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float maxStamina = 100;
-    [SerializeField] protected float maxSkillGauge = 100;
+    [SerializeField] protected float maxSp = 100;
     [SerializeField] protected float statusDefaultPower = 10;
     [SerializeField] protected float statusDefaultMoveSpeed = 2.5f;
     [SerializeField] protected float statusDefaultArmor = 10;
@@ -207,6 +216,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #endif
         /* << FOR TEST */
         RecoverStamina();
+        RecoverSkillGauge();
     }
     #endregion Unity Events
 
@@ -299,12 +309,13 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
     
     public void DodgeToward() {
-        if(currentStamina < staminaForDodge)
+        if(moveDirection == Vector2.zero
+        || currentStamina < staminaForDodge)
             return;
         if(dodgeCoroutine != null)
             StopCoroutine(dodgeCoroutine);
         ConsumeStamina(staminaForDodge);
-        StartCoroutine(DodgeCoroutine());
+            StartCoroutine(DodgeCoroutine());
     }
     private IEnumerator DodgeCoroutine() {
         stateMachine.ChangeState(dodgeState);
@@ -347,6 +358,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(currentStamina < maxStamina)
             currentStamina = Mathf.Min(currentStamina + Time.deltaTime * RecoveringStaminaPerSecond, maxStamina);
         StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
+    }
+    private void RecoverSkillGauge() {
+        if(currentSP < maxSp)
+            currentSP = Mathf.Min(currentSP + Time.deltaTime * RecoveringSpPerSecond, maxStamina);
+        StatusUI.UpdateSpSlider(currentSP / maxSp);
     }
     
     public void GetExp(int amount) {

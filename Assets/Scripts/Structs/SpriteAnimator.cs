@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class SpriteAnimator : MonoBehaviour {
     private Animator _animator;
-    private Animator Animator {
+    public Animator Animator {
         get {
             _animator ??= GetComponent<Animator>();
             return _animator;

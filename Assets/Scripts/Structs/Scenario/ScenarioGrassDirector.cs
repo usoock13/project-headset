@@ -22,10 +22,9 @@ public class ScenarioGrassDirector : ScenarioDirector {
                 monsterWolf.MonsterType,
                 new ObjectPooler(
                     monsterWolf.gameObject,
-                    null,
-                    null,
-                    this.transform,
-                    10, 20
+                    parent: this.transform,
+                    count: 10,
+                    restoreCount: 20
                 )
             },
         };
