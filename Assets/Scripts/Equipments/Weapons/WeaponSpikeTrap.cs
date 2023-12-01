@@ -10,9 +10,11 @@ public class WeaponSpikeTrap : Weapon {
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.25f,   0.30f,   0.35f,   0.40f,   0.45f,  }; // 피해 계수
-    private float[] staticDamage = new float[MAX_LEVEL]     {     30f,     40f,     50f,     60f,     80f,  }; // 고정 피해량
+    private float[] staticDamage = new float[MAX_LEVEL]     {     10f,     13f,     16f,     19f,     22f,  }; // 고정 피해량
     private float[] trapScale = new float[MAX_LEVEL]        {      1f,      1f,      1f,    1.2f,    1.5f,  }; // 덫 크기
-    protected override float AttackInterval => 0.5f;
+    protected override float AttackInterval => 1f;
+    private float countdownDuringDodge = 0;
+    private float intervalDuringDodge = .1f;
 
     public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     public float Duration => 10f;
@@ -42,6 +44,25 @@ public class WeaponSpikeTrap : Weapon {
             Attack();
         };
     }
+    public override void OnGotten() {
+        base.OnGotten();
+        _Character.dodgeState.onActive += (prev) => {
+            if(level >= 4)
+                StartCoroutine(InstallationDuringDodge());
+        };
+    }
+    private IEnumerator InstallationDuringDodge() {
+        Attack();
+        while(_Character.CurrentState.Compare(_Character.dodgeState)) {
+            float scale = _Character.MoveSpeed / _Character.DefaultMoveSpeed;
+            countdownDuringDodge += Time.deltaTime * scale;
+            if(countdownDuringDodge >= intervalDuringDodge) {
+                countdownDuringDodge -= intervalDuringDodge;
+                Attack();
+            }
+            yield return null;
+        }
+    }
     protected void Awake() {
         EffectPooler = new ObjectPooler(
             poolingObject: trapEffect.gameObject,
@@ -51,7 +72,7 @@ public class WeaponSpikeTrap : Weapon {
         );
     }
     protected override void Attack() {
-        var instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
+        var instance = EffectPooler.OutPool(transform.position, Quaternion.identity);
         instance.transform.localScale = Vector3.one * TrapScale;
         _Character.OnAttack();
     }

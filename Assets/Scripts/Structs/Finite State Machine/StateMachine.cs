@@ -25,9 +25,9 @@ public class StateMachine : MonoBehaviour {
             Debug.LogError($"StateMachine on '{gameObject.name}' has not any 'currentState'. Please set initial 'currentState' with SetInitialState(State state).");
         } else {
             currentState?.onInactive?.Invoke(nextState);
-            nextState?.onActive?.Invoke(currentState);
             this.nextState = nextState;
             currentState = nextState;
+            nextState?.onActive?.Invoke(currentState);
         }
     }
     public bool Compare(State target) {

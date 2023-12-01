@@ -194,6 +194,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Action<Character, Monster> onAttackMonster;
     public Action<Character, Monster> onKillMonster;
     public Action<Item> onGetItem;
+    public Action<Character> onDodge;
     #endregion Character Events
 
     #region Unity Events
@@ -235,6 +236,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #region Initialize Dodge State
         #endregion Initialize Dodge State
         dodgeState.onActive += (prev) => {
+            onDodge?.Invoke(this);
             dodgeParticle.Play();
         };
         #region Initialize Die State
@@ -324,10 +326,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         Vector2 step;
         Vector2 dir = moveDirection;
         while (offset < 1) {
-            offset = Mathf.Min(offset + Time.deltaTime/dodgeDuration, 1);
+            float scale = MoveSpeed / DefaultMoveSpeed; // Including move speed bonus 
+            offset = Mathf.Min(offset + Time.deltaTime/dodgeDuration * scale, 1);
             t = Mathf.Sin(Mathf.PI * offset * 0.5f);
             step = Vector2.Lerp(Vector2.zero, dir.normalized, 1-t) * dodgePower * (Time.deltaTime/dodgeDuration);
-            movement.MoveToward(step);
+            movement.MoveToward(step * scale);
             yield return null;
         }
         stateMachine.ChangeState(BasicState);
