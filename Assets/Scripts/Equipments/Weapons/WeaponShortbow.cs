@@ -15,7 +15,7 @@ public class WeaponShortbow : Weapon {
     private int[] arrowQuantity = new int[MAX_LEVEL]    {     1,       2,       2,        3,       5 };  // 투사체 수
     protected override float AttackInterval => interval[level-1];
     public float HittingDelay => 0.25f;
-    public float Damage => damageCoef[level-1] * Character.Power;
+    public float Damage => damageCoef[level-1] * _Character.Power;
     public float ArrowQuantity => arrowQuantity[level-1];
     #endregion Weapon Status
 
@@ -45,10 +45,10 @@ public class WeaponShortbow : Weapon {
     }
     protected override void Attack() {
         for(int i=0; i<ArrowQuantity; i++) {
-            GameObject arrowInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+            GameObject arrowInstance = effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
             float aimJitter = UnityEngine.Random.Range(-7f, 7f);
             arrowInstance.transform.Rotate(Vector3.forward, aimJitter);
-            Character.OnAttack();
+            _Character.OnAttack();
         }
     }
     #endregion Weapon Information

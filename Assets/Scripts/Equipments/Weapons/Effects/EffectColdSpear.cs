@@ -51,7 +51,6 @@ public class EffectColdSpear : EffectProjectile {
     private void AttackArea() {
         Vector2 center = (Vector2)(transform.position + (Vector3)(transform.localToWorldMatrix * damageAreaBounds.center));
         Collider2D[] inners = Physics2D.OverlapCircleAll(center, damageAreaBounds.radius, targetLayer);
-        print(inners.Length);
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster target)
             && target.isArrive) {

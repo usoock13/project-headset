@@ -15,7 +15,7 @@ public class WeaponRifle : Weapon {
     private int[] arrowQuantity = new int[MAX_LEVEL]    {  1,        1,     1,       1,     3 };  // 투사체 수
     protected override float AttackInterval => interval[level-1];
     public float HittingDelay => hittingDelay[level-1];
-    public float Damage => damageCoef[level-1] * Character.Power;
+    public float Damage => damageCoef[level-1] * _Character.Power;
     public float ArrowQuantity => arrowQuantity[level-1];
     #endregion Weapon Status
 
@@ -42,8 +42,8 @@ public class WeaponRifle : Weapon {
         );
     }
     protected override void Attack() {
-        GameObject bulletInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-        Character.OnAttack();
+        GameObject bulletInstance = effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
+        _Character.OnAttack();
     }
     #endregion Weapon Information
 }

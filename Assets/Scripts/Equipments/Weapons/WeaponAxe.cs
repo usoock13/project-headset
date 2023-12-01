@@ -12,7 +12,7 @@ public class WeaponAxe : Weapon {
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.9f,    1.2f,    1.2f,    1.7f,    1.7f,  }; // 피해계수
     private float[] projectileScale = new float[MAX_LEVEL]  {   1.0f,    1.0f,    1.5f,    1.5f,    2.0f,  };
     protected override float AttackInterval => interval[level-1];
-    public float Damage => damageCoef[level-1] * Character.Power;
+    public float Damage => damageCoef[level-1] * _Character.Power;
     public float ProjectileScale => projectileScale[level-1];
     #endregion Weapon Status
 
@@ -45,7 +45,7 @@ public class WeaponAxe : Weapon {
             parent: this.transform);
     }
     protected override void Attack() {
-        effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
-        Character.OnAttack();
+        effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
+        _Character.OnAttack();
     }
 }

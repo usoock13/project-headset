@@ -14,8 +14,8 @@ public class WeaponSpear : Weapon {
     private float[] damageCoef = new float[MAX_LEVEL]       {   1.0f,    1.3f,    1.3f,    1.7f,    1.7f,  }; // 피해계수
     private float[] sideDamageCoef = new float[MAX_LEVEL]   {  0.45f,   0.45f,   0.45f,   0.45f,   0.45f,  }; // 추가 피해계수
     protected override float AttackInterval => interval[level-1];
-    public float Damage => damageCoef[level-1] * Character.Power;
-    public float SideDamage => sideDamageCoef[level-1] * Character.Power;
+    public float Damage => damageCoef[level-1] * _Character.Power;
+    public float SideDamage => sideDamageCoef[level-1] * _Character.Power;
     #endregion Weapon Status
 
     #region Weapon Information
@@ -36,11 +36,11 @@ public class WeaponSpear : Weapon {
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());
-        Character.OnAttack();
+        _Character.OnAttack();
     }
     private IEnumerator AttackCoroutine() {
-        Vector3 effectPoint = Character.attackArrow.position;
-        Quaternion rot = Character.attackArrow.rotation;
+        Vector3 effectPoint = _Character.attackArrow.position;
+        Quaternion rot = _Character.attackArrow.rotation;
         if(level >= 5) {
             GameObject sideEffect;
             

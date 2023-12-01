@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class EffectMonkeyExplosion : MonoBehaviour {
-    [SerializeField] private ArtifactMonkeysPaw originArtifact;
+    [SerializeField] private ArtifactHandOfGlory originArtifact;
     [SerializeField] private float radius = 2f;
 
     [SerializeField] private LayerMask monsterLayer;

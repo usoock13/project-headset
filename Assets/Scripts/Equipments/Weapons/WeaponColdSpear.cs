@@ -17,7 +17,7 @@ public class WeaponColdSpear : Weapon {
     private float[] areaScale = new float[MAX_LEVEL]        {     1f,     1f,     1f,   1.2f,   1.5f,  }; // 폭발 범위
     protected override float AttackInterval => interval[level-1];
 
-    public float Damage => damageCoef[level-1] * Character.Power + staticDamage[level-1];
+    public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     public float Duration => freezingTime[level-1];
     #endregion Weapon Status
 
@@ -44,7 +44,7 @@ public class WeaponColdSpear : Weapon {
         );
     }
     protected override void Attack() {
-        var instance = EffectPooler.OutPool(transform.position, Character.attackArrow.rotation);
-        Character.OnAttack();
+        var instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
+        _Character.OnAttack();
     }
 }

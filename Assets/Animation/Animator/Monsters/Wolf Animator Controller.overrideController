@@ -7,5 +7,11 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wolf Animator Controller
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 9c6b39f86b632bc4e92ff4fa7831876b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3beb5ecaeb39acf42a4627a2717f814d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 69a1793a05a4c5441909b52c6f58aae9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ce422af248184054ea620ab6a1244d53, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 208cdf117cac37644bb4f89628c3991f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6854bb3d723ba6340bac309aa5baa9e5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 414443440a0fb7d4688843da6ef25d8d, type: 2}

@@ -19,9 +19,9 @@ public class WeaponOrthodox : Weapon {
     private float[] damageOfTwoScale = new float[MAX_LEVEL]         { 0.55f,   0.65f,   0.75f,   0.85f,   0.95f }; // 투 펀치 피해계수
     private float[] damageOfStraightScale = new float[MAX_LEVEL]    {  1.5f,    1.5f,    1.5f,    1.5f,    1.5f }; // 스트레이트 피해계수
     protected override float AttackInterval => interval[level-1];
-    public float DamageOfOne => damageOfOneScale[level-1] * Character.Power;
-    public float DamageOfTwo => damageOfTwoScale[level-1] * Character.Power;
-    public float DamageOfStraight => damageOfStraightScale[level-1] * Character.Power;
+    public float DamageOfOne => damageOfOneScale[level-1] * _Character.Power;
+    public float DamageOfTwo => damageOfTwoScale[level-1] * _Character.Power;
+    public float DamageOfStraight => damageOfStraightScale[level-1] * _Character.Power;
     #endregion Weapon Status
 
     #region Weapon Information
@@ -42,23 +42,23 @@ public class WeaponOrthodox : Weapon {
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());
-        Character.OnAttack();
+        _Character.OnAttack();
     }
     private IEnumerator AttackCoroutine() {
-        Vector3 effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
-        GameObject instance = onePunchEffectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
+        Vector3 effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
+        GameObject instance = onePunchEffectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance, onePunchEffectPooler));
 
         yield return new WaitForSeconds(.15f);
 
-        effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
-        instance = twoPunchEffectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
+        effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
+        instance = twoPunchEffectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance, twoPunchEffectPooler));
 
         if(level >= 5) {
             yield return new WaitForSeconds(.15f);
-            effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
-            instance = straightPunchEffectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
+            effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
+            instance = straightPunchEffectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
             StartCoroutine(InPoolEffect(5f, instance, straightPunchEffectPooler));
         }
     }

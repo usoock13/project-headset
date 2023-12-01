@@ -55,13 +55,13 @@ public class WeaponMaliciousFlask : Weapon {
         pooler.InPool(effect);
     }
     protected override void Attack() {
-        GameObject flaskInstance = effectPooler.OutPool(Character.attackArrow.position, Character.attackArrow.rotation);
+        GameObject flaskInstance = effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
         var effect = flaskInstance.GetComponent<EffectMaliciousFlask>();
         effect.originWeapon = this;
-        Character.OnAttack();
+        _Character.OnAttack();
     }
     public float GetDamage(int level) {
-        return staticDamage[level-1] + (Character.Power * damageCoef[level-1]);
+        return staticDamage[level-1] + (_Character.Power * damageCoef[level-1]);
     }
     public float GetSlowAmount(int level) {
         return slowAmount[level-1];

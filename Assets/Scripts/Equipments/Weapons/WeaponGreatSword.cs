@@ -14,7 +14,7 @@ public class WeaponGreatSword : Weapon {
     private float[] damageCoef = new float[MAX_LEVEL]   {  1f,   1.5f,   1.5f,      2f,   4.5f }; // 피해계수
     private float[] areaScale = new float[MAX_LEVEL]    {  1f,     1f,     1f,   1.25f,   1.5f }; // 공격 범위 축척
     protected override float AttackInterval => interval[level-1];
-    public float Damage => damageCoef[level-1] * Character.Power;
+    public float Damage => damageCoef[level-1] * _Character.Power;
     public float AreaScale => areaScale[level-1];
     #endregion Weapon Status
 
@@ -41,10 +41,10 @@ public class WeaponGreatSword : Weapon {
         effectPooler = new ObjectPooler(poolingObject: swordEffect.gameObject, parent: this.transform);
     }
     protected override void Attack() {
-        Vector3 effectPoint = Character.attackArrow.position + Character.attackArrow.forward*attackRange;
-        GameObject instance = effectPooler.OutPool(effectPoint, Character.attackArrow.rotation);
+        Vector3 effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
+        GameObject instance = effectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
         StartCoroutine(InPoolEffect(5f, instance));
-        Character.OnAttack();
+        _Character.OnAttack();
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect) {
         yield return new WaitForSeconds(delay);

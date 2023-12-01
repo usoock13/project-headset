@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 public abstract class Weapon : Equipment {
-    protected Character Character { get { return GameManager.instance.Character; } }
+    protected Character _Character { get { return GameManager.instance.Character; } }
     
     protected abstract float AttackInterval { get; }
     protected float currentTime = 0;
     
     protected virtual void Update() {
         if(currentTime > 0) {
-                currentTime -= Time.deltaTime * Character.AttackSpeed;
+                currentTime -= Time.deltaTime * _Character.AttackSpeed;
         } else {
             while(currentTime <= 0) {
                 currentTime += AttackInterval;

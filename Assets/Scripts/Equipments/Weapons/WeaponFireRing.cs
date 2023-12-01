@@ -12,7 +12,7 @@ public class WeaponFireRing : Weapon {
     private float[] damageCoef      = new float[MAX_LEVEL] { 0.40f,   0.40f,  0.40f,   0.40f,   0.40f }; // 피해 계수
     protected override float AttackInterval => 999;
     public float ReactiveInterval => interval[level-1];
-    public float Damage => staticDamage[level-1] + damageCoef[level-1] * Character.Power;
+    public float Damage => staticDamage[level-1] + damageCoef[level-1] * _Character.Power;
     #endregion Weapon Status
 
     #region Weapon Information
