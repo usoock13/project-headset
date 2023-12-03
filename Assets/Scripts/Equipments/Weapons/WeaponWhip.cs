@@ -32,6 +32,8 @@ public class WeaponWhip : Weapon {
         };
     #endregion Weapon Information
 
+    private int attackDir = 1;
+
     private void Awake() {
         EffectPooler = new ObjectPooler(poolingObject: effect.gameObject, parent: this.transform, count: 5, restoreCount: 2);
     }
@@ -40,10 +42,15 @@ public class WeaponWhip : Weapon {
     }
     private IEnumerator AttackCoroutine() {
         GameObject instance;
-        instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
-        instance.transform.localScale = Vector3.one * AreaScale;
-        _Character.OnAttack();
-        if(level >= 5) {
+        if(level < 5) {
+            instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
+            instance.transform.localScale = new Vector3(attackDir, 1, 1) * AreaScale;
+            _Character.OnAttack();
+            attackDir *= -1;
+        } else {
+            instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
+            instance.transform.localScale = Vector3.one * AreaScale;
+            _Character.OnAttack();
             yield return new WaitForSeconds(0.25f);
             instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
             instance.transform.localScale = new Vector3(-1, 1, 1) * AreaScale;

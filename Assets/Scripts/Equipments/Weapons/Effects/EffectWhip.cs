@@ -19,7 +19,7 @@ public class EffectWhip : MonoBehaviour {
     private void OnEnable() {
         StartCoroutine(AttackProcess());
     }
-    
+
     private System.Collections.IEnumerator AttackProcess() {
         yield return null;
         particle.Play();

@@ -1,6 +1,4 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public abstract class Weapon : Equipment {
     protected Character _Character { get { return GameManager.instance.Character; } }
