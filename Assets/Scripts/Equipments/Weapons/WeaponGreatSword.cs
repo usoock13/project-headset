@@ -28,11 +28,11 @@ public class WeaponGreatSword : Weapon {
             switch(level) {
                 default:
                     return
-                        $"<color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.";
+                        $"<nobr><color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>";
                 case 3 or 4:
                     return string.Join(Environment.NewLine,
-                        $"<color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.",
-                        $"추가로 범위가 <color=#f40>{(areaScale[level]-1) * 100}%</color> 증가합니다.");
+                        $"<nobr><color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.",
+                        $"추가로 범위가 <color=#f40>{(areaScale[level]-1) * 100}%</color> 증가합니다.</nobr>");
             }
         }
     }

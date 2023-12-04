@@ -13,7 +13,7 @@ public class ArtifactBrace : Artifact {
     public override string Name => "보호대";
     public override string Description => 
         level switch {
-            _ => $"<nobr>위력이 {extraPower[level]}만큼 증가합니다.</nobr>"
+            _ => $"<nobr>위력이 <color=#f40>{extraPower[level]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 

@@ -23,8 +23,8 @@ public class ArtifactHolyBox : Artifact {
     public override string Name => "성스러운 유물함";
     public override string Description =>
         level switch {
-            _ => $"피해를 막아주는 보호막을 생성합니다."
-               + $"보호막은 피해를 막고 1초 뒤 사라지며 {regenerateInterval[level]}초 뒤에 재생성됩니다."
+            _ => $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
+               + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[level]}</color>초 뒤에 재생성됩니다.</nobr>"
         };
     #endregion Artifact Infromation
 

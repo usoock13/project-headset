@@ -18,9 +18,9 @@ public class ArtifactSandbag : Artifact {
     public override string Description => 
         level switch {
             _ =>  $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
-                + $"적을 처치할 마다 이동 속도/공격 속도가 {moveSpeedPerStack[level] * 100}%/{attackSpeedPerStack[level] * 100}% 증가하여"
-                + $"최대 {moveSpeedPerStack[level] * 10_000}%/{attackSpeedPerStack[level] * 10_000}%까지 증가합니다."
-                + $"(최종 이동 속도/공격 속도({(int)(moveSpeedPerStack[level] * 30_000 - 30)}%/{attackSpeedPerStack[level] * 30_000 - 40}%)</nobr>"
+                + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[level] * 100}%/{attackSpeedPerStack[level] * 100}%</color> 증가하여"
+                + $"최대 <color=#f40>{moveSpeedPerStack[level] * 10_000}%/{attackSpeedPerStack[level] * 10_000}%</color>까지 증가합니다."
+                + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[level] * 30_000 - 30)}%/{attackSpeedPerStack[level] * 30_000 - 40}%</color></i></nobr>"
         };
     #endregion Artifact Information
 

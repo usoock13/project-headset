@@ -13,7 +13,7 @@ public class ArtifactLeatherGlove : Artifact {
     public override string Name => "가죽 장갑";
     public override string Description => 
         level switch {
-            _ => $"<nobr>공격속도가 {extraSpeed[level]}만큼 증가합니다.</nobr>"
+            _ => $"<nobr>공격속도가 <color=#f40>{extraSpeed[level]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 

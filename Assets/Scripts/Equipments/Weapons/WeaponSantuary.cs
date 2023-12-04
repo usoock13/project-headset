@@ -20,9 +20,9 @@ public class WeaponSantuary : Weapon {
     public override string Name => "성역";
     public override string Description =>
         level switch {
-            >= 4 => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 {staticDamage[level]}의 피해를 가하고 0.25초간 경직시킵니다.\n"
+            >= 4 => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 <color=#f40>{staticDamage[level]}</color>의 피해를 가하고 0.25초간 경직시킵니다.\n"
                   + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
-            _    => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 {staticDamage[level]}의 피해를 가합니다.\n"
+            _    => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 <color=#f40>{staticDamage[level]}</color>의 피해를 가합니다.\n"
                   + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
         };
     #endregion Weapon Information

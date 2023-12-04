@@ -25,10 +25,8 @@ public class WeaponMaliciousFlask : Weapon {
     public override string Name => "둔화독";
     public override string Description => 
         level switch {
-            _ => string.Join(System.Environment.NewLine, 
-                $"{interval[level]}초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다.",
-                $"약병은 적에게 닿으면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 {staticDamage[level]}+{damageCoef[level]*100}%의 피해를 가합니다."
-            )
+            _ =>$"<nobr><color=#f40>{interval[level]}</color>초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다."
+              + $"약병은 적에게 닿으면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>"
         };
     #endregion Weapon Information
 

@@ -16,7 +16,7 @@ public class ArtifactPlateArmor : Artifact {
     public override string Name => "판금 흉갑";
     public override string Description => 
         level switch {
-            _ => $"<nobr>방어력이 {armorAmount[level]}만큼 증가하지만, 이동속도가 {decreasingSpeed[level] * 100}%만큼 감소합니다.</nobr>"
+            _ => $"<nobr>방어력이 <color=#f40>{armorAmount[level]}</color>만큼 증가하지만, 이동속도가 <color=#f40>{decreasingSpeed[level] * 100}%</color>만큼 감소합니다.</nobr>"
         };
     #endregion Artifact Information
 

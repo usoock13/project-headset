@@ -15,7 +15,7 @@ public class ArtifactAdrenaline : Artifact {
     public override string Name => "아드레날린 주사";
     public override string Description => 
         level switch {
-            _ => $"잃은 체력 1%마다 {amountPerOnePercent[level] * 100}%의 추가 위력을 얻으며, 최대 {amountPerOnePercent[level] * 70 * 100}%까지 증가합니다."
+            _ => $"<nobr>잃은 체력 1%마다 <color=#f40>{amountPerOnePercent[level] * 100}%</color>의 추가 위력을 얻으며, 최대 <color=#f40>{amountPerOnePercent[level] * 70 * 100}%</color>까지 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 

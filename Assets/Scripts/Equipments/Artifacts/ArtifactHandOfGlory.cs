@@ -21,7 +21,7 @@ public class ArtifactHandOfGlory : Artifact {
     public override string Name => "영광의 손";
     public override string Description => 
         level switch {
-            _ => $"죽은 적이 폭발하여 주변에 50의 피해를 가합니다. 캐릭터도 폭발에 피해를 입을 수 있습니다!"
+            _ => $"<nobr>죽은 적이 폭발하여 주변에 <color=#f40>50</color>의 피해를 가합니다. <color=#f40>캐릭터도 폭발에 피해를 입을 수 있습니다!</color></nobr>"
         };
     #endregion Artifact Information
 

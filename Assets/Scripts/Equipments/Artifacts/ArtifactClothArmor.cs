@@ -15,7 +15,7 @@ public class ArtifactClothArmor : Artifact {
     public override string Name => "천 갑옷";
     public override string Description => 
         level switch {
-            _ => $"<nobr>방어력이 {extraArmor[level]}만큼 증가합니다.</nobr>"
+            _ => $"<nobr>방어력이 <color=#f40>{extraArmor[level]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 
