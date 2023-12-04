@@ -43,9 +43,9 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     public abstract string MonsterType { get; }
 
     #region States
-    [SerializeField] protected State chaseState = new State("Chase");
-    [SerializeField] protected State hitState = new State("Hit");
-    [SerializeField] protected State dieState = new State("Die");
+    [SerializeField] public State chaseState { get; protected set; } = new State("Chase");
+    [SerializeField] public State hitState   { get; protected set; } = new State("Hit");
+    [SerializeField] public State dieState   { get; protected set; } = new State("Die");
     #endregion States
 
     #region Status About Life
@@ -66,7 +66,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
 
     [SerializeField] protected ObjectPooler ownerPooler = null;
 
-    #region IDamageable Define
+    #region IDamageable Implements
     // When call these three methods, keep below order.
     /* 
         monster.TakeDamage(Damage);
@@ -105,7 +105,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         if(takeHittingDelayCoroutine != null)
             StopCoroutine(takeHittingDelayCoroutine);
     }
-    #endregion IDamageable Define
+    #endregion IDamageable Implements
     
     protected void Awake() {
         movement ??= GetComponent<Movement>();

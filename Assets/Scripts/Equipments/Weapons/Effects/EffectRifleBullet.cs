@@ -29,7 +29,7 @@ public class EffectRifleBullet : EffectProjectile {
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value
         && !hitMonsters.Contains(other.gameObject)) {
-            if(other.TryGetComponent<Monster>(out Monster target)) {
+            if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
                 target.TakeHittingDelay(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
@@ -37,5 +37,9 @@ public class EffectRifleBullet : EffectProjectile {
                 GameManager.instance.Character.OnAttackMonster(target);
             }
         }
+    }
+    protected override void Disapear() {
+        base.Disapear();
+        originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

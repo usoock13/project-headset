@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material Line Renderer For Chain
-  m_Shader: {fileID: -6465566751694194690, guid: 411f9a30bc42bf748b9256848d0483d9, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 49b7510619c5ee74e9f3cbe825c74b1b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -51,7 +51,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Flow_Speed: 0
+    - _Last_Start_Time: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _Tile_X: 10
+    m_Colors:
+    - _Color_Overlap: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

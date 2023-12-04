@@ -20,6 +20,10 @@ public class EffectChainSickle : MonoBehaviour {
     [SerializeField] private AnimationClip flyingAnimation;
     [SerializeField] private AnimationClip pullingAnimation;
 
+    [SerializeField] private SpriteRenderer sickleRenderer;
+    [SerializeField] private Sprite flyingSprite;
+    [SerializeField] private Sprite hookedSprite;
+
     [SerializeField] private Transform chainStartingPoint;
     [SerializeField] private LineRenderer lineRenderer;
     private int chainStep = 20;
@@ -67,6 +71,7 @@ public class EffectChainSickle : MonoBehaviour {
             chainYAddition = lifetime;
             yield return null;
         }
+        sickleRenderer.sprite = hookedSprite;
         isActive = false;
     }
 
@@ -77,6 +82,7 @@ public class EffectChainSickle : MonoBehaviour {
         anim.clip = pullingAnimation;
         anim.Play();
         hitMonsters.Clear();
+        sickleRenderer.sprite = flyingSprite;
         Vector3 origin = transform.position;
         while(lifetime < 1) {
             lifetime += Time.deltaTime / pullingTime;

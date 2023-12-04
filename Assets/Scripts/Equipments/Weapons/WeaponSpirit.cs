@@ -26,7 +26,7 @@ public class WeaponSpirit : Weapon {
         (level+1) switch {
             _ => $"<nobr>적을 추격하며 공격하는 정령을 <color=#f40>{Count}마리</color> 소환합니다.\n"
                + $"정령은 <color=#f40>{runningTime[level]}초</color> 동안 비행하며 충돌한 적에게 "
-               + $"<color=#f40>{staticDamage[level]}+{damageCoef[level] * 100}%</color>의 피해를 줍니다."
+               + $"<color=#f40>{staticDamage[level]}+{damageCoef[level] * 100}%</color>의 피해를 가합니다."
                + $"정령은 비행을 마치면 복귀해 <color=#f10>{interval[level]}초 동안 충전해야합니다.</color></nobr>"
         };
     #endregion Weapon Information

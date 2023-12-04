@@ -10,11 +10,12 @@ public class WeaponGreatSword : Weapon {
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]     {  2f,     2f,   1.2f,    1.2f,   1.2f }; // 공격 간격
-    private float[] damageCoef = new float[MAX_LEVEL]   {  1f,   1.5f,   1.5f,      2f,   4.5f }; // 피해계수
-    private float[] areaScale = new float[MAX_LEVEL]    {  1f,     1f,     1f,   1.25f,   1.5f }; // 공격 범위 축척
+    private float[] interval = new float[MAX_LEVEL]      {   2f,     2f,   1.5f,    1.5f,   1.5f }; // 공격 간격
+    private float[] staticDamage = new float[MAX_LEVEL]  {  30f,    45f,    45f,     70f,   155f }; // 고정 피해량
+    private float[] damageCoef = new float[MAX_LEVEL]    { 0.6f,   0.9f,   0.9f,    1.0f,   2.5f }; // 피해 계수
+    private float[] areaScale = new float[MAX_LEVEL]     {   1f,     1f,     1f,   1.25f,   2.0f }; // 공격 범위 축척
     protected override float AttackInterval => interval[level-1];
-    public float Damage => damageCoef[level-1] * _Character.Power;
+    public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     public float AreaScale => areaScale[level-1];
     #endregion Weapon Status
 
@@ -27,11 +28,11 @@ public class WeaponGreatSword : Weapon {
             switch(level) {
                 default:
                     return
-                        $"{interval[level]}초에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 {damageCoef[level]*100}%의 피해를 가합니다.";
+                        $"<color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.";
                 case 3 or 4:
                     return string.Join(Environment.NewLine,
-                        $"{interval[level]}초에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 {damageCoef[level]*100}%의 피해를 가합니다.",
-                        $"추가로 범위가 {(areaScale[level]-1) * 100}% 증가합니다.");
+                        $"<color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.",
+                        $"추가로 범위가 <color=#f40>{(areaScale[level]-1) * 100}%</color> 증가합니다.");
             }
         }
     }
