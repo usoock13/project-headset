@@ -11,7 +11,7 @@ public class EffectChainSickle : MonoBehaviour {
 
     private bool isPulling = false;
     private float pullingTime = 0.8f;
-    private float pullingHittingDelay = 0.8f;
+    private float pullingHittingDelay = 0.4f;
 
     private List<GameObject> hitMonsters = new List<GameObject>();
     [SerializeField] private LayerMask targetLayer = 1<<8;
@@ -19,7 +19,11 @@ public class EffectChainSickle : MonoBehaviour {
     [SerializeField] private Animation anim;
     [SerializeField] private AnimationClip flyingAnimation;
     [SerializeField] private AnimationClip pullingAnimation;
+
+    [SerializeField] private Transform chainStartingPoint;
     [SerializeField] private LineRenderer lineRenderer;
+    private int chainStep = 20;
+    private float chainYAddition = 1f;
 
     private bool isActive = false;
     private float lifetime = 0f;
@@ -29,6 +33,7 @@ public class EffectChainSickle : MonoBehaviour {
             Debug.LogError($"{this.gameObject.name}'s 'origin weapon' variable is not definded.\nThis game object will be destoyed.");
             Destroy(gameObject);
         }
+        lineRenderer.positionCount = chainStep+1;
     }
     private void Update() {
         UpdateLineRenderer();
@@ -59,6 +64,7 @@ public class EffectChainSickle : MonoBehaviour {
         while(lifetime < 1) {
             lifetime += Time.deltaTime / flyingTime;
             transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
+            chainYAddition = lifetime;
             yield return null;
         }
         isActive = false;
@@ -71,18 +77,26 @@ public class EffectChainSickle : MonoBehaviour {
         anim.clip = pullingAnimation;
         anim.Play();
         hitMonsters.Clear();
+        Vector3 origin = transform.position;
         while(lifetime < 1) {
             lifetime += Time.deltaTime / pullingTime;
-            Vector2 nextPos = Vector2.Lerp(transform.position, originWeapon.transform.position, lifetime*lifetime);
+            Vector2 nextPos = Vector2.Lerp(origin, originWeapon.transform.position, Mathf.Pow(lifetime, 5));
             transform.position = nextPos;
             yield return null;
+            chainYAddition = 1-lifetime;
         }
         Disapear();
     }
 
     private void UpdateLineRenderer() {
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, originWeapon.transform.position);
+        Vector3 next;
+        float yy;
+        for(int i=0; i<=chainStep; i++) {
+            yy = Mathf.Lerp(-1, 1, (float)i/chainStep);
+            yy = 1-Mathf.Pow(yy, 2);
+            next = Vector3.Lerp(transform.position, originWeapon.transform.position+Vector3.up*0.3f, (float)i / chainStep) - (Vector3.up * yy * chainYAddition);
+            lineRenderer.SetPosition(i, next);
+        }
     }
 
     private void Disapear() {
@@ -105,7 +119,7 @@ public class EffectChainSickle : MonoBehaviour {
                 } else {
                     damage = originWeapon.PullingDamage;
                     hittingDelay = pullingHittingDelay;
-                    attackForce = (originWeapon.transform.position - transform.position).normalized * 0.2f;
+                    attackForce = (originWeapon.transform.position - transform.position).normalized * .5f;
                 }
                 target.TakeDamage(damage);
                 target.TakeHittingDelay(hittingDelay);

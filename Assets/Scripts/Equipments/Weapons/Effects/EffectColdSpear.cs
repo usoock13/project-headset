@@ -4,8 +4,7 @@ using UnityEngine;
 public class EffectColdSpear : EffectProjectile {
     private bool isActive = false;
     public WeaponColdSpear originWeapon;
-    private float flyingSpeed = 25f;
-    private float currentSpeed = 0;
+    private float flyingSpeed = 31f;
     [SerializeField] private LayerMask targetLayer = 1<<8;
     [SerializeField] private ParticleSystem explosionEffect;
     [SerializeField] private CircleBounds damageAreaBounds;
@@ -19,14 +18,12 @@ public class EffectColdSpear : EffectProjectile {
     }
     protected override void OnEnable() {
         base.OnEnable();
-        currentSpeed = flyingSpeed;
         projectileRenderer.enabled = true;
         isActive = true;
     }
     protected override void Update() {
         if(isActive) {
-            transform.Translate(Vector2.up * currentSpeed * Time.deltaTime);
-            currentSpeed = Mathf.Lerp(flyingSpeed, 0, lifetime/flyingTime);
+            transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
             lifetime += Time.deltaTime * 5;
             if(lifetime >= flyingTime) {
                 Disapear();

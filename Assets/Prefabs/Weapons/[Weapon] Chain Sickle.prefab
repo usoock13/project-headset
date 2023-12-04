@@ -29,8 +29,40 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 965911160034661183}
+  - {fileID: 918340479136005702}
   m_Father: {fileID: 6476121239946239235}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2802875626396124088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 918340479136005702}
+  m_Layer: 0
+  m_Name: '[Transform] Chain Starting Point'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &918340479136005702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802875626396124088}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.012, y: 0.122, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 431790062405425734}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5035028509994808254
 GameObject:
@@ -5090,6 +5122,7 @@ MonoBehaviour:
   anim: {fileID: 6476121239946239238}
   flyingAnimation: {fileID: 7400000, guid: 6d0519977673c974bb5889546c26e9a1, type: 2}
   pullingAnimation: {fileID: 7400000, guid: e4163f65d73354842aa6146bd54d1a71, type: 2}
+  chainStartingPoint: {fileID: 918340479136005702}
   lineRenderer: {fileID: 7381322134114403194}
 --- !u!120 &7381322134114403194
 LineRenderer:
