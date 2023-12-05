@@ -48,15 +48,14 @@ public class EffectSpirit : MonoBehaviour {
             break;
         }
         if(target is null) {
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(SearchMonsterCoroutine());
+            yield return new WaitForSeconds(0.5f);
+            originWeapon.Waitings.Enqueue(this);
         }
     }
 
     public void Run() {
         IsActive = true;
         battery = originWeapon.RunningTime;
-        print(battery);
     }
 
     public void Stop() { // 03

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class LevelUpUI : MonoBehaviour {
     [SerializeField] private ChoiseItem[] choiseItemUIs = new ChoiseItem[4];
     [SerializeField] private IPlayerGettable[] choises = new IPlayerGettable[4];
+    [SerializeField] private Animator animator;
     public UnityEvent onActive;
 
     public void ActiveUI() {

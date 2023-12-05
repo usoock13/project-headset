@@ -40,13 +40,13 @@ public class WeaponSpirit : Weapon {
 
     protected override void Update() {
         base.Update();
-        if(attackCountdown > 0)
-            attackCountdown -= Time.deltaTime;
-
-        if(Waitings.Count  >  0
-        && attackCountdown <= 0) {
-            Waitings.Dequeue().SearchMonster();
-            attackCountdown += AttackInterval;
+        if(Waitings.Count  >  0) {
+            if(attackCountdown > 0)
+                attackCountdown -= Time.deltaTime;
+            else {
+                Waitings.Dequeue().SearchMonster();
+                attackCountdown += AttackInterval;
+            }
         }
     }
 

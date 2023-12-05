@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   extraInformation: 
-  effectRenderer: {fileID: 4326084042486686692}
+  effectRenderer: {fileID: 0}
   icon: {fileID: -1036015940, guid: b87bd5af24cf80141a679deafb5ea3e3, type: 3}
 --- !u!1 &4326084042486686690
 GameObject:
