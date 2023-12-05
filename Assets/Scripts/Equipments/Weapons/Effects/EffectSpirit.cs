@@ -1,74 +1,109 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectSpirit : MonoBehaviour {
-    [SerializeField] private WeaponFireRing originWeapon;
-    private bool isActive = false;
+    [SerializeField] private WeaponSpirit originWeapon;
+    public bool IsActive   { get; private set; } = false;
 
-    private float explosionRadius = 0.5f;
-    private float attackForce = 1.2f;
-    private float hittingDelay = 0.6f;
+    private Transform target;
+    
+    private float maxVelocity = 8f;
+    private float battery = 0;
+    private float searchRadius = 5f;
+    private float forEachAttackInterval = 0.5f;
+    private Vector2 currentVelocity;
+    private List<GameObject> hitMonsters = new List<GameObject>();
 
     [SerializeField] private LayerMask targetLayer;
-    [SerializeField] private ParticleSystem particle;
-    [SerializeField] private ParticleSystem explosionParticle;
-    [SerializeField] private ParticleSystem trailParticle;
+    [SerializeField] private SpriteRenderer render;
 
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip explosionSound;
+    private float Damage => originWeapon.Damage;
+    private float Acceleration => originWeapon.Acceleration;
+    private float hittingDelay = 0.25f;
+    private float forceScalar = 0.5f;
 
-    private float reactiveCountdown = 0;
-
-    public void Active() {
-        particle.gameObject.SetActive(true);
-        trailParticle.gameObject.SetActive(true);
-        particle.Play();
-        trailParticle.Play();
-        isActive = true;
+    private void Update() {
+        if(IsActive) {
+            Accelerate();
+            battery -= Time.deltaTime;
+            if(battery <= 0) {
+                Stop();
+            }
+        }
     }
-    private void Inactive() {
-        isActive = false;
-        particle.Stop();
-        trailParticle.Stop();
-        particle.gameObject.SetActive(false);
-        trailParticle.gameObject.SetActive(false);
+
+    public void SearchMonster() { // 01
+        StartCoroutine(SearchMonsterCoroutine());
     }
+
+    private IEnumerator SearchMonsterCoroutine() { // 02
+        target = null;
+        Collider2D[] inners = Physics2D.OverlapCircleAll(originWeapon.transform.position, searchRadius, targetLayer);
+        foreach(var inner in inners) {
+            if(inner.TryGetComponent(out Monster _)) {
+                target = inner.transform;
+                Run();
+            }
+            break;
+        }
+        if(target is null) {
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(SearchMonsterCoroutine());
+        }
+    }
+
+    public void Run() {
+        IsActive = true;
+        battery = originWeapon.RunningTime;
+        print(battery);
+    }
+
+    public void Stop() { // 03
+        IsActive = false;
+        hitMonsters.Clear();
+        StartCoroutine(ChargeCoroutine());
+    }
+
+    private IEnumerator ChargeCoroutine() { // 04
+        Vector3 start = transform.position;
+        float offset = 0;
+        while(offset < 1) {
+            transform.position = Vector2.Lerp(start, originWeapon.transform.position, Mathf.Pow(offset, 3));
+            offset += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = originWeapon.transform.position;
+        yield return new WaitForSeconds(originWeapon.ChargeTime);
+        originWeapon.Waitings.Enqueue(this);
+    }
+
+    private IEnumerator RemoveHitMonster(GameObject target) {
+        yield return new WaitForSeconds(forEachAttackInterval);
+        hitMonsters.Remove(target);
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
-        if(isActive
+        if(IsActive
+        && !hitMonsters.Contains(other.gameObject)
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster monster)) {
-                Collider2D[] inners = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-                for(int i=0; i<inners.Length; i++) {
-                    if(inners[i].TryGetComponent(out Monster target)) {
-                        Vector3 characterPoint = GameManager.instance.Character.transform.position;
-                        Vector2 forceDir = (target.transform.position - characterPoint).normalized;
-                        target.TakeDamage(originWeapon.Damage);
-                        target.TakeHittingDelay(hittingDelay);
-                        target.TakeForce(forceDir * attackForce, hittingDelay);
-                        audioSource.PlayOneShot(explosionSound);
-                        explosionParticle.Play();
-                        Inactive();
-                    }
-                }
-            }
-        }
-    }
-    private void Update() {
-        if(!isActive) {
-            reactiveCountdown += Time.deltaTime;
-            if(reactiveCountdown >= originWeapon.ReactiveInterval) {
-                reactiveCountdown = 0;
-                Active();
+                monster.TakeDamage(Damage);
+                monster.TakeHittingDelay(hittingDelay);
+                monster.TakeForce(currentVelocity.normalized * forceScalar, hittingDelay);
+                hitMonsters.Add(monster.gameObject);
+                StartCoroutine(RemoveHitMonster(monster.gameObject));
             }
         }
     }
 
-    #if UNITY_EDITOR
-    private void OnDrawGizmosSelected() {
-        Gizmos.color = new Color(1, 1, 0, 1);
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    private void Accelerate() {
+        Vector2 dir = target.transform.position - transform.position;
+        Vector2 next = currentVelocity + dir * Acceleration * Time.deltaTime;
+        if(next.magnitude > maxVelocity) {
+            next = next.normalized * maxVelocity;
+        }
+        currentVelocity = next;
+        transform.Translate(currentVelocity * Time.deltaTime, Space.World);
     }
-    #endif
 }
