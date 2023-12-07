@@ -12,13 +12,18 @@ public class ArtifactLeatherGlove : Artifact {
     public override Sprite Icon => _icon;
     public override string Name => "가죽 장갑";
     public override string Description => 
-        level switch {
-            _ => $"<nobr>공격속도가 <color=#f40>{extraSpeed[level]}</color>만큼 증가합니다.</nobr>"
+        NextLevelIndex switch {
+            _ => $"<nobr>공격속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 
     public override void OnEquipped() {
-        _Character.extraAttackSpeed += GetExtraMoveSpeed;
+        base.OnEquipped();
+        _Character.extraAttackSpeed += GetExtraAttackSpeed;
     }
-    private float GetExtraMoveSpeed(Character character) => character.DefaultMoveSpeed * extraSpeed[level-1];
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.extraAttackSpeed -= GetExtraAttackSpeed;
+    }
+    private float GetExtraAttackSpeed(Character character) => character.DefaultMoveSpeed * extraSpeed[level-1];
 }

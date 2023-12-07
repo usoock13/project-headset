@@ -24,8 +24,8 @@ public class WeaponShortbow : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "단궁";
     public override string Description => 
-        level switch {
-            _ => $"<nobr><color=#f40>{interval[level]}초</color>에 한 번 조준 방향으로 화살을 <color=#f40>{arrowQuantity[level]}발</color> 발사해 적중한 적에게 <color=#f40>{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>",
+        NextLevelIndex switch {
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 화살을 <color=#f40>{arrowQuantity[NextLevelIndex]}발</color> 발사해 적중한 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
         };
 
     private void Awake() {

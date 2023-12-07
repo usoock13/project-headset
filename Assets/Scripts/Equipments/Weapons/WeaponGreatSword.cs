@@ -23,19 +23,12 @@ public class WeaponGreatSword : Weapon {
     [SerializeField] private Sprite _weaponIcon;
     public override Sprite Icon => _weaponIcon;
     public override string Name => "그레이트 소드";
-    public override string Description {
-        get {
-            switch(level) {
-                default:
-                    return
-                        $"<nobr><color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>";
-                case 3 or 4:
-                    return string.Join(Environment.NewLine,
-                        $"<nobr><color=#f40>{interval[level]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.",
-                        $"추가로 범위가 <color=#f40>{(areaScale[level]-1) * 100}%</color> 증가합니다.</nobr>");
-            }
-        }
-    }
+    public override string Description =>
+            NextLevelIndex switch {
+                3 or 4 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다."
+                        + $"추가로 범위가 <color=#f40>{(areaScale[NextLevelIndex]-1) * 100}%</color> 증가합니다.</nobr>",
+                _      => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            };
     #endregion Weapon Information
 
     private void Awake() {

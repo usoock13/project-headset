@@ -22,9 +22,9 @@ public class ArtifactHolyBox : Artifact {
     public override Sprite Icon => icon;
     public override string Name => "성스러운 유물함";
     public override string Description =>
-        level switch {
+        NextLevelIndex switch {
             _ => $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
-               + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[level]}</color>초 뒤에 재생성됩니다.</nobr>"
+               + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[NextLevelIndex]}</color>초 뒤에 재생성됩니다.</nobr>"
         };
     #endregion Artifact Infromation
 
@@ -39,7 +39,14 @@ public class ArtifactHolyBox : Artifact {
     public override void OnEquipped() {
         base.OnEquipped();
         _Character.attackBlocker += TakeAttackHandler;
+        Active();
     }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.attackBlocker -= TakeAttackHandler;
+        Inactive();
+    }
+
     private void Active() {
         isActive = true;
         effectRenderer.enabled = true;

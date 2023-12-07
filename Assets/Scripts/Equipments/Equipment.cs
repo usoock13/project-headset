@@ -11,6 +11,8 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
      */
     public int CurrentLevel => level;
     public abstract int MaxLevel { get; }
+    public bool IsMaxLevel => CurrentLevel>=MaxLevel;
+    protected int NextLevelIndex => CurrentLevel < MaxLevel ? level : level-1;
     #endregion Level
 
     public abstract Sprite Icon { get; }
@@ -28,8 +30,9 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     protected virtual void OnLevelUp() {
         level ++;
     }
-    public abstract void OnGotten();   // This method is called when Play get this. It's necessary for be displayed on UI.
+    public abstract void OnGotten();   // This method is called when character get this. It's necessary for be displayed on UI.
     public abstract void OnEquipped(); // This method is called by 'OnGotten' method.
+    public abstract void OnTakeOff();
     public override string ToString() {
         return this.Name;
     }

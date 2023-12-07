@@ -23,8 +23,8 @@ public class WeaponRifle : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "출장형 천공기";
     public override string Description => 
-        level switch {
-            _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>",
+        NextLevelIndex switch {
+            _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
         };
 
     private void Awake() {

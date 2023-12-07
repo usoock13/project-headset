@@ -14,13 +14,18 @@ public class ArtifactClothArmor : Artifact {
     public override Sprite Icon => _icon;
     public override string Name => "천 갑옷";
     public override string Description => 
-        level switch {
-            _ => $"<nobr>방어력이 <color=#f40>{extraArmor[level]}</color>만큼 증가합니다.</nobr>"
+        NextLevelIndex switch {
+            _ => $"<nobr>방어력이 <color=#f40>{extraArmor[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 
     public override void OnEquipped() {
+        base.OnEquipped();
         _Character.extraArmor += GetExtraMoveSpeed;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.extraArmor -= GetExtraMoveSpeed;
     }
     private float GetExtraMoveSpeed(Character character) => character.DefaultMoveSpeed * extraArmor[level-1];
 }

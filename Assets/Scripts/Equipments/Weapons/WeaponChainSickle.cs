@@ -29,12 +29,12 @@ public class WeaponChainSickle : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "제니의 사슬낫";
     public override string Description =>
-        (level+1) switch {
-            5 => $"<nobr><color=#f40>{interval[level]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.\n"
-               + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[level]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[level]}+{pullingDamageCoef[level]*100}%</color>의 피해를 입힙니다.\n"
+        (NextLevelIndex+1) switch {
+            5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+               + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 입힙니다.\n"
                + $"회피를 사용하여 꽂혀있는 모든 낫을 회수할 수 있습니다.</nobr>",
-            _ => $"<nobr><color=#f40>{interval[level]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.\n"
-               + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[level]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[level]}+{pullingDamageCoef[level]*100}%</color>의 피해를 입힙니다.</nobr>"
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+               + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 입힙니다.</nobr>"
         };
     #endregion Weapon Information
 
@@ -56,6 +56,10 @@ public class WeaponChainSickle : Weapon {
     public override void OnGotten() {
         base.OnGotten();
         _Character.onDodge += OnDodge;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.onDodge -= OnDodge;
     }
     private void RecallAll() {
         while(hookeds.Count > 0)

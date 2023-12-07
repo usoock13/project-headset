@@ -14,13 +14,18 @@ public class ArtifactAdrenaline : Artifact {
     public override Sprite Icon => _icon;
     public override string Name => "아드레날린 주사";
     public override string Description => 
-        level switch {
-            _ => $"<nobr>잃은 체력 1%마다 <color=#f40>{amountPerOnePercent[level] * 100}%</color>의 추가 위력을 얻으며, 최대 <color=#f40>{amountPerOnePercent[level] * 70 * 100}%</color>까지 증가합니다.</nobr>"
+        NextLevelIndex switch {
+            _ => $"<nobr>잃은 체력 1%마다 <color=#f40>{amountPerOnePercent[NextLevelIndex] * 100}%</color>의 추가 위력을 얻으며, 최대 <color=#f40>{amountPerOnePercent[NextLevelIndex] * 70 * 100}%</color>까지 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 
     public override void OnEquipped() {
+        base.OnEquipped();
         _Character.extraPower += GetExtraPower;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.extraPower -= GetExtraPower;
     }
     private float GetExtraPower(Character character) => Mathf.Min((1 - character.currentHp / character.MaxHp), 0.7f) * character.DefaultPower;
 }

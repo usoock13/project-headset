@@ -20,9 +20,9 @@ public class WeaponFireRing : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "화염구 저글링";
     public override string Description =>
-        level switch {
-            _ => $"<nobr>적과 충돌하면 폭발하여 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 주는 화염구를 <color=#f40>{(level<4 ? 3 : 5)}</color>개 소환합니다.\n"
-               + $"화염구는 캐릭터 주변을 회전하며, 폭발 후 <color=#f40>{interval[level]}초</color>가 지나면 재생성됩니다."
+        NextLevelIndex switch {
+            _ => $"<nobr>적과 충돌하면 폭발하여 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 주는 화염구를 <color=#f40>{(level<4 ? 3 : 5)}</color>개 소환합니다.\n"
+               + $"화염구는 캐릭터 주변을 회전하며, 폭발 후 <color=#f40>{interval[NextLevelIndex]}초</color>가 지나면 재생성됩니다."
                + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
         };
     #endregion Weapon Information

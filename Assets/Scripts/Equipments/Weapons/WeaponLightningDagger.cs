@@ -29,9 +29,9 @@ public class WeaponLightningDagger : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "뇌전표창";
     public override string Description =>
-        level switch {
-            _ => $"<nobr><color=#f40>{interval[level]}초</color>에 한 번 조준 방향으로 고전압 표창을 던져 <color=#f40>{staticDamage[level]}+{damageCoef[level]*100}%</color>의 피해를 가합니다.\n"
-               + $"적중한 위치에서 주변 적을 향해 가정용 전압 수준의 전류가 뻗어 <color=#f40>{chainingStaticDamage[level]}+{chainingDamageCoef[level]*100}%</color>의 피해를 가하며, 최대 <color=#f40>{chainingCount[level]}</color>의 적에게 연쇄됩니다.</nobr>"
+        NextLevelIndex switch {
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 고전압 표창을 던져 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+               + $"적중한 위치에서 주변 적을 향해 가정용 전압 수준의 전류가 뻗어 <color=#f40>{chainingStaticDamage[NextLevelIndex]}+{chainingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하며, 최대 <color=#f40>{chainingCount[NextLevelIndex]}</color>의 적에게 연쇄됩니다.</nobr>"
         };
     private void Awake() {
         EffectPooler = new ObjectPooler(

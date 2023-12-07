@@ -16,11 +16,11 @@ public class ArtifactSandbag : Artifact {
     public override Sprite Icon => _icon;
     public override string Name => "모래주머니";
     public override string Description => 
-        level switch {
+        NextLevelIndex switch {
             _ =>  $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
-                + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[level] * 100}%/{attackSpeedPerStack[level] * 100}%</color> 증가하여"
-                + $"최대 <color=#f40>{moveSpeedPerStack[level] * 10_000}%/{attackSpeedPerStack[level] * 10_000}%</color>까지 증가합니다."
-                + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[level] * 30_000 - 30)}%/{attackSpeedPerStack[level] * 30_000 - 40}%</color></i></nobr>"
+                + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 100}%/{attackSpeedPerStack[NextLevelIndex] * 100}%</color> 증가하여"
+                + $"최대 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 10_000}%/{attackSpeedPerStack[NextLevelIndex] * 10_000}%</color>까지 증가합니다."
+                + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[NextLevelIndex] * 30_000 - 30)}%/{attackSpeedPerStack[NextLevelIndex] * 30_000 - 40}%</color></i></nobr>"
         };
     #endregion Artifact Information
 
@@ -29,6 +29,12 @@ public class ArtifactSandbag : Artifact {
         _Character.onKillMonster += OnKillMonster;
         _Character.extraMoveSpeed += ExtraMoveSpeed;
         _Character.extraAttackSpeed += ExtraAttackSpeed;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.onKillMonster -= OnKillMonster;
+        _Character.extraMoveSpeed -= ExtraMoveSpeed;
+        _Character.extraAttackSpeed -= ExtraAttackSpeed;
     }
     private void OnKillMonster(Character character, Monster monster) {
         currentStack ++;

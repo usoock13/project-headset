@@ -110,6 +110,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Func<Monster, float, bool> attackBlocker; // Monster : Origin of attack // float : Damage amount
     #endregion Extra Status
 
+    #region Calculated Status
     public float Power { get {
             float final = statusDefaultPower;
             Delegate[] additions = extraPower?.GetInvocationList();
@@ -145,6 +146,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             return Mathf.Min(final, MAX_ARMOR);
         }
     }
+    #endregion Calculated Status
     #endregion Status
 
     protected Vector2 moveDirection;
@@ -159,7 +161,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] protected Transform artifactParent;
     [SerializeField] public Transform headmountPoint;
 
-    #region States Refer
+    #region States
     public State idleState { get; protected set; } = new State("Idle");
     public State walkState { get; protected set; } = new State("Walk");
     public State dodgeState {get; protected set; } = new State("Dodge");
@@ -171,7 +173,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         else
             return walkState;
     }}
-    #endregion States Refer
+    #endregion States
 
     [Header("Individual Properties")]
     [SerializeField] protected float maxHp = 100;
@@ -233,12 +235,14 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             }
         };
         #endregion Initialize Move State
+
         #region Initialize Dodge State
-        #endregion Initialize Dodge State
         dodgeState.onActive += (prev) => {
             onDodge?.Invoke(this);
             dodgeParticle.Play();
         };
+        #endregion Initialize Dodge State
+
         #region Initialize Die State
         dieState.onActive += (State previous) => {
             stateMachine.isMuted = true;
@@ -268,6 +272,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(!CurrentState.Compare(dodgeState))
             stateMachine.ChangeState(BasicState);
     }
+    
     private void MoveToward(Vector2 moveVector) {
         movement.MoveToward(moveVector);
         if(arrowIsFixed) {
@@ -284,10 +289,12 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             spriteAnimator.SetFloat("Move Animation Direction", 1);
         }
     }
+    
     private void FlipSprites(bool flip) {
         Vector3 org = spritesParent.transform.localScale;
         spritesParent.localScale =  new Vector3(flip? -1 : 1, org.y, org.z);
     }
+    
     private void RotateArrow(Vector2 direction) {
         float rotateSpeed = 1080f;
         float rotateDir = 1f;
@@ -304,6 +311,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             attackArrow.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg);
         }
     }
+    
     public void FixArrow(bool active) {
         if(!arrowIsFixed && active)
             attackDirection = attackArrow.transform.rotation * Vector2.up;
@@ -319,6 +327,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         ConsumeStamina(staminaForDodge);
             StartCoroutine(DodgeCoroutine());
     }
+    
     private IEnumerator DodgeCoroutine() {
         stateMachine.ChangeState(dodgeState);
         float offset = 0;
@@ -336,21 +345,13 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         stateMachine.ChangeState(BasicState);
     }
     
-    public void AddWeapon(Weapon weapon) {
-        weapon.transform.SetParent(weaponParent);
-        weapon.transform.localPosition = Vector2.zero;
-        StageUIManager.UpdateWeaponList();
-        /* 
-            *** TODO : Update UI that show Chracter information. ***
-        */
+    
+    public void AddEquipment(Equipment equipment) {
+        equipment.transform.SetParent(equipment is Weapon ? weaponParent : artifactParent);
+        equipment.transform.localPosition = Vector2.zero;
     }
-    public void AddArtifact(Artifact artifact) {
-        artifact.transform.SetParent(artifactParent);
-        artifact.transform.localPosition = Vector2.zero;
-        StageUIManager.UpdateArtifactList();
-        /* 
-            *** TODO : Update UI that show Chracter information. ***
-        */
+    public void RemoveEquipment(Equipment target) {
+        target.transform.SetParent(StageManager.EquipmentsManager.transform);
     }
     
     private void ConsumeStamina(float amount) {

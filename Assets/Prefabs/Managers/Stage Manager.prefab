@@ -354,7 +354,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -1139,7 +1139,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -1222,6 +1222,7 @@ Transform:
   - {fileID: 8946713021798581082}
   - {fileID: 7991959169310525349}
   - {fileID: 4181726005862475991}
+  - {fileID: 7362929726731821157}
   m_Father: {fileID: 645271449}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3993,7 +3994,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -4387,7 +4388,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -13994,6 +13995,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3232903881723159892, guid: b024088d53e956f4c8713058b62126e5, type: 3}
   m_PrefabInstance: {fileID: 1518991962044125080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1518991962146924207
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 618784043}
+    m_Modifications:
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303206935590815435, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+      propertyPath: m_Name
+      value: '[Weapon] Tentacle Bag'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+--- !u!4 &7362929726731821157 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8303206935590815434, guid: 61b7d41b7f9c2a444ad333ccfb64ae9b, type: 3}
+  m_PrefabInstance: {fileID: 1518991962146924207}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1518991962160232443
 PrefabInstance:

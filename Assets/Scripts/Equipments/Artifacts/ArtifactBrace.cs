@@ -12,13 +12,18 @@ public class ArtifactBrace : Artifact {
     public override Sprite Icon => _icon;
     public override string Name => "보호대";
     public override string Description => 
-        level switch {
-            _ => $"<nobr>위력이 <color=#f40>{extraPower[level]}</color>만큼 증가합니다.</nobr>"
+        NextLevelIndex switch {
+            _ => $"<nobr>위력이 <color=#f40>{extraPower[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 
     public override void OnEquipped() {
+        base.OnEquipped();
         _Character.extraPower += GetExtraPower;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.extraPower -= GetExtraPower;
     }
     private float GetExtraPower(Character character) => character.DefaultMoveSpeed * extraPower[level-1];
 }

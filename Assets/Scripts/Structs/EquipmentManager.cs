@@ -5,7 +5,8 @@ using UnityEngine;
 using Utility;
 
 public class EquipmentManager : MonoBehaviour {
-    Character Character => GameManager.instance.StageManager.Character;
+    Character _Character => GameManager.instance.StageManager.Character;
+    StageUIManager _UiManager => GameManager.instance.StageManager._StageUIManager;
 
     protected const int MAX_WEAPONS_COUNT = 6;
     protected const int MAX_ARTIFACTS_COUNT = 6;
@@ -39,7 +40,7 @@ public class EquipmentManager : MonoBehaviour {
     #if UNITY_EDITOR
     private void Update() {
         if(Input.GetKeyDown(KeyCode.G))
-            GivePlayerItem(__testItem);
+            ChangeWeapon(0, __testItem);
     }
     #endif
     public IPlayerGettable[] RandomChoises(int number) {
@@ -81,49 +82,110 @@ public class EquipmentManager : MonoBehaviour {
         return candidates.GetRange(0, 4).ToArray();
     }
     
-    public void GivePlayerItem(IPlayerGettable item) {
+    public void OnPlayerSelectItem(IPlayerGettable item) {
         if(item is Weapon) {
-            int targetIndex = remainingWeapons.IndexOf(item as Weapon);
+            int targetIndex;
+            targetIndex = remainingWeapons.IndexOf(item as Weapon);
             if(targetIndex >= 0) {
                 Weapon target = remainingWeapons[targetIndex];
-                remainingWeapons.Remove(target);
-                havingWeapons.Add(target);
-                Character.AddWeapon(target);
-                item.OnGotten();
+                AddEquipmentToPlayer(target);
+            } else {
+                targetIndex = havingWeapons.IndexOf(item as Weapon);
+                if(targetIndex >= 0 && !havingWeapons[targetIndex].IsMaxLevel)
+                    havingWeapons[targetIndex].LevelUp();
             }
-            targetIndex = havingWeapons.IndexOf(item as Weapon);
-            if(targetIndex >= 0)
-                havingWeapons[targetIndex].LevelUp();
+
+                
         } else if(item is Artifact) {
-            int targetIndex = remainingArtifacts.IndexOf(item as Artifact);
+            int targetIndex;
+            targetIndex = remainingArtifacts.IndexOf(item as Artifact);
             if(targetIndex >= 0) {
                 Artifact target = remainingArtifacts[targetIndex];
-                remainingArtifacts.Remove(target);
-                havingArtifacts.Add(target);
-                Character.AddArtifact(target);
-                item.OnGotten();
+                AddEquipmentToPlayer(target);
+            } else {
+                targetIndex = havingArtifacts.IndexOf(item as Artifact);
+                if(targetIndex >= 0 && !havingArtifacts[targetIndex].IsMaxLevel)
+                    havingArtifacts[targetIndex].LevelUp();
             }
-            targetIndex = havingArtifacts.IndexOf(item as Artifact);
-            if(targetIndex >= 0)
-                havingArtifacts[targetIndex].LevelUp();
         } else {
             item.OnGotten();
         }
     }
+
+    public void AddEquipmentToPlayer(Equipment equipment) {
+        if(equipment is Weapon) {
+            havingWeapons.Add((Weapon) equipment);
+            remainingWeapons.Remove((Weapon) equipment);
+        } else if(equipment is Artifact) {
+            havingArtifacts.Add((Artifact) equipment);
+            remainingArtifacts.Remove((Artifact) equipment);
+        } else {
+            throw new ArgumentException("Argument is neither a weapon and a artifact.");
+        }
+
+        if(equipment.CurrentLevel == 0)
+            equipment.LevelUp();
+
+        _Character.AddEquipment(equipment);
+        equipment.OnGotten();
+
+        _UiManager.UpdateWeaponList();
+        _UiManager.UpdateArtifactList();
+    }
+
+    public void RemoveEquipmentFromPlayer(Equipment equipment) {
+        if(equipment is Weapon) {
+            havingWeapons.Remove((Weapon) equipment);
+            remainingWeapons.Add((Weapon) equipment);
+        } else if(equipment is Artifact) {
+            havingArtifacts.Remove((Artifact) equipment);
+            remainingArtifacts.Add((Artifact) equipment);
+        } else {
+            throw new ArgumentException("Argument is neither a weapon and a artifact.");
+        }
+        _Character.RemoveEquipment(equipment);
+        equipment.OnTakeOff();
+
+        _UiManager.UpdateWeaponList();
+        _UiManager.UpdateArtifactList();
+    }
+
+    public void ChangeWeapon(int index, Weapon weapon) {
+        if(havingWeapons.Contains(weapon))
+            return;
+
+        var prev = havingWeapons[index];
+        var next = weapon;
+
+        remainingWeapons.Add(prev);
+        remainingWeapons.Remove(next);
+
+        _Character.RemoveEquipment(prev);
+        _Character.AddEquipment(next);
+
+        prev.OnTakeOff();
+        next.OnGotten();
+        
+        havingWeapons[index] = next;
+
+        _UiManager.UpdateWeaponList();
+    }
+
     public void AddBasicWeapon(Weapon basicWeapon) {
         Weapon target = remainingWeapons.Find((Weapon weapon) => {
             return basicWeapon.EquipmentType == weapon.EquipmentType;
         });
         if(target == null)
             Debug.LogWarning("Weapon that was returned by find is null.\nEqupment Manager may doesn't have that.");
-        GivePlayerItem(target);
+        OnPlayerSelectItem(target);
     }
+
     public void AddBasicArtifact(Artifact basicArtifact) {
         Artifact target = remainingArtifacts.Find((Artifact artifact) => {
             return basicArtifact.EquipmentType == artifact.EquipmentType;
         });
         if(target == null)
             Debug.LogWarning("Artifact that was returned by find is null.\nEqupment Manager may doesn't have that.");
-        GivePlayerItem(target);
+        OnPlayerSelectItem(target);
     }
 }

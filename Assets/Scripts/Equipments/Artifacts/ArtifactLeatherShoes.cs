@@ -14,13 +14,18 @@ public class ArtifactLeatherShoes : Artifact {
     public override Sprite Icon => _icon;
     public override string Name => "가죽 장화";
     public override string Description => 
-        level switch {
-            _ => $"<nobr>이동속도가 <color=#f40>{extraSpeed[level]}</color>만큼 증가합니다.</nobr>"
+        NextLevelIndex switch {
+            _ => $"<nobr>이동속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
         };
     #endregion Artifact Information
 
     public override void OnEquipped() {
+        base.OnEquipped();
         _Character.extraMoveSpeed += GetExtraMoveSpeed;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.extraMoveSpeed -= GetExtraMoveSpeed;
     }
     private float GetExtraMoveSpeed(Character character) => character.DefaultMoveSpeed * extraSpeed[level-1];
 }

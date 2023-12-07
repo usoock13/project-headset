@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EffectSpirit : MonoBehaviour {
     [SerializeField] private WeaponSpirit originWeapon;
-    public bool IsActive   { get; private set; } = false;
+    public bool IsRunning   { get; private set; } = false;
 
     private Transform target;
     
@@ -24,7 +24,7 @@ public class EffectSpirit : MonoBehaviour {
     private float forceScalar = 0.5f;
 
     private void Update() {
-        if(IsActive) {
+        if(IsRunning) {
             Accelerate();
             battery -= Time.deltaTime;
             if(battery <= 0) {
@@ -54,12 +54,12 @@ public class EffectSpirit : MonoBehaviour {
     }
 
     public void Run() {
-        IsActive = true;
+        IsRunning = true;
         battery = originWeapon.RunningTime;
     }
 
     public void Stop() { // 03
-        IsActive = false;
+        IsRunning = false;
         hitMonsters.Clear();
         StartCoroutine(ChargeCoroutine());
     }
@@ -83,7 +83,7 @@ public class EffectSpirit : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(IsActive
+        if(IsRunning
         && !hitMonsters.Contains(other.gameObject)
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster monster)) {

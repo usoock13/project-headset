@@ -29,7 +29,7 @@ public class LevelUpUI : MonoBehaviour {
     public void SelectChoise(int index) {
         var character = GameManager.instance.Character;
         var stageManager = GameManager.instance.StageManager;
-        stageManager.EquipmentsManager.GivePlayerItem(choises[index]);
+        stageManager.EquipmentsManager.OnPlayerSelectItem(choises[index]);
         this.InactiveUI();
         if(++character.levelRewardCount < character.level-1)
             stageManager.OnCharacterLevelUp();

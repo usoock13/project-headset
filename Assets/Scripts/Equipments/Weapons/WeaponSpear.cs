@@ -23,9 +23,9 @@ public class WeaponSpear : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "장창";
     public override string Description =>
-        level switch {
-            4 => $"<nobr><color=#f40>{interval[level]}</color>초에 한 번 조준 방향을 향해 창을 여러 번 찔러 넣어 {sideDamageCoef[level]*100}%/{sideDamageCoef[level]*100}%/{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>",
-            _ => $"<nobr><color=#f40>{interval[level]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{damageCoef[level]*100}%</color>의 피해를 가합니다.</nobr>",
+        NextLevelIndex switch {
+            4 => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 여러 번 찔러 넣어 <color=#f40>{sideDamageCoef[NextLevelIndex]*100}%/{sideDamageCoef[NextLevelIndex]*100}%/{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
         };
     #endregion Weapon Information
 

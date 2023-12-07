@@ -26,10 +26,10 @@ public class WeaponColdSpear : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "얼음창";
     public override string Description =>
-        level switch {
-            3 or 4 => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[level]}초</color> 동안 빙결시킵니다.\n"
-                    + $"기존의 {areaScale[level] * 100}%의 피해 범위를 가집니다.</nobr>",
-            _      => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[level]}+{damageCoef[level] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[level]}초</color> 동안 빙결시킵니다.</nobr>"
+        NextLevelIndex switch {
+            3 or 4 => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[NextLevelIndex]}초</color> 동안 빙결시킵니다.\n"
+                    + $"기존의 {areaScale[NextLevelIndex] * 100}%의 피해 범위를 가집니다.</nobr>",
+            _      => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[NextLevelIndex]}초</color> 동안 빙결시킵니다.</nobr>"
         };
     #endregion Weapon Information
     

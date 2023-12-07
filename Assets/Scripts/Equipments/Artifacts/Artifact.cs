@@ -13,4 +13,7 @@ public abstract class Artifact : Equipment {
     public override void OnEquipped() {
         this.gameObject.SetActive(true);
     }
+    public override void OnTakeOff() {
+        this.gameObject.SetActive(false);
+    }
 }

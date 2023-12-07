@@ -29,9 +29,9 @@ public class WeaponOrthodox : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "오소독스";
     public override string Description => 
-        level switch {
-            4 => $"<nobr><color=#f40>{interval[level]}</color>초에 한 번 조준 방향을 향해 원 투 스트레이트 펀치를 날려 각각 <color=#f40>{damageOfOneScale[level]*100}% / {damageOfTwoScale[level]*100}% / {damageOfStraightScale[level]*100}%</color>의 피해를 가합니다.</nobr>",
-            _ => $"<nobr><color=#f40>{interval[level]}</color>초에 한 번 조준 방향을 향해 원 투 펀치를 날려 각각 <color=#f40>{damageOfOneScale[level]*100}% / {damageOfTwoScale[level]*100}%</color>의 피해를 가합니다.</nobr>",
+        NextLevelIndex switch {
+            4 => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 원 투 스트레이트 펀치를 날려 각각 <color=#f40>{damageOfOneScale[NextLevelIndex]*100}% / {damageOfTwoScale[NextLevelIndex]*100}% / {damageOfStraightScale[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 원 투 펀치를 날려 각각 <color=#f40>{damageOfOneScale[NextLevelIndex]*100}% / {damageOfTwoScale[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
         };
     #endregion Weapon Information
 

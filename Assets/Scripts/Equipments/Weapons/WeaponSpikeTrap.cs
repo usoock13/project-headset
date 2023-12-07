@@ -27,10 +27,10 @@ public class WeaponSpikeTrap : Weapon {
     public override Sprite Icon => _weaponIcon;
     public override string Name => "쇠못덫";
     public override string Description =>
-        level switch {
-            3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[level]}+{damageCoef[level] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
+        NextLevelIndex switch {
+            3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
                     + $"회피하면 경로에 덫을 설치하며 이동합니다.</nobr>",
-            _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[level]}+{damageCoef[level] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
+            _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
         };
     #endregion Weapon Information
 
@@ -46,10 +46,11 @@ public class WeaponSpikeTrap : Weapon {
     }
     public override void OnGotten() {
         base.OnGotten();
-        _Character.dodgeState.onActive += (prev) => {
-            if(level >= 4)
-                StartCoroutine(InstallationDuringDodge());
-        };
+        _Character.dodgeState.onActive += OnDodge;
+    }
+    public override void OnTakeOff() {
+        base.OnTakeOff();
+        _Character.dodgeState.onActive -= OnDodge;
     }
     private IEnumerator InstallationDuringDodge() {
         Attack();
@@ -75,5 +76,9 @@ public class WeaponSpikeTrap : Weapon {
         var instance = EffectPooler.OutPool(transform.position, Quaternion.identity);
         instance.transform.localScale = Vector3.one * TrapScale;
         _Character.OnAttack();
+    }
+    private void OnDodge(State prev) {
+        if(level >= 4)
+            StartCoroutine(InstallationDuringDodge());
     }
 }
