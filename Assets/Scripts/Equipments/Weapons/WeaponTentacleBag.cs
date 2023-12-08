@@ -29,7 +29,7 @@ public class WeaponTentacleBag : Weapon {
     public override string Name => "촉수 가방";
     public override string Description =>
         NextLevelIndex switch {
-            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 근처 적을 향해 촉수가 <color=#f40>{EffectCount}</color>줄기 뻗어나가며 범위 내의 적에게 <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]}%</color>의 피해를 최대 {AttackCount}회 가합니다.</nobr>",
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 근처 적을 향해 촉수가 <color=#f40>{effectCount[NextLevelIndex]}</color>줄기 뻗어나가며 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 최대 {AttackCount}회 가합니다.</nobr>",
         };
     #endregion Weapon Information
 

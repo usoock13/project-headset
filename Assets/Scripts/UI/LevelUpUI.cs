@@ -13,11 +13,13 @@ public class LevelUpUI : MonoBehaviour {
     public void ActiveUI() {
         this.gameObject.SetActive(true);
         GameManager.instance.StageManager.PauseGame(true);
+        GameManager.instance.InputSystem.ChangeToUIMode();
         onActive?.Invoke();
     }
     public void InactiveUI() {
         this.gameObject.SetActive(false);
         GameManager.instance.StageManager.PauseGame(false);
+        GameManager.instance.InputSystem.ChangeToControlMode();
     }
     public void SetChoise(int index, IPlayerGettable choise) {
         if(index > choiseItemUIs.Length)

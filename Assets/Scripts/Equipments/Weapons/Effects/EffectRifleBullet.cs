@@ -6,9 +6,14 @@ public class EffectRifleBullet : EffectProjectile {
     private float Damage => originWeapon.Damage;
     private float flyingSpeed = 36f;
     private float hittingDelay = 0.4f;
+    private int MaxHitCount => originWeapon.MaxHitCount;
+    private int hitCount = 0;
+
     private const float FLYING_TIME = 3;
+
     private List<GameObject> hitMonsters = new List<GameObject>();
-    [SerializeField] LayerMask targetLayer = 8;
+
+    [SerializeField] LayerMask targetLayer = 1<<8;
     [SerializeField] TrailRenderer trailRenderer;
 
     private void Start() {
@@ -23,6 +28,7 @@ public class EffectRifleBullet : EffectProjectile {
     }
     protected override void OnEnable() {
         base.OnEnable();
+        hitCount = 0;
         hitMonsters.Clear();
         trailRenderer.Clear();
     }
@@ -35,6 +41,9 @@ public class EffectRifleBullet : EffectProjectile {
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);
+                
+                if(++hitCount >= MaxHitCount)
+                    Disapear();
             }
         }
     }

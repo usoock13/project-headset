@@ -9,13 +9,14 @@ public class WeaponRifle : Weapon {
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] staticCoef = new float[MAX_LEVEL]   {   25f,     55f,     85f,    115f,   145f };  // 고정 피해량
-    private float[] damageCoef = new float[MAX_LEVEL]   {  0.4f,    0.5f,    0.6f,    0.7f,   0.8f };  // 피해 계수
-    // private float[] hittingDelay = new float[MAX_LEVEL] {    1f,      1f,      1f,      2f,     2f };  // 경직 시간
+    private float[] staticCoef = new float[MAX_LEVEL]   {  25f,     55f,     85f,    115f,   145f }; // 고정 피해량
+    private float[] damageCoef = new float[MAX_LEVEL]   { 0.4f,    0.5f,    0.6f,    0.7f,   0.8f }; // 피해 계수
+    private int[] maxHitCount = new int[MAX_LEVEL]      {    3,       4,       5,       9,     99 }; // 최대 관통 횟수
 
     protected override float AttackInterval => 1;
     public float HittingDelay => 1;
     public float Damage => damageCoef[level-1] * _Character.Power;
+    public int MaxHitCount => maxHitCount[level-1];
     #endregion Weapon Status
 
     #region Weapon Information

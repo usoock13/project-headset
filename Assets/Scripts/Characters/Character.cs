@@ -154,6 +154,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     protected Vector2 attackingDirection;
     public bool arrowIsFixed { get; protected set; } = false;
+    private bool aimWithMouse = false;
     public Transform attackArrow;
     private Vector2 attackDirection;
 
@@ -220,6 +221,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         /* << FOR TEST */
         RecoverStamina();
         RecoverSkillGauge();
+        RotateArrowWithMouse();
     }
     #endregion Unity Events
 
@@ -229,7 +231,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #region Initialize Move State
         walkState.onStay = () => {
             MoveToward(MoveVector * Time.deltaTime);
-            if(!arrowIsFixed) {
+            if(!aimWithMouse && !arrowIsFixed) {
                 attackingDirection = moveDirection;
                 RotateArrow(moveDirection);
             }
@@ -275,7 +277,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     
     private void MoveToward(Vector2 moveVector) {
         movement.MoveToward(moveVector);
-        if(arrowIsFixed) {
+        if(arrowIsFixed || aimWithMouse) {
             if(Mathf.Abs(attackDirection.x) > 0.01f) {
                 FlipSprites(attackDirection.x<0 ? true : false);
             }
@@ -310,6 +312,18 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         } else {
             attackArrow.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg);
         }
+    }
+
+    private void RotateArrowWithMouse() {
+        if(aimWithMouse) {
+            attackDirection = attackArrow.transform.rotation * Vector2.up;
+            var point = new Vector2(Input.mousePosition.x - (Screen.width / 2), Input.mousePosition.y - (Screen.height / 2));
+            attackArrow.eulerAngles = new Vector3(0, 0, (Mathf.Atan2( point.y, point.x ) - Mathf.PI/2) * Mathf.Rad2Deg);
+        }
+    }
+
+    public void ToggleMouseAiming() {
+        aimWithMouse = !aimWithMouse;
     }
     
     public void FixArrow(bool active) {

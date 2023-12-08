@@ -1013,9 +1013,25 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e433615a-0a07-4b1e-9d32-cb01bcccc23e
     m_ActionName: Charactor Control/Dodge[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2486477413569248814}
+        m_TargetAssemblyTypeName: CharacterInputSystem, Assembly-CSharp
+        m_MethodName: ToggleMouse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fa5fbc34-77a3-49a4-851c-6871af18d75e
+    m_ActionName: Charactor Control/Toggle Mouse[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Charactor Control
+  m_DefaultActionMap: Character Control
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1316246117
@@ -1043,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5f01e4605011542821add14225781c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 1589356281}
   character: {fileID: 0}
 --- !u!114 &1589356279
 MonoBehaviour:

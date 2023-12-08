@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
     public Character Character {
         get { return stageManager.Character; }
     }
+    public CharacterInputSystem InputSystem =>
+        Character.characterInputSystem;
     public bool GameIsOver {
         get { return stageManager.isGameOver; }
     }

@@ -2,7 +2,7 @@
     "name": "GamePlayInput",
     "maps": [
         {
-            "name": "Charactor Control",
+            "name": "Character Control",
             "id": "0437613d-3259-499a-83e5-60daa39f3e93",
             "actions": [
                 {
@@ -36,6 +36,15 @@
                     "name": "Dodge",
                     "type": "Button",
                     "id": "e433615a-0a07-4b1e-9d32-cb01bcccc23e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Toggle Mouse",
+                    "type": "Button",
+                    "id": "fa5fbc34-77a3-49a4-851c-6871af18d75e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -185,8 +194,25 @@
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0416c7a-a28b-4320-845a-a3855a5a1587",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "85e46969-da60-4f2a-a1ed-bd495eabc4a1",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

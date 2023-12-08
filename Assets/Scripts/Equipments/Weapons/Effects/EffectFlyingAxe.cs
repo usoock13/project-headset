@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EffectFlyingAxe : EffectProjectile {
     public WeaponAxe originWeapon;
+
+    [SerializeField] private float flyingSpeed = 22f;
     private float Damage => originWeapon.Damage;
     private float Scale => originWeapon.ProjectileScale;
-    [SerializeField] private float flyingSpeed = 22f;
+    private int MaxHitCount => originWeapon.MaxHitCount;
+    private int hitCount = 0;
+    
     private float hittingDelay = 0.8f;
     private List<GameObject> hitMonsters = new List<GameObject>();
     [SerializeField] LayerMask targetLayer = 1<<8;
@@ -28,6 +32,7 @@ public class EffectFlyingAxe : EffectProjectile {
     }
     protected override void OnEnable() {
         base.OnEnable();
+        hitCount = 0;
         hitMonsters.Clear();
         if(currentLevel != originWeapon.CurrentLevel) {
             currentLevel = originWeapon.CurrentLevel;
@@ -55,6 +60,9 @@ public class EffectFlyingAxe : EffectProjectile {
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);
+
+                if(++hitCount >= MaxHitCount)
+                    Disapear();
             }
         }
     }
