@@ -56,7 +56,7 @@ public class EffectFlyingAxe : EffectProjectile {
             Monster target;
             if(other.TryGetComponent<Monster>(out target)) {
                 target.TakeDamage(Damage);
-                target.TakeHittingDelay(hittingDelay);
+                target.TakeAttackDelay(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);

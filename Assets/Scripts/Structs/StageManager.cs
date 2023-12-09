@@ -31,7 +31,12 @@ public class StageManager : MonoBehaviour {
 
     [SerializeField] private Camera mainCamera;
 
+    #region Item
     [SerializeField] private ItemCollector itemCollector;
+    private const int MAX_KESO_FALLEN_COUNT = 200;
+    private const int MAX_EXP_FALLEN_COUNT = 200;
+    private int kesoFallenCount = 0;
+    private int expFallenCount = 0;
     
     [SerializeField] private ExpJewel expJewel;
     private ObjectPooler expPooler;
@@ -41,6 +46,7 @@ public class StageManager : MonoBehaviour {
 
     [SerializeField] private Keso kesoOrigin;
     private ObjectPooler kesoPooler;
+    #endregion Item
 
     [SerializeField] private DamagePrinter damagePrinter;
 
@@ -73,6 +79,8 @@ public class StageManager : MonoBehaviour {
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
         character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
+        
+        character.HeadmountCharacter.HeadAbility?.transform.SetParent(character.transform);
         character.HeadmountCharacter.HeadAbility?.OnTaken(character);
 
         for(int i=1; i<selectedCharacter.Count; i++) {
@@ -99,18 +107,15 @@ public class StageManager : MonoBehaviour {
         scenarioDirector.OnEndsScenario();
         GameManager.instance.ProfileManager.IncreaseKeso(KesoEarned);
     }
+
+    #region Create Item
     public void CreateExp(Vector2 point, int expAmount) {
         var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
         if(exp != null) {
             exp.givingExp = expAmount;
             exp.Drop();
         }
-    }
-    public void CreatePotion(Vector2 point) {
-        GameObject instance = MeatPooler.OutPool(point, Quaternion.identity);
-        if(instance.TryGetComponent(out Meat potion)) {
-            potion.Drop();
-        }
+        expFallenCount ++;
     }
     public void CreateKeso(Vector2 point, int kesoAmount) {
         GameObject instan = kesoPooler.OutPool(point, Quaternion.identity);
@@ -118,9 +123,33 @@ public class StageManager : MonoBehaviour {
             keso.Amount = kesoAmount;
             keso.Drop();
         }
+        kesoFallenCount ++;
     }
+    public void CreateMeat(Vector2 point) {
+        GameObject instance = MeatPooler.OutPool(point, Quaternion.identity);
+        if(instance.TryGetComponent(out Meat potion)) {
+            potion.Drop();
+        }
+    }
+    #endregion Create Item
+
+    #region Getting Item Events
+    public void OnGetExp(ExpJewel expJewel) {
+        expFallenCount --;
+        OnGetItem(expJewel);
+    }
+    public void OnGetKeso(Keso keso) {
+        kesoFallenCount --;
+        OnGetItem(keso);
+    }
+    public void OnGetItem(Item item) {
+        Character.onGetItem?.Invoke(item);
+    }
+    #endregion Getting Item Events
+    
     public void OnMonsterDie(Monster monster) {
         character.OnKillMonster(monster);
+        scenarioDirector.MonsterDefeatHandler(monster);
         IncreaseKillScore();
     }
     public void PauseGame(bool pause) {

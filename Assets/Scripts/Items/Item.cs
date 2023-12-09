@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(StateMachine))]
 public abstract class Item : MonoBehaviour, IPlayerGettable {
     public Action<Item> onGetItem;
 
@@ -10,45 +9,45 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     public abstract string Name { get; }
     public abstract string Description { get; }
 
-    protected StateMachine stateMachine;
     protected SpriteRenderer spriteRenderer;
 
     #region States
-    protected State inactiveState = new State("Inactive");
-    protected State droppedState = new State("Dropped");
-    protected State pickingUpState = new State("Picking Up");
-    protected State storedState = new State("Stores");
     #endregion States
 
-    private Coroutine pickUpCoroutine;
+    private Coroutine pullCoroutine;
+
+    enum ItemState {
+        Dropped,
+        Pulled,
+        Stored
+    }
+    ItemState currentState = ItemState.Stored;
 
     protected void Awake() {
-        stateMachine = GetComponent<StateMachine>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        InitializeStates();
     }
-    protected virtual void InitializeStates() {
-        stateMachine.SetIntialState(inactiveState);
-        droppedState.onActive += (State previous) => {
-            gameObject.SetActive(true);
-        };
-        pickingUpState.onInactive += (State next) => {
-            StopCoroutine(pickUpCoroutine);
-        };
-        storedState.onActive += (State previous) => {
-            gameObject.SetActive(false);
-        };
-    }
+
     public virtual void Drop() {
-        stateMachine.ChangeState(droppedState);
+        currentState = ItemState.Dropped;
+        gameObject.SetActive(true);
     }
-    public virtual void PickUpItem(Transform getter) {
-        if(stateMachine.Compare(droppedState)) {
-            stateMachine.ChangeState(pickingUpState);
-            pickUpCoroutine = StartCoroutine(PickUpCoroutine(getter));
+    public virtual void Pull(Transform getter) {
+        if(currentState == ItemState.Dropped) {
+            pullCoroutine = StartCoroutine(PullCoroutine(getter));
         }
     }
-    private IEnumerator PickUpCoroutine(Transform target) {
+    public virtual void Store(Character onwer) {
+        if(!onwer.CurrentState.Compare(onwer.dieState)) {
+            OnGotten();
+            Disapear();
+        }
+    }
+    protected void Disapear() {
+        gameObject.SetActive(false);
+        currentState = ItemState.Stored;
+        StopAllCoroutines();
+    }
+    private IEnumerator PullCoroutine(Transform target) {
         Vector2 origin = (Vector2) transform.position;
         float offset = 0;
         while(offset < 2) {
@@ -56,20 +55,17 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
             offset += Time.deltaTime;
             yield return null;
         }
-        stateMachine.ChangeState(droppedState);
+        currentState = ItemState.Dropped;
     }
     public virtual void OnGotten() {
         onGetItem?.Invoke(this);
-        GameManager.instance.Character.onGetItem?.Invoke(this);
+        GameManager.instance.StageManager.OnGetItem(this);
     }
     protected virtual void OnTriggerEnter2D(Collider2D other) {
-        if(stateMachine.Compare(droppedState)
-        || stateMachine.Compare(pickingUpState)) {
+        if(currentState == ItemState.Dropped
+        || currentState == ItemState.Pulled) {
             if(other.TryGetComponent<Character>(out var ch)) {
-                if(ch.CurrentState.Compare(ch.dieState))
-                    return;
-                OnGotten();
-                stateMachine.ChangeState(storedState);
+                Store(ch);
             }
         }
     }

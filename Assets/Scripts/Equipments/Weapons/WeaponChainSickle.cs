@@ -60,6 +60,7 @@ public class WeaponChainSickle : Weapon {
     public override void OnTakeOff() {
         base.OnTakeOff();
         _Character.onDodge -= OnDodge;
+        RecallAll();
     }
     private void RecallAll() {
         while(hookeds.Count > 0)

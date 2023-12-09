@@ -28,7 +28,7 @@ public class EffectSantuary : MonoBehaviour {
                 if(inners[i].TryGetComponent(out Monster target)) {
                     target.TakeDamage(Damage);
                     if(HittingDelay > 0)
-                        target.TakeHittingDelay(HittingDelay);
+                        target.TakeAttackDelay(HittingDelay);
                 }
             }
         }

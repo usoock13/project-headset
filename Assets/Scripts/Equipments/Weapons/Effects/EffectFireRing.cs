@@ -45,7 +45,7 @@ public class EffectFireRing : MonoBehaviour {
                         Vector3 characterPoint = GameManager.instance.Character.transform.position;
                         Vector2 forceDir = (target.transform.position - characterPoint).normalized;
                         target.TakeDamage(originWeapon.Damage);
-                        target.TakeHittingDelay(hittingDelay);
+                        target.TakeAttackDelay(hittingDelay);
                         target.TakeForce(forceDir * attackForce, hittingDelay);
                         audioSource.PlayOneShot(explosionSound);
                         explosionParticle.Play();

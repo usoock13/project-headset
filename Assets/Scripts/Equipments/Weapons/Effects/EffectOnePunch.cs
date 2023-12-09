@@ -21,7 +21,7 @@ public class EffectOnePunch : MonoBehaviour {
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<Monster>();
             target.TakeDamage(originWeapon.DamageOfOne);
-            target.TakeHittingDelay(hitDelay);
+            target.TakeAttackDelay(hitDelay);
             target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
             GameManager.instance.Character.OnAttackMonster(target);
         }

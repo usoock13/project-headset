@@ -33,7 +33,7 @@ public class EffectShortbow : EffectProjectile {
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeHittingDelay(hittingDelay);
+                target.TakeAttackDelay(hittingDelay);
                 target.TakeForce(transform.up * .2f, hittingDelay);
                 isActive = false;
                 Disapear();

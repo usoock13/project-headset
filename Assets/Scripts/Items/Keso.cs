@@ -28,11 +28,21 @@ public class Keso : Item {
             spriteRenderer.sprite = spriteList[0];
         }
     }
-    protected override void InitializeStates() {
-        base.InitializeStates();
+
+    public override void Drop() {
+        base.Drop();
+        StartCoroutine(DisapearCoroutine());
     }
+
+    private IEnumerator DisapearCoroutine() {
+        yield return new WaitForSeconds(120f);
+        Disapear();
+    }
+
     public override void OnGotten() {
-        base.OnGotten();
+        onGetItem?.Invoke(this);
+        GameManager.instance.StageManager.OnGetKeso(this);
         GameManager.instance.StageManager.IncreaseKesoEarned(amount);
     }
+    
 }

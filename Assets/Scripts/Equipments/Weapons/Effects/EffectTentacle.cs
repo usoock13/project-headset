@@ -55,7 +55,7 @@ public class EffectTentacle : MonoBehaviour {
     private void AttackArea() {
         for(int i=0; i<inners.Count; i++) {
             inners[i].TakeDamage(Damage);
-            inners[i].TakeHittingDelay(interval * 1.1f);
+            inners[i].TakeAttackDelay(interval * 1.1f);
             inners[i].TakeForce(transform.up * attackForceScalar);
         }
     }

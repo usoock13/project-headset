@@ -18,7 +18,7 @@ public class ExpJewel : Item {
             spriteRenderer.sprite = spriteList[0];
         }
     }
-    private Coroutine dropCoroutine;
+    
     private bool isGround = false;
     private Transform getter = null;
 
@@ -34,14 +34,21 @@ public class ExpJewel : Item {
 
     public override void Drop() {
         base.Drop();
-        dropCoroutine = StartCoroutine(DropCoroutine());
+        StartCoroutine(DropCoroutine());
+        StartCoroutine(DisapearCoroutine());
     }
-    public override void PickUpItem(Transform getter) {
+    public override void Pull(Transform getter) {
         if(isGround)
-            base.PickUpItem(getter);
+            base.Pull(getter);
         else
             this.getter = getter;
     }
+
+    private IEnumerator DisapearCoroutine() {
+        yield return new WaitForSeconds(120f);
+        Disapear();
+    }
+
     private IEnumerator DropCoroutine() {
         float randomAngle = Random.Range(0, 360);
         Vector2 origin = transform.position;
@@ -54,14 +61,16 @@ public class ExpJewel : Item {
         }
         isGround = true;
         if(getter is not null)
-            this.PickUpItem(this.getter);
+            this.Pull(this.getter);
     }
     public override void OnGotten() {
-        base.OnGotten();
+        onGetItem?.Invoke(this);
+        GameManager.instance.StageManager.OnGetExp(this);
         GameManager.instance.Character.GetExp(givingExp);
         isGround = false;
         getter = null;
     }
+
     protected override void OnTriggerEnter2D(Collider2D other) {
         if(isGround)
             base.OnTriggerEnter2D(other);

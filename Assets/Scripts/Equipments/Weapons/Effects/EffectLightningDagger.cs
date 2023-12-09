@@ -42,7 +42,7 @@ public class EffectLightningDagger : EffectProjectile {
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeHittingDelay(hittingDelay);
+                target.TakeAttackDelay(hittingDelay);
                 target.TakeForce(transform.up * attackForceScalar, hittingDelay);
                 isActive = false;
                 daggerRenderer.enabled = false;
@@ -61,7 +61,7 @@ public class EffectLightningDagger : EffectProjectile {
             foreach(var inner in inners) {
                 if(inner.TryGetComponent(out Monster target)) {
                     target.TakeDamage(originWeapon.ChainingDamage);
-                    target.TakeHittingDelay(chainingHittingDelay);
+                    target.TakeAttackDelay(chainingHittingDelay);
 
                     LineRenderer lr = originWeapon.LineRendererPooler.OutPool().GetComponent<LineRenderer>();
                     lineRenderers.Add(lr);

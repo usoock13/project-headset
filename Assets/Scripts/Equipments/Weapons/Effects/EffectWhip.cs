@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EffectWhip : MonoBehaviour {
@@ -42,7 +41,7 @@ public class EffectWhip : MonoBehaviour {
                 Vector2 attackForce = transform.right * Mathf.Sin( Mathf.Atan2(dir.y, dir.x) ) * distance;
 
                 monster.TakeDamage(originWeapon.Damage);
-                monster.TakeHittingDelay(originWeapon.HittingDelay);
+                monster.TakeAttackDelay(originWeapon.HittingDelay);
                 if(swipeDir * Mathf.Atan2(dir.y, dir.x) < 0)
                     monster.TakeForce(attackForce, 0.5f);
             }

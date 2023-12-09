@@ -22,7 +22,7 @@ public class EffectStraightPunch : MonoBehaviour {
             if(inner.TryGetComponent(out Monster target)) {
                 target.TakeDamage(originWeapon.DamageOfStraight);
                 target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForceScalar, hitDelay);
-                target.TakeHittingDelay(hitDelay);
+                target.TakeAttackDelay(hitDelay);
                 GameManager.instance.Character.OnAttackMonster(target);
             }
         }

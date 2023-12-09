@@ -88,7 +88,7 @@ public class EffectSpirit : MonoBehaviour {
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(Damage);
-                monster.TakeHittingDelay(hittingDelay);
+                monster.TakeAttackDelay(hittingDelay);
                 monster.TakeForce(currentVelocity.normalized * forceScalar, hittingDelay);
                 hitMonsters.Add(monster.gameObject);
                 StartCoroutine(RemoveHitMonster(monster.gameObject));

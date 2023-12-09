@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.8, y: 0.2}
+  m_Size: {x: 1.2, y: 0.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -199,17 +199,57 @@ PrefabInstance:
       propertyPath: defaultMoveSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: maxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 2203739214735206125}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: monsterType
+      value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: rigidbody2D
+      value: 
+      objectReference: {fileID: 2203739214735206127}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: stateMachine
+      value: 
+      objectReference: {fileID: 2203739214735206124}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: spriteAnimator
+      value: 
+      objectReference: {fileID: 5676563592131661430}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 2203739214735206115}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: defaultMoveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4473507440462479738, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Radius
       value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Radius
-      value: 0.5
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Offset.y
-      value: 0.3
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522980, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Controller
@@ -260,9 +300,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -131531354, guid: a2a8bf4cd4b318943a1683d2a0b75d84, type: 3}
+    - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6342264030857522990, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Name
       value: '[Monster] Wolf'
@@ -271,8 +327,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2490272933369885350, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
 --- !u!4 &1395137167436847574 stripped
 Transform:
@@ -289,7 +344,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6342264030857522990, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
   m_PrefabInstance: {fileID: 5084984728409082314}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6736325236809837497
+--- !u!60 &3864603887867270190
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203739214735206116}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.14583333}
+    oldSize: {x: 2.5, y: 1.5}
+    newSize: {x: 2.5, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5541446, y: 0.3008199}
+      - {x: 0.39405468, y: 0.32970813}
+      - {x: 0.2983576, y: 0.7409615}
+      - {x: -0.54931307, y: 0.9753055}
+      - {x: -0.6940202, y: 0.67234135}
+--- !u!114 &5053606320476133356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,21 +383,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2203739214735206116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c0a753649de324c85991eb0da0dc10, type: 3}
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 2203739214735206125}
-  stateMachine: {fileID: 2203739214735206124}
-  spriteRenderer: {fileID: 2203739214735206115}
-  spriteAnimator: {fileID: 5676563592131661430}
-  collider2D: {fileID: 0}
-  rigidbody2D: {fileID: 2203739214735206127}
-  defaultMoveSpeed: 1.5
-  maxHp: 65
-  givingExp: 10
-  givingKeso: 20
-  ownerPooler:
-    poolingObject: {fileID: 0}
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!114 &2203739214735206124 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6342264030857522982, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}

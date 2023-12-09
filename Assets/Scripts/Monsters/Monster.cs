@@ -38,8 +38,9 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
             }
         return final>0 ? final : 0;
     }}
-    protected Vector2 targetDirection;
     protected Vector2 MoveVector => targetDirection * MoveSpeed;
+
+    protected Vector2 targetDirection;
     public abstract string MonsterType { get; }
 
     #region States
@@ -48,12 +49,14 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] public State dieState   { get; protected set; } = new State("Die");
     #endregion States
 
-    #region Status About Life
+    #region Status
     public bool isArrive { get; protected set;} = true;
+    [SerializeField] private float defaultToughness = 1f;
+    [SerializeField] private float Toughness => defaultToughness > 1  ? defaultToughness  :  1;
     [SerializeField] protected float maxHp = 100;
     protected float currentHp = 0;
     public UnityAction<Monster> onDie;
-    #endregion Status About Life
+    #endregion Status
 
     private List<Attachment> havingAttachment = new List<Attachment>();
     public List<Attachment> H => havingAttachment;
@@ -61,10 +64,11 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] protected int givingExp = 10;
     [SerializeField] protected int givingKeso = 20;
 
-    private Coroutine takeHittingDelayCoroutine;
+    protected Coroutine takeAttackDelayCoroutine;
+    protected Coroutine takeForceCoroutine;
     private Coroutine updateTargetDirectionCoroutine;
 
-    [SerializeField] protected ObjectPooler ownerPooler = null;
+    protected ObjectPooler ownerPooler = null;
 
     #region IDamageable Implements
     // When call these three methods, keep below order.
@@ -80,17 +84,28 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
             stateMachine.ChangeState(dieState);
         _StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString());
     }
-    public virtual void TakeHittingDelay(float second) {
-        takeHittingDelayCoroutine = StartCoroutine(TakeHittingDelayCoroutine(second));
+
+
+    public virtual void TakeAttackDelay(float second) {
+        float reduced = second / Toughness;
+        if(reduced > 0.1f) {
+            takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(reduced));
+        }
     }
-    private IEnumerator TakeHittingDelayCoroutine(float second) {
+
+    private IEnumerator TakeAttackDelayCoroutine(float second) {
         stateMachine.ChangeState(hitState);
         yield return new WaitForSeconds(second);
         stateMachine.ChangeState(chaseState);
     }
+
+
     public virtual void TakeForce(Vector2 force, float duration=.25f) {
-        StartCoroutine(TakeForceCoroutine(force, duration));
+        force = Toughness == 0  ?  force  :  force / Toughness;
+        duration = Toughness == 0  ?  duration  :  duration / Toughness;
+        takeForceCoroutine = StartCoroutine(TakeForceCoroutine(force, duration));
     }
+
     private IEnumerator TakeForceCoroutine(Vector2 force, float duration) {
         float offset = 0;
         float step = 1 / duration;
@@ -102,8 +117,6 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
             offset += Time.deltaTime * step;
             yield return null;
         }
-        if(takeHittingDelayCoroutine != null)
-            StopCoroutine(takeHittingDelayCoroutine);
     }
     #endregion IDamageable Implements
     
@@ -148,17 +161,33 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         float ratio = 0.02f;
         float next = UnityEngine.Random.Range(0f, 1f);
         if(next < ratio)
-            _StageManager.CreatePotion(transform.position);
+            _StageManager.CreateMeat(transform.position);
     }
     protected void DropKeso() {
-        // float ratio = 0.02f;
-        float ratio = 1.00f;
+        float ratio = 0.25f;
         float next = UnityEngine.Random.Range(0f, 1f);
         int amount = (int)(givingKeso * UnityEngine.Random.Range(0.8f, 1.2f));
         if(next < ratio)
             _StageManager.CreateKeso(transform.position, amount);
     }
-    protected abstract void InitializeStates();
+
+    protected virtual void InitializeStates() {
+        hitState.onActive += (State prev) => {
+            if(takeForceCoroutine != null)
+                StopCoroutine(takeForceCoroutine);
+        };
+
+        hitState.onInactive += (State next) => {
+            StopCoroutine(takeAttackDelayCoroutine);
+        };
+
+        dieState.onActive += (State prev) => {
+            isArrive = false;
+            stateMachine.isMuted = true;
+            OnDie();
+        };
+    }
+
     private IEnumerator UpdateTargetPoint() {
         while(isArrive) {
             targetDirection = (TargetCharacter.transform.position - transform.position).normalized;

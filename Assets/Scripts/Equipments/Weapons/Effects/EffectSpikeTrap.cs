@@ -24,7 +24,7 @@ public class EffectSpikeTrap : MonoBehaviour {
         if(1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(damage);
-                monster.TakeHittingDelay(HittingDelay);
+                monster.TakeAttackDelay(HittingDelay);
             }
             Disapear();
         }

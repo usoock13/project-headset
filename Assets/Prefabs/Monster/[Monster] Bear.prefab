@@ -7,10 +7,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: maxHp
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: givingExp
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: toughness
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: givingKeso
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: attackPower
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: monsterType
+      value: Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: defaultMoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: defaultToughness
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473176198454058471, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522980, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: d85b58ea39c5cc849add52b7cf017f6d, type: 2}
+      objectReference: {fileID: 22100000, guid: 977eae2adfb6bf64b8a92de8e16bef7d, type: 2}
+    - target: {fileID: 6342264030857522981, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522984, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -59,6 +107,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 959369691, guid: 96325a2f8a96c3e44806c9ce90009658, type: 3}
+    - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6342264030857522990, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Name
       value: '[Monster] Bear'
@@ -69,4 +121,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2666180196710873429, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+--- !u!1 &1663554775467767761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6342264030857522990, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+  m_PrefabInstance: {fileID: 5697649230501828863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &5212882096386598255
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663554775467767761}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.1125}
+    oldSize: {x: 3.1111112, y: 2.2222223}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4753302, y: 0.42654186}
+      - {x: 0.7492808, y: 0.465114}
+      - {x: 1.152151, y: 1.063542}
+      - {x: -0.01702267, y: 1.3549318}
+      - {x: -1.1486537, y: 0.8255507}

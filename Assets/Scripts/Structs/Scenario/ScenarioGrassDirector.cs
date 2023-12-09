@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScenarioGrassDirector : ScenarioDirector {
+    [SerializeField] private const int MAX_MONSTER_COUNT = 200;
     [SerializeField] private Monster defaultMonster;
     [SerializeField] private int defaultSpawncount = 1;
     [SerializeField] private float defaultSpawnInterval = 1f;
-    private int defaultMonsterDefeatCount = 0;
+    private int monsterSpawnedCount = 0;
 
     private Coroutine spawnDefaultMonsterCoroutine;
 
-    [SerializeField] private MonsterWolf monsterWolf;
+    [SerializeField] private MonsterBasic monsterWolf;
+    [SerializeField] private MonsterBasic monsterBear;
     [SerializeField] private MonsterToad monsterToad;
     [SerializeField] private MonsterUndead monsterUndead;
     [SerializeField] private MonsterWitch monsterWitch;
@@ -23,8 +25,17 @@ public class ScenarioGrassDirector : ScenarioDirector {
                 new ObjectPooler(
                     monsterWolf.gameObject,
                     parent: this.transform,
-                    count: 10,
+                    count: 100,
                     restoreCount: 20
+                )
+            },
+            {
+                monsterBear.MonsterType,
+                new ObjectPooler(
+                    monsterBear.gameObject,
+                    parent: this.transform,
+                    count: 10,
+                    restoreCount: 2
                 )
             },
         };
@@ -34,23 +45,27 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(3, () => {
             defaultMonster = monsterWolf;
-            defaultSpawnInterval = 1f;
-            defaultSpawncount = 3;
+            defaultSpawnInterval = 1.5f;
+            defaultSpawncount = 5;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
+        }));
+        scenarios.Add(new Scenario(5, () => {
+            SpawnMonster(monsterBear, 1);
         }));
     }
 
     protected IEnumerator SpawnDefaultMonster() {
         while(!ScenarioIsEnd) {
-            SpawnMonster(defaultMonster, defaultSpawncount);
+            if(monsterSpawnedCount < MAX_MONSTER_COUNT) {
+                SpawnMonster(defaultMonster, defaultSpawncount);
+                monsterSpawnedCount += defaultSpawncount;
+            }
             yield return new WaitForSeconds(defaultSpawnInterval);
         }
     }
 
-    public override void MonsterDefeatEvent(Monster monster) {
-        if(++defaultMonsterDefeatCount%4 == 0) {
-            SpawnMonster(defaultMonster, 1);
-        }
+    public override void MonsterDefeatHandler(Monster monster) {
+        monsterSpawnedCount--;
     }
 
     public override void OnEndsScenario() {

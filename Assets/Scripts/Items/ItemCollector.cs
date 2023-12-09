@@ -18,7 +18,7 @@ public class ItemCollector : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Item"
         && other.TryGetComponent(out Item item)) {
-            item.PickUpItem(transform);
+            item.Pull(transform);
         }
     }
 }

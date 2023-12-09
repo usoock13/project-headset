@@ -12,7 +12,7 @@ public class ArtifactHandOfGlory : Artifact {
     public float CharacterDamage => Damage * characterDamageRatio;
     #endregion Artifact Status
 
-    [SerializeField] private EffectMonkeyExplosion explosionOrigin;
+    [SerializeField] private EffectGlory explosionOrigin;
     private ObjectPooler explosionPooler;
 
     #region Artifact Information

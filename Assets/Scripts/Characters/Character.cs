@@ -427,7 +427,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
         StageUIManager.ActiveHitEffectUI();
     }
-    public void TakeHittingDelay(float amount) {
+    public void TakeAttackDelay(float amount) {
         throw new NotImplementedException();
         if(CurrentState.Compare(dieState))
             return;

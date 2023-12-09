@@ -128,7 +128,7 @@ public class EffectChainSickle : MonoBehaviour {
                     attackForce = (originWeapon.transform.position - transform.position).normalized * .5f;
                 }
                 target.TakeDamage(damage);
-                target.TakeHittingDelay(hittingDelay);
+                target.TakeAttackDelay(hittingDelay);
                 target.TakeForce(attackForce);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);

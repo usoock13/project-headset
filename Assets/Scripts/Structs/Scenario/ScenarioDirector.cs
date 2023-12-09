@@ -64,6 +64,6 @@ public abstract class ScenarioDirector : MonoBehaviour {
                 return 0;
         }
     }
-    public abstract void MonsterDefeatEvent(Monster monster);
+    public abstract void MonsterDefeatHandler(Monster monster);
     public abstract void OnEndsScenario();
 }

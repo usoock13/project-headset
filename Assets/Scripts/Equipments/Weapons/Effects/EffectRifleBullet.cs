@@ -37,7 +37,7 @@ public class EffectRifleBullet : EffectProjectile {
         && !hitMonsters.Contains(other.gameObject)) {
             if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeHittingDelay(hittingDelay);
+                target.TakeAttackDelay(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);
