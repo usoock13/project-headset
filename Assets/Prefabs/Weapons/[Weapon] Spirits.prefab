@@ -53,6 +53,8 @@ MonoBehaviour:
   - {fileID: 3394854858623473953}
   - {fileID: 4851664303954551447}
   - {fileID: 2739486426972767220}
+  - {fileID: 2739486426972767220}
+  - {fileID: 2739486426972767220}
   _weaponIcon: {fileID: 479645979, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
   attackCountdown: 0
 --- !u!1 &3394854858623473948
@@ -131,7 +133,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 479645979, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  m_Sprite: {fileID: -1727665315, guid: 462f9fde6cb0bd64ebc40f3924b73b84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -359,7 +361,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 479645979, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  m_Sprite: {fileID: -1727665315, guid: 462f9fde6cb0bd64ebc40f3924b73b84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -587,7 +589,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 479645979, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  m_Sprite: {fileID: -1727665315, guid: 462f9fde6cb0bd64ebc40f3924b73b84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
