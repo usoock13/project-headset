@@ -15,7 +15,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         }
         set { targetCharacter ??= value; }
     }
-    private StageManager _StageManager => GameManager.instance.StageManager;
+    protected StageManager _StageManager => GameManager.instance.StageManager;
     
     public GameObject GameObject => this.gameObject;
 
@@ -25,6 +25,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] protected SpriteAnimator spriteAnimator;
     [SerializeField] new protected Collider2D collider2D;
     [SerializeField] new protected Rigidbody2D rigidbody2D;
+    protected Material material;
 
     [SerializeField] protected float defaultMoveSpeed = 5f;
     private Func<Monster, float> speedModifier;
@@ -50,16 +51,22 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     #endregion States
 
     #region Status
+
     public bool isArrive { get; protected set;} = true;
     [SerializeField] private float defaultToughness = 1f;
-    [SerializeField] private float Toughness => defaultToughness > 1  ? defaultToughness  :  1;
+    [SerializeField] private float Toughness { get {
+        float final = defaultToughness * _StageManager.StageLevel;
+        final = final > 1  ?  final  :  1;
+        return final;
+    }}
+    [SerializeField] protected float defaultHp = 100;
     [SerializeField] protected float maxHp = 100;
     protected float currentHp = 0;
     public UnityAction<Monster> onDie;
     #endregion Status
 
     private List<Attachment> havingAttachment = new List<Attachment>();
-    public List<Attachment> H => havingAttachment;
+    public List<Attachment> HavingAttackment => havingAttachment;
 
     [SerializeField] protected int givingExp = 10;
     [SerializeField] protected int givingKeso = 20;
@@ -71,10 +78,11 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     protected ObjectPooler ownerPooler = null;
 
     #region IDamageable Implements
+
     // When call these three methods, keep below order.
     /* 
         monster.TakeDamage(Damage);
-        monster.TakeHittingDelay(hittingDelay);
+        monster.TakeAttackDelay(hittingDelay);
         monster.TakeForce(transform.up * 1f, hittingDelay);
         
     */
@@ -90,6 +98,8 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         float reduced = second / Toughness;
         if(reduced > 0.1f) {
             takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(reduced));
+        } else {
+            StartCoroutine(TakeBitDelayCoroutine());
         }
     }
 
@@ -98,7 +108,11 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         yield return new WaitForSeconds(second);
         stateMachine.ChangeState(chaseState);
     }
-
+    private IEnumerator TakeBitDelayCoroutine() {
+        material?.SetFloat("_Hit_Effect_Scale", 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        material?.SetFloat("_Hit_Effect_Scale", 0);
+    }
 
     public virtual void TakeForce(Vector2 force, float duration=.25f) {
         force = Toughness == 0  ?  force  :  force / Toughness;
@@ -120,6 +134,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     }
     #endregion IDamageable Implements
     
+    #region Unity events
     protected void Awake() {
         movement ??= GetComponent<Movement>();
         stateMachine ??= GetComponent<StateMachine>();
@@ -130,12 +145,19 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
 
         InitializeStates();
     }
-    protected void Start() {}
+    protected void Start() {
+        _StageManager.onChageStageLevel += IncreaseStageLevelHandler;
+        material = spriteRenderer?.material;
+    }
+
     protected void OnEnable() {
         OnSpawn();
     }
-    public void OnSpawn() {
+    #endregion Unity events
+
+    public virtual void OnSpawn() {
         isArrive = true;
+        maxHp = defaultHp * _StageManager.StageLevel;
         currentHp = maxHp;
         rigidbody2D.simulated = true;
         ownerPooler = GameManager.instance.StageManager.ScenarioDirector.monsterPoolerMap[this.MonsterType];
@@ -143,6 +165,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         stateMachine.isMuted = false;
         stateMachine.ChangeState(chaseState);
     }
+
     protected virtual void OnDie() {
         isArrive = false;
         rigidbody2D.simulated = false;
@@ -151,24 +174,27 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         ClearAttachments();
         _StageManager.OnMonsterDie(this);
         DropExp();
-        DropPotion();
+        DropMeat();
         DropKeso();
     }
+
     protected void DropExp() {
-        _StageManager.CreateExp(transform.position, givingExp);
+        _StageManager.CreateExp(transform.position, (int)(givingExp * _StageManager.StageLevel));
     }
-    protected void DropPotion() {
+
+    protected void DropMeat() {
         float ratio = 0.02f;
         float next = UnityEngine.Random.Range(0f, 1f);
         if(next < ratio)
             _StageManager.CreateMeat(transform.position);
     }
+
     protected void DropKeso() {
         float ratio = 0.25f;
         float next = UnityEngine.Random.Range(0f, 1f);
         int amount = (int)(givingKeso * UnityEngine.Random.Range(0.8f, 1.2f));
         if(next < ratio)
-            _StageManager.CreateKeso(transform.position, amount);
+            _StageManager.CreateKeso(transform.position, (int)(amount * _StageManager.StageLevel));
     }
 
     protected virtual void InitializeStates() {
@@ -184,14 +210,21 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         dieState.onActive += (State prev) => {
             isArrive = false;
             stateMachine.isMuted = true;
+            material?.SetColor("_Addition_Color", new Color(1, 1, 1, 0.0f));
             OnDie();
         };
+    }
+
+    protected void IncreaseStageLevelHandler(float prev, float next) {
+        float ratio = next / prev;
+        maxHp *= ratio;
+        currentHp *= ratio;
     }
 
     private IEnumerator UpdateTargetPoint() {
         while(isArrive) {
             targetDirection = (TargetCharacter.transform.position - transform.position).normalized;
-            yield return new WaitForSeconds(.4f);
+            yield return new WaitForSeconds(.7f);
         }
     }
     protected void LookAt2D(float x) {

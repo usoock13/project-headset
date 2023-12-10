@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(StateMachine))]
@@ -200,6 +201,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Action<Character> onDodge;
     #endregion Character Events
 
+    [SerializeField] private Light2D handLampLight;
+
     #region Unity Events
     protected void Awake() {
         movement ??= GetComponent<Movement>();
@@ -217,6 +220,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp(100);
+        if(Input.GetKeyDown(KeyCode.K)) {
+            GameManager.instance.StageManager.IncreaseStageLevel(0.1f);
+            print("success increaseing stage level. " + GameManager.instance.StageManager.StageLevel);
+        }
         #endif
         /* << FOR TEST */
         RecoverStamina();
@@ -445,6 +452,21 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     private void Die() {
         stateMachine.ChangeState(dieState, false);
         StageManager.GameOver();
+    }
+
+    public void TurnOnLamp(bool on) {
+        StartCoroutine(LampCoroutine(on));
+    }
+    private IEnumerator LampCoroutine(bool on) {
+        float offset = 0;
+        float start =   handLampLight.intensity;
+        float end =     on ? 0.6f :    0;
+        while(offset < 1) {
+            handLampLight.intensity = Mathf.Lerp(start, end, offset);
+            offset += Time.deltaTime * 0.5f;
+            yield return null;
+        }
+        handLampLight.intensity = end;
     }
 
     #region IAttachmentsTakeable Implements

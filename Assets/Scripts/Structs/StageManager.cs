@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class StageManager : MonoBehaviour {
     internal bool isGameOver = false;
@@ -53,12 +54,24 @@ public class StageManager : MonoBehaviour {
     public int KillScore { get; private set; } = 0;
     public int KesoEarned { get; private set; } = 0;
 
+    public float StageLevel { get; private set; } = 1f;
+    /// <summary>
+    /// float : Stage level value before stage level up.
+    /// float : Stage level value after atage level up.
+    /// </summary>
+    public Action<float, float> onChageStageLevel;
+
+    [SerializeField] private Light2D globalLight;
+    [SerializeField] private Color sunLightColor = Color.white;
+    [SerializeField] private Color moonLightColor = Color.gray;
+    
     private void Awake() {
         if(GameManager.instance.StageManager == null)
             GameManager.instance.StageManager = this;
         else
             Destroy(gameObject);
     }
+
     private void Start() {
         SpawnCharacter();
         character.InitializeCharacter();
@@ -76,6 +89,34 @@ public class StageManager : MonoBehaviour {
         MeatPooler = new ObjectPooler(meatOrigin.gameObject, null, null, parent: this.transform);
         kesoPooler = new ObjectPooler(kesoOrigin.gameObject, null, null, null, parent: this.transform);
     }
+
+    public void IncreaseStageLevel(float amount) {
+        float prev = StageLevel;
+        StageLevel += amount;
+        OnIncreaseStageLevel(prev, StageLevel);
+    }
+    public void ChangeDayNight(bool isDay) {
+        character.TurnOnLamp(!isDay);
+        StartCoroutine(ChangeDayNightCoroutine(isDay));
+    }
+    public IEnumerator ChangeDayNightCoroutine(bool isDay) {
+        if(globalLight != null) {
+            float offset = 0;
+            Color start = globalLight.color;
+            Color end = isDay ? sunLightColor : moonLightColor;
+            while(offset < 1) {
+                globalLight.color = Color.Lerp(start, end, offset);
+                offset += Time.deltaTime * 0.5f;
+                yield return null;
+            }
+            globalLight.color = end;
+        }
+    }
+
+    private void OnIncreaseStageLevel(float prev, float next) {
+        onChageStageLevel?.Invoke(prev, next);
+    }
+
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
         character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
@@ -87,9 +128,11 @@ public class StageManager : MonoBehaviour {
             character.MountCharacter(selectedCharacter[i].HeadmountCharacter);
         }
     }
+
     private void InitializeUI() {
         stageUIManager.InitializeStatusUI();
     }
+
     public void OnCharacterLevelUp() {
         if(character.CurrentState.Compare(character.dieState))
             return;

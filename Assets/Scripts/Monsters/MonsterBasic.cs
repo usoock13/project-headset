@@ -3,10 +3,11 @@ using System.Collections;
 using UnityEngine;
 
 public class MonsterBasic : Monster {
-    [SerializeField] private float attackPower = 10f;
+    [SerializeField] private float defaultAttackPower = 10f;
+    public float AttackPower => defaultAttackPower * (1 + (_StageManager.StageLevel - 1) * 0.5f);
 
+    private bool canAttack = false;
     private float attackInterval = 1f;
-    private float currentAttackCooldown = 1f;
 
     [SerializeField] private string monsterType;
     public override string MonsterType => monsterType;
@@ -17,13 +18,10 @@ public class MonsterBasic : Monster {
 
     private Coroutine dieCoroutine;
 
-    #region Unity Events
-    private void Update() {
-        if(currentAttackCooldown < attackInterval) {
-            currentAttackCooldown += Time.deltaTime;
-        }
+    public override void OnSpawn() {
+        base.OnSpawn();
+        canAttack = true;
     }
-    #endregion Unity Events
 
     protected override void InitializeStates() {
         base.InitializeStates();
@@ -62,10 +60,15 @@ public class MonsterBasic : Monster {
         }
     }
     private void HitChracter(Character character) {
-        if(currentAttackCooldown >= attackInterval) {
-            currentAttackCooldown = 0;
-            character?.TakeAttack(this, 10f);
+        if(canAttack) {
+            canAttack = false;
+            character?.TakeAttack(this, AttackPower);
+            StartCoroutine(AttackCoroutine());
         }
+    }
+    private IEnumerator AttackCoroutine() {
+        yield return new WaitForSeconds(attackInterval);
+        canAttack = true;
     }
     private IEnumerator DieCoroutine() {
         yield return new WaitForSeconds(3f);

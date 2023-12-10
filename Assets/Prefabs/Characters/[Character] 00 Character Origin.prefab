@@ -1074,6 +1074,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1478f0d77c2b8447ae4203500217f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &6171596081947297097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1589,7 +1592,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.9622642, g: 0.73366135, b: 0.32226774, a: 1}
-  m_Intensity: 0.6
+  m_Intensity: 0
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: a1b02bed000000008b8cc492512a59995718355e

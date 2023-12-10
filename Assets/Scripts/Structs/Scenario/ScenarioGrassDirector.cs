@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class ScenarioGrassDirector : ScenarioDirector {
     [SerializeField] private const int MAX_MONSTER_COUNT = 200;
-    [SerializeField] private Monster defaultMonster;
-    [SerializeField] private int defaultSpawncount = 1;
+    [SerializeField] private List<(Monster monster, int count)> autoSpanwMonsters;
     [SerializeField] private float defaultSpawnInterval = 1f;
     private int monsterSpawnedCount = 0;
 
@@ -14,16 +13,27 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
     [SerializeField] private MonsterBasic monsterWolf;
     [SerializeField] private MonsterBasic monsterBear;
-    [SerializeField] private MonsterToad monsterToad;
-    [SerializeField] private MonsterUndead monsterUndead;
-    [SerializeField] private MonsterWitch monsterWitch;
+    [SerializeField] private MonsterBasic monsterBat;
+
+    StageManager _StageManager => GameManager.instance.StageManager;
     
     protected override void InitializeScenario() {
+        autoSpanwMonsters = new List<(Monster monster, int count)>();
+
         monsterPoolerMap = new Dictionary<string, ObjectPooler> {
             {
                 monsterWolf.MonsterType,
                 new ObjectPooler(
                     monsterWolf.gameObject,
+                    parent: this.transform,
+                    count: 100,
+                    restoreCount: 20
+                )
+            },
+            {
+                monsterBat.MonsterType,
+                new ObjectPooler(
+                    monsterBat.gameObject,
                     parent: this.transform,
                     count: 100,
                     restoreCount: 20
@@ -43,22 +53,28 @@ public class ScenarioGrassDirector : ScenarioDirector {
         // poolerUndead = new Dictionary<string, ObjectPooler>();
         // poolerWitch = new Dictionary<string, ObjectPooler>();
 
-        scenarios.Add(new Scenario(3, () => {
-            defaultMonster = monsterWolf;
-            defaultSpawnInterval = 1.5f;
-            defaultSpawncount = 5;
+        scenarios.Add(new Scenario(2, () => {
+            autoSpanwMonsters.Add( (monsterBat, 3) );
+            autoSpanwMonsters.Add( (monsterWolf, 1) );
+            defaultSpawnInterval = 5f;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
         }));
-        scenarios.Add(new Scenario(5, () => {
+        scenarios.Add(new Scenario(10, () => {
             SpawnMonster(monsterBear, 1);
+        }));
+        scenarios.Add(new Scenario(15, () => {
+            _StageManager.IncreaseStageLevel(3);
+            _StageManager.ChangeDayNight(false);
         }));
     }
 
     protected IEnumerator SpawnDefaultMonster() {
         while(!ScenarioIsEnd) {
             if(monsterSpawnedCount < MAX_MONSTER_COUNT) {
-                SpawnMonster(defaultMonster, defaultSpawncount);
-                monsterSpawnedCount += defaultSpawncount;
+                foreach(var element in autoSpanwMonsters) {
+                    SpawnMonster(element.monster, element.count);
+                    monsterSpawnedCount += element.count;
+                }
             }
             yield return new WaitForSeconds(defaultSpawnInterval);
         }

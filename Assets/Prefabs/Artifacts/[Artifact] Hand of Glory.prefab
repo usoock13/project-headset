@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originArtifact: {fileID: 972108212714815233}
-  radius: 0.5
+  radius: 0.8
   monsterLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -770,7 +770,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.5
+      value: 0.8
       mode: 0
       spread: 0
       speed:

@@ -3,16 +3,15 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
     private float radius;
-    private const int BLOCK_LAYER = 7;
+    [SerializeField] private LayerMask blockLayer = 1<<7;
 
     public void Start() {
         radius = GetComponent<CircleCollider2D>()?.radius ?? radius;
     }
     public void MoveToward(Vector2 moveVector) {
-        if(Physics2D.OverlapCircle(transform.position, radius, 1<<BLOCK_LAYER))
-            return;
-
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius*1.1f, moveVector, moveVector.magnitude, 1<<BLOCK_LAYER);
+        // if(Physics2D.OverlapCircle(transform.position, radius, blockLayer.value))
+        //     return;
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius*1.1f, moveVector, moveVector.magnitude, blockLayer.value);
         Vector2 normal = moveVector.normalized;
         foreach(RaycastHit2D hit in hits) {
             if(hit.transform.gameObject != gameObject) {
@@ -26,12 +25,22 @@ public class Movement : MonoBehaviour {
         transform.Translate(final);
     }
     public void Translate(Vector2 moveVector) {
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.1f, moveVector, moveVector.magnitude, blockLayer.value);
+        int count = 0;
+        for(int i=0; i<hits.Length; i++) {
+            if(hits[i].transform.gameObject != this.gameObject) {
+                transform.Translate((transform.position - hits[i].transform.position) * moveVector.magnitude);
+                if(++ count > 3)
+                    break;
+            }
+        }
         transform.Translate(moveVector);
     }
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.layer == BLOCK_LAYER) {
+        if((1<<other.gameObject.layer & blockLayer.value) > 0
+        && other.gameObject != this.gameObject) {
             transform.Translate(((Vector2)transform.position - other.ClosestPoint(transform.position)) * Time.deltaTime);
-            print("Character in the collider that has block layer");
+            print($"{gameObject.name} is in the collider that has block layer");
         }
     }
 }

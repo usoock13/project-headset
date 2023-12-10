@@ -38,10 +38,7 @@ public class EquipmentManager : MonoBehaviour {
         bonusChoises = bonusChoisesParent.GetComponentsInChildren<Item>(true).ToList();
     }
     #if UNITY_EDITOR
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.G))
-            ChangeWeapon(0, __testItem);
-    }
+    
     #endif
     public IPlayerGettable[] RandomChoises(int number) {
         List<IPlayerGettable> candidates = new List<IPlayerGettable>();
