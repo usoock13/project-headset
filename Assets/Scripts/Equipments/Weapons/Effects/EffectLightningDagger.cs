@@ -53,12 +53,15 @@ public class EffectLightningDagger : EffectProjectile {
     }
 
     private IEnumerator ChainLightning(GameObject hit) {
+        GameObject last = hit.gameObject;
         Vector2 lastPoint = hit.transform.position;
         var lineRenderers = new List<LineRenderer>();
         
         for(int i=0;  i<originWeapon.ChainingCount;  i++){
             Collider2D[] inners = Physics2D.OverlapCircleAll(lastPoint, chainingRadius, targetLayer);
             foreach(var inner in inners) {
+                if(last == inner.gameObject)
+                    continue;
                 if(inner.TryGetComponent(out Monster target)) {
                     target.TakeDamage(originWeapon.ChainingDamage);
                     target.TakeAttackDelay(chainingHittingDelay);
@@ -66,11 +69,11 @@ public class EffectLightningDagger : EffectProjectile {
                     LineRenderer lr = originWeapon.LineRendererPooler.OutPool().GetComponent<LineRenderer>();
                     lineRenderers.Add(lr);
                     if(lr is not null) {
-
                         lr.positionCount = 2;
                         lr.material.SetFloat("_Last_Start_Time", Time.time);
                         lr.SetPosition(0, lastPoint);
                         lr.SetPosition(1, target.transform.position);
+                        last = target.gameObject;
                         lastPoint = target.transform.position;
                         yield return new WaitForSeconds(0.08f);
                         break;

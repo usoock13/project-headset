@@ -129,11 +129,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 0}
-      - {x: -1, y: 1.7888544}
-      - {x: -0.6032176, y: 1.9258511}
-      - {x: 0, y: 2}
-      - {x: 0.6032176, y: 1.925851}
-      - {x: 1, y: 1.788854}
+      - {x: 2.121321, y: 2.121321}
+      - {x: 1.1480502, y: 2.7716384}
+      - {x: 0, y: 3}
+      - {x: -1.1480502, y: 2.7716384}
+      - {x: -2.121321, y: 2.121321}
 --- !u!198 &4620205840647711031
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -386,7 +386,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1.97
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -439,7 +439,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 7.28
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1634,7 +1634,7 @@ ParticleSystem:
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
     tilesX: 3
-    tilesY: 2
+    tilesY: 3
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -4920,7 +4920,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34e78034e36b36a4bbeae333ec975999, type: 2}
+  - {fileID: 2100000, guid: e890857cedb2fa741a00b93a059f0293, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

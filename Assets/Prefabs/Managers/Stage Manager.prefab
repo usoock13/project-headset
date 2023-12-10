@@ -1274,11 +1274,11 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.44255075, g: 0.4833976, b: 0.6132076, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: a1b02bed512a59995718355e00000000
+  m_ApplyToSortingLayers: a1b02bed512a59995718355e00000000c55e1887
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -6262,7 +6262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSpawnPoint: {fileID: 1709495040}
   __testCharacters:
-  - {fileID: 3436822020272946154, guid: 76c9d2544cc0e314586e7b177ecc04be, type: 3}
+  - {fileID: 7016407898438589713, guid: 293dd8f4272656246a73db77699200c1, type: 3}
   - {fileID: 6215241322940970394, guid: 9d6a242972dc0224f8d1a9cdab8da8f6, type: 3}
   - {fileID: 1679132990418732944, guid: 99d27420e93610547883acc86984455b, type: 3}
   scenarioDirector: {fileID: 2011709208}
@@ -6276,7 +6276,7 @@ MonoBehaviour:
   damagePrinter: {fileID: 23886302435565243}
   globalLight: {fileID: 619394801}
   sunLightColor: {r: 1, g: 1, b: 1, a: 1}
-  moonLightColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  moonLightColor: {r: 0.44313726, g: 0.48235294, b: 0.6117647, a: 1}
 --- !u!1 &1542045614983733762
 GameObject:
   m_ObjectHideFlags: 0
