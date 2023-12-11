@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ public class EffectColdSpear : EffectProjectile {
     public WeaponColdSpear originWeapon;
     private float flyingSpeed = 31f;
     [SerializeField] private LayerMask targetLayer = 1<<8;
-    [SerializeField] private ParticleSystem explosionEffect;
     [SerializeField] private CircleBounds damageAreaBounds;
     [SerializeField] private SpriteRenderer projectileRenderer;
 
@@ -41,7 +41,6 @@ public class EffectColdSpear : EffectProjectile {
     protected override void Disapear() {
         base.Disapear();
         projectileRenderer.enabled = false;
-        explosionEffect.Play();
         AttackArea();
         isActive = false;
     }
@@ -56,9 +55,14 @@ public class EffectColdSpear : EffectProjectile {
                 if(target.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
                     target.ReleaseAttachment(already);
                 target.TakeAttachment(attch);
+                originWeapon.SideEffectPooler.OutPool(target.transform.position, Quaternion.identity);
                 GameManager.instance.Character.OnAttackMonster(target);
             }
         }
+    }
+    private IEnumerator InPoolSideEffect(GameObject effect) {
+        yield return new WaitForSeconds(3f);
+        originWeapon.SideEffectPooler.InPool(effect);
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;

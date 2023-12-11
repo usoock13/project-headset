@@ -226,8 +226,10 @@ MonoBehaviour:
   rigidbody2D: {fileID: 2430626424060954413}
   defaultMoveSpeed: 1.5
   defaultToughness: 1
-  defaultHp: 90
+  defaultHp: 20
   maxHp: 100
+  givingExp: 10
+  givingKeso: 20
   defaultAttackPower: 8
   monsterType: Bat
 --- !u!114 &5281126444557153126

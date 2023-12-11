@@ -6,6 +6,7 @@ public class EffectChainSickle : MonoBehaviour {
     public WeaponChainSickle originWeapon;
 
     private float flyingSpeed = 24f;
+    private float currentFlyingSpeed = 24f;
     private float flyingTime = 0.3f;
     private float flyingHittingDelay = 0.5f;
 
@@ -32,6 +33,8 @@ public class EffectChainSickle : MonoBehaviour {
     private bool isActive = false;
     private float lifetime = 0f;
 
+    private Coroutine flyingCoroutine;
+
     private void Start() {
         if(originWeapon == null) {
             Debug.LogError($"{this.gameObject.name}'s 'origin weapon' variable is not definded.\nThis game object will be destoyed.");
@@ -45,7 +48,7 @@ public class EffectChainSickle : MonoBehaviour {
 
     private void OnEnable() {
         RotateRenderer();
-        StartCoroutine(FlyCoroutine());
+        flyingCoroutine = StartCoroutine(FlyCoroutine());
     }
 
     private void RotateRenderer() {
@@ -62,15 +65,21 @@ public class EffectChainSickle : MonoBehaviour {
         lifetime = 0;
         isActive = true;
         isPulling = false;
+        currentFlyingSpeed = flyingSpeed;
         anim.clip = flyingAnimation;
         anim.Play();
         hitMonsters.Clear();
         while(lifetime < 1) {
             lifetime += Time.deltaTime / flyingTime;
-            transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
+            transform.Translate(Vector2.up * currentFlyingSpeed * Time.deltaTime);
             chainYAddition = lifetime;
             yield return null;
         }
+        HookSickle();
+    }
+    private void HookSickle() {
+        if(flyingCoroutine != null)
+            StopCoroutine(flyingCoroutine);
         sickleRenderer.sprite = hookedSprite;
         isActive = false;
     }
@@ -122,6 +131,7 @@ public class EffectChainSickle : MonoBehaviour {
                     damage = originWeapon.Damage;
                     hittingDelay = flyingHittingDelay;
                     attackForce = transform.up * .6f;
+                    currentFlyingSpeed *= 0.7f;
                 } else {
                     damage = originWeapon.PullingDamage;
                     hittingDelay = pullingHittingDelay;

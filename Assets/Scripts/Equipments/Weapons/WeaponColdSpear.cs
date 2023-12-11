@@ -4,8 +4,10 @@ using UnityEngine;
 public class WeaponColdSpear : Weapon {
     [SerializeField] private EffectColdSpear projectile;
     [SerializeField] private AttachmentFreeze attachment;
+    [SerializeField] private GameObject sideEffect;
     public ObjectPooler EffectPooler { get; private set; }
     public ObjectPooler AttachmentPooler { get; private set; }
+    public ObjectPooler SideEffectPooler { get; private set; }
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
@@ -13,7 +15,7 @@ public class WeaponColdSpear : Weapon {
     private float[] interval = new float[MAX_LEVEL]         {   2.5f,   2.5f,   2.0f,   2.0f,   2.0f,  }; // 공격 간격
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.3f,   0.3f,   0.3f,   0.3f,   0.3f,  }; // 피해 계수
     private float[] staticDamage = new float[MAX_LEVEL]     {    15f,    15f,    25f,    25f,    30f,  }; // 고정 피해량
-    private float[] freezingTime = new float[MAX_LEVEL]     {   0.6f,   1.0f,   1.0f,   1.0f,   2.0f,  }; // 빙결 시간
+    private float[] freezingTime = new float[MAX_LEVEL]     {   0.6f,   0.7f,   0.8f,   0.8f,   1.0f,  }; // 빙결 시간
     private float[] areaScale = new float[MAX_LEVEL]        {     1f,     1f,     1f,   1.2f,   1.5f,  }; // 폭발 범위
     protected override float AttackInterval => interval[level-1];
 
@@ -40,6 +42,10 @@ public class WeaponColdSpear : Weapon {
         );
         AttachmentPooler = new ObjectPooler(
             poolingObject: attachment.gameObject,
+            parent: this.transform
+        );
+        SideEffectPooler = new ObjectPooler(
+            poolingObject: sideEffect,
             parent: this.transform
         );
     }

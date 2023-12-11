@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 2203739214735206125}
     - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: defaultHp
-      value: 265
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: monsterType
@@ -269,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 2203739214735206115}
     - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: defaultMoveSpeed
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4342474256135882105, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_RootOrder

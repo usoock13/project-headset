@@ -14,6 +14,8 @@ public class ScenarioGrassDirector : ScenarioDirector {
     [SerializeField] private MonsterBasic monsterWolf;
     [SerializeField] private MonsterBasic monsterBear;
     [SerializeField] private MonsterBasic monsterBat;
+    [SerializeField] private MonsterBasic monsterGoblin;
+    [SerializeField] private MonsterBasic monsterGoblinRider;
 
     StageManager _StageManager => GameManager.instance.StageManager;
     
@@ -48,21 +50,42 @@ public class ScenarioGrassDirector : ScenarioDirector {
                     restoreCount: 2
                 )
             },
+            {
+                monsterGoblin.MonsterType,
+                new ObjectPooler(
+                    monsterGoblin.gameObject,
+                    parent: this.transform,
+                    count: 100,
+                    restoreCount: 20
+                )
+            },
+            {
+                monsterGoblinRider.MonsterType,
+                new ObjectPooler(
+                    monsterGoblinRider.gameObject,
+                    parent: this.transform,
+                    count: 50,
+                    restoreCount: 10
+                )
+            },
         };
         // poolerToad = new Dictionary<string, ObjectPooler>();
         // poolerUndead = new Dictionary<string, ObjectPooler>();
         // poolerWitch = new Dictionary<string, ObjectPooler>();
 
         scenarios.Add(new Scenario(2, () => {
-            autoSpanwMonsters.Add( (monsterBat, 3) );
-            autoSpanwMonsters.Add( (monsterWolf, 1) );
+            autoSpanwMonsters.Add( (monsterBat, 9) );
+            autoSpanwMonsters.Add( (monsterWolf, 2) );
             defaultSpawnInterval = 5f;
             spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
         }));
-        scenarios.Add(new Scenario(10, () => {
-            SpawnMonster(monsterBear, 1);
+        scenarios.Add(new Scenario(5, () => {
+            autoSpanwMonsters.Add( (monsterGoblin, 3) );
+            autoSpanwMonsters.Add( (monsterGoblinRider, 1) );
+            defaultSpawnInterval = 5f;
         }));
-        scenarios.Add(new Scenario(15, () => {
+        scenarios.Add(new Scenario(60, () => {
+            SpawnMonster(monsterBear, 1);
             _StageManager.IncreaseStageLevel(3);
             _StageManager.ChangeDayNight(false);
         }));
