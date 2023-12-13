@@ -47,11 +47,11 @@ public class EffectFireRing : MonoBehaviour {
                         target.TakeDamage(originWeapon.Damage);
                         target.TakeAttackDelay(hittingDelay);
                         target.TakeForce(forceDir * attackForce, hittingDelay);
-                        audioSource.PlayOneShot(explosionSound);
                         explosionParticle.Play();
-                        Inactive();
                     }
                 }
+                audioSource.PlayOneShot(explosionSound);
+                Inactive();
             }
         }
     }

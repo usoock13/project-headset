@@ -24130,6 +24130,7 @@ GameObject:
   - component: {fileID: 696128500888791722}
   - component: {fileID: 1449645383854724341}
   - component: {fileID: 6761354064252191471}
+  - component: {fileID: 8814091458433564816}
   m_Layer: 9
   m_Name: '[Effect] Fireball (4)'
   m_TagString: Untagged
@@ -24176,7 +24177,6 @@ MonoBehaviour:
   trailParticle: {fileID: 8429375055054798695}
   audioSource: {fileID: 6761354064252191471}
   explosionSound: {fileID: 8300000, guid: 21d725ff5aed94943a94bc9c3f27a8fe, type: 3}
-  generationSound: {fileID: 8300000, guid: 6062285dd73859b4e93f44ecd423bbb3, type: 3}
 --- !u!58 &1449645383854724341
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24289,6 +24289,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &8814091458433564816
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096496718560828762}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3913324331712313345
 GameObject:
   m_ObjectHideFlags: 0
@@ -43589,6 +43610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  extraInformation: 
   effects:
   - {fileID: 8710336082612426103}
   - {fileID: 190267201072137122}
@@ -43625,6 +43647,7 @@ GameObject:
   - component: {fileID: 190267201072137122}
   - component: {fileID: 7541972267181777077}
   - component: {fileID: 2619245704703805024}
+  - component: {fileID: 4514099277496679541}
   m_Layer: 9
   m_Name: '[Effect] Fireball (2)'
   m_TagString: Untagged
@@ -43671,7 +43694,6 @@ MonoBehaviour:
   trailParticle: {fileID: 5763408823887463914}
   audioSource: {fileID: 2619245704703805024}
   explosionSound: {fileID: 8300000, guid: 21d725ff5aed94943a94bc9c3f27a8fe, type: 3}
-  generationSound: {fileID: 8300000, guid: 6062285dd73859b4e93f44ecd423bbb3, type: 3}
 --- !u!58 &7541972267181777077
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -43784,6 +43806,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &4514099277496679541
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316885555623091575}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5477537035400448868
 GameObject:
   m_ObjectHideFlags: 0
@@ -58290,6 +58333,7 @@ GameObject:
   - component: {fileID: 4773261640804195854}
   - component: {fileID: 5252009233928552535}
   - component: {fileID: 8354598792110287214}
+  - component: {fileID: 6880144966219826379}
   m_Layer: 9
   m_Name: '[Effect] Fireball (5)'
   m_TagString: Untagged
@@ -58336,7 +58380,6 @@ MonoBehaviour:
   trailParticle: {fileID: 2579189356030877777}
   audioSource: {fileID: 8354598792110287214}
   explosionSound: {fileID: 8300000, guid: 21d725ff5aed94943a94bc9c3f27a8fe, type: 3}
-  generationSound: {fileID: 8300000, guid: 6062285dd73859b4e93f44ecd423bbb3, type: 3}
 --- !u!58 &5252009233928552535
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -58449,6 +58492,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &6880144966219826379
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639722262673007819}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5735614256713978680
 GameObject:
   m_ObjectHideFlags: 0
@@ -58461,6 +58525,7 @@ GameObject:
   - component: {fileID: 1650339296196938590}
   - component: {fileID: 7276934932598997507}
   - component: {fileID: 3421640987575921919}
+  - component: {fileID: 6579536159369293719}
   m_Layer: 9
   m_Name: '[Effect] Fireball (3)'
   m_TagString: Untagged
@@ -58507,7 +58572,6 @@ MonoBehaviour:
   trailParticle: {fileID: 3331541595351638502}
   audioSource: {fileID: 3421640987575921919}
   explosionSound: {fileID: 8300000, guid: 21d725ff5aed94943a94bc9c3f27a8fe, type: 3}
-  generationSound: {fileID: 8300000, guid: 6062285dd73859b4e93f44ecd423bbb3, type: 3}
 --- !u!58 &7276934932598997507
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -58620,6 +58684,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &6579536159369293719
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735614256713978680}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6274898807383606254
 GameObject:
   m_ObjectHideFlags: 0
@@ -68314,6 +68399,7 @@ GameObject:
   - component: {fileID: 7521308731286158573}
   - component: {fileID: 936469192447686930}
   - component: {fileID: 489376167569959657}
+  - component: {fileID: 2276124096904663532}
   m_Layer: 9
   m_Name: '[Effect] Fireball (6)'
   m_TagString: Untagged
@@ -68360,7 +68446,6 @@ MonoBehaviour:
   trailParticle: {fileID: 2432063286989281144}
   audioSource: {fileID: 489376167569959657}
   explosionSound: {fileID: 8300000, guid: 21d725ff5aed94943a94bc9c3f27a8fe, type: 3}
-  generationSound: {fileID: 8300000, guid: 6062285dd73859b4e93f44ecd423bbb3, type: 3}
 --- !u!58 &936469192447686930
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -68473,6 +68558,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &2276124096904663532
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607559169379489355}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7763282686356519269
 GameObject:
   m_ObjectHideFlags: 0
@@ -78167,6 +78273,7 @@ GameObject:
   - component: {fileID: 8710336082612426103}
   - component: {fileID: 3181068741855997277}
   - component: {fileID: 2611334395040983740}
+  - component: {fileID: 8582745586601648152}
   m_Layer: 9
   m_Name: '[Effect] Fireball (1)'
   m_TagString: Untagged
@@ -78213,7 +78320,6 @@ MonoBehaviour:
   trailParticle: {fileID: 678928216100665635}
   audioSource: {fileID: 2611334395040983740}
   explosionSound: {fileID: 8300000, guid: 21d725ff5aed94943a94bc9c3f27a8fe, type: 3}
-  generationSound: {fileID: 8300000, guid: 6062285dd73859b4e93f44ecd423bbb3, type: 3}
 --- !u!58 &3181068741855997277
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -78326,6 +78432,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &8582745586601648152
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439498068482545938}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8825602159767152706
 GameObject:
   m_ObjectHideFlags: 0

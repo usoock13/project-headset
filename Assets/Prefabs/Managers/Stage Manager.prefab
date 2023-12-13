@@ -1256,7 +1256,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1518991961084924916}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &619394801
 MonoBehaviour:
@@ -3770,7 +3770,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1518991961084924916}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1623357324
 MonoBehaviour:
@@ -3852,68 +3852,6 @@ MonoBehaviour:
   levelTexts:
   - {fileID: 1396017097}
   - {fileID: 750193761}
---- !u!1 &1675668300
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1675668302}
-  - component: {fileID: 1675668301}
-  - component: {fileID: 1675668303}
-  m_Layer: 0
-  m_Name: Item Getter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1675668302
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675668300}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1518991961084924916}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1675668301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675668300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d6d2edc4594c4248a20adce24947204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
---- !u!58 &1675668303
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675668300}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2
 --- !u!1 &1685749928
 GameObject:
   m_ObjectHideFlags: 0
@@ -4338,6 +4276,8 @@ MonoBehaviour:
   monsterWolf: {fileID: 8827275723782606859, guid: a864c26925de80044bc03d090f0fee3f, type: 3}
   monsterBear: {fileID: 8287656728954601790, guid: aa7fa0a53f1534e4095491f78cb3acd8, type: 3}
   monsterBat: {fileID: 5021188650886164937, guid: ed76029500c95944c86ae272ac958a30, type: 3}
+  monsterGoblin: {fileID: 0}
+  monsterGoblinRider: {fileID: 0}
 --- !u!1 &2039748777
 GameObject:
   m_ObjectHideFlags: 0
@@ -6242,7 +6182,6 @@ Transform:
   - {fileID: 645271449}
   - {fileID: 1127542977}
   - {fileID: 169608903755178395}
-  - {fileID: 1675668302}
   - {fileID: 1623357323}
   - {fileID: 619394802}
   m_Father: {fileID: 0}
@@ -6269,7 +6208,7 @@ MonoBehaviour:
   equipmentsManager: {fileID: 645271450}
   stageUIManager: {fileID: 1528812583}
   mainCamera: {fileID: 169608903755178340}
-  itemCollector: {fileID: 1675668301}
+  itemCollector: {fileID: 0}
   expJewel: {fileID: 4080156060269761904, guid: acb57ea86207ef64e88efa1388ab93b3, type: 3}
   meatOrigin: {fileID: 6169390572222454006, guid: 26182a5d20ca64d418497cdfe47ea3a5, type: 3}
   kesoOrigin: {fileID: 4610777979350597109, guid: 6c3d002b49596ff4d8d337412eb442c3, type: 3}

@@ -126,7 +126,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         Vector2 current = force;
         while(offset <= 1) {
             Vector2 next = Vector2.Lerp(Vector2.zero, force, Mathf.Pow(1-offset, 5));
-            movement.MoveToward(current - next);
+            movement.Translate(current - next);
             current = next;
             offset += Time.deltaTime * step;
             yield return null;

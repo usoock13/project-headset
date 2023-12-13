@@ -2,16 +2,17 @@ using System;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    private float radius;
+    private float bounds;
     [SerializeField] private LayerMask blockLayer = 1<<7;
 
     public void Start() {
-        radius = GetComponent<CircleCollider2D>()?.radius ?? radius;
+        var size = GetComponent<Collider2D>().bounds.size;
+        bounds = Mathf.Min(size.x, size.y);
     }
     public void MoveToward(Vector2 moveVector) {
         // if(Physics2D.OverlapCircle(transform.position, radius, blockLayer.value))
         //     return;
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius*1.1f, moveVector, moveVector.magnitude, blockLayer.value);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, bounds*1.1f, moveVector, moveVector.magnitude, blockLayer.value);
         Vector2 normal = moveVector.normalized;
         foreach(RaycastHit2D hit in hits) {
             if(hit.transform.gameObject != gameObject) {

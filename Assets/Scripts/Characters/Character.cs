@@ -47,6 +47,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(additions != null)
             for(int i=0; i<additions.Length; i++)
                 final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
+        print(final);
         return final;
     }}
     protected float staminaForDodge = 100f;
@@ -81,8 +82,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         get { return itemCollector; }
         set { 
             itemCollector = value;
-            itemCollector.transform.SetParent(null);
-            itemCollector.owner = this.transform;
         }
     }
 
@@ -255,7 +254,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #region Initialize Die State
         dieState.onActive += (State previous) => {
             stateMachine.isMuted = true;
-            itemCollector.gameObject.SetActive(false);
         };
         #endregion Initialize Die State
 
