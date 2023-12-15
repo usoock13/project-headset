@@ -1223,6 +1223,8 @@ Transform:
   - {fileID: 7991959169310525349}
   - {fileID: 4181726005862475991}
   - {fileID: 7362929726731821157}
+  - {fileID: 3161333473759383470}
+  - {fileID: 8267638772247306839}
   m_Father: {fileID: 645271449}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1236,7 +1238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 619394802}
   - component: {fileID: 619394801}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Global Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4276,8 +4278,8 @@ MonoBehaviour:
   monsterWolf: {fileID: 8827275723782606859, guid: a864c26925de80044bc03d090f0fee3f, type: 3}
   monsterBear: {fileID: 8287656728954601790, guid: aa7fa0a53f1534e4095491f78cb3acd8, type: 3}
   monsterBat: {fileID: 5021188650886164937, guid: ed76029500c95944c86ae272ac958a30, type: 3}
-  monsterGoblin: {fileID: 0}
-  monsterGoblinRider: {fileID: 0}
+  monsterGoblin: {fileID: 8827275723782606859, guid: 0ebccabad95bb1742afe79f51ebbd75f, type: 3}
+  monsterGoblinRider: {fileID: 8827275723782606859, guid: 043ce569bc5394748948ceb0e8c3c582, type: 3}
 --- !u!1 &2039748777
 GameObject:
   m_ObjectHideFlags: 0
@@ -4802,7 +4804,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4839,7 +4841,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -13577,6 +13579,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 76598019019729480, guid: 787fe06f081cea04eb10b7aad768ace2, type: 3}
   m_PrefabInstance: {fileID: 1518991961285002834}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1518991961300967874
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 618784043}
+    m_Modifications:
+    - target: {fileID: 7469227184000369556, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_Name
+      value: '[Awaken Weapon] Explosion Arrow'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369556, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+--- !u!4 &8267638772247306839 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7469227184000369557, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
+  m_PrefabInstance: {fileID: 1518991961300967874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1518991961327985967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14589,6 +14657,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7583383592976911184, guid: 038f86b6df00ccf4eb184bee71c3b6f7, type: 3}
   m_PrefabInstance: {fileID: 1518991963032946698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1518991963056527267
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 618784043}
+    m_Modifications:
+    - target: {fileID: 4524951245690148876, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_Name
+      value: '[Awaken Weapon] XXXLcalibur'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148876, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+--- !u!4 &3161333473759383470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4524951245690148877, guid: fd7b11a4cb0218e4ba218c1f78930d4e, type: 3}
+  m_PrefabInstance: {fileID: 1518991963056527267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1758959535826430143
 PrefabInstance:

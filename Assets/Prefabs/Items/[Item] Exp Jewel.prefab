@@ -50,7 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   givingExp: 0
   icon: {fileID: 1981910703, guid: 4a4f746faedd5d045883f4e48deb2731, type: 3}
-  spriteList: []
+  spriteList:
+  - {fileID: 1094833510, guid: 4a4f746faedd5d045883f4e48deb2731, type: 3}
+  - {fileID: 2134087002, guid: 4a4f746faedd5d045883f4e48deb2731, type: 3}
+  - {fileID: 1981910703, guid: 4a4f746faedd5d045883f4e48deb2731, type: 3}
 --- !u!212 &4080156060269761910
 SpriteRenderer:
   m_ObjectHideFlags: 0

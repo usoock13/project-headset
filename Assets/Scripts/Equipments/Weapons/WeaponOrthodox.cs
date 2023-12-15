@@ -3,25 +3,19 @@ using System.Collections;
 using UnityEngine;
 
 public class WeaponOrthodox : Weapon {
-    [SerializeField] private EffectOnePunch onePunchEffect;
-    [SerializeField] private EffectTwoPunch twoPunchEffect;
-    [SerializeField] private EffectStraightPunch straightPunchEffect;
-    private ObjectPooler onePunchEffectPooler;
-    private ObjectPooler twoPunchEffectPooler;
-    private ObjectPooler straightPunchEffectPooler;
+    [SerializeField] private EffectStraightPunch punchEffect;
+    public ObjectPooler EffectPooler { get; private set; }
     [SerializeField] float attackRange = .5f;
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]                 {  1.3f,    1.2f,    1.1f,    1.0f,    0.9f }; // 공격 간격
-    private float[] damageOfOneScale = new float[MAX_LEVEL]         {  0.4f,    0.5f,    0.6f,    0.7f,    0.8f }; // 원 펀치 피해계수
-    private float[] damageOfTwoScale = new float[MAX_LEVEL]         { 0.55f,   0.65f,   0.75f,   0.85f,   0.95f }; // 투 펀치 피해계수
-    private float[] damageOfStraightScale = new float[MAX_LEVEL]    {  1.5f,    1.5f,    1.5f,    1.5f,    1.5f }; // 스트레이트 피해계수
+    private float[] interval = new float[MAX_LEVEL]        { 1.3f,    1.3f,    1.3f,    1.3f,    1.3f }; // 공격 간격
+    private int[] attackCount = new int[MAX_LEVEL]         {    2,       2,       3,       3,       5 }; // 공격 횟수
+    private float[] staticDamage = new float[MAX_LEVEL]    {  10f,     20f,     20f,     30f,     30f }; // 고정 피해량
+    private float[] damageCoef = new float[MAX_LEVEL]      { 0.3f,    0.3f,    0.3f,    0.3f,    0.3f }; // 피해 계수
     protected override float AttackInterval => interval[level-1];
-    public float DamageOfOne => damageOfOneScale[level-1] * _Character.Power;
-    public float DamageOfTwo => damageOfTwoScale[level-1] * _Character.Power;
-    public float DamageOfStraight => damageOfStraightScale[level-1] * _Character.Power;
+    public float DamageOfStraight => damageCoef[level-1] * _Character.Power;
     #endregion Weapon Status
 
     #region Weapon Information
@@ -30,36 +24,23 @@ public class WeaponOrthodox : Weapon {
     public override string Name => "오소독스";
     public override string Description => 
         NextLevelIndex switch {
-            4 => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 원 투 스트레이트 펀치를 날려 각각 <color=#f40>{damageOfOneScale[NextLevelIndex]*100}% / {damageOfTwoScale[NextLevelIndex]*100}% / {damageOfStraightScale[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
-            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 원 투 펀치를 날려 각각 <color=#f40>{damageOfOneScale[NextLevelIndex]*100}% / {damageOfTwoScale[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 펀치를<color=#f40>{attackCount[NextLevelIndex]}회</color> 내질러 각각 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
         };
     #endregion Weapon Information
 
     private void Awake() {
-        onePunchEffectPooler = new ObjectPooler(poolingObject: onePunchEffect.gameObject, parent: this.transform);
-        twoPunchEffectPooler = new ObjectPooler(poolingObject: twoPunchEffect.gameObject, parent: this.transform);
-        straightPunchEffectPooler = new ObjectPooler(poolingObject: straightPunchEffect.gameObject, parent: this.transform);
+        EffectPooler = new ObjectPooler(poolingObject: punchEffect.gameObject, parent: this.transform);
     }
     protected override void Attack() {
         StartCoroutine(AttackCoroutine());
         _Character.OnAttack();
     }
     private IEnumerator AttackCoroutine() {
-        Vector3 effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
-        GameObject instance = onePunchEffectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
-        StartCoroutine(InPoolEffect(5f, instance, onePunchEffectPooler));
-
-        yield return new WaitForSeconds(.15f);
-
-        effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
-        instance = twoPunchEffectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
-        StartCoroutine(InPoolEffect(5f, instance, twoPunchEffectPooler));
-
-        if(level >= 5) {
-            yield return new WaitForSeconds(.15f);
-            effectPoint = _Character.attackArrow.position + _Character.attackArrow.forward*attackRange;
-            instance = straightPunchEffectPooler.OutPool(effectPoint, _Character.attackArrow.rotation);
-            StartCoroutine(InPoolEffect(5f, instance, straightPunchEffectPooler));
+        for(int i=0; i<attackCount[level-1]; i++) {
+            var instance = EffectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
+            instance.transform.Rotate(Vector3.forward, UnityEngine.Random.Range(-30f, 30f));
+            StartCoroutine(InPoolEffect(3f, instance, EffectPooler));
+            yield return new WaitForSeconds(0.1f);
         }
     }
     private IEnumerator InPoolEffect(float delay, GameObject effect, ObjectPooler pooler) {

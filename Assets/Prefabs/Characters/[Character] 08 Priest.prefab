@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5964419567356530393}
   - component: {fileID: 2759207233222750408}
   m_Layer: 3
-  m_Name: '[Head Ability] Head Ability Mage'
+  m_Name: '[Head Ability] Head Ability Prist'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

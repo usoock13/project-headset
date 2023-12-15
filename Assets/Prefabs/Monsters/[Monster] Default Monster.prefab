@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6182874355846385692}
   - component: {fileID: 6342264030857522985}
   - component: {fileID: 6342264030857522980}
-  - component: {fileID: 6342264030857522981}
   - component: {fileID: 6342264030857522982}
   - component: {fileID: 6342264030857522983}
   - component: {fileID: 600749143156082620}
   - component: {fileID: 7729059201679774176}
   - component: {fileID: 4328441013541657025}
+  - component: {fileID: 6342264030857522981}
   - component: {fileID: 3527790578222439278}
   m_Layer: 8
   m_Name: '[Monster] Default Monster'
@@ -112,27 +112,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &6342264030857522981
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6342264030857522990}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 2
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!114 &6342264030857522982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +191,27 @@ MonoBehaviour:
   givingKeso: 20
   defaultAttackPower: 10
   monsterType: 
+--- !u!50 &6342264030857522981
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342264030857522990}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 2
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &3527790578222439278
 MonoBehaviour:
   m_ObjectHideFlags: 0

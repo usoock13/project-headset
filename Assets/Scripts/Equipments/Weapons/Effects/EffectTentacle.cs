@@ -57,6 +57,7 @@ public class EffectTentacle : MonoBehaviour {
             inners[i].TakeDamage(Damage);
             inners[i].TakeAttackDelay(interval * 1.1f);
             inners[i].TakeForce(transform.up * attackForceScalar);
+            GameManager.instance.Character.OnAttackMonster(inners[i]);
         }
     }
 

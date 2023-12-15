@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class ExpJewel : Item {
-    public int givingExp = 0;
+    private int givingExp = 0;
     public int GivingExp {
         get => givingExp;
         set {

@@ -47,6 +47,7 @@ public class EffectFireRing : MonoBehaviour {
                         target.TakeDamage(originWeapon.Damage);
                         target.TakeAttackDelay(hittingDelay);
                         target.TakeForce(forceDir * attackForce, hittingDelay);
+                        GameManager.instance.Character.OnAttackMonster(monster);
                         explosionParticle.Play();
                     }
                 }

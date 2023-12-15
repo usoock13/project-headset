@@ -4,7 +4,7 @@ public class ArtifactBrace : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] extraPower = new float[] {  10f,   13f,   16f,   19f,   22f };
+    private float[] extraPower = new float[] {  7f,   10f,   13f,   16f,   19f };
     #endregion Artifact Status
 
     #region Artifact Information

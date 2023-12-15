@@ -155,7 +155,7 @@ public class StageManager : MonoBehaviour {
     public void CreateExp(Vector2 point, int expAmount) {
         var exp = expPooler.OutPool(point, Quaternion.identity).GetComponent<ExpJewel>();
         if(exp != null) {
-            exp.givingExp = expAmount;
+            exp.GivingExp = expAmount;
             exp.Drop();
         }
         expFallenCount ++;

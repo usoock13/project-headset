@@ -23,7 +23,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     #region Character Status
     public int level { get; protected set; } = 1;
-    [SerializeField] protected int MaxExp => 50 + (int)(100 * Mathf.Pow(1.1f, level));
+    [SerializeField] protected int MaxExp => 50 + (int)(50 * Mathf.Pow(1.4f, level));
     protected int currentExp = 0;
     public Func<Character, float> extraExpScale;
     public float GettingExpScale { get {
@@ -47,7 +47,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(additions != null)
             for(int i=0; i<additions.Length; i++)
                 final += ((Func<Character, float>) additions[i])?.Invoke(this) ?? 0;
-        print(final);
         return final;
     }}
     protected float staminaForDodge = 100f;
@@ -321,8 +320,9 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     private void RotateArrowWithMouse() {
         if(aimWithMouse) {
+            Vector2 screenPos = (Camera.main.WorldToScreenPoint(attackArrow.transform.position));
             attackDirection = attackArrow.transform.rotation * Vector2.up;
-            var point = new Vector2(Input.mousePosition.x - (Screen.width / 2), Input.mousePosition.y - (Screen.height / 2));
+            var point = new Vector2(Input.mousePosition.x - screenPos.x, Input.mousePosition.y - screenPos.y);
             attackArrow.eulerAngles = new Vector3(0, 0, (Mathf.Atan2( point.y, point.x ) - Mathf.PI/2) * Mathf.Rad2Deg);
         }
     }

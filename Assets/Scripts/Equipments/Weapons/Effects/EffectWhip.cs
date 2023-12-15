@@ -44,6 +44,7 @@ public class EffectWhip : MonoBehaviour {
                 monster.TakeAttackDelay(originWeapon.HittingDelay);
                 if(swipeDir * Mathf.Atan2(dir.y, dir.x) < 0)
                     monster.TakeForce(attackForce, 0.5f);
+                GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
         yield return new WaitForSeconds(3f);

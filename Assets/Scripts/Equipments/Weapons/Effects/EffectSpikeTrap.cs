@@ -26,6 +26,7 @@ public class EffectSpikeTrap : MonoBehaviour {
                 monster.TakeDamage(damage);
                 monster.TakeAttackDelay(HittingDelay);
             }
+            GameManager.instance.Character.OnAttackMonster(monster);
             Disapear();
         }
     }

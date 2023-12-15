@@ -4,7 +4,7 @@ public class ArtifactLeatherGlove : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] extraSpeed = new float[] {  0.20f,   0.25f,   0.30f,   0.35f,   0.40f };
+    private float[] extraSpeed = new float[] {  0.15f,   0.18f,   0.21f,   0.24f,   0.27f };
     #endregion Artifact Status
 
     #region Artifact Information

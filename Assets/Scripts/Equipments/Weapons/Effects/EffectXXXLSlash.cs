@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectXXXLSlash : MonoBehaviour {
-    [SerializeField] private AwakenWeaponXXXLCalibur originWeapon;
+    [SerializeField] private AWeaponXXXLCalibur originWeapon;
 
     [SerializeField] private ParticleSystem firstParticle;
 
@@ -40,6 +40,7 @@ public class EffectXXXLSlash : MonoBehaviour {
                 monster.TakeDamage(FirstDamage);
                 monster.TakeAttackDelay(fAttackDelay);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * fForceScalar);
+                GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
     }

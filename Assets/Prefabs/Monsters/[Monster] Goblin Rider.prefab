@@ -248,6 +248,10 @@ PrefabInstance:
       value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
+      propertyPath: givingExp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: monsterType
       value: Goblin Rider
       objectReference: {fileID: 0}

@@ -59,6 +59,7 @@ public class EffectAwakenSantuary : MonoBehaviour {
                     target.TakeDamage(Damage);
                     if(HittingDelay > 0)
                         target.TakeAttackDelay(HittingDelay);
+                    GameManager.instance.Character.OnAttackMonster(target);
                 }
             }
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectXXXLStrike : MonoBehaviour {
-    [SerializeField] private AwakenWeaponXXXLCalibur originWeapon;
+    [SerializeField] private AWeaponXXXLCalibur originWeapon;
 
     [SerializeField] private ParticleSystem secondParticle;
 
@@ -41,6 +41,7 @@ public class EffectXXXLStrike : MonoBehaviour {
                 monster.TakeDamage(SecondDamage);
                 monster.TakeAttackDelay(sAttackDelay);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * sForceScalar);
+                GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
     }

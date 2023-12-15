@@ -138,7 +138,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2430626424060954406}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   defaultToughness: 1
   defaultHp: 20
   maxHp: 100
-  givingExp: 10
+  givingExp: 8
   givingKeso: 20
   defaultAttackPower: 8
   monsterType: Bat

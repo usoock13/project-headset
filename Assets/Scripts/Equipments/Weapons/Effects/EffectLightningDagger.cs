@@ -65,6 +65,7 @@ public class EffectLightningDagger : EffectProjectile {
                 if(inner.TryGetComponent(out Monster target)) {
                     target.TakeDamage(originWeapon.ChainingDamage);
                     target.TakeAttackDelay(chainingHittingDelay);
+                    GameManager.instance.Character.OnAttackMonster(target);
 
                     LineRenderer lr = originWeapon.LineRendererPooler.OutPool().GetComponent<LineRenderer>();
                     lineRenderers.Add(lr);

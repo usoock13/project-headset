@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class ScenarioGrassDirector : ScenarioDirector {
     [SerializeField] private const int MAX_MONSTER_COUNT = 200;
-    [SerializeField] private List<(Monster monster, int count)> autoSpanwMonsters;
-    [SerializeField] private float defaultSpawnInterval = 1f;
     private int monsterSpawnedCount = 0;
-
-    private Coroutine spawnDefaultMonsterCoroutine;
 
     [SerializeField] private MonsterBasic monsterWolf;
     [SerializeField] private MonsterBasic monsterBear;
@@ -17,11 +13,11 @@ public class ScenarioGrassDirector : ScenarioDirector {
     [SerializeField] private MonsterBasic monsterGoblin;
     [SerializeField] private MonsterBasic monsterGoblinRider;
 
-    StageManager _StageManager => GameManager.instance.StageManager;
+    private StageManager _StageManager => GameManager.instance.StageManager;
+
+    private bool bossIsSummoned = false;
     
     protected override void InitializeScenario() {
-        autoSpanwMonsters = new List<(Monster monster, int count)>();
-
         monsterPoolerMap = new Dictionary<string, ObjectPooler> {
             {
                 monsterWolf.MonsterType,
@@ -73,33 +69,58 @@ public class ScenarioGrassDirector : ScenarioDirector {
         // poolerUndead = new Dictionary<string, ObjectPooler>();
         // poolerWitch = new Dictionary<string, ObjectPooler>();
 
-        scenarios.Add(new Scenario(2, () => {
-            autoSpanwMonsters.Add( (monsterBat, 9) );
-            autoSpanwMonsters.Add( (monsterWolf, 2) );
-            defaultSpawnInterval = 5f;
-            spawnDefaultMonsterCoroutine = StartCoroutine(SpawnDefaultMonster());
-        }));
-        scenarios.Add(new Scenario(5, () => {
-            autoSpanwMonsters.Add( (monsterGoblin, 3) );
-            autoSpanwMonsters.Add( (monsterGoblinRider, 1) );
-            defaultSpawnInterval = 5f;
-        }));
-        scenarios.Add(new Scenario(60, () => {
-            SpawnMonster(monsterBear, 1);
-            _StageManager.IncreaseStageLevel(3);
-            _StageManager.ChangeDayNight(false);
-        }));
-    }
+        scenarios.Add(new Scenario(3, () => {
+            IEnumerator AutoSpawn() {
+                while(!bossIsSummoned && Time.time < 30) {
 
-    protected IEnumerator SpawnDefaultMonster() {
-        while(!ScenarioIsEnd) {
-            if(monsterSpawnedCount < MAX_MONSTER_COUNT) {
-                foreach(var element in autoSpanwMonsters) {
-                    SpawnMonster(element.monster, element.count);
-                    monsterSpawnedCount += element.count;
+                    SpawnDefaultMonster(monsterBat, 3);
+                    SpawnDefaultMonster(monsterWolf, 1);
+                    yield return new WaitForSeconds(3f);
                 }
             }
-            yield return new WaitForSeconds(defaultSpawnInterval);
+            StartCoroutine(AutoSpawn());
+        })); // # 01
+
+        scenarios.Add(new Scenario(30, () => {
+            IEnumerator AutoSpawn() {
+                while(!bossIsSummoned && Time.time < 120) {
+                    SpawnDefaultMonster(monsterGoblin, 4);
+                    SpawnDefaultMonster(monsterGoblinRider, 1);
+                    yield return new WaitForSeconds(3f);
+                }
+            }
+            StartCoroutine(AutoSpawn());
+        })); // # 02
+
+        scenarios.Add(new Scenario(60, () => {
+            SpawnMonster(monsterBear, 10);
+            _StageManager.IncreaseStageLevel(0.5f);
+            _StageManager.ChangeDayNight(false);
+        })); // # 03
+
+        scenarios.Add(new Scenario(120, () => {
+            IEnumerator AutoSpawn() {
+                while(!bossIsSummoned) {
+                    SpawnDefaultMonster(monsterBear, 3);
+                    yield return new WaitForSeconds(2f);
+                }
+            }
+            StartCoroutine(AutoSpawn());
+            _StageManager.IncreaseStageLevel(-0.5f);
+            _StageManager.ChangeDayNight(true);
+        })); // # 04 (Extra temporary spawn to test)
+    }
+
+    public void SummonBoss() {
+        bossIsSummoned = true;
+        /* 
+            Actually summon boss.
+         */
+    }
+
+    protected void SpawnDefaultMonster(Monster monster, int number) {
+        if(monsterSpawnedCount < MAX_MONSTER_COUNT) {
+            SpawnMonster(monster, number);
         }
     }
 
@@ -108,14 +129,15 @@ public class ScenarioGrassDirector : ScenarioDirector {
     }
 
     public override void OnEndsScenario() {
-        StopCoroutine(spawnDefaultMonsterCoroutine);
+        StopAllCoroutines();
     }
 
-    protected override List<Monster> SpawnMonster(Monster monster, int amount) {
+    protected override List<Monster> SpawnMonster(Monster monster, int number) {
         ObjectPooler pooler;
+        monsterSpawnedCount += number;
         if(monsterPoolerMap.TryGetValue(monster.MonsterType, out pooler)) {
             List<Monster> result = new List<Monster>();
-            for(int i=0; i<amount; i++) {
+            for(int i=0; i<number; i++) {
                 Vector2 spawnPoint = RandomDirection * spawnDistance + (Vector2)Character.transform.position;
                 spawnPoint.x = Mathf.Clamp(spawnPoint.x, mapLeftBottom.x, mapRightTop.x);
                 spawnPoint.y = Mathf.Clamp(spawnPoint.y, mapLeftBottom.y, mapRightTop.y);

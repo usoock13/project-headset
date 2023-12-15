@@ -92,6 +92,7 @@ public class EffectSpirit : MonoBehaviour {
                 monster.TakeForce(currentVelocity.normalized * forceScalar, hittingDelay);
                 hitMonsters.Add(monster.gameObject);
                 StartCoroutine(RemoveHitMonster(monster.gameObject));
+                GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
     }

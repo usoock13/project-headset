@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 074dd75ce705f2d4b95914620d789a43
+guid: 82e09f84a534a1641a5eaa313e0cf3dc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -104,148 +104,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_effect_spear_0
+      name: sprite_effect_spear2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab083c1ee134697428b7e6efcf78fd1e
-      internalID: 1442209050
+      spriteID: ce5c12d4f6b592b4ea52ecde17a01f24
+      internalID: 1382616436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_effect_spear_1
+      name: sprite_effect_spear2_1
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18ff38e4cd4bd0e4cbcb861126a1d32d
-      internalID: 1217848015
+      spriteID: e0428b880d3faf945b343bfff7a5c37c
+      internalID: 520412448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_effect_spear_2
+      name: sprite_effect_spear2_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02cf88b9a7bd3d84da953e41dc9a5da2
-      internalID: 1622164734
+      spriteID: 80f1eda9c04e936408c22b2465d6f2fb
+      internalID: 752815826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_effect_spear_3
+      name: sprite_effect_spear2_3
       rect:
         serializedVersion: 2
         x: 384
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52ecc37ec2bd2634dad77af9eb8edab4
-      internalID: 301987146
+      spriteID: ad32b21b55ceaf1449c1c762c8529474
+      internalID: 1914790223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_effect_spear_4
+      name: sprite_effect_spear2_4
       rect:
         serializedVersion: 2
         x: 512
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08faf27d3982b65489e80f29a9bac5e9
-      internalID: -46994119
+      spriteID: 06f3a24834151334a95612850de07d1d
+      internalID: -480145943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_effect_spear_5
+      name: sprite_effect_spear2_5
       rect:
         serializedVersion: 2
         x: 640
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4665006565431044b8bf7ee564960169
-      internalID: 2025390427
+      spriteID: 0459bdfda260d9f4486355e3f701ae76
+      internalID: 1776340177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_effect_spear_6
+      name: sprite_effect_spear2_6
       rect:
         serializedVersion: 2
         x: 768
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 772050fd7ff979540b16c2ef8d55c9c9
-      internalID: 2072279828
+      spriteID: 4a07aead7d14bd24ab32bade9b688e1e
+      internalID: -978986304
       vertices: []
       indices: 
       edges: []
@@ -261,13 +261,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_effect_spear_3: 301987146
-      sprite_effect_spear_4: -46994119
-      sprite_effect_spear_6: 2072279828
-      sprite_effect_spear_0: 1442209050
-      sprite_effect_spear_5: 2025390427
-      sprite_effect_spear_2: 1622164734
-      sprite_effect_spear_1: 1217848015
+      sprite_effect_spear2_0: 1382616436
+      sprite_effect_spear2_6: -978986304
+      sprite_effect_spear2_3: 1914790223
+      sprite_effect_spear2_1: 520412448
+      sprite_effect_spear2_5: 1776340177
+      sprite_effect_spear2_2: 752815826
+      sprite_effect_spear2_4: -480145943
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

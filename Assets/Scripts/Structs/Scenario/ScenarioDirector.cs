@@ -33,12 +33,17 @@ public abstract class ScenarioDirector : MonoBehaviour {
         character = GameManager.instance.Character;
         InitializeScenario();
         scenarios.Sort();
+
+        if(scenarios.Count > 0)
+            next = scenarios[0];
     }
     protected virtual void Update() {
         if(order < scenarios.Count
         && Time.time >= next.time) {
-            next = scenarios[order++];
             next.action?.Invoke();
+            order ++;
+            if(order < scenarios.Count)
+                next = scenarios[order];
         }
     }
     #endregion Unity Events
@@ -47,7 +52,7 @@ public abstract class ScenarioDirector : MonoBehaviour {
     protected abstract List<Monster> SpawnMonster(Monster monster, int amount);
 
     [Serializable]
-    public struct Scenario : IComparable<Scenario> {
+    public class Scenario : IComparable<Scenario> {
         public float time;
         public UnityAction action;
 
