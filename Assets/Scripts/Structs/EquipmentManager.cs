@@ -8,6 +8,8 @@ public class EquipmentManager : MonoBehaviour {
     Character _Character => GameManager.instance.StageManager.Character;
     StageUIManager _UiManager => GameManager.instance.StageManager._StageUIManager;
 
+    [SerializeField] private Transform allEquipmentsParent;
+
     protected const int MAX_WEAPONS_COUNT = 6;
     protected const int MAX_ARTIFACTS_COUNT = 6;
     [SerializeField] private List<Weapon> remainingWeapons;
@@ -30,16 +32,21 @@ public class EquipmentManager : MonoBehaviour {
     [SerializeField] private Weapon __testItem;
 
     private void Awake() {
-        remainingWeapons = transform.GetComponentsInChildren<Weapon>(true).ToList();
-        remainingArtifacts = transform.GetComponentsInChildren<Artifact>(true).ToList();
+        remainingWeapons = new List<Weapon>();
+        remainingArtifacts = new List<Artifact>();
         havingWeapons = new List<Weapon>();
         havingArtifacts = new List<Artifact>();
+        for(int i=0; i<allEquipmentsParent.childCount; i++) {
+            if(allEquipmentsParent.GetChild(i).TryGetComponent(out Weapon weapon)) {
+                remainingWeapons.Add(weapon);
+            } else if(allEquipmentsParent.GetChild(i).TryGetComponent(out Artifact artifact)) {
+                remainingArtifacts.Add(artifact);
+            }
+        }
 
         bonusChoises = bonusChoisesParent.GetComponentsInChildren<Item>(true).ToList();
     }
-    #if UNITY_EDITOR
     
-    #endif
     public IPlayerGettable[] RandomChoises(int number) {
         List<IPlayerGettable> candidates = new List<IPlayerGettable>();
 
@@ -92,7 +99,6 @@ public class EquipmentManager : MonoBehaviour {
                     havingWeapons[targetIndex].LevelUp();
             }
 
-                
         } else if(item is Artifact) {
             int targetIndex;
             targetIndex = remainingArtifacts.IndexOf(item as Artifact);
@@ -104,8 +110,29 @@ public class EquipmentManager : MonoBehaviour {
                 if(targetIndex >= 0 && !havingArtifacts[targetIndex].IsMaxLevel)
                     havingArtifacts[targetIndex].LevelUp();
             }
+
         } else {
             item.OnGotten();
+        }
+    }
+
+    public void AddBonusItemAtList(Item item) {
+        item.transform.SetParent(bonusChoisesParent);
+        bonusChoises.Add(item);
+    }
+
+    public void RemoveBonusItemFromList(Item item) {
+        Destroy(item.gameObject);
+        bonusChoises.Remove(item);
+    }
+
+    public void AddEquipmentAtList(Equipment equipment) {
+        equipment.transform.SetParent(allEquipmentsParent);
+        
+        if(equipment is Weapon) {
+            remainingWeapons.Add((Weapon) equipment);
+        } else if(equipment is Artifact) {
+            remainingArtifacts.Add((Artifact) equipment);
         }
     }
 
@@ -147,23 +174,23 @@ public class EquipmentManager : MonoBehaviour {
         _UiManager.UpdateArtifactList();
     }
 
-    public void ChangeWeapon(int index, Weapon weapon) {
-        if(havingWeapons.Contains(weapon))
+    public void ChangeWeapon(Weapon oldWeapon, Weapon newWeapon) {
+        if(!havingWeapons.Contains(oldWeapon)
+        && havingWeapons.Contains(newWeapon))
             return;
 
-        var prev = havingWeapons[index];
-        var next = weapon;
+        int index = havingWeapons.IndexOf(oldWeapon);
 
-        remainingWeapons.Add(prev);
-        remainingWeapons.Remove(next);
+        remainingWeapons.Add(oldWeapon);
+        remainingWeapons.Remove(newWeapon);
 
-        _Character.RemoveEquipment(prev);
-        _Character.AddEquipment(next);
+        _Character.RemoveEquipment(oldWeapon);
+        _Character.AddEquipment(newWeapon);
 
-        prev.OnTakeOff();
-        next.OnGotten();
+        oldWeapon.OnTakeOff();
+        newWeapon.OnGotten();
         
-        havingWeapons[index] = next;
+        havingWeapons[index] = newWeapon;
 
         _UiManager.UpdateWeaponList();
     }

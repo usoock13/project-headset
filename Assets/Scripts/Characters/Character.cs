@@ -112,6 +112,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     #region Calculated Status
     public float Power { get {
             float final = statusDefaultPower;
+            final += level * increasingPower;
             Delegate[] additions = extraPower?.GetInvocationList();
             if(additions != null)
                 for(int i=0; i<additions.Length; i++)
@@ -179,9 +180,14 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float maxStamina = 100;
     [SerializeField] protected float maxSp = 100;
+
     [SerializeField] protected float statusDefaultPower = 10;
     [SerializeField] protected float statusDefaultMoveSpeed = 2.5f;
     [SerializeField] protected float statusDefaultArmor = 10;
+
+    [SerializeField] protected float increasingPower = 0.2f;
+    [SerializeField] protected float increasingHP = 2f;
+    
     [SerializeField] protected Weapon basicWeapon;
     [SerializeField] private Sprite defaultSprite;
 
@@ -217,10 +223,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         /* FOR TEST >> */
         #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.L))
-            this.GetExp(100);
+            this.GetExp((int) (MaxExp * 0.5f));
         if(Input.GetKeyDown(KeyCode.K)) {
             GameManager.instance.StageManager.IncreaseStageLevel(0.1f);
-            print("success increaseing stage level. " + GameManager.instance.StageManager.StageLevel);
+            print("success increasing stage level. " + GameManager.instance.StageManager.StageLevel);
         }
         #endif
         /* << FOR TEST */
@@ -397,6 +403,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     private void LevelUp() {
         currentExp = currentExp - MaxExp;
         level ++;
+        maxHp += increasingHP;
+        currentHp += increasingHP;
+
+        StatusUI.UpdateHpSlider(currentHp / maxHp);
         StatusUI.UpdateLevel(level);
         StageManager.OnCharacterLevelUp();
         GetExp(0); // Check multiple level up. 

@@ -15,6 +15,8 @@ public class StageManager : MonoBehaviour {
         get { return character; }
         set { character ??= value; }
     }
+    public List<Character> Party { get; private set; }
+
     private PlayerInput PlayerInput => character.GetComponent<PlayerInput>();
     [SerializeField] private ScenarioDirector scenarioDirector;
     public ScenarioDirector ScenarioDirector {
@@ -119,6 +121,8 @@ public class StageManager : MonoBehaviour {
 
     private void SpawnCharacter() {
         List<Character> selectedCharacter = GameManager.instance.SelectedCharacters ?? __testCharacters;
+        Party = selectedCharacter;
+
         character = Instantiate(selectedCharacter[0].gameObject, characterSpawnPoint.position, characterSpawnPoint.rotation).GetComponent<Character>();
         
         character.HeadmountCharacter.HeadAbility?.transform.SetParent(character.transform);
@@ -137,13 +141,7 @@ public class StageManager : MonoBehaviour {
         if(character.CurrentState.Compare(character.dieState))
             return;
             
-        LevelUpUI levelUpUI = _StageUIManager.LevelUpUI;
-        IPlayerGettable[] choises = EquipmentsManager.RandomChoises(4);
-        levelUpUI.SetChoise(0, choises[0]);
-        levelUpUI.SetChoise(1, choises[1]);
-        levelUpUI.SetChoise(2, choises[2]);
-        levelUpUI.SetChoise(3, choises[3]);
-        levelUpUI.ActiveUI();
+        _StageUIManager.LevelUpUI.ShowChoise();
     }
     public void GameOver() {
         isGameOver = true;

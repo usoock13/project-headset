@@ -232,8 +232,10 @@ MonoBehaviour:
   maxStamina: 100
   maxSp: 100
   statusDefaultPower: 20
-  statusDefaultMoveSpeed: 2.4
-  statusDefaultArmor: 15
+  statusDefaultMoveSpeed: 2.3
+  statusDefaultArmor: 10
+  increasingPower: 0.7
+  increasingHP: 6
   basicWeapon: {fileID: 2740440719906952877, guid: 99205e9800d4c9b4980e7ab0ad681d39, type: 3}
   defaultSprite: {fileID: 21300000, guid: 4cc3cd7f15ddac1419f2b5260ca96d6a, type: 3}
   handLampLight: {fileID: 3076683220489727271}

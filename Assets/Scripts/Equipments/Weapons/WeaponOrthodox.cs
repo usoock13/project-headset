@@ -6,6 +6,8 @@ public class WeaponOrthodox : Weapon {
     [SerializeField] private EffectStraightPunch punchEffect;
     public ObjectPooler EffectPooler { get; private set; }
     [SerializeField] float attackRange = .5f;
+
+    [SerializeField] private ItemAwake itemAwake;
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
@@ -15,7 +17,7 @@ public class WeaponOrthodox : Weapon {
     private float[] staticDamage = new float[MAX_LEVEL]    {  10f,     20f,     20f,     30f,     30f }; // 고정 피해량
     private float[] damageCoef = new float[MAX_LEVEL]      { 0.3f,    0.3f,    0.3f,    0.3f,    0.3f }; // 피해 계수
     protected override float AttackInterval => interval[level-1];
-    public float DamageOfStraight => damageCoef[level-1] * _Character.Power;
+    public float DamageOfStraight => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     #endregion Weapon Status
 
     #region Weapon Information
@@ -46,5 +48,17 @@ public class WeaponOrthodox : Weapon {
     private IEnumerator InPoolEffect(float delay, GameObject effect, ObjectPooler pooler) {
         yield return new WaitForSeconds(delay);
         pooler.InPool(effect);
+    }
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterFighter) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
     }
 }

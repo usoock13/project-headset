@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugShaders:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
-  m_RendererFeatures:
-  - {fileID: 603291834192390487}
-  m_RendererFeatureMap: 5769ee10ba525f08
+  m_RendererFeatures: []
+  m_RendererFeatureMap: 
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 3
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
@@ -59,26 +58,6 @@ MonoBehaviour:
   m_DefaultLitMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_DefaultUnlitMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_DefaultMaskMaterial: {fileID: 2100000, guid: 15d0c3709176029428a0da2f8cecf0b5, type: 2}
---- !u!114 &603291834192390487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c99a95500dc2d448a94d4f08b63c57, type: 3}
-  m_Name: PixelRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  settings:
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 4096
-    renderPassEvent: 450
-    blitMaterial: {fileID: 2100000, guid: 14e2c08703df1ed429327b92955fb609, type: 2}
-    pixelDensity: 10.62
 --- !u!114 &4904833271538937901
 MonoBehaviour:
   m_ObjectHideFlags: 0

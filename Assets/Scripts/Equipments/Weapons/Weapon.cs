@@ -20,17 +20,21 @@ public abstract class Weapon : Equipment {
             }
         }
     }
+    
     protected override void OnLevelUp() {
         base.OnLevelUp();
         GameManager.instance.StageManager._StageUIManager.UpdateWeaponList();
     }
+    
     protected abstract void Attack();
     public override void OnGotten() {
         OnEquipped();
     }
+    
     public override void OnEquipped() {
         this.gameObject.SetActive(true);
     }
+    
     public override void OnTakeOff() {
         this.gameObject.SetActive(false);
     }

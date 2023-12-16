@@ -5103,7 +5103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a7dad3ec3e9e34291695692d328605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingTime: 3
+  flyingTime: 1
   lifetime: 0
   originWeapon: {fileID: 7469227184000369546}
   targetLayer:
@@ -5395,7 +5395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f36197a07b7c84fad05355c6dbd364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingTime: 3
+  flyingTime: 1
   lifetime: 0
   originWeapon: {fileID: 7469227184000369546}
   targetLayer:

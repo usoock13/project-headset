@@ -228,12 +228,14 @@ MonoBehaviour:
   weaponParent: {fileID: 4364672604279695569}
   artifactParent: {fileID: 947811563956023290}
   headmountPoint: {fileID: 9218828611891435066}
-  maxHp: 100
+  maxHp: 95
   maxStamina: 100
   maxSp: 100
   statusDefaultPower: 10
-  statusDefaultMoveSpeed: 2.5
-  statusDefaultArmor: 10
+  statusDefaultMoveSpeed: 2.4
+  statusDefaultArmor: 6
+  increasingPower: 0.9
+  increasingHP: 3.5
   basicWeapon: {fileID: 4608071478447801991, guid: fe1fd630ccd46034c8a5b56460b8d6bc, type: 3}
   defaultSprite: {fileID: 21300000, guid: 6dc3074441d24e444a31f5b3346f319d, type: 3}
   handLampLight: {fileID: 3076683220489727271}

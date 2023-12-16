@@ -7,6 +7,8 @@ public class WeaponShortbow : Weapon {
     [SerializeField] private EffectShortbow shortbowEffect;
     private ObjectPooler effectPooler;
     
+    [SerializeField] private ItemAwake itemAwake;
+    
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
@@ -53,4 +55,16 @@ public class WeaponShortbow : Weapon {
         }
     }
     #endregion Weapon Information
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterRanger) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
+    }
 }

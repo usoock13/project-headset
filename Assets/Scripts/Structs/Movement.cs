@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour {
         int count = 0;
         for(int i=0; i<hits.Length; i++) {
             if(hits[i].transform.gameObject != this.gameObject) {
-                transform.Translate((transform.position - hits[i].transform.position) * moveVector.magnitude);
+                transform.Translate((transform.position - hits[i].transform.position) * 0.2f * Time.deltaTime);
                 if(++ count > 3)
                     break;
             }

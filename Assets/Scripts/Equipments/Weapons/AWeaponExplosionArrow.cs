@@ -8,7 +8,7 @@ public class AWeaponExplosionArrow : Weapon {
     [SerializeField] private EffectAwExplosionArrow explosionArrowOrigin;
     public ObjectPooler NormalEffectPooler { get; private set; }
     public ObjectPooler ExplosionEffectPooler { get; private set; }
-    
+
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }

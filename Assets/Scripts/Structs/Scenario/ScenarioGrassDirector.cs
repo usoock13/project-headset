@@ -115,7 +115,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
         bossIsSummoned = true;
         /* 
             Actually summon boss.
-         */
+        */
     }
 
     protected void SpawnDefaultMonster(Monster monster, int number) {

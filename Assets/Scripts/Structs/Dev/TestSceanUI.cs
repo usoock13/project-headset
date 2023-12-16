@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TestSceanUI : MonoBehaviour {
@@ -10,12 +11,12 @@ public class TestSceanUI : MonoBehaviour {
     bool aOpend = false;
     
     private void Start() {
-        Equipment[] equipments = equipmentParent.GetComponentsInChildren<Equipment>(true);
+        var equipments = equipmentParent.GetComponentsInChildren<Equipment>(true).ToList();
         foreach(var e in equipments) {
             if(e is Weapon)
-                weapons.Add((Weapon)e);
+                weapons.Add((Weapon) e);
             if(e is Artifact)
-                artifacts.Add((Artifact)e);
+                artifacts.Add((Artifact) e);
         }
     }
 

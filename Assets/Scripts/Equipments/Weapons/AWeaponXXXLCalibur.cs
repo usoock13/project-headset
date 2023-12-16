@@ -50,7 +50,7 @@ public class AWeaponXXXLCalibur : Weapon {
 
     private IEnumerator AttackCoroutine() {
         var slash = FirstEffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
-        slash.transform.localScale = Vector3.one * AreaScale;
+        // slash.transform.localScale = Vector3.one * AreaScale;
         slash.GetComponent<EffectXXXLSlash>()?.Active();
 
         yield return new WaitForSeconds(0.25f);

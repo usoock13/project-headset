@@ -6,6 +6,8 @@ public class WeaponGreatSword : Weapon {
     [SerializeField] private EffectGreatSword swordEffect;
     private ObjectPooler effectPooler;
     [SerializeField] private float attackRange = .5f;
+
+    [SerializeField] ItemAwake itemAwake;
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
@@ -43,5 +45,17 @@ public class WeaponGreatSword : Weapon {
     private IEnumerator InPoolEffect(float delay, GameObject effect) {
         yield return new WaitForSeconds(delay);
         effectPooler.InPool(effect);
+    }
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterWarrior) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ObjectPooler {
     [SerializeField] private GameObject poolingObject;
     private Transform parent = null;
-    private int count;
+    public int Count => queue.Count;
     private int restoreCount = 5;
     private Queue<GameObject> queue = new Queue<GameObject>();
 

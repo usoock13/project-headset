@@ -55,6 +55,7 @@ public class EffectAwExplosionArrow : EffectProjectile {
                 GameManager.instance.Character.OnAttackMonster(monster);
                 explosionParticle.Play();
                 spriteRenderer.enabled = false;
+                StartCoroutine(DisapearCoroutine());
                 isActive = false;
             }
         }
