@@ -47,17 +47,17 @@ public class EffectAwExplosionArrow : EffectProjectile {
 
     private void Explode() {
         Collider2D[] inners = Physics2D.OverlapCircleAll(transform.position, explostionRadius, targetLayer);
+        spriteRenderer.enabled = false;
+        StartCoroutine(DisapearCoroutine());
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(Damage);
                 monster.TakeAttackDelay(hittingDelay);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * 4f, hittingDelay);
                 GameManager.instance.Character.OnAttackMonster(monster);
-                explosionParticle.Play();
-                spriteRenderer.enabled = false;
-                StartCoroutine(DisapearCoroutine());
             }
         }
+        explosionParticle.Play();
     }
 
     private IEnumerator DisapearCoroutine() {
