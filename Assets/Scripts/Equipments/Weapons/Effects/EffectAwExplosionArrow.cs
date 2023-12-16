@@ -56,7 +56,6 @@ public class EffectAwExplosionArrow : EffectProjectile {
                 explosionParticle.Play();
                 spriteRenderer.enabled = false;
                 StartCoroutine(DisapearCoroutine());
-                isActive = false;
             }
         }
     }
