@@ -121,6 +121,15 @@ public class EquipmentManager : MonoBehaviour {
         bonusChoises.Add(item);
     }
 
+    public void RemoveEquipmentFromList(Equipment equipment) {
+        if(equipment is Weapon) {
+            remainingWeapons.Remove((Weapon) equipment);
+        } else if(equipment is Artifact) {
+            remainingArtifacts.Remove((Artifact) equipment);
+        }
+        Destroy(equipment.gameObject);
+    }
+
     public void RemoveBonusItemFromList(Item item) {
         Destroy(item.gameObject);
         bonusChoises.Remove(item);

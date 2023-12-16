@@ -20,6 +20,7 @@ public class ItemAwake : Item {
         GameManager.instance.StageManager.EquipmentsManager.AddEquipmentAtList(newWeapon);
         newWeapon.LevelUp();
         GameManager.instance.StageManager.EquipmentsManager.ChangeWeapon(oldWeapon, newWeapon);
+        GameManager.instance.StageManager.EquipmentsManager.RemoveEquipmentFromList(oldWeapon);
         GameManager.instance.StageManager.EquipmentsManager.RemoveBonusItemFromList(this);
     }
 }

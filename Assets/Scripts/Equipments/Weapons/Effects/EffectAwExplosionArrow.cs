@@ -68,6 +68,6 @@ public class EffectAwExplosionArrow : EffectProjectile {
 
     protected override void Disapear() {
         base.Disapear();
-        originWeapon.NormalEffectPooler.InPool(this.gameObject);
+        originWeapon.ExplosionEffectPooler.InPool(this.gameObject);
     }
 }
