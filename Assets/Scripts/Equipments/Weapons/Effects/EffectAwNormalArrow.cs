@@ -6,7 +6,7 @@ public class EffectAwNormalArrow : EffectProjectile {
     private bool isActive = false;
     public AWeaponExplosionArrow originWeapon;
     private float Damage => originWeapon.Damage;
-    private float flyingSpeed = 12f;
+    private float flyingSpeed = 18f;
     private float hittingDelay {
         get => originWeapon.HittingDelay;
     }

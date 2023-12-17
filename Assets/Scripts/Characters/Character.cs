@@ -345,6 +345,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     
     public void DodgeToward() {
         if(moveDirection == Vector2.zero
+        || stateMachine.currentState.Compare(dieState)
         || currentStamina < staminaForDodge)
             return;
         if(dodgeCoroutine != null)

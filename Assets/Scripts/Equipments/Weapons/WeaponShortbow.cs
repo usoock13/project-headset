@@ -13,8 +13,8 @@ public class WeaponShortbow : Weapon {
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] interval = new float[MAX_LEVEL]     {   .5f,     .4f,     .3f,      .3f,     .3f };  // 공격 간격
-    private float[] damageCoef = new float[MAX_LEVEL]   {  .10f,    .10f,    .10f,     .15f,    .55f };  // 피해 계수
-    private float[] staticDamage = new float[MAX_LEVEL] {    12f,    16f,     16f,      24f,    .55f };  // 고정 피해량
+    private float[] damageCoef = new float[MAX_LEVEL]   {  .10f,    .10f,    .10f,     .15f,    .15f };  // 피해 계수
+    private float[] staticDamage = new float[MAX_LEVEL] {    12f,    16f,     16f,      24f,     24f };  // 고정 피해량
     private int[] arrowQuantity = new int[MAX_LEVEL]    {     1,       1,       2,        2,       4 };  // 투사체 수
     protected override float AttackInterval => interval[level-1];
     public float HittingDelay => 0.25f;

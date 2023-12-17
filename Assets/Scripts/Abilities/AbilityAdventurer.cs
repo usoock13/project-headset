@@ -30,6 +30,9 @@ public class AbilityAdventurer : Ability {
             GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);
             GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);
             GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);
+            GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);
+            GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);
+            GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);
         }
     }
 }

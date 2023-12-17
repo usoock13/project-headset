@@ -71,6 +71,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(3, () => {
             IEnumerator AutoSpawn() {
+                SpawnMonster(monsterBear, 10);
                 while(!bossIsSummoned && Time.time < 30) {
 
                     SpawnDefaultMonster(monsterBat, 3);

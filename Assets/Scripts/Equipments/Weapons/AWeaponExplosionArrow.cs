@@ -12,12 +12,12 @@ public class AWeaponExplosionArrow : Weapon {
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] damageCoef = new float[MAX_LEVEL]       {  0.55f,  0.55f,  0.55f,  0.55f,  0.55f };  // 피해 계수
-    private float[] staticDamage = new float[MAX_LEVEL]     {    10f,    20f,    30f,    40f,    50f };  // 고정 피해량
+    private float[] damageCoef = new float[MAX_LEVEL]       {  0.15f,  0.15f,  0.15f,  0.15f,  0.15f };  // 피해 계수
+    private float[] staticDamage = new float[MAX_LEVEL]     {    25f,    25f,    25f,    25f,    25f };  // 고정 피해량
     private int[] arrowBombCount = new int[MAX_LEVEL]       {     11,     10,      9,      8,      7 };  // 폭발 화살 발사를 위한 적중 횟수
     private float[] bombDamageCoef = new float[MAX_LEVEL]   {  1.55f,  1.55f,  1.55f,  1.55f,  1.55f };  // 폭발 화살 피혜 계수
     private float[] bombStaticDamage = new float[MAX_LEVEL] {    70f,    90f,   110f,   130f,   150f };  // 폭발 화살 고정 피해량
-    protected override float AttackInterval => 0.05f;
+    protected override float AttackInterval => 0.12f;
     public float HittingDelay => 0.25f;
     public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     public float BombDamage => bombDamageCoef[level-1] * _Character.Power + bombStaticDamage[level-1];

@@ -28,7 +28,6 @@ public class EffectFlyingAxe : EffectProjectile {
             Debug.LogError($"{this.gameObject.name}'s 'origin weapon' variable is not definded.\nThis game object will be destoyed.");
             Destroy(gameObject);
         }
-        // circleCollider = GetComponent<CircleCollider2D>(); // Please input on inspector window.
     }
     protected override void OnEnable() {
         base.OnEnable();
