@@ -16,33 +16,56 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
 
     private Coroutine pullCoroutine;
 
+    private Transform puller;
+
     enum ItemState {
+        Dropping,
         Dropped,
         Pulled,
         Stored
     }
     ItemState currentState = ItemState.Stored;
 
-    protected void Awake() {
+    protected virtual void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public virtual void Drop() {
-        currentState = ItemState.Dropped;
+        StartCoroutine(DropCoroutine());
         gameObject.SetActive(true);
     }
-    public virtual void Pull(Transform getter) {
+    private IEnumerator DropCoroutine() {
+        currentState = ItemState.Dropping;
+        
+        float randomAngle = UnityEngine.Random.Range(0, 360);
+        Vector2 origin = transform.position;
+        Vector2 dest = Quaternion.AngleAxis(randomAngle, Vector3.forward) * Vector2.up * UnityEngine.Random.Range(.5f, 1.5f);
+        float offset = 0;
+        while(offset < 1) {
+            transform.position = Vector2.Lerp(origin, origin + dest, offset);
+            offset += Time.deltaTime * 4f;
+            yield return null;
+        }
+        currentState = ItemState.Dropped;
+        if(puller is not null)
+            Pull(this.puller);
+    }
+
+    public virtual void Pull(Transform puller) {
+        if(currentState == ItemState.Dropping) {
+            this.puller = puller;
+        }
         if(currentState == ItemState.Dropped) {
-            pullCoroutine = StartCoroutine(PullCoroutine(getter));
+            pullCoroutine = StartCoroutine(PullCoroutine(puller));
         }
     }
     public virtual void Store(Character onwer) {
         if(!onwer.CurrentState.Compare(onwer.dieState)) {
             OnGotten();
-            Disapear();
+            Disappear();
         }
     }
-    protected void Disapear() {
+    protected void Disappear() {
         gameObject.SetActive(false);
         currentState = ItemState.Stored;
         StopAllCoroutines();

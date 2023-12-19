@@ -6,7 +6,7 @@ using Utility;
 
 public class EquipmentManager : MonoBehaviour {
     Character _Character => GameManager.instance.StageManager.Character;
-    StageUIManager _UiManager => GameManager.instance.StageManager._StageUIManager;
+    StageUIManager _UiManager => GameManager.instance.StageManager.StageUIManager;
 
     [SerializeField] private Transform allEquipmentsParent;
 

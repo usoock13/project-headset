@@ -5,7 +5,7 @@ public class EffectProjectile : MonoBehaviour {
     [SerializeField] protected float flyingTime = 3f;
     [SerializeField] protected float lifetime = 0;
 
-    public Action<EffectProjectile> onDisapear;
+    public Action<EffectProjectile> onDisappear;
 
     protected virtual void OnEnable() {
         lifetime = 0;
@@ -14,10 +14,10 @@ public class EffectProjectile : MonoBehaviour {
         if(lifetime < flyingTime) {
             lifetime += Time.deltaTime;
         } else {
-            Disapear();
+            Disappear();
         }
     }
-    protected virtual void Disapear() {
-        onDisapear?.Invoke(this);
+    protected virtual void Disappear() {
+        onDisappear?.Invoke(this);
     }
 }

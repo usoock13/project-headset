@@ -361,16 +361,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Size.x
-      value: 2.5
+      value: 1.875
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Size.y
-      value: 1.5
+      value: 1.875
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 57906832, guid: 4248710b772857a4485099ee47f4848c, type: 3}
+      objectReference: {fileID: 606050354, guid: 03c74935c12f3d945914b0209731e949, type: 3}
     - target: {fileID: 6342264030857522985, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -432,9 +432,9 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.61}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.11666667}
-    oldSize: {x: 1.6666666, y: 1.6666666}
-    newSize: {x: 2.5, y: 1.5}
+    pivot: {x: 0.5, y: 0.1166667}
+    oldSize: {x: 1.875, y: 1.875}
+    newSize: {x: 1.875, y: 1.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

@@ -75,8 +75,8 @@ public class EffectAwAxe : EffectProjectile {
         isReturning = true;
     }
 
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         originWeapon.EffectPooler.InPool(this.gameObject);
         StopAllCoroutines();
     }
@@ -84,7 +84,7 @@ public class EffectAwAxe : EffectProjectile {
     private void OnTriggerEnter2D(Collider2D other) {
         if(isReturning
         && (1<<other.gameObject.layer & 1<<GameManager.instance.Character.gameObject.layer) > 0) {
-            Disapear();
+            Disappear();
         }
     }
 

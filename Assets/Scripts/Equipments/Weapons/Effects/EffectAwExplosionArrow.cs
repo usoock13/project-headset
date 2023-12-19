@@ -48,7 +48,7 @@ public class EffectAwExplosionArrow : EffectProjectile {
     private void Explode() {
         Collider2D[] inners = Physics2D.OverlapCircleAll(transform.position, explostionRadius, targetLayer);
         spriteRenderer.enabled = false;
-        StartCoroutine(DisapearCoroutine());
+        StartCoroutine(DisappearCoroutine());
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(Damage);
@@ -60,13 +60,13 @@ public class EffectAwExplosionArrow : EffectProjectile {
         explosionParticle.Play();
     }
 
-    private IEnumerator DisapearCoroutine() {
+    private IEnumerator DisappearCoroutine() {
         yield return new WaitForSeconds(3f);
-        Disapear();
+        Disappear();
     }
 
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         originWeapon.ExplosionEffectPooler.InPool(this.gameObject);
     }
 }

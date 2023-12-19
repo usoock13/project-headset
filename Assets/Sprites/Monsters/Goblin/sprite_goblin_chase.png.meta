@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4248710b772857a4485099ee47f4848c
+guid: 03c74935c12f3d945914b0209731e949
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 36
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_goblin_chase_0
+      name: sprite_goblin_hit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,20 +112,20 @@ TextureImporter:
         width: 60
         height: 60
       alignment: 9
-      pivot: {x: 0.5, y: 0.11666667}
+      pivot: {x: 0.5, y: 0.1166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef3bd35e5ec6ed94fbb9bada8a27da2e
-      internalID: 57906832
+      spriteID: 1ecd0bc4656458d4bb20965d642e243a
+      internalID: 606050354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_goblin_chase_1
+      name: sprite_goblin_hit_1
       rect:
         serializedVersion: 2
         x: 60
@@ -133,20 +133,20 @@ TextureImporter:
         width: 60
         height: 60
       alignment: 9
-      pivot: {x: 0.5, y: 0.11666667}
+      pivot: {x: 0.5, y: 0.1166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 446a9e1dd0201e9449ad468b7f58611d
-      internalID: -1342133238
+      spriteID: 52b0ee2573de02e4fbb133d5cc62d3a3
+      internalID: -810151135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_goblin_chase_2
+      name: sprite_goblin_hit_2
       rect:
         serializedVersion: 2
         x: 0
@@ -154,20 +154,20 @@ TextureImporter:
         width: 60
         height: 60
       alignment: 9
-      pivot: {x: 0.5, y: 0.11666667}
+      pivot: {x: 0.5, y: 0.1166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4432c62486f54f4468626ef0844f2d3f
-      internalID: -1245329750
+      spriteID: 4ef0bd78e8d22f14c8c2ab6a43f977c4
+      internalID: 2034322034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_goblin_chase_3
+      name: sprite_goblin_hit_3
       rect:
         serializedVersion: 2
         x: 60
@@ -175,14 +175,14 @@ TextureImporter:
         width: 60
         height: 60
       alignment: 9
-      pivot: {x: 0.5, y: 0.11666667}
+      pivot: {x: 0.5, y: 0.1166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26c208114da393a4da3ecbb7656913a8
-      internalID: -1356992919
+      spriteID: 5a56fac789fd4de4bb7d0e9e86202a9a
+      internalID: 473092590
       vertices: []
       indices: 
       edges: []
@@ -198,10 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_goblin_chase_2: -1245329750
-      sprite_goblin_chase_1: -1342133238
-      sprite_goblin_chase_0: 57906832
-      sprite_goblin_chase_3: -1356992919
+      sprite_goblin_hit_0: 606050354
+      sprite_goblin_hit_3: 473092590
+      sprite_goblin_hit_1: -810151135
+      sprite_goblin_hit_2: 2034322034
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

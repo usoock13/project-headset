@@ -29,7 +29,7 @@ public class EffectMaliciousFlask : EffectProjectile {
             currentSpeed = Mathf.Lerp(flyingSpeed, 0, lifetime/flyingTime);
             lifetime += Time.deltaTime * 5;
             if(lifetime >= flyingTime) {
-                Disapear();
+                Disappear();
             }
         }
     }
@@ -38,12 +38,12 @@ public class EffectMaliciousFlask : EffectProjectile {
         && isActive) {
             Monster target;
             if(other.TryGetComponent<Monster>(out target)) {
-                Disapear();
+                Disappear();
             }
         }
     }
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         flaskSpriteRenderer.enabled = false;
         explosionEffect.Play();
         AttackArea();

@@ -40,13 +40,13 @@ public class EffectAwNormalArrow : EffectProjectile {
                 isActive = false;
                 originWeapon.OnAttackMonster();
                 GameManager.instance.Character.OnAttackMonster(target);
-                Disapear();
+                Disappear();
             }
         }
     }
 
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         originWeapon.NormalEffectPooler.InPool(this.gameObject);
     }
 }

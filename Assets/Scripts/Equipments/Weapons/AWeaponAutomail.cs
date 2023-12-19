@@ -30,7 +30,7 @@ public class AWeaponAutomail : Weapon {
         set {
             overload = value;
             extraInformation = $"{overload:0}";
-            GameManager.instance.StageManager._StageUIManager.UpdateWeaponList();
+            GameManager.instance.StageManager.StageUIManager.UpdateWeaponList();
         }
     }
 

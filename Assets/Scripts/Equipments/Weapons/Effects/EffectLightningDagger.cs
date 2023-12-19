@@ -86,10 +86,10 @@ public class EffectLightningDagger : EffectProjectile {
 
         foreach(var lr in lineRenderers)
             originWeapon.LineRendererPooler.InPool(lr.gameObject);
-        Disapear();
+        Disappear();
     }
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

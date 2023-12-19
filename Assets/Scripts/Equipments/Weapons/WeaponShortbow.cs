@@ -37,7 +37,7 @@ public class WeaponShortbow : Weapon {
             onCreated: (gobj) => {
                 var effect = gobj.GetComponent<EffectShortbow>();
                 effect.originWeapon = this;
-                effect.onDisapear += (projectile) => {
+                effect.onDisappear += (projectile) => {
                     effectPooler.InPool(projectile.gameObject);
                 };
             },

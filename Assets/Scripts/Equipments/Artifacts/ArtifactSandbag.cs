@@ -43,7 +43,7 @@ public class ArtifactSandbag : Artifact {
             currentStack = MAX_STACK;
         }
         extraInformation = currentStack.ToString();
-        GameManager.instance.StageManager._StageUIManager.UpdateArtifactList();
+        GameManager.instance.StageManager.StageUIManager.UpdateArtifactList();
     }
     private float ExtraMoveSpeed(Character character) => character.DefaultMoveSpeed * (moveSpeedPerStack[level-1] * currentStack - .3f);
     private float ExtraAttackSpeed(Character character) => attackSpeedPerStack[level-1] * currentStack - .4f;

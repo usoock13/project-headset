@@ -23,7 +23,7 @@ public abstract class Weapon : Equipment {
     
     protected override void OnLevelUp() {
         base.OnLevelUp();
-        GameManager.instance.StageManager._StageUIManager.UpdateWeaponList();
+        GameManager.instance.StageManager.StageUIManager.UpdateWeaponList();
     }
     
     protected abstract void Attack();

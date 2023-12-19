@@ -34,45 +34,16 @@ public class ExpJewel : Item {
 
     public override void Drop() {
         base.Drop();
-        StartCoroutine(DropCoroutine());
-        StartCoroutine(DisapearCoroutine());
-    }
-    public override void Pull(Transform getter) {
-        if(isGround)
-            base.Pull(getter);
-        else
-            this.getter = getter;
+        StartCoroutine(DisappearCoroutine());
     }
 
-    private IEnumerator DisapearCoroutine() {
+    private IEnumerator DisappearCoroutine() {
         yield return new WaitForSeconds(120f);
-        Disapear();
+        Disappear();
     }
-
-    private IEnumerator DropCoroutine() {
-        float randomAngle = Random.Range(0, 360);
-        Vector2 origin = transform.position;
-        Vector2 dest = Quaternion.AngleAxis(randomAngle, Vector3.forward) * Vector2.up * Random.Range(.5f, 1.5f);
-        float offset = 0;
-        while(offset < 1) {
-            transform.position = Vector2.Lerp(origin, origin + dest, offset);
-            offset += Time.deltaTime * 4f;
-            yield return null;
-        }
-        isGround = true;
-        if(getter is not null)
-            this.Pull(this.getter);
-    }
+    
     public override void OnGotten() {
-        onGetItem?.Invoke(this);
-        GameManager.instance.StageManager.OnGetExp(this);
+        base.OnGotten();
         GameManager.instance.Character.GetExp(givingExp);
-        isGround = false;
-        getter = null;
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D other) {
-        if(isGround)
-            base.OnTriggerEnter2D(other);
     }
 }

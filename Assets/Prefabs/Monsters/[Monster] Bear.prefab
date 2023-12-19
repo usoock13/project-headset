@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522983, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: blockLayer.m_Bits
-      value: 128
+      value: 384
       objectReference: {fileID: 0}
     - target: {fileID: 6342264030857522984, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: m_RootOrder

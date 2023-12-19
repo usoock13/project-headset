@@ -18,7 +18,7 @@ public class EffectSpikeTrap : MonoBehaviour {
     private void Update() {
         lifetime += Time.deltaTime;
         if(lifetime >= duration)
-            Disapear();
+            Disappear();
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value) {
@@ -27,10 +27,10 @@ public class EffectSpikeTrap : MonoBehaviour {
                 monster.TakeAttackDelay(HittingDelay);
             }
             GameManager.instance.Character.OnAttackMonster(monster);
-            Disapear();
+            Disappear();
         }
     }
-    private void Disapear() {
+    private void Disappear() {
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

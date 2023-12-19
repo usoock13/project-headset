@@ -35,7 +35,7 @@ public class WeaponMaliciousFlask : Weapon {
             poolingObject: flaskEffect.gameObject,
             parent: this.transform,
             onCreated: (gobj) => {
-                gobj.GetComponent<EffectMaliciousFlask>().onDisapear += (projectile) => {
+                gobj.GetComponent<EffectMaliciousFlask>().onDisappear += (projectile) => {
                     StartCoroutine(InPoolCoroutine(effectPooler, projectile.gameObject));
                 };
         });

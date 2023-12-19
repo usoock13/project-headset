@@ -26,7 +26,7 @@ public class EffectColdSpear : EffectProjectile {
             transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
             lifetime += Time.deltaTime * 5;
             if(lifetime >= flyingTime) {
-                Disapear();
+                Disappear();
             }
         }
     }
@@ -34,12 +34,12 @@ public class EffectColdSpear : EffectProjectile {
         if(1<<other.gameObject.layer == targetLayer.value
         && isActive) {
             if(other.TryGetComponent<Monster>(out _)) {
-                Disapear();
+                Disappear();
             }
         }
     }
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         projectileRenderer.enabled = false;
         AttackArea();
         isActive = false;

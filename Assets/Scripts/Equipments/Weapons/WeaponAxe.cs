@@ -38,7 +38,7 @@ public class WeaponAxe : Weapon {
             onCreated: (GameObject instance) => {
                 var effect = instance.GetComponent<EffectFlyingAxe>();
                 effect.originWeapon = this;
-                effect.onDisapear += (projectile) => {
+                effect.onDisappear += (projectile) => {
                     effectPooler.InPool(projectile.gameObject);
                 };
             }, 

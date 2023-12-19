@@ -5,7 +5,7 @@ public abstract class Artifact : Equipment {
 
     protected override void OnLevelUp() {
         base.OnLevelUp();
-        GameManager.instance.StageManager._StageUIManager.UpdateArtifactList();
+        GameManager.instance.StageManager.StageUIManager.UpdateArtifactList();
     }
     public override void OnGotten() {
         OnEquipped();

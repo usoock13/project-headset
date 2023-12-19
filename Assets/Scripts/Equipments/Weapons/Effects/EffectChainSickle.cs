@@ -100,7 +100,7 @@ public class EffectChainSickle : MonoBehaviour {
             yield return null;
             chainYAddition = 1-lifetime;
         }
-        Disapear();
+        Disappear();
     }
 
     private void UpdateLineRenderer() {
@@ -114,7 +114,7 @@ public class EffectChainSickle : MonoBehaviour {
         }
     }
 
-    private void Disapear() {
+    private void Disappear() {
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
     

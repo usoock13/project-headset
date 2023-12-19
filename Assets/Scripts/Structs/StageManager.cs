@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -19,18 +20,13 @@ public class StageManager : MonoBehaviour {
 
     private PlayerInput PlayerInput => character.GetComponent<PlayerInput>();
     [SerializeField] private ScenarioDirector scenarioDirector;
-    public ScenarioDirector ScenarioDirector {
-        get { return scenarioDirector; }
-        set { scenarioDirector ??= value; }
-    }
+    public ScenarioDirector ScenarioDirector => scenarioDirector;
+
     [SerializeField] private EquipmentManager equipmentsManager;
-    public EquipmentManager EquipmentsManager {
-        get { return equipmentsManager; }
-    }
+    public EquipmentManager EquipmentsManager => equipmentsManager;
+
     [SerializeField] private StageUIManager stageUIManager;
-    public StageUIManager _StageUIManager {
-        get { return stageUIManager; }
-    }
+    public StageUIManager StageUIManager => stageUIManager;
 
     [SerializeField] private Camera mainCamera;
 
@@ -38,8 +34,6 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private ItemCollector itemCollector;
     private const int MAX_KESO_FALLEN_COUNT = 200;
     private const int MAX_EXP_FALLEN_COUNT = 200;
-    private int kesoFallenCount = 0;
-    private int expFallenCount = 0;
     
     [SerializeField] private ExpJewel expJewel;
     private ObjectPooler expPooler;
@@ -49,6 +43,9 @@ public class StageManager : MonoBehaviour {
 
     [SerializeField] private Keso kesoOrigin;
     private ObjectPooler kesoPooler;
+
+    [SerializeField] private Salad saladOrigin;
+    private ObjectPooler saladPooler;
     #endregion Item
 
     [SerializeField] private DamagePrinter damagePrinter;
@@ -90,6 +87,7 @@ public class StageManager : MonoBehaviour {
         expPooler = new ObjectPooler(expJewel.gameObject, null, null, parent: this.transform);
         MeatPooler = new ObjectPooler(meatOrigin.gameObject, null, null, parent: this.transform);
         kesoPooler = new ObjectPooler(kesoOrigin.gameObject, null, null, null, parent: this.transform);
+        saladPooler = new ObjectPooler(saladOrigin.gameObject, null, null, parent: this.transform);
     }
 
     public void IncreaseStageLevel(float amount) {
@@ -141,7 +139,7 @@ public class StageManager : MonoBehaviour {
         if(character.CurrentState.Compare(character.dieState))
             return;
             
-        _StageUIManager.LevelUpUI.ShowChoise();
+        StageUIManager.LevelUpUI.ShowChoise();
     }
     public void GameOver() {
         isGameOver = true;
@@ -156,7 +154,6 @@ public class StageManager : MonoBehaviour {
             exp.GivingExp = expAmount;
             exp.Drop();
         }
-        expFallenCount ++;
     }
     public void CreateKeso(Vector2 point, int kesoAmount) {
         GameObject instan = kesoPooler.OutPool(point, Quaternion.identity);
@@ -164,29 +161,24 @@ public class StageManager : MonoBehaviour {
             keso.Amount = kesoAmount;
             keso.Drop();
         }
-        kesoFallenCount ++;
     }
     public void CreateMeat(Vector2 point) {
         GameObject instance = MeatPooler.OutPool(point, Quaternion.identity);
-        if(instance.TryGetComponent(out Meat potion)) {
-            potion.Drop();
+        if(instance.TryGetComponent(out Meat meat)) {
+            meat.Drop();
+        }
+    }
+    public void CreateSalad(Vector2 point) {
+        GameObject instance = saladPooler.OutPool(point, quaternion.identity);
+        if(instance.TryGetComponent(out Salad salad)) {
+            salad.Drop();
         }
     }
     #endregion Create Item
 
-    #region Getting Item Events
-    public void OnGetExp(ExpJewel expJewel) {
-        expFallenCount --;
-        OnGetItem(expJewel);
-    }
-    public void OnGetKeso(Keso keso) {
-        kesoFallenCount --;
-        OnGetItem(keso);
-    }
     public void OnGetItem(Item item) {
         Character.onGetItem?.Invoke(item);
     }
-    #endregion Getting Item Events
     
     public void OnMonsterDie(Monster monster) {
         character.OnKillMonster(monster);

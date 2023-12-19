@@ -31,17 +31,16 @@ public class Keso : Item {
 
     public override void Drop() {
         base.Drop();
-        StartCoroutine(DisapearCoroutine());
+        StartCoroutine(DisappearCoroutine());
     }
 
-    private IEnumerator DisapearCoroutine() {
+    private IEnumerator DisappearCoroutine() {
         yield return new WaitForSeconds(120f);
-        Disapear();
+        Disappear();
     }
 
     public override void OnGotten() {
-        onGetItem?.Invoke(this);
-        GameManager.instance.StageManager.OnGetKeso(this);
+        base.OnGotten();
         GameManager.instance.StageManager.IncreaseKesoEarned(amount);
     }
     

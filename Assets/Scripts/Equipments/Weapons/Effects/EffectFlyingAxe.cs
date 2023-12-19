@@ -61,7 +61,7 @@ public class EffectFlyingAxe : EffectProjectile {
                 GameManager.instance.Character.OnAttackMonster(target);
 
                 if(++hitCount >= MaxHitCount)
-                    Disapear();
+                    Disappear();
             }
         }
     }

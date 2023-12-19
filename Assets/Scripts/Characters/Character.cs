@@ -10,10 +10,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     private StageManager StageManager {
         get { return GameManager.instance.StageManager; }
     }
-    StageUIManager StageUIManager => GameManager.instance.StageManager._StageUIManager;
+    StageUIManager StageUIManager => GameManager.instance.StageManager.StageUIManager;
     
     private CharacterStatusUI _characterStatusUI;
-    private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager._StageUIManager.CharacterStatusUI;
+    private CharacterStatusUI StatusUI => _characterStatusUI ?? GameManager.instance.StageManager.StageUIManager.CharacterStatusUI;
 
     [SerializeField] public Slider hpSlider;
     [SerializeField] public Slider staminaSlider;
@@ -53,10 +53,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     public float MaxSp => maxSp;
     public float currentSP { get; protected set; } = 0;
-    protected float defaultRecoverimgSP = 1f;
+    protected float defaultRecoveringSP = 1f;
     public Func<Character, float> extraRecoveringSp;
     protected float RecoveringSpPerSecond { get {
-        float final = defaultRecoverimgSP;
+        float final = defaultRecoveringSP;
         Delegate[] additions = extraRecoveringSp?.GetInvocationList();
         if(additions != null)
             for(int i=0; i<additions.Length; i++)
@@ -194,6 +194,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public float DefaultPower => statusDefaultPower;
     public float DefaultMoveSpeed => statusDefaultMoveSpeed;
     public float DefaultArmor => statusDefaultArmor;
+    public float DefaultRecoveringSP => defaultRecoveringSP;
+    public float DefaultRecoveringStamina => defaultRecoveringStamina;
 
     #region Character Events
     public Action<Character, Monster, float> onTakeAttack;
@@ -224,14 +226,12 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp((int) (MaxExp * 0.5f));
-        if(Input.GetKeyDown(KeyCode.K)) {
-            GameManager.instance.StageManager.IncreaseStageLevel(0.1f);
-            print("success increasing stage level. " + GameManager.instance.StageManager.StageLevel);
-        }
+        if(Input.GetKeyDown(KeyCode.K))
+            GameManager.instance.StageManager.CreateSalad(transform.position);
         #endif
         /* << FOR TEST */
-        RecoverStamina();
-        RecoverSkillGauge();
+        RecoverStamina(Time.deltaTime * RecoveringStaminaPerSecond);
+        RecoverSkillGauge(Time.deltaTime * RecoveringSpPerSecond);
         RotateArrowWithMouse();
     }
     #endregion Unity Events
@@ -384,16 +384,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         currentStamina = Mathf.Max(currentStamina - amount, 0);
         StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
     }
-    private void RecoverStamina() {
-        if(currentStamina < maxStamina)
-            currentStamina = Mathf.Min(currentStamina + Time.deltaTime * RecoveringStaminaPerSecond, maxStamina);
-        StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
-    }
-    private void RecoverSkillGauge() {
-        if(currentSP < maxSp)
-            currentSP = Mathf.Min(currentSP + Time.deltaTime * RecoveringSpPerSecond, maxStamina);
-        StatusUI.UpdateSpSlider(currentSP / maxSp);
-    }
     
     public void GetExp(int amount) {
         currentExp += amount;
@@ -458,6 +448,21 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StatusUI.UpdateHpSlider(currentHp / maxHp);
         StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString(), Color.green);
     }
+    public void IncreaseMaxHp(int amount) {
+        maxHp += amount;
+    }
+
+    public void RecoverStamina(float amount) {
+        if(currentStamina < maxStamina)
+            currentStamina = Mathf.Min(currentStamina + amount, maxStamina);
+        StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
+    }
+    public void RecoverSkillGauge(float amount) {
+        if(currentSP < maxSp)
+            currentSP = Mathf.Min(currentSP + amount, maxStamina);
+        StatusUI.UpdateSpSlider(currentSP / maxSp);
+    }
+    
     private void Die() {
         stateMachine.ChangeState(dieState, false);
         StageManager.GameOver();
@@ -480,6 +485,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     #region IAttachmentsTakeable Implements
     public void TakeAttachment(Attachment attachment) {
+        attachment.transform.SetParent(this.transform);
+        attachment.transform.localPosition = Vector2.zero;
         attachment.OnAttached(this);
         havingAttachment.Add(attachment);
     }

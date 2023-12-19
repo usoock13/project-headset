@@ -43,12 +43,12 @@ public class EffectRifleBullet : EffectProjectile {
                 GameManager.instance.Character.OnAttackMonster(target);
                 
                 if(++hitCount >= MaxHitCount)
-                    Disapear();
+                    Disappear();
             }
         }
     }
-    protected override void Disapear() {
-        base.Disapear();
+    protected override void Disappear() {
+        base.Disappear();
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

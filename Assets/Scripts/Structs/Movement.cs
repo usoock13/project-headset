@@ -26,11 +26,11 @@ public class Movement : MonoBehaviour {
         transform.Translate(final);
     }
     public void Translate(Vector2 moveVector) {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.1f, moveVector, moveVector.magnitude, blockLayer.value);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.5f, moveVector, moveVector.magnitude, blockLayer.value);
         int count = 0;
         for(int i=0; i<hits.Length; i++) {
             if(hits[i].transform.gameObject != this.gameObject) {
-                transform.Translate((transform.position - hits[i].transform.position) * 0.2f * Time.deltaTime);
+                transform.Translate((transform.position - hits[i].transform.position) * 1f * Time.deltaTime);
                 if(++ count > 3)
                     break;
             }

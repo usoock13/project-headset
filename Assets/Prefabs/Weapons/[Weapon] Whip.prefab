@@ -128,12 +128,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0}
-      - {x: 2.121321, y: 2.121321}
-      - {x: 1.1480502, y: 2.7716384}
-      - {x: 0, y: 3}
-      - {x: -1.1480502, y: 2.7716384}
-      - {x: -2.121321, y: 2.121321}
+    - - {x: -1.2, y: 1.5}
+      - {x: 0, y: 1.65}
+      - {x: 1.2, y: 1.5}
+      - {x: 2.254023, y: 2.8001437}
+      - {x: 1.37766, y: 3.6585627}
+      - {x: 0, y: 3.96}
+      - {x: -1.37766, y: 3.6585627}
+      - {x: -2.2540228, y: 2.773638}
 --- !u!198 &4620205840647711031
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -217,7 +219,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1535,22 +1537,31 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
+          time: 0.0034828186
           value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
+          inSlope: 2.071633
+          outSlope: 2.071633
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.38363463
+        - serializedVersion: 3
+          time: 0.7119133
+          value: 0.87967885
+          inSlope: 0.4322409
+          outSlope: 0.4322409
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.2706376
+          outWeight: 0.9999996
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
+          inSlope: 0.38235277
+          outSlope: 0.38235277
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.99176526
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

@@ -36,7 +36,7 @@ public class EffectShortbow : EffectProjectile {
                 target.TakeAttackDelay(hittingDelay);
                 target.TakeForce(transform.up * .2f, hittingDelay);
                 isActive = false;
-                Disapear();
+                Disappear();
                 GameManager.instance.Character.OnAttackMonster(target);
             }
         }

@@ -13,7 +13,7 @@ public class AWeaponExplosionArrow : Weapon {
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] damageCoef = new float[MAX_LEVEL]       {  0.15f,  0.15f,  0.15f,  0.15f,  0.15f };  // 피해 계수
-    private float[] staticDamage = new float[MAX_LEVEL]     {    25f,    25f,    25f,    25f,    25f };  // 고정 피해량
+    private float[] staticDamage = new float[MAX_LEVEL]     {    20f,    25f,    30f,    35f,    40f };  // 고정 피해량
     private int[] arrowBombCount = new int[MAX_LEVEL]       {     11,     10,      9,      8,      7 };  // 폭발 화살 발사를 위한 적중 횟수
     private float[] bombDamageCoef = new float[MAX_LEVEL]   {  1.55f,  1.55f,  1.55f,  1.55f,  1.55f };  // 폭발 화살 피혜 계수
     private float[] bombStaticDamage = new float[MAX_LEVEL] {    70f,    90f,   110f,   130f,   150f };  // 폭발 화살 고정 피해량
