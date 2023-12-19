@@ -439,6 +439,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: sprite_weapons_16
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 680933d65d3aa284292e6b7468d05c9b
+      internalID: 1026322415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_weapons_17
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d766c8d44286b14f908fd97d00863c0
+      internalID: -1761253977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_weapons_18
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d23bc956393e2a84189d7b1363a091a6
+      internalID: 1148539457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -460,10 +523,13 @@ TextureImporter:
       sprite_weapons_14: 479645979
       sprite_weapons_10: -336608412
       sprite_weapons_1: 679180364
+      sprite_weapons_16: 1026322415
       sprite_weapons_9: 1763907733
       sprite_weapons_2: 1779788115
+      sprite_weapons_17: -1761253977
       sprite_weapons_7: 448342285
       sprite_weapons_13: 877247089
+      sprite_weapons_18: 1148539457
       sprite_weapons_5: 844431414
       sprite_weapons_0: 136583627
   spritePackingTag: 

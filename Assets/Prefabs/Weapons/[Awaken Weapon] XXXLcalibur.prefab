@@ -101,7 +101,7 @@ MonoBehaviour:
   extraInformation: 
   slashEffect: {fileID: 4524951246823102919}
   strikeEffect: {fileID: 6467782208484355240}
-  _icon: {fileID: 0}
+  _icon: {fileID: 1026322415, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
 --- !u!1 &4524951246573172402
 GameObject:
   m_ObjectHideFlags: 0
