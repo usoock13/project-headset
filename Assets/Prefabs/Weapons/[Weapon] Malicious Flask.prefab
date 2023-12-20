@@ -4901,7 +4901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5e2c2f6e6013547a671a7f615f78e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingTime: 1
+  flyingTime: 0.25
   lifetime: 0
   originWeapon: {fileID: 4640521107017607792}
   targetLayer:
@@ -5059,6 +5059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  extraInformation: 
   flaskEffect: {fileID: 6369733202015624637}
   attachmentSlowPoison: {fileID: 5921333705445956045}
   _weaponIcon: {fileID: 844431414, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}

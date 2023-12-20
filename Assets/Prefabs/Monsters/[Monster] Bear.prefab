@@ -129,7 +129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: defaultToughness
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4328441013541657025, guid: 8e73a973c159fe744ae8d2a8fb169f7a, type: 3}
       propertyPath: defaultAttackPower

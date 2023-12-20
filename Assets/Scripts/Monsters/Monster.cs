@@ -41,6 +41,16 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     }}
     protected Vector2 MoveVector => targetDirection * MoveSpeed;
 
+    public Func<Monster, float> extraDamageScale;
+    private float DamageScale { get {
+        float final = 1;
+        Delegate[] scales = extraDamageScale?.GetInvocationList();
+        if(scales != null)
+            for(int i=0; i<scales.Length; i++)
+                final += ((Func<Monster, float>) scales[i])?.Invoke(this) ?? 0;
+        return final;
+    }}
+
     protected Vector2 targetDirection;
     public abstract string MonsterType { get; }
 
@@ -87,10 +97,11 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         
     */
     public virtual void TakeDamage(float amount) {
-        currentHp -= amount;
+        float damage = amount * DamageScale;
+        currentHp -= damage;
         if(currentHp <= 0)
             stateMachine.ChangeState(dieState);
-        _StageManager.PrintDamageNumber(transform.position, ((int) amount).ToString());
+        _StageManager.PrintDamageNumber(transform.position, ((int) damage).ToString());
     }
 
 
@@ -244,9 +255,11 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         attachment.OnDetached(this);
     }
     public bool TryGetAttachment(string attachmentType, out Attachment attachment) {
-        attachment = havingAttachment.Find((item) => {
-            return attachmentType == item.AttachmentType;
-        });
+        attachment = havingAttachment.Find( (item) => attachmentType == item.AttachmentType );
+        return attachment==null ? false : true;
+    }
+    public bool TryGetAttachment<T>(out T attachment) where T : Attachment {
+        attachment = (T) havingAttachment.Find( (item) => item is T );
         return attachment==null ? false : true;
     }
     #endregion IAttachmentsTakeable Implements

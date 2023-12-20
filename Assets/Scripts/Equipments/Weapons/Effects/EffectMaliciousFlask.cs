@@ -6,7 +6,7 @@ public class EffectMaliciousFlask : EffectProjectile {
     public WeaponMaliciousFlask originWeapon;
     private float flyingSpeed = 45f;
     private float currentSpeed = 0;
-    [SerializeField] private LayerMask targetLayer = 8;
+    [SerializeField] private LayerMask targetLayer = 1<<8;
     [SerializeField] private ParticleSystem explosionEffect;
     [SerializeField] private CircleBounds damageAreaBounds;
     [SerializeField] private SpriteRenderer flaskSpriteRenderer;
@@ -27,7 +27,7 @@ public class EffectMaliciousFlask : EffectProjectile {
         if(isActive) {
             transform.Translate(Vector2.up * currentSpeed * Time.deltaTime);
             currentSpeed = Mathf.Lerp(flyingSpeed, 0, lifetime/flyingTime);
-            lifetime += Time.deltaTime * 5;
+            lifetime += Time.deltaTime;
             if(lifetime >= flyingTime) {
                 Disappear();
             }
