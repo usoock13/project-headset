@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class AWeaponMagicPen : Weapon {
         return final;
     }}
     public float Interval => AttackInterval;
-    protected override float AttackInterval => 0.125f;
+    protected override float AttackInterval => 0.75f;
     #endregion Weapon Status
 
     #region Weapon Information
@@ -50,9 +51,10 @@ public class AWeaponMagicPen : Weapon {
       + "</nobr>";
     #endregion Weapon Information
 
-    [SerializeField] private Transform generatingPoint;
-    private readonly int MASTERPIECE_COOLDOWN = 16;
+    [SerializeField] private ParticleSystem inkParticle;
+    private readonly int MASTERPIECE_COOLDOWN = 8;
     private int lineOfMasterpiece = 0;
+    private float swingDir = 1;
 
     protected void Awake() {
         DrawingPooler = new ObjectPooler(
@@ -66,12 +68,39 @@ public class AWeaponMagicPen : Weapon {
     }
 
     protected override void Attack() {
-        float angle = UnityEngine.Random.Range(-22f, 22f);
-        effect.transform.rotation = _Character.attackArrow.rotation;
-        effect.transform.Rotate(Vector3.forward, angle);
-        effect.AttackForward();
+        StartCoroutine(AttackCoroutine());
         _Character.OnAttack();
+    }
+
+    private IEnumerator AttackCoroutine() {
+        inkParticle.Play();
+        bool stoped = false;
+        float timeScale = 1 / AttackInterval * _Character.AttackSpeed * 1.25f;
+        float offset = 0;
+
+        float a = (Mathf.Atan2(effect.transform.up.y, effect.transform.up.x) - Mathf.PI*0.5f) * Mathf.Rad2Deg;
+        float b = (Mathf.Atan2(_Character.attackArrow.up.y, _Character.attackArrow.up.x) - Mathf.PI*0.5f) * Mathf.Rad2Deg + 45f * swingDir;
+
+        if(a<b && swingDir<0)
+            b -= 360;
+        if(a>=b && swingDir>0)
+            b += 360;
+
+        float angle;
+        while(offset < 1) {
+            offset += Time.deltaTime * timeScale;
+            angle = Mathf.Lerp(a, b, 1 - Mathf.Pow(1 - offset, 5));
+            effect.transform.eulerAngles = new Vector3(0, 0, angle);
+            if(!stoped && offset > 0.5f) {
+                stoped = true;
+                inkParticle.Stop();
+            }
+            yield return null;
+        }
+
         DrawMasterpiece();
+        swingDir *= -1;
+        effect.ClearHitMonsterList();
     }
 
     private void DrawMasterpiece() {
@@ -79,31 +108,31 @@ public class AWeaponMagicPen : Weapon {
             lineOfMasterpiece --;
             return;
         }
-        float number = UnityEngine.Random.Range(0, 200);
+        float number = UnityEngine.Random.Range(0, 50);
         
         switch(number) {
             case 0:
-                DrawingPooler.OutPool(generatingPoint.position, Quaternion.identity)
+                DrawingPooler.OutPool(transform.position + _Character.attackArrow.up * 2f, Quaternion.identity)
                     .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.Bomb);
                 lineOfMasterpiece = MASTERPIECE_COOLDOWN;
                 break;
             case 1:
-                DrawingPooler.OutPool(generatingPoint.position, Quaternion.identity)
+                DrawingPooler.OutPool(transform.position + _Character.attackArrow.up * 2f, Quaternion.identity)
                     .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.FirstAid);
                 lineOfMasterpiece = MASTERPIECE_COOLDOWN;
                 break;
             case 2:
-                DrawingPooler.OutPool(generatingPoint.position, Quaternion.identity)
+                DrawingPooler.OutPool(transform.position + _Character.attackArrow.up * 2f, Quaternion.identity)
                     .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.BoonFoods);
                 lineOfMasterpiece = MASTERPIECE_COOLDOWN;
                 break;
             case 3:
-                DrawingPooler.OutPool(generatingPoint.position, Quaternion.identity)
+                DrawingPooler.OutPool(transform.position + _Character.attackArrow.up * 2f, Quaternion.identity)
                     .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.Keso);
                 lineOfMasterpiece = MASTERPIECE_COOLDOWN;
                 break;
             case 4:
-                DrawingPooler.OutPool(generatingPoint.position, Quaternion.identity)
+                DrawingPooler.OutPool(transform.position + _Character.attackArrow.up * 2f, Quaternion.identity)
                     .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.Goblin);
                 lineOfMasterpiece = MASTERPIECE_COOLDOWN;
                 break;

@@ -12,10 +12,10 @@ public class WeaponMaliciousFlask : Weapon {
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]     {  1.50f,   1.50f,   1.50f,   1.50f,  1.25f };  // 공격 간격
-    private float[] staticDamage = new float[MAX_LEVEL] {  3.00f,   4.00f,   5.00f,   6.00f,  7.00f };  // 고정 피해량
+    private float[] interval = new float[MAX_LEVEL]     {  2.50f,   2.50f,   2.50f,   2.50f,  2.50f };  // 공격 간격
+    private float[] staticDamage = new float[MAX_LEVEL] {  7.00f,   9.00f,  11.00f,  13.00f, 15.00f };  // 고정 피해량
     private float[] damageCoef = new float[MAX_LEVEL]   {  0.10f,   0.10f,   0.10f,   0.15f,  0.20f };  // 피해계수
-    private float[] slowAmount = new float[MAX_LEVEL]   {  0.30f,   0.40f,   0.50f,   0.50f,  0.60f };  // 둔화율
+    private float[] slowAmount = new float[MAX_LEVEL]   {  0.10f,   0.15f,   0.20f,   0.25f,  0.30f };  // 둔화율
     protected override float AttackInterval => interval[level-1];
     #endregion Weapon Status
 

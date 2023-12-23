@@ -43,7 +43,7 @@ public class AWeaponAutomail : Weapon {
     public override string Name => "오토메일";
     public override string Description => 
         NextLevelIndex switch {
-            _ => $"<nobr>강철 주먹을 마구 내질러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩 1을 얻습니다.\n중첩 1당 주먹의 공격 속도가 2% 증가하고 100이 되면 잠시 뒤 폭발을 일으켜 주변 넓의 범위의 적에게 <color=#f40>{explosionDamageCoef[NextLevelIndex]}+{explosionDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩을 모두 잃으며, 잠깐동안 주먹을 진정시키는 시간을 갖습니다.</nobr>",
+            _ => $"<nobr>강철 주먹을 마구 내질러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩 1을 얻습니다.\n중첩 1당 주먹의 공격 속도가 2% 증가하고 100이 되면 잠시 뒤 폭발을 일으켜 주변 넓의 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{explosionDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩을 모두 잃으며, 잠깐동안 주먹을 진정시키는 시간을 갖습니다.</nobr>",
         };
     #endregion Weapon Information
 
