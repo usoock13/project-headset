@@ -1663,7 +1663,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -2489,7 +2489,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Fireball 2'
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -3315,7 +3315,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Ice Orb 1'
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -4141,7 +4141,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Ice Orb 2'
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -4967,7 +4967,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Thunderbolt 1'
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -5793,7 +5793,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
   m_CompressedRotationCurves: []
   m_EulerCurves: []
   m_PositionCurves: []
@@ -9971,7 +9971,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -10800,7 +10800,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11629,7 +11629,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -12458,7 +12458,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -13287,7 +13287,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -14116,7 +14116,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -14945,7 +14945,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15774,7 +15774,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -16603,7 +16603,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -17432,7 +17432,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -18261,7 +18261,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -19090,7 +19090,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -19919,7 +19919,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -20748,7 +20748,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -21577,7 +21577,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -22406,7 +22406,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -23235,7 +23235,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -24064,7 +24064,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -24893,7 +24893,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -25722,7 +25722,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -26551,7 +26551,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -27380,7 +27380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -28209,7 +28209,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29038,7 +29038,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -29151,7 +29151,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.x
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29179,7 +29179,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.y
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29207,7 +29207,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.z
-    path: '[Effect] Fireball (1)'
+    path: '[Effect] Fireball 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29235,7 +29235,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.x
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29263,7 +29263,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.y
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29291,7 +29291,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.z
-    path: '[Effect] Fireball (2)'
+    path: '[Effect] Ice Orb 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29319,7 +29319,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.x
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29347,7 +29347,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.y
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29375,7 +29375,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.z
-    path: '[Effect] Fireball (3)'
+    path: '[Effect] Thunderbolt 1'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29403,7 +29403,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.x
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29431,7 +29431,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.y
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29459,7 +29459,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.z
-    path: '[Effect] Fireball (4)'
+    path: '[Effect] Fireball 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29487,7 +29487,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.x
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29515,7 +29515,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.y
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29543,7 +29543,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.z
-    path: '[Effect] Fireball (5)'
+    path: '[Effect] Ice Orb 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29571,7 +29571,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.x
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29599,7 +29599,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.y
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -29627,7 +29627,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesBaked.z
-    path: '[Effect] Fireball (6)'
+    path: '[Effect] Thunderbolt 2'
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

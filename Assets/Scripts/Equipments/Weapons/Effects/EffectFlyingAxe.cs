@@ -47,7 +47,7 @@ public class EffectFlyingAxe : EffectProjectile {
         base.Update();
         velocity *= 1-Time.deltaTime;
         velocity = new Vector2(velocity.x, velocity.y + (-Time.deltaTime * 128f));
-        transform.Translate(velocity * Time.deltaTime, Space.World);
+        transform.Translate(velocity * Time.deltaTime, Space.World); 
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value
@@ -64,5 +64,10 @@ public class EffectFlyingAxe : EffectProjectile {
                     Disappear();
             }
         }
+    }
+
+    protected override void Disappear() {
+        base.Disappear();
+        originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

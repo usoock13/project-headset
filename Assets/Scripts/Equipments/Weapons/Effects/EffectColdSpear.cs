@@ -54,6 +54,7 @@ public class EffectColdSpear : EffectProjectile {
                 var attch = originWeapon.AttachmentPooler.OutPool(this.transform.position, Quaternion.identity).GetComponent<AttachmentFreeze>();
                 if(target.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
                     target.ReleaseAttachment(already);
+                attch.duration = originWeapon.FreezeTime;
                 target.TakeAttachment(attch);
                 originWeapon.SideEffectPooler.OutPool(target.transform.position, Quaternion.identity);
                 GameManager.instance.Character.OnAttackMonster(target);

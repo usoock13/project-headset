@@ -20,7 +20,7 @@ public class WeaponColdSpear : Weapon {
     protected override float AttackInterval => interval[level-1];
 
     public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
-    public float Duration => freezingTime[level-1];
+    public float FreezeTime => freezingTime[level-1];
     #endregion Weapon Status
 
     #region Weapon Information

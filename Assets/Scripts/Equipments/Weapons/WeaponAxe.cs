@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WeaponAxe : Weapon {
     [SerializeField] private EffectFlyingAxe projectile;
-    private ObjectPooler effectPooler;
+    public ObjectPooler EffectPooler { get; private set; }
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
@@ -33,19 +33,12 @@ public class WeaponAxe : Weapon {
     #endregion Weapon Information
 
     private void Awake() {
-        effectPooler = new ObjectPooler(
+        EffectPooler = new ObjectPooler(
             poolingObject: projectile.gameObject,
-            onCreated: (GameObject instance) => {
-                var effect = instance.GetComponent<EffectFlyingAxe>();
-                effect.originWeapon = this;
-                effect.onDisappear += (projectile) => {
-                    effectPooler.InPool(projectile.gameObject);
-                };
-            }, 
             parent: this.transform);
     }
     protected override void Attack() {
-        effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
+        EffectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
         _Character.OnAttack();
     }
 }

@@ -23,7 +23,6 @@ public class EffectFireRing : MonoBehaviour {
 
     public void Active() {
         particle.gameObject.SetActive(true);
-        trailParticle.gameObject.SetActive(true);
         particle.Play();
         trailParticle.Play();
         isActive = true;
@@ -33,7 +32,6 @@ public class EffectFireRing : MonoBehaviour {
         particle.Stop();
         trailParticle.Stop();
         particle.gameObject.SetActive(false);
-        trailParticle.gameObject.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(isActive
