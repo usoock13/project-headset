@@ -47,7 +47,7 @@ public abstract class EffectAwElement : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(isActive
-        && (1<<other.gameObject.layer | targetLayer.value) > 0) {
+        && (1<<other.gameObject.layer & targetLayer.value) > 0) {
             Collider2D[] inners = Physics2D.OverlapCircleAll(transform.position, explosionRadius, targetLayer);
             List<Monster> monsters = new List<Monster>();
             for(int i=0; i<inners.Length; i++) {

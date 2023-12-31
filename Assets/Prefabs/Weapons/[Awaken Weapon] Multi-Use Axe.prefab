@@ -48,13 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f432d4c194e7b43b1f55a75a5e7a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingTime: 0.5
+  flyingTime: 15
   lifetime: 0
   originWeapon: {fileID: 6384741104556455527}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  anim: {fileID: 3509633153491953215}
 --- !u!111 &3509633153491953215
 Animation:
   m_ObjectHideFlags: 0

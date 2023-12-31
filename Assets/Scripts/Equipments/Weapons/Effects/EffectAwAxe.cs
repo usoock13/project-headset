@@ -55,6 +55,10 @@ public class EffectAwAxe : EffectProjectile {
             velocity = velocity.normalized * maxVelocity;
 
         transform.Translate(velocity * Time.deltaTime, Space.World);
+        
+        lifetime += Time.deltaTime;
+        if(lifetime > flyingTime)
+            Disappear();
     }
 
     private IEnumerator AttackCoroutine() {
