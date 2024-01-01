@@ -7,7 +7,7 @@ public class AttachmentFreeze : Attachment {
 
     public float duration  = 1f;
     private float lifetime = 0;
-    private Color attachedColor = new Color(.2f, .6f, 1f);
+    private Color attachColor = new Color(.2f, .6f, 1f);
 
     private Coroutine detachCoroutine;
     
@@ -18,7 +18,7 @@ public class AttachmentFreeze : Attachment {
         #region Monster Target Implements
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
             targetMonster.AddSpeedModifier(GetSpeedModifier);
-            targetMonster.GetComponent<SpriteColorManager>()?.AddColor(attachedColor);
+            targetMonster.GetComponent<SpriteColorManager>()?.AddColor(attachColor);
             detachCoroutine = StartCoroutine(DetachCoroutine(targetMonster));
         }
         #endregion Monster Target Implements
@@ -26,7 +26,7 @@ public class AttachmentFreeze : Attachment {
     public override void OnDetached(IAttachmentsTakeable target) {
         base.OnDetached(target);
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
-            targetMonster.GetComponent<SpriteColorManager>()?.RemoveColor(attachedColor);
+            targetMonster.ColorManager?.RemoveColor(attachColor);
             targetMonster.RemoveSpeedModifier(GetSpeedModifier);
         }
         if(detachCoroutine != null)

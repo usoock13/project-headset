@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 
 public class AttachmentBurning : Attachment {
+    private Monster owner;
+
     public override string AttachmentType => "Burning";
     public float damagePerSecond = 0f;
     public float duration = 0f;
@@ -10,10 +12,14 @@ public class AttachmentBurning : Attachment {
 
     public Coroutine damageCoroutine;
 
+    [SerializeField] private Color attachColor;
+
     public override void OnAttached(IAttachmentsTakeable target) {
         base.OnAttached(target);
         if(target.GameObject.TryGetComponent(out Monster monster)) {
-            damageCoroutine = StartCoroutine(DamageCoroutine(monster));
+            owner = monster;
+            damageCoroutine = StartCoroutine(DamageCoroutine(owner));
+            owner.ColorManager?.AddColor(attachColor);
         }
     }
 
@@ -21,6 +27,7 @@ public class AttachmentBurning : Attachment {
         base.OnDetached(target);
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);
+        owner.ColorManager?.RemoveColor(attachColor);
     }
 
     private IEnumerator DamageCoroutine(Monster monster) {

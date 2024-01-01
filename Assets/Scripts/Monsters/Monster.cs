@@ -25,7 +25,10 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     [SerializeField] protected SpriteAnimator spriteAnimator;
     [SerializeField] new protected Collider2D collider2D;
     [SerializeField] new protected Rigidbody2D rigidbody2D;
+
     protected Material material;
+    [SerializeField] private SpriteColorManager colorManager;
+    public SpriteColorManager ColorManager => colorManager;
 
     [SerializeField] protected float defaultMoveSpeed = 5f;
     private Func<Monster, float> speedModifier;
@@ -119,7 +122,8 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         yield return new WaitForSeconds(second);
         stateMachine.ChangeState(chaseState);
     }
-    private IEnumerator TakeBitDelayCoroutine() {
+    
+    protected IEnumerator TakeBitDelayCoroutine() {
         material?.SetFloat("_Hit_Effect_Scale", 0.3f);
         yield return new WaitForSeconds(0.1f);
         material?.SetFloat("_Hit_Effect_Scale", 0);
@@ -153,6 +157,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         spriteAnimator ??= GetComponent<SpriteAnimator>();
         collider2D ??= GetComponent<Collider2D>();
         rigidbody2D ??= GetComponent<Rigidbody2D>();
+        colorManager ??= GetComponent<SpriteColorManager>();
 
         InitializeStates();
     }
@@ -244,13 +249,13 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     }
 
     #region IAttachmentsTakeable Implements
-    public void TakeAttachment(Attachment attachment) {
+    public virtual void TakeAttachment(Attachment attachment) {
         attachment.transform.SetParent(this.transform);
         attachment.transform.localPosition = Vector2.zero;
         havingAttachment.Add(attachment);
         attachment.OnAttached(this);
     }
-    public void ReleaseAttachment(Attachment attachment) {
+    public virtual void ReleaseAttachment(Attachment attachment) {
         havingAttachment.Remove(attachment);
         attachment.OnDetached(this);
     }

@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 
 public class AttachmentShock : Attachment {
+    private Monster owner;
+
     public override string AttachmentType => "Shock";
     public float damagePerSecond = 0f;
     public float duration = 0f;
@@ -14,12 +16,16 @@ public class AttachmentShock : Attachment {
 
     [SerializeField] private LineRenderer chainRenderer;
 
+    [SerializeField] private Color attachColor;
+
     private Coroutine damageCoroutine;
 
     public override void OnAttached(IAttachmentsTakeable target) {
         base.OnAttached(target);
         if(target.GameObject.TryGetComponent(out Monster monster)) {
+            owner = monster;
             damageCoroutine = StartCoroutine(DamageCoroutine(monster));
+            monster.ColorManager?.AddColor(attachColor);
         }
     }
 
@@ -27,6 +33,7 @@ public class AttachmentShock : Attachment {
         base.OnDetached(target);
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);
+        owner.ColorManager?.RemoveColor(attachColor);
     }
 
     private IEnumerator DamageCoroutine(Monster monster) {
