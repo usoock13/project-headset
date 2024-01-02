@@ -4979,7 +4979,7 @@ MonoBehaviour:
     m_Bits: 256
   chargingEffect: {fileID: 4794982358295570934}
   explosionEffect: {fileID: 3886407400812383138}
-  _weaponIcon: {fileID: 0}
+  _weaponIcon: {fileID: 721703420, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
 --- !u!1 &2492561197422808084
 GameObject:
   m_ObjectHideFlags: 0

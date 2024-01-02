@@ -152,7 +152,7 @@ MonoBehaviour:
   effect: {fileID: 4201149415781519963}
   drawingOrigin: {fileID: 4874221511117408721}
   goblinOrigin: {fileID: 5383379111756034239}
-  _weapnoIcon: {fileID: 0}
+  _weapnoIcon: {fileID: 934931997, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
   inkParticle: {fileID: 1840713914542876607}
 --- !u!1 &4201149417108809823
 GameObject:

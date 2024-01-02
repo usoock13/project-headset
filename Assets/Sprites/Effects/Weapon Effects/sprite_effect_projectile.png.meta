@@ -250,6 +250,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: sprite_effect_projectile_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c4e401562642194486cb7f45114f5de
+      internalID: 1109590266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_effect_projectile_8
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e27546b80787ccb43b29502ae3e374d7
+      internalID: -1704716281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_effect_projectile_9
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d313c455a1c0d45af391ce97f1a6c5
+      internalID: -1713950982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -261,10 +324,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      sprite_effect_projectile_9: -1713950982
       sprite_effect_projectile_6: -1727665315
       sprite_effect_projectile_5: -1432568797
       sprite_effect_projectile_2: 1238363387
+      sprite_effect_projectile_8: -1704716281
       sprite_effect_projectile_3: -1763022155
+      sprite_effect_projectile_7: 1109590266
       sprite_effect_projectile_0: 307609868
       sprite_effect_projectile_1: 768522164
       sprite_effect_projectile_4: -1494340257

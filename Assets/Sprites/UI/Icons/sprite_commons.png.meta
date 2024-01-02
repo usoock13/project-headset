@@ -334,6 +334,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: sprite_commons_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a5ad34cf3c608d47bc8293e0a2560a6
+      internalID: 796829314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -354,6 +375,7 @@ TextureImporter:
       sprite_commons_8: -13729712
       sprite_commons_2: 1094833510
       sprite_commons_10: -1767133516
+      sprite_commons_11: 796829314
       sprite_commons_3: 1981910703
       sprite_commons_4: -1716811298
   spritePackingTag: 

@@ -302,7 +302,7 @@ MonoBehaviour:
   repentanceOrigin: {fileID: 1753462704852618040}
   RepentancePooler:
     poolingObject: {fileID: 0}
-  _weaponIcon: {fileID: 0}
+  _weaponIcon: {fileID: 635293794, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
 --- !u!1 &7527964271606196403
 GameObject:
   m_ObjectHideFlags: 0
