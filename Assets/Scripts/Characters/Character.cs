@@ -226,8 +226,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp((int) (MaxExp * 0.5f));
-        if(Input.GetKeyDown(KeyCode.K))
-            GameManager.instance.StageManager.CreateSalad(transform.position);
         #endif
         /* << FOR TEST */
         RecoverStamina(Time.deltaTime * RecoveringStaminaPerSecond);

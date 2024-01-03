@@ -13,9 +13,19 @@ public class ScenarioGrassDirector : ScenarioDirector {
     [SerializeField] private MonsterBasic monsterGoblin;
     [SerializeField] private MonsterBasic monsterGoblinRider;
 
+    [SerializeField] private Transform bossSummonPoint;
+    [SerializeField] private MonsterWitch bossMonsterWitch;
+
     private StageManager _StageManager => GameManager.instance.StageManager;
 
     private bool bossIsSummoned = false;
+
+    protected override void Update() {
+        base.Update();
+        
+        if(Input.GetKeyDown(KeyCode.K))
+            SummonBoss();
+    }
     
     protected override void InitializeScenario() {
         monsterPoolerMap = new Dictionary<string, ObjectPooler> {
@@ -117,6 +127,8 @@ public class ScenarioGrassDirector : ScenarioDirector {
         /* 
             Actually summon boss.
         */
+        MonsterWitch boss = Instantiate(bossMonsterWitch, bossSummonPoint.position, Quaternion.identity);
+        boss.gameObject.SetActive(true);
     }
 
     protected void SpawnDefaultMonster(Monster monster, int number) {
