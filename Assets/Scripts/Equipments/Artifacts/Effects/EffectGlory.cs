@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EffectGlory : MonoBehaviour {
     [SerializeField] private ArtifactHandOfGlory originArtifact;
-    [SerializeField] private float radius = 1f;
+    [SerializeField] private float radius = 1.5f;
 
     [SerializeField] private LayerMask monsterLayer;
     [SerializeField] private LayerMask characterLayer;
@@ -34,11 +34,11 @@ public class EffectGlory : MonoBehaviour {
     }
     private IEnumerator AttackNextFrame() {
         DamageArea();
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.15f);
         DamageArea();
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.15f);
         DamageArea();
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.15f);
         DamageArea();
     }
 }

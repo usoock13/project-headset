@@ -5,7 +5,7 @@ public class ArtifactHandOfGlory : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] damage = new float[] { 15f, 20f, 25f, 30f, 35f };
+    private float[] damage = new float[] { 15f,  20f,  25f,  30f,  35f };
 
     public float Damage => damage[level-1];
     private float characterDamageRatio = .3f;
