@@ -11,12 +11,19 @@ public class ArtifactLeatherShoes : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "가죽 장화";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr>이동속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Leather Shoes",
+        Description:
+            $"<nobr>이동속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "가죽 장화",
+        Description:
+            $"<nobr>이동속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
     #endregion Artifact Information
 
     public override void OnEquipped() {

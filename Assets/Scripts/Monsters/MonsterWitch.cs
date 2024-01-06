@@ -24,7 +24,6 @@ public class MonsterWitch : Monster {
         base.InitializeStates();
 
         chaseState.onActive += (State prev) => {
-            print("Actives");
             moveCoroutine = StartCoroutine(MoveToTarget());
         };
         chaseState.onStay += () => {

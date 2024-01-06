@@ -21,13 +21,25 @@ public class WeaponMaliciousFlask : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "둔화독";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ =>$"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다."
-              + $"약병은 적에게 닿거나 사거리 끝에 도달하면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Slow Poison",
+        Description:
+            NextLevelIndex switch {
+                _ =>$"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다."
+                + $"약병은 적에게 닿거나 사거리 끝에 도달하면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "둔화독",
+        Description:
+            NextLevelIndex switch {
+                _ =>$"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다."
+                + $"약병은 적에게 닿거나 사거리 끝에 도달하면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            }
+    );
     #endregion Weapon Information
 
     private void Awake() {

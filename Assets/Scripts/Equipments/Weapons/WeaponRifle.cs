@@ -21,12 +21,23 @@ public class WeaponRifle : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "출장형 천공기";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Musket",
+        Description:
+            NextLevelIndex switch {
+                _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "화승총",
+        Description:
+            NextLevelIndex switch {
+                _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            }
+    );
 
     private void Awake() {
         EffectPooler = new ObjectPooler(

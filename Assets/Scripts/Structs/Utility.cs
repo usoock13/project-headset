@@ -1,5 +1,9 @@
 namespace Utility {
     using System.Collections.Generic;
+    
+    using UnityEngine.Localization;
+    using UnityEngine.Localization.Settings;
+
     static class List {
         static public void Shuffle<T>(this List<T> list) {
             if(list.Count == 0)
@@ -19,5 +23,10 @@ namespace Utility {
             }
             return str;
         }
+    }
+
+    public interface IMultiLanguage {
+        public IMultiLanguage EN();
+        public IMultiLanguage KO();
     }
 }

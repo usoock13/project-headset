@@ -17,12 +17,23 @@ public class AWeaponMultiUseAxe : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "절단용 부메랑";
-    public override string Description =>
-        NextLevelIndex switch {
-            _       => $"<nobr><color=#f40>{AttackInterval}초</color>에 한 번 조준 방향을 향해 절단용 부메랑을 던져 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 매초 가합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "The Piece Maker",
+        Description: 
+            NextLevelIndex switch {
+                _       => $"<nobr><color=#f40>{AttackInterval}초</color>에 한 번 조준 방향을 향해 절단용 부메랑을 던져 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 매초 가합니다.</nobr>"
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "피스메이커",
+        Description: 
+            NextLevelIndex switch {
+                _       => $"<nobr><color=#f40>{AttackInterval}초</color>에 한 번 조준 방향을 향해 절단용 부메랑을 던져 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 매초 가합니다.</nobr>"
+            }
+    );
     #endregion Weapon Information
 
     private void Awake() {

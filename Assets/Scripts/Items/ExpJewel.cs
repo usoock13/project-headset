@@ -22,10 +22,20 @@ public class ExpJewel : Item {
     private bool isGround = false;
     private Transform getter = null;
 
-    [SerializeField] private Sprite icon;
-    public override Sprite Icon => icon;
-    public override string Name => "경험의 보석";
-    public override string Description => $" 강해지기 위한 경험치를 {givingExp}만큼 얻을 수 있는 보석입니다.";
+    [SerializeField] private Sprite _icon;
+
+    protected override ItemInformation InformationEN => new ItemInformation(
+        Icon: _icon,
+        Name: "Experience Jewel",
+        Description:
+            $" 강해지기 위한 경험치를 {givingExp}만큼 얻을 수 있는 보석입니다."
+    );
+    protected override ItemInformation InformationKO => new ItemInformation(
+        Icon: _icon,
+        Name: "경험의 보석",
+        Description:
+            $" 강해지기 위한 경험치를 {givingExp}만큼 얻을 수 있는 보석입니다."
+    );
 
     private const int SPLIT_SPRITE_BORDER_1 = 50;
     private const int SPLIT_SPRITE_BORDER_2 = 200;

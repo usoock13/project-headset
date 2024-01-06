@@ -23,13 +23,25 @@ public class WeaponWhip : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon         => _weaponIcon;
-    public override string Name         => "포획용 채찍";
-    public override string Description  =>
-        (NextLevelIndex+1) switch {
-            5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 휘두른 방향으로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>",
-            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 두 번 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 가운데로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Whip",
+        Description:
+            (NextLevelIndex+1) switch {
+                5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 휘두른 방향으로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>",
+                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 두 번 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 가운데로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>"
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "채찍",
+        Description:
+            (NextLevelIndex+1) switch {
+                5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 휘두른 방향으로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>",
+                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 두 번 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 가운데로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>"
+            }
+    );
     #endregion Weapon Information
 
     private int attackDir = 1;

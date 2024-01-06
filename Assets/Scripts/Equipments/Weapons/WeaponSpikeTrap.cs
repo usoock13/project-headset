@@ -24,14 +24,27 @@ public class WeaponSpikeTrap : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "쇠못덫";
-    public override string Description =>
-        NextLevelIndex switch {
-            3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
-                    + $"회피하면 경로에 덫을 설치하며 이동합니다.</nobr>",
-            _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Caltrop",
+        Description:
+            NextLevelIndex switch {
+                3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
+                        + $"회피하면 경로에 덫을 설치하며 이동합니다.</nobr>",
+                _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "마름쇠",
+        Description:
+            NextLevelIndex switch {
+                3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
+                        + $"회피하면 경로에 덫을 설치하며 이동합니다.</nobr>",
+                _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
+            }
+    );
     #endregion Weapon Information
 
     protected override void Update() {

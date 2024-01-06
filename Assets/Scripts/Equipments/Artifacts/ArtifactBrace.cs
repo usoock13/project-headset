@@ -9,12 +9,19 @@ public class ArtifactBrace : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "보호대";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr>위력이 <color=#f40>{extraPower[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Brace",
+        Description: 
+            $"<nobr>위력이 <color=#f40>{extraPower[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "보호대",
+        Description: 
+            $"<nobr>위력이 <color=#f40>{extraPower[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
     #endregion Artifact Information
 
     public override void OnEquipped() {

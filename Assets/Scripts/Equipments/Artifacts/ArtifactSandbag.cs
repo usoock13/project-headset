@@ -13,15 +13,25 @@ public class ArtifactSandbag : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "모래주머니";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ =>  $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
-                + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 100}%/{attackSpeedPerStack[NextLevelIndex] * 100}%</color> 증가하여"
-                + $"최대 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 10_000}%/{attackSpeedPerStack[NextLevelIndex] * 10_000}%</color>까지 증가합니다."
-                + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[NextLevelIndex] * 30_000 - 30)}%/{attackSpeedPerStack[NextLevelIndex] * 30_000 - 40}%</color></i></nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Sandbag",
+        Description:
+              $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
+            + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 100}%/{attackSpeedPerStack[NextLevelIndex] * 100}%</color> 증가하여"
+            + $"최대 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 10_000}%/{attackSpeedPerStack[NextLevelIndex] * 10_000}%</color>까지 증가합니다."
+            + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[NextLevelIndex] * 30_000 - 30)}%/{attackSpeedPerStack[NextLevelIndex] * 30_000 - 40}%</color></i></nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "모래주머니",
+        Description:
+              $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
+            + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 100}%/{attackSpeedPerStack[NextLevelIndex] * 100}%</color> 증가하여"
+            + $"최대 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 10_000}%/{attackSpeedPerStack[NextLevelIndex] * 10_000}%</color>까지 증가합니다."
+            + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[NextLevelIndex] * 30_000 - 30)}%/{attackSpeedPerStack[NextLevelIndex] * 30_000 - 40}%</color></i></nobr>"
+    );
     #endregion Artifact Information
 
     public override void OnEquipped() {

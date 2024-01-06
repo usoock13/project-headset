@@ -31,15 +31,29 @@ public class AweaponHolyLand : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "거룩한 땅";
-    public override string Description =>
-        $"<nobr>"
-      + $"거룩한 땅을 펼쳐 매초 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-      + $"영역 안에서 적이 <color=#f40>{killCountToSummon[NextLevelIndex]}</color>번 처치될 때마다, 적을 추격하여 매 초 <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 빛의 기사를 소환합니다."
-      + $"빛의 기사는 {AllyDuration}초간 지속됩니다."
-      + $"이 무기는 공격 속도에 영향을 받지 않습니다."
-      + $"</nobr>";
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "The Canaan",
+        Description: 
+              $"<nobr>"
+            + $"거룩한 땅을 펼쳐 매초 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+            + $"영역 안에서 적이 <color=#f40>{killCountToSummon[NextLevelIndex]}</color>번 처치될 때마다, 적을 추격하여 매 초 <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 빛의 기사를 소환합니다."
+            + $"빛의 기사는 {AllyDuration}초간 지속됩니다."
+            + $"이 무기는 공격 속도에 영향을 받지 않습니다."
+            + $"</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "가나안",
+        Description: 
+              $"<nobr>"
+            + $"거룩한 땅을 펼쳐 매초 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+            + $"영역 안에서 적이 <color=#f40>{killCountToSummon[NextLevelIndex]}</color>번 처치될 때마다, 적을 추격하여 매 초 <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 빛의 기사를 소환합니다."
+            + $"빛의 기사는 {AllyDuration}초간 지속됩니다."
+            + $"이 무기는 공격 속도에 영향을 받지 않습니다."
+            + $"</nobr>"
+    );
     #endregion Weapon Information
 
     private int killCount = 0;

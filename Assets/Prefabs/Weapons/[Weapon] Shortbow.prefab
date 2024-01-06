@@ -337,7 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _itemName: "\uAC01\uC131 \uB2E8\uAD81 : \uACF5\uC131 \uD654\uC0B4"
+  _itemNameEN: 'Awaken Shortbow : The Locksmith'
+  _itemNameKO: "\uAC01\uC131 \uB2E8\uAD81 : \uC5F4\uC1E0\uACF5"
   oldWeapon: {fileID: -3919815677109160991}
   newWeapon: {fileID: 6645458888653629957}
 --- !u!1001 &4292334149037058447

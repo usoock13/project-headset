@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using Utility;
 
 public class WeaponGreatSword : Weapon {
     [SerializeField] private EffectGreatSword swordEffect;
@@ -23,14 +26,31 @@ public class WeaponGreatSword : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "그레이트 소드";
-    public override string Description =>
-            NextLevelIndex switch {
-                3 or 4 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다."
-                        + $"추가로 범위가 <color=#f40>{(areaScale[NextLevelIndex]-1) * 100}%</color> 증가합니다.</nobr>",
-                _      => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 대검을 휘둘러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
-            };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Short Sword",
+        Description:
+              $"<nobr>"
+            + $"Wield a sword in the direction of aim to damage the monsters.\n"
+            + $"\n"
+            + $"Damage : {staticDamage[0]}+{damageCoef[0]*100}% / {staticDamage[1]}+{damageCoef[1]*100}% / {staticDamage[2]}+{damageCoef[2]*100}% / {staticDamage[3]}+{damageCoef[3]*100}% / {staticDamage[4]}+{damageCoef[4]*100}%\n"
+            + $"Attack Interval : {interval[0]} / {interval[1]} / {interval[2]} / {interval[3]} / {interval[4]}\n"
+            + $"Attack Area : {areaScale[0]*100}% / {areaScale[1]*100}% / {areaScale[2]*100}% / {areaScale[3]*100}% / {areaScale[4]*100}%"
+            + $"</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "숏소드",
+        Description:
+              $"<nobr>"
+            + $"조준 방향으로 검을 휘둘러 피해를 가합니다.\n"
+            + $"\n"
+            + $"피해량 : {staticDamage[0]}+{damageCoef[0]*100}% / {staticDamage[1]}+{damageCoef[1]*100}% / {staticDamage[2]}+{damageCoef[2]*100}% / {staticDamage[3]}+{damageCoef[3]*100}% / {staticDamage[4]}+{damageCoef[4]*100}%\n"
+            + $"공격 주기 : {interval[0]} / {interval[1]} / {interval[2]} / {interval[3]} / {interval[4]}\n"
+            + $"공격 범위 : {areaScale[0]*100}% / {areaScale[1]*100}% / {areaScale[2]*100}% / {areaScale[3]*100}% / {areaScale[4]*100}%"
+            + $"</nobr>"
+    );
     #endregion Weapon Information
 
     private void Awake() {

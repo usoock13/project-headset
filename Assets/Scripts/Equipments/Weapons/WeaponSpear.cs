@@ -17,12 +17,23 @@ public class WeaponSpear : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "장창";
-    public override string Description =>
-        NextLevelIndex switch {
-            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Long Spear",
+        Description:
+            NextLevelIndex switch {
+                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "장창",
+        Description:
+            NextLevelIndex switch {
+                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            }
+    );
     #endregion Weapon Information
 
     private void Awake() {

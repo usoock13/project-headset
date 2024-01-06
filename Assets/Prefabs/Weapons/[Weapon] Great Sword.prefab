@@ -5021,8 +5021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55aecf3e1b8ca7f43a372519084a6321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _itemName: "\uAC01\uC131 \uB300\uAC80 : XXXL\uCE7C\uB9AC\uBC84"
+  _icon: {fileID: 1026322415, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  _itemNameEN: 'Awaken Short Sword : The Inquisitor'
+  _itemNameKO: "\uAC01\uC131 \uC20F\uC18C\uB4DC : \uC774\uB2E8\uC2EC\uD310\uAD00"
   oldWeapon: {fileID: 974240963}
   newWeapon: {fileID: 2320894488622114105}
 --- !u!1001 &2233400666270285111

@@ -3,11 +3,19 @@ using UnityEngine;
 
 public class ItemAwake : Item {
     [SerializeField] private Sprite _icon;
-    [SerializeField] private string _itemName;
+    [SerializeField] private string _itemNameEN;
+    [SerializeField] private string _itemNameKO;
 
-    public override Sprite Icon => _icon;
-    public override string Name => _itemName;
-    public override string Description => newWeapon.Description;
+    protected override ItemInformation InformationEN => new ItemInformation(
+        Icon: _icon,
+        Name: _itemNameEN,
+        Description: newWeapon.Description
+    );
+    protected override ItemInformation InformationKO => new ItemInformation(
+        Icon: _icon,
+        Name: _itemNameKO,
+        Description: newWeapon.Description
+    );
 
     [SerializeField] Weapon oldWeapon;
     [SerializeField] Weapon newWeapon;

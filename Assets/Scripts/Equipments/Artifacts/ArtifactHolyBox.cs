@@ -18,14 +18,22 @@ public class ArtifactHolyBox : Artifact {
     #endregion Artifact Status
 
     #region Artifact Infromation
-    [SerializeField] private Sprite icon;
-    public override Sprite Icon => icon;
-    public override string Name => "성스러운 유물함";
-    public override string Description =>
-        NextLevelIndex switch {
-            _ => $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
-               + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[NextLevelIndex]}</color>초 뒤에 재생성됩니다.</nobr>"
-        };
+    [SerializeField] private Sprite _icon;
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Reliquary",
+        Description:
+              $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
+            + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[NextLevelIndex]}</color>초 뒤에 재생성됩니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "성스러운 유물함",
+        Description:
+              $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
+            + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[NextLevelIndex]}</color>초 뒤에 재생성됩니다.</nobr>"
+    );
     #endregion Artifact Infromation
 
     private void Update() {

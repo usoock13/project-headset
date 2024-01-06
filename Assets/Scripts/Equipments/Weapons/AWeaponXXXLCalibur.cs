@@ -22,12 +22,24 @@ public class AWeaponXXXLCalibur : Weapon {
     protected override float AttackInterval => 1.5f;
     #endregion Weapon Status
 
-    [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "쓰리엑스라지칼리버";
-    public override string Description =>
-        $"<nobr>XXXL급 범위로 주변을 크게 휘둘러 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-      + $"이후 검을 좁은 범위에 내리쳐 <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>";
+    #region Weapon Information
+    [SerializeField] private Sprite _weaponIcon;
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "The Inquisitor",
+        Description: 
+              $"<nobr>XXXL급 범위로 주변을 크게 휘둘러 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+            + $"이후 검을 좁은 범위에 내리쳐 <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "이단심판관",
+        Description: 
+              $"<nobr>XXXL급 범위로 주변을 크게 휘둘러 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+            + $"이후 검을 좁은 범위에 내리쳐 <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+    );
+    #endregion Weapon Information
 
     private void Awake() {
         FirstEffectPooler = new ObjectPooler(

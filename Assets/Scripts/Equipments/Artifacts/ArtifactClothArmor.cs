@@ -11,12 +11,19 @@ public class ArtifactClothArmor : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "천 갑옷";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr>방어력이 <color=#f40>{extraArmor[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Cloth Armor",
+        Description: 
+            $"<nobr>방어력이 <color=#f40>{extraArmor[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "천 갑옷",
+        Description: 
+            $"<nobr>방어력이 <color=#f40>{extraArmor[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
     #endregion Artifact Information
 
     public override void OnEquipped() {

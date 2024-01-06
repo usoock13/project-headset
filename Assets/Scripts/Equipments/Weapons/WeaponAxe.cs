@@ -22,14 +22,27 @@ public class WeaponAxe : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "벌목 도구";
-    public override string Description =>
-        NextLevelIndex switch {
-            2 or 4  => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다. "
-                     + $"벌목 도구의 크기가 <color=#f40>{(projectileScale[NextLevelIndex] - projectileScale[0]) * 100}%</color> 증가합니다.</nobr>",
-            _       => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
-        };
+    
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Axe",
+        Description: 
+            NextLevelIndex switch {
+                2 or 4  => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다. "
+                        + $"벌목 도구의 크기가 <color=#f40>{(projectileScale[NextLevelIndex] - projectileScale[0]) * 100}%</color> 증가합니다.</nobr>",
+                _       => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "도끼",
+        Description: 
+            NextLevelIndex switch {
+                2 or 4  => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다. "
+                        + $"벌목 도구의 크기가 <color=#f40>{(projectileScale[NextLevelIndex] - projectileScale[0]) * 100}%</color> 증가합니다.</nobr>",
+                _       => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            }
+    );
     #endregion Weapon Information
 
     private void Awake() {

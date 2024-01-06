@@ -24,15 +24,29 @@ public class WeaponSpirit : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "무인 항공 정령";
-    public override string Description =>
-        (NextLevelIndex+1) switch {
-            _ => $"<nobr>적을 추격하며 공격하는 정령을 <color=#f40>{spiritCount[NextLevelIndex]}마리</color> 소환합니다.\n"
-               + $"정령은 <color=#f40>{runningTime[NextLevelIndex]}초</color> 동안 비행하며 충돌한 적에게 "
-               + $"<color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가합니다."
-               + $"정령은 비행을 마치면 복귀해 <color=#f10>{chargeTime[NextLevelIndex]}초</color> 동안 충전됩니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Spirit",
+        Description:
+            (NextLevelIndex+1) switch {
+                _ => $"<nobr>적을 추격하며 공격하는 정령을 <color=#f40>{spiritCount[NextLevelIndex]}마리</color> 소환합니다.\n"
+                + $"정령은 <color=#f40>{runningTime[NextLevelIndex]}초</color> 동안 비행하며 충돌한 적에게 "
+                + $"<color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가합니다."
+                + $"정령은 비행을 마치면 복귀해 <color=#f10>{chargeTime[NextLevelIndex]}초</color> 동안 충전됩니다.</nobr>"
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "정령",
+        Description:
+            (NextLevelIndex+1) switch {
+                _ => $"<nobr>적을 추격하며 공격하는 정령을 <color=#f40>{spiritCount[NextLevelIndex]}마리</color> 소환합니다.\n"
+                + $"정령은 <color=#f40>{runningTime[NextLevelIndex]}초</color> 동안 비행하며 충돌한 적에게 "
+                + $"<color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가합니다."
+                + $"정령은 비행을 마치면 복귀해 <color=#f10>{chargeTime[NextLevelIndex]}초</color> 동안 충전됩니다.</nobr>"
+            }
+    );
     #endregion Weapon Information
 
     public Queue<EffectSpirit> Waitings { get; private set; } = new Queue<EffectSpirit>();

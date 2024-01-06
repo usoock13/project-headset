@@ -41,14 +41,26 @@ public class AWeaponMagicPen : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
-    [SerializeField] private Sprite _weapnoIcon;
-    public override Sprite Icon => _weapnoIcon;
-    public override string Name => "마술 만연필";
-    public override string Description => 
-        $"<nobr>"
-      + $"마술 만연필로 조준 방향을 휘저어 매초 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-      + $"<color=#f40>때때로 걸작이 등장해 도움을 받을 수 있습니다!</color>"
-      + "</nobr>";
+    [SerializeField] private Sprite _weaponIcon;
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "The Bestseller",
+        Description: 
+              $"<nobr>"
+            + $"마술 만연필로 조준 방향을 휘저어 매초 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+            + $"<color=#f40>때때로 걸작이 등장해 도움을 받을 수 있습니다!</color>"
+            + "</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "베스트셀러",
+        Description: 
+              $"<nobr>"
+            + $"마술 만연필로 조준 방향을 휘저어 매초 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
+            + $"<color=#f40>때때로 걸작이 등장해 도움을 받을 수 있습니다!</color>"
+            + "</nobr>"
+    );
     #endregion Weapon Information
 
     [SerializeField] private ParticleSystem inkParticle;

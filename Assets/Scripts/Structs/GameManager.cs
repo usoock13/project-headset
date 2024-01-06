@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
-
+using UnityEditor.Localization;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class GameManager : MonoBehaviour {
     static public GameManager instance;
@@ -29,7 +31,10 @@ public class GameManager : MonoBehaviour {
         set { selectedCharacters = value; }
     }
 
-    public Action onLevelUp;
+    private Locale _selectedLocale;
+    public Locale SelectedLocale => LocalizationSettings.SelectedLocale;
+    public string LangCodeEN => LocalizationEditorSettings.GetLocale("en").LocaleName;
+    public string LangCodeKO => LocalizationEditorSettings.GetLocale("ko").LocaleName;
 
     private void Awake() {
         if(instance == null)

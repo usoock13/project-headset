@@ -12,12 +12,19 @@ public class ArtifactPlateArmor : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "판금 흉갑";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr>방어력이 <color=#f40>{armorAmount[NextLevelIndex]}</color>만큼 증가하지만, 이동속도가 <color=#f40>{decreasingSpeed[NextLevelIndex] * 100}%</color>만큼 감소합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Plate Armor",
+        Description:
+            $"<nobr>방어력이 <color=#f40>{armorAmount[NextLevelIndex]}</color>만큼 증가하지만, 이동속도가 <color=#f40>{decreasingSpeed[NextLevelIndex] * 100}%</color>만큼 감소합니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "판금 흉갑",
+        Description:
+            $"<nobr>방어력이 <color=#f40>{armorAmount[NextLevelIndex]}</color>만큼 증가하지만, 이동속도가 <color=#f40>{decreasingSpeed[NextLevelIndex] * 100}%</color>만큼 감소합니다.</nobr>"
+    );
     #endregion Artifact Information
 
     public override void OnEquipped() {

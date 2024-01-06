@@ -5,9 +5,35 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour, IPlayerGettable {
     public Action<Item> onGetItem;
 
-    public abstract Sprite Icon { get; }
-    public abstract string Name { get; }
-    public abstract string Description { get; }
+    protected record ItemInformation(Sprite Icon, string Name, string Description);
+
+    protected abstract ItemInformation InformationEN { get; }
+    protected abstract ItemInformation InformationKO { get; }
+
+    public Sprite Icon { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => InformationEN.Icon,
+             "Korean (ko)" => InformationKO.Icon,
+
+                        _  => InformationEN.Icon, 
+        };
+    }}
+    public string Name { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => InformationEN.Name,
+             "Korean (ko)" => InformationKO.Name,
+
+                        _  => InformationEN.Name,
+        };
+    }}
+    public string Description { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => InformationEN.Description,
+             "Korean (ko)" => InformationKO.Description,
+
+                        _  => InformationEN.Description,
+        };
+    }}
 
     protected SpriteRenderer spriteRenderer;
 
@@ -82,6 +108,8 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
     }
     public virtual void OnGotten() {
         onGetItem?.Invoke(this);
+        if(pullCoroutine != null)
+            StopCoroutine(pullCoroutine);
         GameManager.instance.StageManager.OnGetItem(this);
     }
     protected virtual void OnTriggerEnter2D(Collider2D other) {

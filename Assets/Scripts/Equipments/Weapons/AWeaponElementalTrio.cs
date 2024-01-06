@@ -39,17 +39,33 @@ public class AWeaponElementalTrio : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "원소 트리오";
-    public override string Description =>
-                 $"<nobr>"
-               + $"주변을 공전하는 불과 얼음, 번개 구체를 각각 2개씩 소환합니다. 구체는 적과 충돌하면 폭발하여 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고"
-               + $"속성에따라 추가 효과를 적용합니다. 폭발한 구체는 {ReactiveInterval}초 후 재생성 됩니다."
-               + $"<i>불 : 매 초 <color=#f40>{burningStaticDamage[NextLevelIndex]}+{burningDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 점화 효과를 {BurningDuration}초간 적용합니다.</i>"
-               + $"<i>얼음 : <color=#f40>{freezeDuration[NextLevelIndex]}</color>초동안 적은 빙결시킵니다.</i>"
-               + $"<i>번개 : 최대 3명의 주변 적에게 매 초 <color=#f40>{shockStaticDamage[NextLevelIndex]}+{shockDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 감전 효과를 {ShockDuration}초간 적용합니다.</i>"
-               + $"</nobr>";
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "The Elementals",
+        Description: 
+              $"<nobr>"
+            + $"주변을 공전하는 불과 얼음, 번개 구체를 각각 2개씩 소환합니다. 구체는 적과 충돌하면 폭발하여 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고"
+            + $"속성에따라 추가 효과를 적용합니다. 폭발한 구체는 {ReactiveInterval}초 후 재생성 됩니다."
+            + $"<i>불 : 매 초 <color=#f40>{burningStaticDamage[NextLevelIndex]}+{burningDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 점화 효과를 {BurningDuration}초간 적용합니다.</i>"
+            + $"<i>얼음 : <color=#f40>{freezeDuration[NextLevelIndex]}</color>초동안 적은 빙결시킵니다.</i>"
+            + $"<i>번개 : 최대 3명의 주변 적에게 매 초 <color=#f40>{shockStaticDamage[NextLevelIndex]}+{shockDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 감전 효과를 {ShockDuration}초간 적용합니다.</i>"
+            + $"</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "원소들",
+        Description: 
+              $"<nobr>"
+            + $"주변을 공전하는 불과 얼음, 번개 구체를 각각 2개씩 소환합니다. 구체는 적과 충돌하면 폭발하여 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고"
+            + $"속성에따라 추가 효과를 적용합니다. 폭발한 구체는 {ReactiveInterval}초 후 재생성 됩니다."
+            + $"<i>불 : 매 초 <color=#f40>{burningStaticDamage[NextLevelIndex]}+{burningDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 점화 효과를 {BurningDuration}초간 적용합니다.</i>"
+            + $"<i>얼음 : <color=#f40>{freezeDuration[NextLevelIndex]}</color>초동안 적은 빙결시킵니다.</i>"
+            + $"<i>번개 : 최대 3명의 주변 적에게 매 초 <color=#f40>{shockStaticDamage[NextLevelIndex]}+{shockDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 감전 효과를 {ShockDuration}초간 적용합니다.</i>"
+            + $"</nobr>"
+    );
     #endregion Weapon Information
+    
     protected override void Update() {}
     protected override void Attack() {}
 

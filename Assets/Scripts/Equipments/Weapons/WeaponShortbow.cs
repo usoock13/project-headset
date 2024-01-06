@@ -24,12 +24,23 @@ public class WeaponShortbow : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    public override Sprite Icon => _weaponIcon;
-    public override string Name => "단궁";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 화살을 <color=#f40>{arrowQuantity[NextLevelIndex]}발</color> 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "Shortbow",
+        Description:
+            NextLevelIndex switch {
+                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 화살을 <color=#f40>{arrowQuantity[NextLevelIndex]}발</color> 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            }
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _weaponIcon,
+        Name: "단궁",
+        Description:
+            NextLevelIndex switch {
+                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 화살을 <color=#f40>{arrowQuantity[NextLevelIndex]}발</color> 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            }
+    );
 
     private void Awake() {
         effectPooler = new ObjectPooler(

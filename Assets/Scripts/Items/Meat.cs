@@ -3,9 +3,19 @@ using UnityEngine;
 
 public class Meat : Item {
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "고기";
-    public override string Description => "즉시 캐릭터 체력을 30%를 회복시킵니다.";
+
+    protected override ItemInformation InformationEN => new ItemInformation(
+        Icon: _icon,
+        Name: "Meat",
+        Description:
+            "즉시 캐릭터 체력을 30%를 회복시킵니다."
+    );
+    protected override ItemInformation InformationKO => new ItemInformation(
+        Icon: _icon,
+        Name: "고기",
+        Description:
+            "즉시 캐릭터 체력을 30%를 회복시킵니다."
+    );
 
     public override void Drop() {
         base.Drop();

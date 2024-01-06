@@ -1,7 +1,18 @@
+using System;
 using UnityEngine;
+using Utility;
+
+namespace System.Runtime.CompilerServices {
+    internal static class IsExternalInit {};
+}
 
 public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     public string EquipmentType => this.GetType().ToString();
+
+    protected record EquipmentInformation(Sprite Icon, string Name, string Description);
+
+    protected abstract EquipmentInformation InformationEN { get; }
+    protected abstract EquipmentInformation InformationKO { get; }
 
     #region Level
     [SerializeField] protected int level = 0;
@@ -15,9 +26,30 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     protected int NextLevelIndex => CurrentLevel < MaxLevel ? level : level-1;
     #endregion Level
 
-    public abstract Sprite Icon { get; }
-    public abstract string Name { get; }
-    public abstract string Description { get; }
+    public Sprite Icon { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => InformationEN.Icon,
+             "Korean (ko)" => InformationKO.Icon,
+             
+                        _  => InformationEN.Icon,
+        };
+    }}
+    public string Name { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => InformationEN.Name,
+             "Korean (ko)" => InformationKO.Name,
+             
+                        _  => InformationEN.Name,
+        };
+    }}
+    public string Description { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => InformationEN.Description,
+             "Korean (ko)" => InformationKO.Description,
+             
+                        _  => InformationEN.Description,
+        };
+    }}
     public string extraInformation = "";
 
     public void LevelUp() {

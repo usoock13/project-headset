@@ -5022,7 +5022,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _itemName: "\uAC01\uC131 \uC624\uC18C\uB3C5\uC2A4 : \uC624\uD1A0\uBA54\uC77C"
+  _itemNameEN: The Judgement
+  _itemNameKO: "\uC815\uC758 \uC9D1\uD589"
   oldWeapon: {fileID: 35642202144724696}
   newWeapon: {fileID: 1866772308176104086}
 --- !u!1001 &4287216518828206828
@@ -5034,7 +5035,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2492561196036538488, guid: 26e29d44cf7fe4a4ab76e9d2cb7647e5, type: 3}
       propertyPath: m_Name
-      value: '[Awaken Weapon] Automail'
+      value: '[Awaken Weapon] The Judgement'
       objectReference: {fileID: 0}
     - target: {fileID: 2492561196036538488, guid: 26e29d44cf7fe4a4ab76e9d2cb7647e5, type: 3}
       propertyPath: m_IsActive

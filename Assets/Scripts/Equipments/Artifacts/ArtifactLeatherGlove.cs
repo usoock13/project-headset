@@ -9,12 +9,19 @@ public class ArtifactLeatherGlove : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
-    public override Sprite Icon => _icon;
-    public override string Name => "가죽 장갑";
-    public override string Description => 
-        NextLevelIndex switch {
-            _ => $"<nobr>공격속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
-        };
+
+    protected override EquipmentInformation InformationEN => new EquipmentInformation(
+        Icon: _icon,
+        Name: "Leather Glove",
+        Description:
+            $"<nobr>공격속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
+    protected override EquipmentInformation InformationKO => new EquipmentInformation(
+        Icon: _icon,
+        Name: "가죽 장갑",
+        Description:
+            $"<nobr>공격속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+    );
     #endregion Artifact Information
 
     public override void OnEquipped() {
