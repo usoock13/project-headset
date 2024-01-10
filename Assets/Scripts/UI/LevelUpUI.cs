@@ -89,10 +89,17 @@ public class LevelUpUI : MonoBehaviour {
         public Image icon;
         public TMP_Text name;
         public TMP_Text description;
+        public TMP_Text level;
         public void SetItem(IPlayerGettable info) {
             this.icon.sprite = info.Icon;
             this.name.text = info.Name;
             this.description.text = info.Description;
+
+            var equipment = info as Equipment;
+            if(equipment is not null)
+                level.text = equipment.CurrentLevel + 1 + "Lv";
+            else
+                level.text = "";
         }
     }
 }

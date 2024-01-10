@@ -17,7 +17,7 @@ public class WeaponOrthodox : Weapon {
     private float[] staticDamage = new float[MAX_LEVEL]    {  10f,     20f,     20f,     30f,     30f }; // 고정 피해량
     private float[] damageCoef = new float[MAX_LEVEL]      { 0.3f,    0.3f,    0.3f,    0.3f,    0.3f }; // 피해 계수
     protected override float AttackInterval => interval[level-1];
-    public float DamageOfStraight => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
+    public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     #endregion Weapon Status
 
     #region Weapon Information
@@ -27,16 +27,42 @@ public class WeaponOrthodox : Weapon {
         Icon: _weaponIcon,
         Name: "Knuckle",
         Description:
-            NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 펀치를<color=#f40>{attackCount[NextLevelIndex]}회</color> 내질러 각각 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            CurrentLevel switch {
+                0 => $"<nobr>"
+                   + $"Throw several short punchs in the direction of aim to damage monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nPunch Count : <color=#f40>{attackCount[0]}</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw several short punchs in the direction of aim to damage monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nPunch Count : <color=#f40>{attackCount[level-1]}</color> > <color=#f40>{attackCount[NextLevelIndex]}</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "너클",
         Description:
-            NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 펀치를<color=#f40>{attackCount[NextLevelIndex]}회</color> 내질러 각각 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+            CurrentLevel switch {
+                0 => $"<nobr>"
+                   + $"조준 방향으로 여러번 짧게 주먹을 날려 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n펀치 횟수 : <color=#f40>{attackCount[0]}</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"조준 방향으로 여러번 짧게 주먹을 날려 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n펀치 횟수 : <color=#f40>{attackCount[level-1]}</color> > <color=#f40>{attackCount[NextLevelIndex]}</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

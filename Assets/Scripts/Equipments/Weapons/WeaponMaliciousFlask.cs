@@ -26,18 +26,46 @@ public class WeaponMaliciousFlask : Weapon {
         Icon: _weaponIcon,
         Name: "Slow Poison",
         Description:
-            NextLevelIndex switch {
-                _ =>$"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다."
-                + $"약병은 적에게 닿거나 사거리 끝에 도달하면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            CurrentLevel switch {
+                0 => $"<nobr>"
+                   + $"Throw a flask in the direction of aim. After collide monster or reach to maximum distance, the flask breaks and attach 'Slow Poison' to the monsters that in area."
+                   + $"\n"
+                   + $"\nDamage per Second : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"\nSlow Amount : <color=#f40>{slowAmount[0]*100}%</color>"
+                   + $"\nDuration : <color=#f40>3sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a flask in the direction of aim. After collide monster or reach to maximum distance, the flask breaks and attach 'Slow Poison' to the monsters that in area."
+                   + $"\n"
+                   + $"\nDamage per Second : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nSlow Amount : <color=#f40>{slowAmount[level-1]*100}%</color> > <color=#f40>{slowAmount[NextLevelIndex]*100}%</color>"
+                   + $"\nDuration : <color=#f40>3sec</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "둔화독",
         Description:
-            NextLevelIndex switch {
-                _ =>$"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향으로 둔화독으로 가득찬 약병을 던집니다."
-                + $"약병은 적에게 닿거나 사거리 끝에 도달하면 폭발하여 좁은 범위에 적을 중독시켜 3초에 걸쳐 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            CurrentLevel switch {
+                0 => $"<nobr>"
+                   + $"조준 방향으로 플라스크를 던집니다. 플라스크는 몬스터와 충돌하거나 사거리 끝에 도달하면 깨지며 범위 내의 적에게 '둔화 독'을 부착합니다."
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}sec</color>"
+                   + $"\n둔화량 : <color=#f40>{slowAmount[0]*100}%</color>"
+                   + $"\n지속 시간 : <color=#f40>3sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"조준 방향으로 플라스크를 던집니다. 플라스크는 몬스터와 충돌하거나 사거리 끝에 도달하면 깨지며 범위 내의 적에게 '둔화 독'을 부착합니다."
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\n둔화량 : <color=#f40>{slowAmount[level-1]*100}%</color> > <color=#f40>{slowAmount[NextLevelIndex]*100}%</color>"
+                   + $"\n지속 시간 : <color=#f40>3sec</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

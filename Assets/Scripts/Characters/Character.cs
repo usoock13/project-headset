@@ -23,7 +23,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     #region Character Status
     public int level { get; protected set; } = 1;
-    [SerializeField] protected int MaxExp => 50 + (int)(50 * Mathf.Pow(1.4f, level));
+    [SerializeField] protected int MaxExp => 50*level + 10*level*level;
     protected int currentExp = 0;
     public Func<Character, float> extraExpScale;
     public float GettingExpScale { get {

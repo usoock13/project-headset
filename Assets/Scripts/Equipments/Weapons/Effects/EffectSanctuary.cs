@@ -26,7 +26,7 @@ public class EffectSanctuary : MonoBehaviour {
             Collider2D[] inners = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer.value);
             for(int i=0; i<inners.Length; i++) {
                 if(inners[i].TryGetComponent(out Monster target)) {
-                    target.TakeDamage(Damage);
+                    target.TakeDamage(Damage * ATTACK_INTERVAL);
                     if(HittingDelay > 0)
                         target.TakeAttackDelay(HittingDelay);
                     GameManager.instance.Character.OnAttackMonster(target);

@@ -17,20 +17,48 @@ public class WeaponFireRing : Weapon {
 
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
-    
+
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "Fireballs",
-        Description: $"<nobr>적과 충돌하면 폭발하여 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 주는 화염구를 <color=#f40>{(level<4 ? 3 : 6)}</color>개 소환합니다.\n"
-                   + $"화염구는 캐릭터 주변을 회전하며, 폭발 후 <color=#f40>{interval[NextLevelIndex]}초</color>가 지나면 재생성됩니다."
-                   + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>"
+        Description:
+            NextLevelIndex switch {
+                0 => "<nobr>"
+                  + $"Summon a spinning fireball around the character. Fireball hits a monster and then explodes, dealing damage to the monsters in around. The exploded fireball is created in a few seconds."
+                  + $"\n"
+                  + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                  + $"\nTime of Regenerate : <color=#f40>{interval[0]}</color>"
+                  + $"\nNumber of Fireballs : <color=#f40>3</color>"
+                  + $"</nobr>",
+                _ => "<nobr>"
+                  + $"Summon a spinning fireball around the character. Fireball hits a monster and then explodes, dealing damage to the monsters in around. The exploded fireball is created in a few seconds."
+                  + $"\n"
+                  + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                  + $"\nTime of Regenerate : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"
+                  + $"\nNumber of Fireballs : <color=#f40>3</color> > <color=#f40>{(NextLevelIndex == MaxLevel-1 ? 6 : 3)}</color>"
+                  + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
-        Name: "화염구 저글링",
-        Description: $"<nobr>적과 충돌하면 폭발하여 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 주는 화염구를 <color=#f40>{(level<4 ? 3 : 6)}</color>개 소환합니다.\n"
-                   + $"화염구는 캐릭터 주변을 회전하며, 폭발 후 <color=#f40>{interval[NextLevelIndex]}초</color>가 지나면 재생성됩니다."
-                   + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>"
+        Name: "화염구",
+        Description:
+            NextLevelIndex switch {
+                0 => "<nobr>"
+                  + $"캐릭터 주변을 회전하는 화염구를 소환합니다. 화염구는 몬스터와 충돌하면 폭발하여 주변에 피해를 가하고 잠시 뒤 재생성됩니다."
+                  + $"\n"
+                  + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                  + $"\n재생성 시간 : <color=#f40>{interval[0]}</color>"
+                  + $"\n화염구 개수 : <color=#f40>3</color>"
+                  + $"</nobr>",
+                _ => "<nobr>"
+                  + $"캐릭터 주변을 회전하는 화염구를 소환합니다. 화염구는 몬스터와 충돌하면 폭발하여 주변에 피해를 가하고 잠시 뒤 재생성됩니다."
+                  + $"\n"
+                  + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                  + $"\n재생성 시간 : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"
+                  + $"\n화염구 개수 : <color=#f40>3</color> > <color=#f40>{(NextLevelIndex == MaxLevel-1 ? 6 : 3)}</color>"
+                  + $"</nobr>",
+            }
     );
 
     #endregion Weapon Information

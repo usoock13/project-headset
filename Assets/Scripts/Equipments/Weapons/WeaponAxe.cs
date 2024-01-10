@@ -27,20 +27,46 @@ public class WeaponAxe : Weapon {
         Icon: _weaponIcon,
         Name: "Axe",
         Description: 
-            NextLevelIndex switch {
-                2 or 4  => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다. "
-                        + $"벌목 도구의 크기가 <color=#f40>{(projectileScale[NextLevelIndex] - projectileScale[0]) * 100}%</color> 증가합니다.</nobr>",
-                _       => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            CurrentLevel switch {
+                0 => $"<nobr>"
+                   + $"Throw a axe that damage to monsters in the direction of aim. Axe after attack a few monster disapear."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"\nMax Attack Count : <color=#f40>{maxHitCount[0]}</color>"
+                   + $"\nAxe Scale : <color=#f40>{projectileScale[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a axe that damage to monsters in the direction of aim. Axe after attack a few monster disapear."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nMax Attack Count : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
+                   + $"\nAxe Scale : <color=#f40>{projectileScale[level-1]*100}%</color> > <color=#f40>{projectileScale[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "도끼",
         Description: 
-            NextLevelIndex switch {
-                2 or 4  => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다. "
-                        + $"벌목 도구의 크기가 <color=#f40>{(projectileScale[NextLevelIndex] - projectileScale[0]) * 100}%</color> 증가합니다.</nobr>",
-                _       => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 클래식 벌목 도구를 던져 적중하는 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            CurrentLevel switch {
+                0 => $"<nobr>"
+                   + $"조준 방향으로 관통한 몬스터에게 피해를 가하는 도끼를 던집니다. 도끼는 일정 횟수 공격 후 사라집니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}sec</color>"
+                   + $"\n최대 공격 횟수 : <color=#f40>{maxHitCount[0]}</color>"
+                   + $"\n도끼 크기 : <color=#f40>{projectileScale[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a axe that damage to monsters in the direction of aim. Axe after attack a few monster disapear."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\n최대 공격 횟수 : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
+                   + $"\n도끼 크기 : <color=#f40>{projectileScale[level-1]*100}%</color> > <color=#f40>{projectileScale[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

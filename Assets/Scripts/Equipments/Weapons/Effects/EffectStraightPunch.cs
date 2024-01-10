@@ -20,7 +20,7 @@ public class EffectStraightPunch : MonoBehaviour {
         Collider2D[] inners = Physics2D.OverlapBoxAll(center, effectBounds.Size, transform.rotation.eulerAngles.z, targetLayer);
         foreach(Collider2D inner in inners) {
             if(inner.TryGetComponent(out Monster target)) {
-                target.TakeDamage(originWeapon.DamageOfStraight);
+                target.TakeDamage(originWeapon.Damage);
                 target.TakeAttackDelay(hitDelay);
                 target.TakeForce(transform.up * attackForceScalar, hitDelay);
                 GameManager.instance.Character.OnAttackMonster(target);

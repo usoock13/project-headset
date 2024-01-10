@@ -23,10 +23,18 @@ public class WeaponSanctuary : Weapon {
         Name: "Sanctuary",
         Description:
             NextLevelIndex switch {
-                >= 4 => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 0.25초간 경직시킵니다.\n"
-                    + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
-                _    => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                    + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
+                0 => "<nobr>"
+                  + $"Spread the holy area and continuous damage monsters in the area."
+                  + $"\n"
+                  + $"\nDamage per Second : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                  + $"\nStaggering Time : <color=#f40>{hittingDelay[0]}</color>"
+                  + $"</nobr>",
+                _ => "<nobr>"
+                  + $"Spread the holy area and continuous damage monsters in the area."
+                  + $"\n"
+                  + $"\nDamage per Second : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}</color>%"
+                  + $"\nStaggering Time : <color=#f40>{hittingDelay[level-1]}</color> > <color=#f40>{hittingDelay[NextLevelIndex]}</color>"
+                  + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -34,10 +42,18 @@ public class WeaponSanctuary : Weapon {
         Name: "성역",
         Description:
             NextLevelIndex switch {
-                >= 4 => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 0.25초간 경직시킵니다.\n"
-                    + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
-                _    => $"<nobr>신성한 영역을 펼쳐 0.5초마다 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                    + $"이 무기는 공격 속도에 영향을 받지 않습니다.</nobr>",
+                0 => "<nobr>"
+                  + $"신성한 영역을 펼져 범위 안의 몬스터에게 지속적으로 피해를 가합니다."
+                  + $"\n"
+                  + $"\n초당 피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                  + $"\n경직 시간 : <color=#f40>{hittingDelay[0]}</color>"
+                  + $"</nobr>",
+                _ => "<nobr>"
+                  + $"신성한 영역을 펼져 범위 안의 몬스터에게 지속적으로 피해를 가합니다."
+                  + $"\n"
+                  + $"\n초당 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                  + $"\n경직 시간 : <color=#f40>{hittingDelay[level-1]}</color> > <color=#f40>{hittingDelay[NextLevelIndex]}</color>"
+                  + $"</nobr>"
             }
     );
     #endregion Weapon Information

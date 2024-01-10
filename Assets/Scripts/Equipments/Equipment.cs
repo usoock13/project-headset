@@ -23,7 +23,7 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     public int CurrentLevel => level;
     public abstract int MaxLevel { get; }
     public bool IsMaxLevel => CurrentLevel>=MaxLevel;
-    protected int NextLevelIndex => CurrentLevel < MaxLevel ? level : level-1;
+    protected int NextLevelIndex => level < MaxLevel ? level : level-1;
     #endregion Level
 
     public Sprite Icon { get {

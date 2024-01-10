@@ -40,7 +40,7 @@ public class AttachmentSlowPoison : Attachment {
     }
     private IEnumerator DamageCoroutine(Monster target) {
         while(lifetime < duration) {
-            target.TakeDamage(Damage);
+            target.TakeDamage(Damage * damageInterval);
             lifetime += damageInterval;
             yield return new WaitForSeconds(damageInterval);
         }

@@ -23,7 +23,18 @@ public class WeaponSpear : Weapon {
         Name: "Long Spear",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"Pierce in the direction of aim with a spear to damage monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Pierce in the direction of aim with a spear to damage monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]}</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]}</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -31,7 +42,18 @@ public class WeaponSpear : Weapon {
         Name: "장창",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 조준 방향을 향해 창을 찔러 넣어 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"창으로 조준 방향을 찔러 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"창으로 조준 방향을 찔러 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]}</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]}</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information
