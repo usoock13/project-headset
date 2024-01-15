@@ -24,15 +24,35 @@ public class ArtifactHolyBox : Artifact {
         Icon: _icon,
         Name: "Reliquary",
         Description:
-              $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
-            + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[NextLevelIndex]}</color>초 뒤에 재생성됩니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Create a shiled that blocks damage. The shiled will be disapeared in a second after block any damage."
+                   + $"\n"
+                   + $"\nRegenerating Time : <color=#f40>{regenerateInterval[0]}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Create a shiled that blocks damage. The shiled will be disapeared in a second after block any damage."
+                   + $"\n"
+                   + $"\nRegenerating Time : <color=#f40>{regenerateInterval[level-1]}sec</color> > <color=#f40>{regenerateInterval[NextLevelIndex]}sec</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "성스러운 유물함",
         Description:
-              $"<nobr>피해를 막아주는 보호막을 생성합니다.\n"
-            + $"보호막은 피해를 막고 1초 뒤 사라지며 <color=#f40>{regenerateInterval[NextLevelIndex]}</color>초 뒤에 재생성됩니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"피해를 막아주는 보호막을 생성합니다. 보호막은 어떤 피해든 막게되면 1초 뒤 사라집니다."
+                   + $"\n"
+                   + $"\n재생성 시간 : <color=#f40>{regenerateInterval[0]}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"피해를 막아주는 보호막을 생성합니다. 보호막은 어떤 피해든 막게되면 1초 뒤 사라집니다."
+                   + $"\n"
+                   + $"\n재생성 시간 : <color=#f40>{regenerateInterval[level-1]}초</color> > <color=#f40>{regenerateInterval[NextLevelIndex]}초</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Artifact Infromation
 

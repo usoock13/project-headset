@@ -45,7 +45,24 @@ public class AWeaponAutomail : Weapon {
         Name: "The Judgement",
         Description: 
             NextLevelIndex switch {
-                _ => $"<nobr>강철 주먹을 마구 내질러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩 1을 얻습니다.\n중첩 1당 주먹의 공격 속도가 2% 증가하고 100이 되면 잠시 뒤 폭발을 일으켜 주변 넓의 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{explosionDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩을 모두 잃으며, 잠깐동안 주먹을 진정시키는 시간을 갖습니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"Punch fast with the iron fist to damage monsters. Each hit increases <color=#f40>Overload</color> stack up to 100."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>0.2sec</color>"
+                   + $"\n<color=#f40>[Overload]</color>"
+                   + $"\nIncrease punch speed up to 300%. When reach to 100 stacks, after a while cause explosion and damage monsters around the character. After explosion, punch need rest."
+                   + $"\nExplosion Damage : <color=#f40>{explosionStaticDamage[0]}+{explosionDamageCoef[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Punch fast with the iron fist to damage monsters. Each hit increases <color=#f40>Overload</color> stack up to 100."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>0.2sec</color>"
+                   + $"\n<color=#f40>[Overload]</color>"
+                   + $"\nIncrease punch speed up to 300%. When reach to 100 stacks, after a while cause explosion and damage monsters around the character. After explosion, punch need rest."
+                   + $"\nExplosion Damage : <color=#f40>{explosionStaticDamage[level-1]}+{explosionDamageCoef[level-1]*100}%</color> > <color=#f40>{explosionStaticDamage[NextLevelIndex]}+{explosionDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -53,7 +70,24 @@ public class AWeaponAutomail : Weapon {
         Name: "정의 집행",
         Description: 
             NextLevelIndex switch {
-                _ => $"<nobr>강철 주먹을 마구 내질러 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩 1을 얻습니다.\n중첩 1당 주먹의 공격 속도가 2% 증가하고 100이 되면 잠시 뒤 폭발을 일으켜 주변 넓의 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{explosionDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 중첩을 모두 잃으며, 잠깐동안 주먹을 진정시키는 시간을 갖습니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"빠르게 강철 주먹 날려 몬스터에게 피해를 가합니다. 주먹이 적중하면 <color=#f40>과부화</color>가 중첩되며, 최대 100까지 중첩됩니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>0.2초</color>"
+                   + $"\n<color=#f40>[과부화]</color>"
+                   + $"\n펀치의 속도를 최대 300%까지 증가시킵니다. 100 중첩에 도달하면 잠시 뒤 폭발하여 캐릭터 주변의 몬스터에게 피해를 가합니다. 폭발 이후 주먹에게 휴식이 필요합니다."
+                   + $"\n폭발 피해량 : <color=#f40>{explosionStaticDamage[0]}+{explosionDamageCoef[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"빠르게 강철 주먹 날려 몬스터에게 피해를 가합니다. 주먹이 적중하면 <color=#f40>과부화</color>가 중첩되며, 최대 100까지 중첩됩니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>0.2초</color>"
+                   + $"\n<color=#f40>[과부화]</color>"
+                   + $"\n펀치의 속도를 최대 300%까지 증가시킵니다. 100 중첩에 도달하면 잠시 뒤 폭발하여 캐릭터 주변의 몬스터에게 피해를 가합니다. 폭발 이후 주먹에게 휴식이 필요합니다."
+                   + $"\n폭발 피해량 : <color=#f40>{explosionStaticDamage[level-1]}+{explosionDamageCoef[level-1]*100}%</color> > <color=#f40>{explosionStaticDamage[NextLevelIndex]}+{explosionDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

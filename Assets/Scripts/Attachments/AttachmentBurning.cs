@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 
 public class AttachmentBurning : Attachment {
+    [SerializeField] AWeaponElementalTrio originWeapon;
+    
     private Monster owner;
 
     public override string AttachmentType => "Burning";
@@ -28,6 +30,7 @@ public class AttachmentBurning : Attachment {
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);
         owner.ColorManager?.RemoveColor(attachColor);
+        originWeapon.BurningPooler.InPool(this.gameObject);
     }
 
     private IEnumerator DamageCoroutine(Monster monster) {

@@ -6,7 +6,7 @@ public class ArtifactClothArmor : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] extraArmor = new float[] {  5f,   7f,   9f,   11f,   13f };
+    private float[] extraArmor = new float[] {  11f,   15f,   19f,   23f,   27f };
     #endregion Artifact Status
 
     #region Artifact Information
@@ -16,13 +16,35 @@ public class ArtifactClothArmor : Artifact {
         Icon: _icon,
         Name: "Cloth Armor",
         Description: 
-            $"<nobr>방어력이 <color=#f40>{extraArmor[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Armor</color>."
+                   + $"\n"
+                   + $"\nAmount : <color=#f40>{extraArmor[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Armor</color>."
+                   + $"\n"
+                   + $"\nAmount : <color=#f40>{extraArmor[level-1]}</color> > <color=#f40>{extraArmor[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "천 갑옷",
         Description: 
-            $"<nobr>방어력이 <color=#f40>{extraArmor[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>방어력</color>을 얻습니다."
+                   + $"\n"
+                   + $"\n증가량 : <color=#f40>{extraArmor[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>방어력</color>을 얻습니다."
+                   + $"\n"
+                   + $"\n증가량 : <color=#f40>{extraArmor[level-1]}</color> > <color=#f40>{extraArmor[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Artifact Information
 
@@ -34,5 +56,5 @@ public class ArtifactClothArmor : Artifact {
         base.OnTakeOff();
         _Character.extraArmor -= GetExtraMoveSpeed;
     }
-    private float GetExtraMoveSpeed(Character character) => character.DefaultMoveSpeed * extraArmor[level-1];
+    private float GetExtraMoveSpeed(Character character) => extraArmor[level-1];
 }

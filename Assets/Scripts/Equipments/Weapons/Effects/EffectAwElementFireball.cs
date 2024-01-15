@@ -6,11 +6,11 @@ public class EffectAwElementFireball : EffectAwElement
         for(int i=0; i<monsters.Length; i++) {
             Vector3 characterPoint = GameManager.instance.Character.transform.position;
             Vector2 forceDir = (monsters[i].transform.position - characterPoint).normalized;
+            AttachToMonster(monsters[i]);
             monsters[i].TakeDamage(originWeapon.Damage);
             monsters[i].TakeAttackDelay(hittingDelay);
             monsters[i].TakeForce(forceDir * attackForce, hittingDelay);
             GameManager.instance.Character.OnAttackMonster(monsters[i]);
-            AttachToMonster(monsters[i]);
         }
     }
 

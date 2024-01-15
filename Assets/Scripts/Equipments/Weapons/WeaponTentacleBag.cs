@@ -31,7 +31,20 @@ public class WeaponTentacleBag : Weapon {
         Name: "Tentacle Bag",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 근처 적을 향해 촉수가 <color=#f40>{effectCount[NextLevelIndex]}</color>줄기 뻗어나가며 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 최대 {AttackCount}회 가합니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"Summon Tentacles those attack monsters in around."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"\nNumber of Tentacles : <color=#f40>{effectCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Summon Tentacles those attack monsters in around."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nNumber of Tentacles : <color=#f40>{effectCount[level-1]}</color> > <color=#f40>{effectCount[NextLevelIndex]}</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -39,7 +52,20 @@ public class WeaponTentacleBag : Weapon {
         Name: "촉수 가방",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초에 한 번 근처 적을 향해 촉수가 <color=#f40>{effectCount[NextLevelIndex]}</color>줄기 뻗어나가며 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 최대 {AttackCount}회 가합니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"촉수를 소환해 주변 몬스터에게 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
+                   + $"\n촉수 개수 : <color=#f40>{effectCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"촉수를 소환해 주변 몬스터에게 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"\n촉수 개수 : <color=#f40>{effectCount[level-1]}</color> > <color=#f40>{effectCount[NextLevelIndex]}</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

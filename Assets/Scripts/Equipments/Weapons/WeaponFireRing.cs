@@ -24,14 +24,14 @@ public class WeaponFireRing : Weapon {
         Description:
             NextLevelIndex switch {
                 0 => "<nobr>"
-                  + $"Summon a spinning fireball around the character. Fireball hits a monster and then explodes, dealing damage to the monsters in around. The exploded fireball is created in a few seconds."
+                  + $"Summon a spinning fireball around the character. Fireball hits a monster and then explodes, damages to the monsters in around. It's need some time to regenerate exploded fireball."
                   + $"\n"
                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                   + $"\nTime of Regenerate : <color=#f40>{interval[0]}</color>"
                   + $"\nNumber of Fireballs : <color=#f40>3</color>"
                   + $"</nobr>",
                 _ => "<nobr>"
-                  + $"Summon a spinning fireball around the character. Fireball hits a monster and then explodes, dealing damage to the monsters in around. The exploded fireball is created in a few seconds."
+                  + $"Summon a spinning fireball around the character. Fireball hits a monster and then explodes, damages to the monsters in around. It's need some time to regenerate exploded fireball."
                   + $"\n"
                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                   + $"\nTime of Regenerate : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"

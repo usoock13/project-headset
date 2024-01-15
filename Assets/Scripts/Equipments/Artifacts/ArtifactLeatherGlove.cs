@@ -4,7 +4,7 @@ public class ArtifactLeatherGlove : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] extraSpeed = new float[] {  0.15f,   0.18f,   0.21f,   0.24f,   0.27f };
+    private float[] extraSpeed = new float[] {  0.2f,   0.25f,   0.30f,   0.35f,   0.40f };
     #endregion Artifact Status
 
     #region Artifact Information
@@ -14,13 +14,36 @@ public class ArtifactLeatherGlove : Artifact {
         Icon: _icon,
         Name: "Leather Glove",
         Description:
-            $"<nobr>공격속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Attack Speed</color>."
+                   + $"\n"
+                   + $"\nAmount : <color=#f40>{extraSpeed[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Attack Speed</color>."
+                   + $"\n"
+                   + $"\nAmount : <color=#f40>{extraSpeed[level-1]}</color> > <color=#f40>{extraSpeed[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+            }
+        
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "가죽 장갑",
         Description:
-            $"<nobr>공격속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>공격 속도</color>를 얻습니다."
+                   + $"\n"
+                   + $"\n증가량 : <color=#f40>{extraSpeed[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>공격 속도</color>를 얻습니다."
+                   + $"\n"
+                   + $"\n증가량 : <color=#f40>{extraSpeed[level-1]}</color> > <color=#f40>{extraSpeed[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Artifact Information
 
@@ -32,5 +55,5 @@ public class ArtifactLeatherGlove : Artifact {
         base.OnTakeOff();
         _Character.extraAttackSpeed -= GetExtraAttackSpeed;
     }
-    private float GetExtraAttackSpeed(Character character) => character.DefaultMoveSpeed * extraSpeed[level-1];
+    private float GetExtraAttackSpeed(Character character) => extraSpeed[level-1];
 }

@@ -12,13 +12,11 @@ public class WeaponSpikeTrap : Weapon {
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.25f,   0.30f,   0.35f,   0.40f,   0.45f,  }; // 피해 계수
     private float[] staticDamage = new float[MAX_LEVEL]     {     10f,     13f,     16f,     19f,     22f,  }; // 고정 피해량
     private float[] trapScale = new float[MAX_LEVEL]        {      1f,      1f,      1f,    1.2f,    1.5f,  }; // 덫 크기
-    protected override float AttackInterval => 1f;
-    private float countdownDuringDodge = 0;
-    private float intervalDuringDodge = .1f;
+    protected override float AttackInterval => 5f;
 
-    public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
-    public float Duration => 10f;
-    public float HittingDelay => 1f;
+    public float DamagePerSecond => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
+    public float Duration => 5f;
+    public float HittingDelay => 0.1f;
     public float TrapScale => trapScale[level-1];
     #endregion Weapon Status
 
@@ -30,9 +28,31 @@ public class WeaponSpikeTrap : Weapon {
         Name: "Caltrop",
         Description:
             NextLevelIndex switch {
-                3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
-                        + $"회피하면 경로에 덫을 설치하며 이동합니다.</nobr>",
-                _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"During the character move, set up the trap which damage monsters on that."
+                   + $"\nThe faster character's movement is, the faster to set up the trap."
+                   + $"\n"
+                   + $"\nDPS : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nDuration : <color=#f40>{Duration}sec</color>"
+                   + $"\nTrap Scale : <color=#f40>{trapScale[0]*100}%</color>"
+                   + $"</nobr>",
+                4 => $"<nobr>"
+                   + $"During the character move, set up the trap which damage monsters on that."
+                   + $"\nThe faster character's movement is, the faster to set up the trap."
+                   + $"\n<color=#f40>Now character can does dodge to set up the several traps!</color>"
+                   + $"\n"
+                   + $"\nDPS : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nDuration : <color=#f40>{Duration}sec</color>"
+                   + $"\nTrap Scale : <color=#f40>{trapScale[level-1]*100}%</color> > <color=#f40>{trapScale[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"During the character move, set up the trap which damage monsters on that."
+                   + $"\nThe faster character's movement is, the faster to set up the trap."
+                   + $"\n"
+                   + $"\nDPS : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nDuration : <color=#f40>{Duration}sec</color>"
+                   + $"\nTrap Scale : <color=#f40>{trapScale[level-1]*100}%</color> > <color=#f40>{trapScale[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -40,9 +60,31 @@ public class WeaponSpikeTrap : Weapon {
         Name: "마름쇠",
         Description:
             NextLevelIndex switch {
-                3 or 4 => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.\n"
-                        + $"회피하면 경로에 덫을 설치하며 이동합니다.</nobr>",
-                _      => $"<nobr>이동하면 바닥에 쇠못덫을 설치합니다. 덫은 밟은 적에게 <color=#ff4400>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 1초간 경직시킨 뒤 사라집니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"캐릭터가 이동하는 동안 덫을 설치하여 덫 위의 몬스터에게 피해를 가합니다."
+                   + $"\n캐릭터의 이동속도가 빨라지면 덫을 설치하는 속도가 빨라집니다."
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n지속시간 : <color=#f40>{Duration}초</color>"
+                   + $"\n덫 크기 : <color=#f40>{trapScale[0]*100}%</color>"
+                   + $"</nobr>",
+                4 => $"<nobr>"
+                   + $"캐릭터가 이동하는 동안 덫을 설치하여 덫 위의 몬스터에게 피해를 가합니다."
+                   + $"\n캐릭터의 이동속도가 빨라지면 덫을 설치하는 속도가 빨라집니다."
+                   + $"\n<color=#f40>이제 회피를 사용하여 덫을 여럿 설치할 수 있습니다!</color>"
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n지속시간 : <color=#f40>{Duration}초</color>"
+                   + $"\n덫 크기 : <color=#f40>{trapScale[level-1]*100}%</color> > <color=#f40>{trapScale[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터가 이동하는 동안 덫을 설치하여 덫 위의 몬스터에게 피해를 가합니다."
+                   + $"\n캐릭터의 이동속도가 빨라지면 덫을 설치하는 속도가 빨라집니다."
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n지속시간 : <color=#f40>{Duration}초</color>"
+                   + $"\n덫 크기 : <color=#f40>{trapScale[level-1]*100}%</color> > <color=#f40>{trapScale[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information
@@ -51,7 +93,7 @@ public class WeaponSpikeTrap : Weapon {
         if(!_Character.CurrentState.Compare(_Character.walkState))
             return;
         if(currentTime > 0) {
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.deltaTime * _Character.MoveSpeed * _Character.AttackSpeed;
         } else {
             currentTime += AttackInterval;
             Attack();
@@ -65,15 +107,24 @@ public class WeaponSpikeTrap : Weapon {
         base.OnTakeOff();
         _Character.dodgeState.onActive -= OnDodge;
     }
-    private IEnumerator InstallationDuringDodge() {
-        Attack();
-        while(_Character.CurrentState.Compare(_Character.dodgeState)) {
-            float scale = _Character.MoveSpeed / _Character.DefaultMoveSpeed;
-            countdownDuringDodge += Time.deltaTime * scale;
-            if(countdownDuringDodge >= intervalDuringDodge) {
-                countdownDuringDodge -= intervalDuringDodge;
-                Attack();
-            }
+    private void InstallationDuringDodge() {
+        StartCoroutine(ThrowTrap(72*0));
+        StartCoroutine(ThrowTrap(72*1));
+        StartCoroutine(ThrowTrap(72*2));
+        StartCoroutine(ThrowTrap(72*3));
+        StartCoroutine(ThrowTrap(72*4));
+        _Character.OnAttack();
+    }
+    private IEnumerator ThrowTrap(float angle) {
+        var trap = EffectPooler.OutPool(transform.position, Quaternion.identity);
+        trap.transform.Rotate(Vector3.forward, angle);
+
+        Vector2 start = trap.transform.position;
+        Vector2 end = trap.transform.position + trap.transform.up * 1.5f;
+        float offset = 0;
+        while(offset < 1) {
+            offset += Time.deltaTime * 3f;
+            trap.transform.position = Vector2.Lerp(start, end, 1-Mathf.Pow(1-offset, 3));
             yield return null;
         }
     }
@@ -86,12 +137,11 @@ public class WeaponSpikeTrap : Weapon {
         );
     }
     protected override void Attack() {
-        var instance = EffectPooler.OutPool(transform.position, Quaternion.identity);
-        instance.transform.localScale = Vector3.one * TrapScale;
+        EffectPooler.OutPool(transform.position, Quaternion.identity);
         _Character.OnAttack();
     }
     private void OnDodge(State prev) {
         if(level >= 4)
-            StartCoroutine(InstallationDuringDodge());
+            InstallationDuringDodge();
     }
 }

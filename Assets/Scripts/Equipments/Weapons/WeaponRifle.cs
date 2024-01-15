@@ -27,7 +27,20 @@ public class WeaponRifle : Weapon {
         Name: "Musket",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"Shoot the piercing bullet to damage monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"\nMax Hit Monsters : <color=#f40>{maxHitCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Shoot the piercing bullet to damage monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"\nMax Hit Monsters : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
+                   + $"</nobr>"
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -35,7 +48,20 @@ public class WeaponRifle : Weapon {
         Name: "화승총",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{AttackInterval}</color>초에 한 번 조준 방향으로 관통하는 철갑탄을 발사해 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>",
+                0 => $"<nobr>"
+                   + $"몬스터를 꿰뚫는 총알을 발사해 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"\n최대 공격 횟수 : <color=#f40>{maxHitCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"몬스터를 꿰뚫는 총알을 발사해 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"\n최대 공격 횟수 : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
+                   + $"</nobr>"
             }
     );
 

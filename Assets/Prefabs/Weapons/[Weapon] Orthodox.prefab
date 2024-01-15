@@ -5021,9 +5021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55aecf3e1b8ca7f43a372519084a6321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _itemNameEN: The Judgement
-  _itemNameKO: "\uC815\uC758 \uC9D1\uD589"
+  _icon: {fileID: 721703420, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  _itemNameEN: 'Awaken Knuckle : The Judgement'
+  _itemNameKO: "\uAC01\uC131 \uB108\uD074 : \uC815\uC758 \uC9D1\uD589"
   oldWeapon: {fileID: 35642202144724696}
   newWeapon: {fileID: 1866772308176104086}
 --- !u!1001 &4287216518828206828

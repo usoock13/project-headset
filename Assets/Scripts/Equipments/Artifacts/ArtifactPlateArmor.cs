@@ -6,7 +6,7 @@ public class ArtifactPlateArmor : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] armorAmount = new float[]     {    12,      14,      16,      18,      20 };
+    private float[] armorAmount = new float[]     {    24,      28,      32,      36,      40 };
     private float[] decreasingSpeed = new float[] { 0.30f,   0.25f,   0.20f,   0.15f,   0.10f };
     #endregion Artifact Status
 
@@ -17,13 +17,39 @@ public class ArtifactPlateArmor : Artifact {
         Icon: _icon,
         Name: "Plate Armor",
         Description:
-            $"<nobr>방어력이 <color=#f40>{armorAmount[NextLevelIndex]}</color>만큼 증가하지만, 이동속도가 <color=#f40>{decreasingSpeed[NextLevelIndex] * 100}%</color>만큼 감소합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Armor</color> but gets degreasing <color=#f40>Movement Speed</color>."
+                   + $"\n"
+                   + $"\nIncreasing Armor : <color=#f40>{armorAmount[0]}</color>"
+                   + $"\nDecreasing Speed : <color=#f40>{decreasingSpeed[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Armor</color> but gets degreasing <color=#f40>Movement Speed</color>."
+                   + $"\n"
+                   + $"\nIncreasing Armor : <color=#f40>{armorAmount[level-1]}</color> > <color=#f40>{armorAmount[NextLevelIndex]}</color>"
+                   + $"\nDecreasing Speed : <color=#f40>{decreasingSpeed[level-1]*100}%</color> > <color=#f40>{decreasingSpeed[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "판금 흉갑",
         Description:
-            $"<nobr>방어력이 <color=#f40>{armorAmount[NextLevelIndex]}</color>만큼 증가하지만, 이동속도가 <color=#f40>{decreasingSpeed[NextLevelIndex] * 100}%</color>만큼 감소합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>방어력</color>을 얻지만 <color=#f40>이동 속도</color>가 감소합니다."
+                   + $"\n"
+                   + $"\n방어력 증가량 : <color=#f40>{armorAmount[0]}</color>"
+                   + $"\n속도 감소량 : <color=#f40>{decreasingSpeed[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>방어력</color>을 얻지만 <color=#f40>이동 속도</color>가 감소합니다."
+                   + $"\n"
+                   + $"\n방어력 증가량 : <color=#f40>{armorAmount[level-1]}</color> > <color=#f40>{armorAmount[NextLevelIndex]}</color>"
+                   + $"\n속도 감소량 : <color=#f40>{decreasingSpeed[level-1]*100}%</color> > <color=#f40>{decreasingSpeed[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Artifact Information
 

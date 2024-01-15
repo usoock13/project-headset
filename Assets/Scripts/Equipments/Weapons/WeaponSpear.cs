@@ -24,16 +24,16 @@ public class WeaponSpear : Weapon {
         Description:
             NextLevelIndex switch {
                 0 => $"<nobr>"
-                   + $"Pierce in the direction of aim with a spear to damage monsters."
+                   + $"Pierce with a spear to damage monsters hit."
                    + $"\n"
-                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
-                   + $"\nAttack Interval : <color=#f40>{interval[0]}</color>"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"Pierce in the direction of aim with a spear to damage monsters."
+                   + $"Pierce with a spear to damage monsters hit."
                    + $"\n"
-                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]}</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]}</color>"
-                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
                    + $"</nobr>",
             }
     );
@@ -43,16 +43,16 @@ public class WeaponSpear : Weapon {
         Description:
             NextLevelIndex switch {
                 0 => $"<nobr>"
-                   + $"창으로 조준 방향을 찔러 피해를 가합니다."
+                   + $"창으로 찔러 적중한 몬스터에게 피해를 가합니다."
                    + $"\n"
-                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
-                   + $"\n공격 주기 : <color=#f40>{interval[0]}</color>"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"창으로 조준 방향을 찔러 피해를 가합니다."
+                   + $"창으로 찔러 적중한 몬스터에게 피해를 가합니다."
                    + $"\n"
-                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]}</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]}</color>"
-                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}</color> > <color=#f40>{interval[NextLevelIndex]}</color>"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
                    + $"</nobr>",
             }
     );

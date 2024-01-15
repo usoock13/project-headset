@@ -31,14 +31,14 @@ public class WeaponShortbow : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"Shoot arrows in the direction of aim. Damage to a monster that is first hit by arrow."
+                   + $"Shoot arrows to damage the monster."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
                    + $"\nArrows Quantity : <color=#f40>{arrowQuantity[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"Shoot arrows in the direction of aim. Damage to a monster that is first hit by arrow."
+                   + $"Shoot arrows to damage the monster."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
@@ -52,14 +52,14 @@ public class WeaponShortbow : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"조준 방향으로 화살을 발사해 처음 적중한 몬스터에게 피해를 가합니다."
+                   + $"화살을 발사해 처음 적중한 몬스터에게 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
                    + $"\n화살 개수 : <color=#f40>{arrowQuantity[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"조준 방향으로 화살을 발사해 처음 적중한 몬스터에게 피해를 가합니다."
+                   + $"화살을 발사해 처음 적중한 몬스터에게 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"

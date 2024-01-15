@@ -29,19 +29,19 @@ public class WeaponAxe : Weapon {
         Description: 
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"Throw a axe that damage to monsters in the direction of aim. Axe after attack a few monster disapear."
+                   + $"Throw a axe to damage the monsters."
                    + $"\n"
-                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
-                   + $"\nMax Attack Count : <color=#f40>{maxHitCount[0]}</color>"
+                   + $"\nMax Hit Monsters : <color=#f40>{maxHitCount[0]}</color>"
                    + $"\nAxe Scale : <color=#f40>{projectileScale[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"Throw a axe that damage to monsters in the direction of aim. Axe after attack a few monster disapear."
+                   + $"Throw a axe to damage the monsters."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
-                   + $"\nMax Attack Count : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
+                   + $"\nMax Hit Monsters : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
                    + $"\nAxe Scale : <color=#f40>{projectileScale[level-1]*100}%</color> > <color=#f40>{projectileScale[NextLevelIndex]*100}%</color>"
                    + $"</nobr>",
             }
@@ -52,18 +52,18 @@ public class WeaponAxe : Weapon {
         Description: 
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"조준 방향으로 관통한 몬스터에게 피해를 가하는 도끼를 던집니다. 도끼는 일정 횟수 공격 후 사라집니다."
+                   + $"관통한 몬스터에게 피해를 가하는 도끼를 던집니다."
                    + $"\n"
-                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]}</color>"
-                   + $"\n공격 주기 : <color=#f40>{interval[0]}sec</color>"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
                    + $"\n최대 공격 횟수 : <color=#f40>{maxHitCount[0]}</color>"
                    + $"\n도끼 크기 : <color=#f40>{projectileScale[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"Throw a axe that damage to monsters in the direction of aim. Axe after attack a few monster disapear."
+                   + $"관통한 몬스터에게 피해를 가하는 도끼를 던집니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
-                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
                    + $"\n최대 공격 횟수 : <color=#f40>{maxHitCount[level-1]}</color> > <color=#f40>{maxHitCount[NextLevelIndex]}</color>"
                    + $"\n도끼 크기 : <color=#f40>{projectileScale[level-1]*100}%</color> > <color=#f40>{projectileScale[NextLevelIndex]*100}%</color>"
                    + $"</nobr>",

@@ -32,7 +32,7 @@ public class AWeaponExplosionArrow : Weapon {
         Description: 
             NextLevelIndex switch {
                 _ => $"<nobr>조준 방향으로 화살을 빠르게 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"화살이 <color=#f40>{arrowBombCount[NextLevelIndex]}번</color> 적중할 때 마다 조준 방향으로 폭발 화살을 발사합니다. 폭발 화살은 적에게 적중하면 폭발하여 주변 적에게 <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+                + $"화살이 <color=#f40>{arrowBombCount[NextLevelIndex]}번</color> 적중할 때마다 조준 방향으로 폭발 화살을 발사합니다. 폭발 화살은 적에게 적중하면 폭발하여 주변 적에게 <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -41,7 +41,7 @@ public class AWeaponExplosionArrow : Weapon {
         Description: 
             NextLevelIndex switch {
                 _ => $"<nobr>조준 방향으로 화살을 빠르게 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"화살이 <color=#f40>{arrowBombCount[NextLevelIndex]}번</color> 적중할 때 마다 조준 방향으로 폭발 화살을 발사합니다. 폭발 화살은 적에게 적중하면 폭발하여 주변 적에게 <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+                + $"화살이 <color=#f40>{arrowBombCount[NextLevelIndex]}번</color> 적중할 때마다 조준 방향으로 폭발 화살을 발사합니다. 폭발 화살은 적에게 적중하면 폭발하여 주변 적에게 <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
             }
     );
     #endregion Weapon Information

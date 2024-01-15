@@ -359,7 +359,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         Vector2 step;
         Vector2 dir = moveDirection;
         while (offset < 1) {
-            float scale = MoveSpeed / DefaultMoveSpeed; // Including move speed bonus 
+            float scale = MoveSpeed / DefaultMoveSpeed; // Including movement speed bonus 
             offset = Mathf.Min(offset + Time.deltaTime/dodgeDuration * scale, 1);
             t = Mathf.Sin(Mathf.PI * offset * 0.5f);
             step = Vector2.Lerp(Vector2.zero, dir.normalized, 1-t) * dodgePower * (Time.deltaTime/dodgeDuration);

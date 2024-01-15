@@ -16,13 +16,35 @@ public class ArtifactLeatherShoes : Artifact {
         Icon: _icon,
         Name: "Leather Shoes",
         Description:
-            $"<nobr>이동속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Movement Speed</color>."
+                   + $"\n"
+                   + $"\nAmount : <color=#f40>{extraSpeed[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"The character gets additional <color=#f40>Movement Speed</color>."
+                   + $"\n"
+                   + $"\nAmount : <color=#f40>{extraSpeed[level-1]}</color> > <color=#f40>{extraSpeed[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "가죽 장화",
         Description:
-            $"<nobr>이동속도가 <color=#f40>{extraSpeed[NextLevelIndex]}</color>만큼 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>이동 속도</color>를 얻습니다."
+                   + $"\n"
+                   + $"\n증가량 : <color=#f40>{extraSpeed[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터가 추가 <color=#f40>이동 속도</color>를 얻습니다."
+                   + $"\n"
+                   + $"\n증가량 : <color=#f40>{extraSpeed[level-1]}</color> > <color=#f40>{extraSpeed[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Artifact Information
 
@@ -34,5 +56,5 @@ public class ArtifactLeatherShoes : Artifact {
         base.OnTakeOff();
         _Character.extraMoveSpeed -= GetExtraMoveSpeed;
     }
-    private float GetExtraMoveSpeed(Character character) => character.DefaultMoveSpeed * extraSpeed[level-1];
+    private float GetExtraMoveSpeed(Character character) => extraSpeed[level-1];
 }

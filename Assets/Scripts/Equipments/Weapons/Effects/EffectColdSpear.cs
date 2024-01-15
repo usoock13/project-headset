@@ -33,31 +33,38 @@ public class EffectColdSpear : EffectProjectile {
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value
         && isActive) {
-            if(other.TryGetComponent<Monster>(out _)) {
-                Disappear();
+            if(other.TryGetComponent(out Monster monster)) {
+                monster.TakeDamage(originWeapon.Damage);
+                var attch = originWeapon.AttachmentPooler.OutPool(this.transform.position, Quaternion.identity).GetComponent<AttachmentFreeze>();
+                if(monster.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
+                    monster.ReleaseAttachment(already);
+                attch.duration = originWeapon.FreezeTime;
+                monster.TakeAttachment(attch);
+                originWeapon.SideEffectPooler.OutPool(monster.transform.position, Quaternion.identity);
+                GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
     }
     protected override void Disappear() {
         base.Disappear();
         projectileRenderer.enabled = false;
-        AttackArea();
         isActive = false;
     }
+
     private void AttackArea() {
         Vector2 center = (Vector2)(transform.position + (Vector3)(transform.localToWorldMatrix * damageAreaBounds.center));
         Collider2D[] inners = Physics2D.OverlapCircleAll(center, damageAreaBounds.radius, targetLayer);
         for(int i=0; i<inners.Length; i++) {
-            if(inners[i].TryGetComponent(out Monster target)
-            && target.isArrive) {
-                target.TakeDamage(originWeapon.Damage);
+            if(inners[i].TryGetComponent(out Monster monster)
+            && monster.isArrive) {
+                monster.TakeDamage(originWeapon.Damage);
                 var attch = originWeapon.AttachmentPooler.OutPool(this.transform.position, Quaternion.identity).GetComponent<AttachmentFreeze>();
-                if(target.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
-                    target.ReleaseAttachment(already);
+                if(monster.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
+                    monster.ReleaseAttachment(already);
                 attch.duration = originWeapon.FreezeTime;
-                target.TakeAttachment(attch);
-                originWeapon.SideEffectPooler.OutPool(target.transform.position, Quaternion.identity);
-                GameManager.instance.Character.OnAttackMonster(target);
+                monster.TakeAttachment(attch);
+                originWeapon.SideEffectPooler.OutPool(monster.transform.position, Quaternion.identity);
+                GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
     }

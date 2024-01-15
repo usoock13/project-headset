@@ -26,13 +26,13 @@ public class WeaponSanctuary : Weapon {
                 0 => "<nobr>"
                   + $"Spread the holy area and continuous damage monsters in the area."
                   + $"\n"
-                  + $"\nDamage per Second : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                  + $"\nDPS : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                   + $"\nStaggering Time : <color=#f40>{hittingDelay[0]}</color>"
                   + $"</nobr>",
                 _ => "<nobr>"
                   + $"Spread the holy area and continuous damage monsters in the area."
                   + $"\n"
-                  + $"\nDamage per Second : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}</color>%"
+                  + $"\nDPS : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                   + $"\nStaggering Time : <color=#f40>{hittingDelay[level-1]}</color> > <color=#f40>{hittingDelay[NextLevelIndex]}</color>"
                   + $"</nobr>",
             }

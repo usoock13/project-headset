@@ -29,22 +29,46 @@ public class WeaponSpirit : Weapon {
         Icon: _weaponIcon,
         Name: "Spirit",
         Description:
-            (NextLevelIndex+1) switch {
-                _ => $"<nobr>적을 추격하며 공격하는 정령을 <color=#f40>{spiritCount[NextLevelIndex]}마리</color> 소환합니다.\n"
-                + $"정령은 <color=#f40>{runningTime[NextLevelIndex]}초</color> 동안 비행하며 충돌한 적에게 "
-                + $"<color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가합니다."
-                + $"정령은 비행을 마치면 복귀해 <color=#f10>{chargeTime[NextLevelIndex]}초</color> 동안 충전됩니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Summon spirits that chase and hit monsters. Spirits has to return and charge after flies certain time."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nRunning Time : <color=#f40>{runningTime[0]}sec</color>"
+                   + $"\nCharge Time : <color=#f40>{chargeTime[0]}sec</color>"
+                   + $"\nNumber of Spirits : <color=#f40>{spiritCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Summon spirits that chase and hit monsters. Spirits has to return and charge after flies certain time."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nRunning Time : <color=#f40>{runningTime[level-1]}sec</color>"
+                   + $"\nCharge Time : <color=#f40>{chargeTime[level-1]}sec</color> > <color=#f40>{chargeTime[NextLevelIndex]}sec</color>"
+                   + $"\nNumber of Spirits : <color=#f40>{spiritCount[level-1]}</color> > <color=#f40>{spiritCount[NextLevelIndex]}</color>"
+                   + $"</nobr>"
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "정령",
         Description:
-            (NextLevelIndex+1) switch {
-                _ => $"<nobr>적을 추격하며 공격하는 정령을 <color=#f40>{spiritCount[NextLevelIndex]}마리</color> 소환합니다.\n"
-                + $"정령은 <color=#f40>{runningTime[NextLevelIndex]}초</color> 동안 비행하며 충돌한 적에게 "
-                + $"<color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가합니다."
-                + $"정령은 비행을 마치면 복귀해 <color=#f10>{chargeTime[NextLevelIndex]}초</color> 동안 충전됩니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"몬스터를 추적하고 공격하는 정령을 소환합니다. 정령은 일정 시간 비행 후에 돌아와 충전 해야합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n비행 시간 : <color=#f40>{runningTime[0]}초</color>"
+                   + $"\n충전 시간 : <color=#f40>{chargeTime[0]}초</color>"
+                   + $"\n정령 수 : <color=#f40>{spiritCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"몬스터를 추적하고 공격하는 정령을 소환합니다. 정령은 일정 시간 비행 후에 돌아와 충전 해야합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n비행 시간 : <color=#f40>{runningTime[level-1]}초</color>"
+                   + $"\n충전 시간 : <color=#f40>{chargeTime[level-1]}초</color> > <color=#f40>{chargeTime[NextLevelIndex]}초</color>"
+                   + $"\n정령 수 : <color=#f40>{spiritCount[level-1]}</color> > <color=#f40>{spiritCount[NextLevelIndex]}</color>"
+                   + $"</nobr>"
             }
     );
     #endregion Weapon Information

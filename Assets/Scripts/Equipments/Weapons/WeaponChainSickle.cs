@@ -31,24 +31,64 @@ public class WeaponChainSickle : Weapon {
         Icon: _weaponIcon,
         Name: "Chain Sickle",
         Description: 
-            (NextLevelIndex+1) switch {
-                5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 입힙니다.\n"
-                + $"회피를 사용하여 꽂혀있는 모든 낫을 회수할 수 있습니다.</nobr>",
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 입힙니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Throw a sickle to damage monsters. The sickle stays there when it reaches maximum range. When the number of sickles thrown exceeds maximum, the oldest sickle returns to character and damages monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nReturning Damage : <color=#f40>{pullingStaticDamage[0]}+{pullingDamageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"\nMax Sickle Count : <color=#f40>{maxHookedsCount[0]}</color>"
+                   + $"</nobr>",
+                4 => $"<nobr>"
+                   + $"Throw a sickle to damage monsters. The sickle stays there when it reaches maximum range. When the number of sickles thrown exceeds maximum, the oldest sickle returns to character and damages monsters."
+                   + $"\n<color=#f40>Now when character does dodge, all sickles return!</color>"
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nReturning Damage : <color=#f40>{pullingStaticDamage[level-1]}+{pullingDamageCoef[level-1]*100}%</color> > <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nMax Sickle Count : <color=#f40>{maxHookedsCount[level-1]}</color> > <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a sickle to damage monsters. The sickle stays there when it reaches maximum range. When the number of sickles thrown exceeds maximum, the oldest sickle returns to character and damages hit monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nReturning Damage : <color=#f40>{pullingStaticDamage[level-1]}+{pullingDamageCoef[level-1]*100}%</color> > <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nMax Sickle Count : <color=#f40>{maxHookedsCount[level-1]}</color> > <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "사슬낫",
         Description: 
-            (NextLevelIndex+1) switch {
-                5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 입힙니다.\n"
-                + $"회피를 사용하여 꽂혀있는 모든 낫을 회수할 수 있습니다.</nobr>",
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}</color>초마다 조준 방향으로 자비 없는 사슬낫을 던져 적중하는 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"낫은 최대 사거리에 도달하면 그 자리에 꽂힙니다. 최대 <color=#f40>{maxHookedsCount[NextLevelIndex]}</color>개까지 꽂혀 있을 수 있으며, 최대 개수를 초과하면 가장 먼저 던진 낫을 회수하여 <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 입힙니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"적중한 몬스터에게 피해를 주는 낫을 던집니다. 낫은 최대 사거리에 도달하면 그 자리에 머무릅니다. 던진 낫이 최대 개수를 초과하면 가장 이전에 던진 낫이 되돌아오며 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n복귀 피해량 : <color=#f40>{pullingStaticDamage[0]}+{pullingDamageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
+                   + $"\n최개 개수 : <color=#f40>{maxHookedsCount[0]}개</color>"
+                   + $"</nobr>",
+                4 => $"<nobr>"
+                   + $"적중한 몬스터에게 피해를 주는 낫을 던집니다. 낫은 최대 사거리에 도달하면 그 자리에 머무릅니다. 던진 낫이 최대 개수를 초과하면 가장 이전에 던진 낫이 되돌아오며 피해를 가합니다."
+                   + $"\n<color=#f40>이제 캐릭터가 회피를 사용하면 모든 낫이 되돌아옵니다!</color>"
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n복귀 피해량 : <color=#f40>{pullingStaticDamage[level-1]}+{pullingDamageCoef[level-1]*100}%</color> > <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"\n최개 개수 : <color=#f40>{maxHookedsCount[level-1]}개</color> > <color=#f40>{maxHookedsCount[NextLevelIndex]}개</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"적중한 몬스터에게 피해를 주는 낫을 던집니다. 낫은 최대 사거리에 도달하면 그 자리에 머무릅니다. 던진 낫이 최대 개수를 초과하면 가장 이전에 던진 낫이 되돌아오며 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n복귀 피해량 : <color=#f40>{pullingStaticDamage[level-1]}+{pullingDamageCoef[level-1]*100}%</color> > <color=#f40>{pullingStaticDamage[NextLevelIndex]}+{pullingDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"\n최개 개수 : <color=#f40>{maxHookedsCount[level-1]}개</color> > <color=#f40>{maxHookedsCount[NextLevelIndex]}개</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

@@ -11,18 +11,45 @@ public class ArtifactAdrenaline : Artifact {
 
     #region Artifact Information
     [SerializeField] private Sprite _icon;
+    private readonly float maxIncreasing = 0.7f; // 70%
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _icon,
         Name: "Adrenaline",
         Description: 
-            $"<nobr>잃은 체력 1%마다 <color=#f40>{amountPerOnePercent[NextLevelIndex] * 100}%</color>의 추가 위력을 얻으며, 최대 <color=#f40>{amountPerOnePercent[NextLevelIndex] * 70 * 100}%</color>까지 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"The character gets <color=#f40>Power</color> increases by lost HP."
+                   + $"\n"
+                   + $"\nPower per Lost HP : <color=#f40>{amountPerOnePercent[0]*100}%</color>"
+                   + $"\nMaximum Increase : <color=#f40>{amountPerOnePercent[0]*100 * maxIncreasing*100}%</color>"
+                   + $"<nobr>",
+                _ => $"<nobr>"
+                   + $"The character gets <color=#f40>Power</color> increases by lost HP."
+                   + $"\n"
+                   + $"\nPower per Lost HP : <color=#f40>{amountPerOnePercent[level-1]*100}%</color> > <color=#f40>{amountPerOnePercent[NextLevelIndex]*100}%</color>"
+                   + $"\nMaximum Increase : <color=#f40>{amountPerOnePercent[level-1]*100 * maxIncreasing*100}%</color> > <color=#f40>{amountPerOnePercent[NextLevelIndex]*100 * maxIncreasing*100}%</color>"
+                   + $"<nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "아드레날린",
         Description: 
-            $"<nobr>잃은 체력 1%마다 <color=#f40>{amountPerOnePercent[NextLevelIndex] * 100}%</color>의 추가 위력을 얻으며, 최대 <color=#f40>{amountPerOnePercent[NextLevelIndex] * 70 * 100}%</color>까지 증가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"캐릭터가 잃은 체력이 비례해 <color=#f40>위력</color>을 얻습니다."
+                   + $"\n"
+                   + $"\n잃은 체력당 위력 : <color=#f40>{amountPerOnePercent[0]*100}%</color>"
+                   + $"\n최대 증가량 : <color=#f40>{amountPerOnePercent[0]*100 * maxIncreasing*100}%</color>"
+                   + $"<nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터가 잃은 체력이 비례해 <color=#f40>위력</color>을 얻습니다."
+                   + $"\n"
+                   + $"\n잃은 체력당 위력 : <color=#f40>{amountPerOnePercent[level-1]*100}%</color> > <color=#f40>{amountPerOnePercent[NextLevelIndex]*100}%</color>"
+                   + $"\n최대 증가량 : <color=#f40>{amountPerOnePercent[level-1]*100 * maxIncreasing*100}%</color> > <color=#f40>{amountPerOnePercent[NextLevelIndex]*100 * maxIncreasing*100}%</color>"
+                   + $"<nobr>",
+            }
     );
     #endregion Artifact Information
 
@@ -34,5 +61,5 @@ public class ArtifactAdrenaline : Artifact {
         base.OnTakeOff();
         _Character.extraPower -= GetExtraPower;
     }
-    private float GetExtraPower(Character character) => Mathf.Min((1 - character.currentHp / character.MaxHp), 0.7f) * character.DefaultPower;
+    private float GetExtraPower(Character character) => Mathf.Min(1 - character.currentHp / character.MaxHp, maxIncreasing) * character.DefaultPower;
 }

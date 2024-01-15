@@ -7,14 +7,18 @@ public class EffectAwAcidFlask : EffectProjectile {
     private bool isFlying = false;
     [SerializeField] private AWeaponAcidFlask originWeapon;
 
+    [SerializeField] private ParticleSystem explosionParticle;
+
     private float flyingSpeed = 45f;
     private float currentSpeed = 0f;
 
     [SerializeField] private LayerMask targetLayer = 1<<8;
+    [SerializeField] new private SpriteRenderer renderer;
 
     protected override void OnEnable() {
         base.OnEnable();
         isFlying = true;
+        renderer.enabled = true;
     }
     protected override void Update() {
         if(isFlying) {
@@ -36,7 +40,12 @@ public class EffectAwAcidFlask : EffectProjectile {
     protected override void Disappear() {
         base.Disappear();
         isFlying = false;
+        explosionParticle.Play();
+        renderer.enabled = false;
         originWeapon.CloudPooler.OutPool(this.transform.position, Quaternion.identity);
+    }
+    private IEnumerator InPoolCoroutine() {
+        yield return new WaitForSeconds(3f);
         originWeapon.FlaskPooler.InPool(this.gameObject);
     }
 }

@@ -30,14 +30,14 @@ public class WeaponGreatSword : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"Wield a sword in the direction of aim to damage the monsters."
+                   + $"Wield a sword to damage the monsters."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
                    + $"\nAttack Area : <color=#f40>{areaScale[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"Wield a sword in the direction of aim to damage the monsters."
+                   + $"Wield a sword to damage the monsters."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
@@ -51,14 +51,14 @@ public class WeaponGreatSword : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"조준 방향으로 검을 휘둘러 피해를 가합니다."
+                   + $"검을 휘둘러 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
                    + $"\n공격 범위 : <color=#f40>{areaScale[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"조준 방향으로 검을 휘둘러 피해를 가합니다."
+                   + $"검을 휘둘러 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"

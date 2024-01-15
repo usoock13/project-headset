@@ -32,8 +32,22 @@ public class WeaponLightningDagger : Weapon {
         Name: "Lightning Shuriken",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 고전압 표창을 던져 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"적중한 위치에서 주변 적을 향해 가정용 전압 수준의 전류가 뻗어 <color=#f40>{chainingStaticDamage[NextLevelIndex]}+{chainingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하며, 최대 <color=#f40>{chainingCount[NextLevelIndex]}</color>의 적에게 연쇄됩니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"Throw a dagger with lightning. When the monster gets hit, lightning strike generates and bounces to other monster around the hit monster."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nLightning Damage : <color=#f40>{chainingStaticDamage[0]}+{chainingDamageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"\nNumber of Bouncing : <color=#f40>{chainingCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a dagger with lightning. When the monster gets hit, lightning strike generates and bounces to other monster around the hit monster."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nDamage : <color=#f40>{chainingStaticDamage[level-1]}+{chainingDamageCoef[level-1]*100}%</color> > <color=#f40>{chainingStaticDamage[NextLevelIndex]}+{chainingDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nNumber of Bouncing : <color=#f40>{chainingCount[level-1]}</color> > <color=#f40>{chainingCount[NextLevelIndex]}</color>"
+                   + $"</nobr>"
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -41,8 +55,22 @@ public class WeaponLightningDagger : Weapon {
         Name: "뇌전수리검",
         Description:
             NextLevelIndex switch {
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향으로 고전압 표창을 던져 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"적중한 위치에서 주변 적을 향해 가정용 전압 수준의 전류가 뻗어 <color=#f40>{chainingStaticDamage[NextLevelIndex]}+{chainingDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가하며, 최대 <color=#f40>{chainingCount[NextLevelIndex]}</color>의 적에게 연쇄됩니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"번개가 흐르는 단검을 던집니다. 몬스터가 단검에 맞으면 번개가 발생해 주변 적에게 튕기며 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n번개 피해량 : <color=#f40>{chainingStaticDamage[0]}+{chainingDamageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
+                   + $"\n튕기는 횟수 : <color=#f40>{chainingCount[0]}</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"번개가 흐르는 단검을 던집니다. 몬스터가 단검에 맞으면 번개가 발생해 주변 적에게 튕기며 피해를 가합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n번개 피해량 : <color=#f40>{chainingStaticDamage[level-1]}+{chainingDamageCoef[level-1]*100}%</color> > <color=#f40>{chainingStaticDamage[NextLevelIndex]}+{chainingDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"\n튕기는 횟수 : <color=#f40>{chainingCount[level-1]}</color> > <color=#f40>{chainingCount[NextLevelIndex]}</color>"
+                   + $"</nobr>"
             }
     );
     private void Awake() {

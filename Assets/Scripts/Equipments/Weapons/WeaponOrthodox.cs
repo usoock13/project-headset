@@ -29,14 +29,14 @@ public class WeaponOrthodox : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"Throw several short punchs in the direction of aim to damage monsters."
+                   + $"Throw several short punchs to damage monsters."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\nPunch Count : <color=#f40>{attackCount[0]}</color>"
                    + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"Throw several short punchs in the direction of aim to damage monsters."
+                   + $"Throw several short punchs to damage monsters."
                    + $"\n"
                    + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\nPunch Count : <color=#f40>{attackCount[level-1]}</color> > <color=#f40>{attackCount[NextLevelIndex]}</color>"
@@ -50,14 +50,14 @@ public class WeaponOrthodox : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"조준 방향으로 여러번 짧게 주먹을 날려 피해를 가합니다."
+                   + $"짧은 거리에 주먹을 여러번 날려 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\n펀치 횟수 : <color=#f40>{attackCount[0]}</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"조준 방향으로 여러번 짧게 주먹을 날려 피해를 가합니다."
+                   + $"짧은 거리에 주먹을 여러번 날려 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\n펀치 횟수 : <color=#f40>{attackCount[level-1]}</color> > <color=#f40>{attackCount[NextLevelIndex]}</color>"

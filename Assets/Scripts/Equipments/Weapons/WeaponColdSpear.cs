@@ -15,8 +15,8 @@ public class WeaponColdSpear : Weapon {
     private float[] interval = new float[MAX_LEVEL]         {   2.5f,   2.5f,   2.0f,   2.0f,   2.0f,  }; // 공격 간격
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.3f,   0.3f,   0.3f,   0.3f,   0.3f,  }; // 피해 계수
     private float[] staticDamage = new float[MAX_LEVEL]     {    15f,    15f,    25f,    25f,    30f,  }; // 고정 피해량
-    private float[] freezingTime = new float[MAX_LEVEL]     {   0.6f,   0.7f,   0.8f,   0.8f,   1.0f,  }; // 빙결 시간
-    private float[] areaScale = new float[MAX_LEVEL]        {     1f,     1f,     1f,   1.2f,   1.5f,  }; // 폭발 범위
+    private float[] freezingTime = new float[MAX_LEVEL]     {   0.8f,   1.1f,   1.1f,   1.4f,   1.6f,  }; // 빙결 시간
+    // private float[] areaScale = new float[MAX_LEVEL]        {     1f,     1f,     1f,   1.2f,   1.5f,  }; // 폭발 범위
     protected override float AttackInterval => interval[level-1];
 
     public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
@@ -31,9 +31,20 @@ public class WeaponColdSpear : Weapon {
         Name: "Ice Spear",
         Description: 
             NextLevelIndex switch {
-                3 or 4 => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[NextLevelIndex]}초</color> 동안 빙결시킵니다.\n"
-                        + $"기존의 {areaScale[NextLevelIndex] * 100}%의 피해 범위를 가집니다.</nobr>",
-                _      => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[NextLevelIndex]}초</color> 동안 빙결시킵니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"Throw a ice spear to damage and freeze the monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"\nFreezing Time : <color=#f40>{freezingTime[0]}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a ice spear to damage and freeze the monsters."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"\nFreezing Time : <color=#f40>{freezingTime[level-1]}sec</color> > <color=#f40>{freezingTime[NextLevelIndex]}sec</color>"
+                   + $"</nobr>"
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -41,9 +52,20 @@ public class WeaponColdSpear : Weapon {
         Name: "얼음창",
         Description: 
             NextLevelIndex switch {
-                3 or 4 => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[NextLevelIndex]}초</color> 동안 빙결시킵니다.\n"
-                        + $"기존의 {areaScale[NextLevelIndex] * 100}%의 피해 범위를 가집니다.</nobr>",
-                _      => $"<nobr>적에게 닿으면 폭발하여 좁은 범위의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex] * 100}%</color>의 피해를 가하고 <color=#f40>{freezingTime[NextLevelIndex]}초</color> 동안 빙결시킵니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"얼음 창을 던져 꿰뚫린 몬스터에게 피해를 가하고 얼립니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
+                   + $"\n빙결 지속시간 : <color=#f40>{freezingTime[0]}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"얼음 창을 던져 꿰뚫린 몬스터에게 피해를 가하고 얼립니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"\n빙결 지속시간 : <color=#f40>{freezingTime[level-1]}초</color> > <color=#f40>{freezingTime[NextLevelIndex]}초</color>"
+                   + $"</nobr>"
             }
     );
     #endregion Weapon Information
@@ -63,7 +85,7 @@ public class WeaponColdSpear : Weapon {
         );
     }
     protected override void Attack() {
-        var instance = EffectPooler.OutPool(transform.position, _Character.attackArrow.rotation);
+        var instance = EffectPooler.OutPool(transform.position + Vector3.up * 0.5f, _Character.attackArrow.rotation);
         _Character.OnAttack();
     }
 }

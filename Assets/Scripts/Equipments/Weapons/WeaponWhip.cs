@@ -10,7 +10,7 @@ public class WeaponWhip : Weapon {
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] interval = new float[MAX_LEVEL]     { 2.0f,   2.0f,   2.0f,   2.0f,   1.5f }; // 공격 간격
-    private float[] staticDamage = new float[MAX_LEVEL] {  15f,    15f,    20f,    20f,    20f }; // 고정 피해량
+    private float[] staticDamage = new float[MAX_LEVEL] {  15f,    15f,    20f,    30f,    40f }; // 고정 피해량
     private float[] damageCoef = new float[MAX_LEVEL]   { 0.3f,   0.3f,   0.5f,   0.5f,   0.5f }; // 피해 계수
     private float[] hittingDelay = new float[MAX_LEVEL] { 0.5f,   0.6f,   0.6f,   0.7f,   0.7f }; // 경직 시간
     private float[] areaScale = new float[MAX_LEVEL]    { 1.0f,   1.0f,   1.0f,   1.0f,   1.0f }; // 공격 범위 축척
@@ -28,18 +28,50 @@ public class WeaponWhip : Weapon {
         Icon: _weaponIcon,
         Name: "Whip",
         Description:
-            (NextLevelIndex+1) switch {
-                5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 휘두른 방향으로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>",
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 두 번 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 가운데로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Swipe with the whip to damage monsters and gather hit monsters to center."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[0]}sec</color>"
+                   + $"</nobr>",
+                4 => $"<nobr>"
+                   + $"Swipe <color=#f40>twice</color> with the whip to damage monsters and gather hit monsters to center."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Swipe with the whip to damage monsters and gather hit monsters to center."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "채찍",
         Description:
-            (NextLevelIndex+1) switch {
-                5 => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 휘두른 방향으로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>",
-                _ => $"<nobr><color=#f40>{interval[NextLevelIndex]}초</color>에 한 번 조준 방향을 향해 채찍을 두 번 휘둘러 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가하고 가운데로 몰아 넣습니다. 가까이 있는 적은 공격에 맞지 않습니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"채찍을 휘둘러 몬스터에게 피해를 주고 가운데로 끌어당깁니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[0]}초</color>"
+                   + $"</nobr>",
+                4 => $"<nobr>"
+                   + $"채찍을 <color=#f40>두 번</color> 휘둘러 몬스터에게 피해를 주고 가운데로 끌어당깁니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"채찍을 휘둘러 몬스터에게 피해를 주고 가운데로 끌어당깁니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{interval[level-1]}초</color> > <color=#f40>{interval[NextLevelIndex]}초</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

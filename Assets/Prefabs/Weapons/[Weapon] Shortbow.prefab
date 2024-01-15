@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55aecf3e1b8ca7f43a372519084a6321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: -1761253977, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
   _itemNameEN: 'Awaken Shortbow : The Locksmith'
   _itemNameKO: "\uAC01\uC131 \uB2E8\uAD81 : \uC5F4\uC1E0\uACF5"
   oldWeapon: {fileID: -3919815677109160991}

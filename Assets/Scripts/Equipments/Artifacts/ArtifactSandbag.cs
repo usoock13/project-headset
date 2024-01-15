@@ -18,19 +18,47 @@ public class ArtifactSandbag : Artifact {
         Icon: _icon,
         Name: "Sandbag",
         Description:
-              $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
-            + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 100}%/{attackSpeedPerStack[NextLevelIndex] * 100}%</color> 증가하여"
-            + $"최대 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 10_000}%/{attackSpeedPerStack[NextLevelIndex] * 10_000}%</color>까지 증가합니다."
-            + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[NextLevelIndex] * 30_000 - 30)}%/{attackSpeedPerStack[NextLevelIndex] * 30_000 - 40}%</color></i></nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Decrease the character's <color=#f40>Movement Speed/Attack Speed</color>."
+                   + $"\nEach time when the character defeats a monster, get increasing <color=#f40>Movement Speed/Attack Speed</color>."
+                   + $"\n"
+                   + $"\nDecreasing Amount : <color=#f40>30%/40%</color>"
+                   + $"\nIncreasing Amount : <color=#f40>{moveSpeedPerStack[0]*100}%/{attackSpeedPerStack[0]*100}%</color>"
+                   + $"\nMaximum Increasing : <color=#f40>{moveSpeedPerStack[0]*100 * MAX_STACK}%/{attackSpeedPerStack[0]*100 * MAX_STACK}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Decrease the character's <color=#f40>Movement Speed/Attack Speed</color>."
+                   + $"\nEach time when the character defeats a monster, get increasing <color=#f40>Movement Speed/Attack Speed</color>."
+                   + $"\n"
+                   + $"\nDecreasing Amount : <color=#f40>30%/40%</color>"
+                   + $"\nIncreasing Amount : <color=#f40>{moveSpeedPerStack[level-1]*100}%/{attackSpeedPerStack[level-1]*100}%</color> > <color=#f40>{moveSpeedPerStack[NextLevelIndex]*100}% / {attackSpeedPerStack[NextLevelIndex]*100}%</color>"
+                   + $"\nMaximum Increasing : <color=#f40>{moveSpeedPerStack[level-1]*100 * MAX_STACK}%/{attackSpeedPerStack[level-1]*100 * MAX_STACK}%</color> > <color=#f40>{moveSpeedPerStack[NextLevelIndex]*100 * MAX_STACK}% / {attackSpeedPerStack[NextLevelIndex]*100 * MAX_STACK}%</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _icon,
         Name: "모래주머니",
         Description:
-              $"<nobr>획득하면 즉시 이동 속도/공격 속도가 30%/40% 감소합니다.\n"
-            + $"적을 처치할 마다 이동 속도/공격 속도가 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 100}%/{attackSpeedPerStack[NextLevelIndex] * 100}%</color> 증가하여"
-            + $"최대 <color=#f40>{moveSpeedPerStack[NextLevelIndex] * 10_000}%/{attackSpeedPerStack[NextLevelIndex] * 10_000}%</color>까지 증가합니다."
-            + $"<i>최종 이동 속도/공격 속도 <color=#f40>{(int)(moveSpeedPerStack[NextLevelIndex] * 30_000 - 30)}%/{attackSpeedPerStack[NextLevelIndex] * 30_000 - 40}%</color></i></nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"캐릭터의 <color=#f40>이동 속도/공격 속도</color>가 감소합니다."
+                   + $"\n이후 몬스터를 처치할 때마다 <color=#f40>이동 속도/공격 속도</color>가 증가합니다."
+                   + $"\n"
+                   + $"\n감소량 : <color=#f40>30%/40%</color>"
+                   + $"\n증가량 : <color=#f40>{moveSpeedPerStack[0]*100}%/{attackSpeedPerStack[0]*100}%</color>"
+                   + $"\n최대 증가량 : <color=#f40>{moveSpeedPerStack[0]*100 * MAX_STACK}%/{attackSpeedPerStack[0]*100 * MAX_STACK}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"캐릭터의 <color=#f40>이동 속도/공격 속도</color>가 감소합니다."
+                   + $"\n이후 몬스터를 처치할 때마다 <color=#f40>이동 속도/공격 속도</color>가 증가합니다."
+                   + $"\n"
+                   + $"\n감소량 : <color=#f40>30%/40%</color>"
+                   + $"\n증가량 : <color=#f40>{moveSpeedPerStack[level-1]*100}%/{attackSpeedPerStack[level-1]*100}%</color> > <color=#f40>{moveSpeedPerStack[NextLevelIndex]*100}% / {attackSpeedPerStack[NextLevelIndex]*100}%</color>"
+                   + $"\n최대 증가량 : <color=#f40>{moveSpeedPerStack[level-1]*100 * MAX_STACK}%/{attackSpeedPerStack[level-1]*100 * MAX_STACK}%</color> > <color=#f40>{moveSpeedPerStack[NextLevelIndex]*100 * MAX_STACK}% / {attackSpeedPerStack[NextLevelIndex]*100 * MAX_STACK}%</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Artifact Information
 
