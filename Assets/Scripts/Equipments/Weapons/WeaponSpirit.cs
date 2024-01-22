@@ -8,11 +8,11 @@ public class WeaponSpirit : Weapon {
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
     private float[] chargeTime       = new float[MAX_LEVEL] { 6.00f,  5.00f,  4.00f,  3.00f,  2.00f }; // 충전 시간
-    private float[] runningTime      = new float[MAX_LEVEL] { 6.00f,  6.00f,  6.00f,  6.00f,  6.00f }; // 가동 시간
+    private float[] runningTime      = new float[MAX_LEVEL] { 6.00f,  7.00f,  8.00f,  9.00f, 10.00f }; // 가동 시간
     private float[] staticDamage     = new float[MAX_LEVEL] {    8f,    10f,    12f,    14f,    16f }; // 고정 피해량
     private float[] damageCoef       = new float[MAX_LEVEL] { 0.15f,  0.20f,  0.25f,  0.30f,  0.35f }; // 피해 계수
     // private float[] acceleration     = new float[MAX_LEVEL] { 1.00f,  1.00f,  2.00f,  2.00f,  3.00f }; // 가속도
-    private int[] spiritCount        = new int[MAX_LEVEL]   {     1,      2,      2,      3,      3 }; // 정령 수
+    private int[] spiritCount        = new int[MAX_LEVEL]   {     3,      5,      5,      7,      7 }; // 정령 수
 
     protected override float AttackInterval => 0.5f;
     public float ChargeTime                 => chargeTime[level-1];

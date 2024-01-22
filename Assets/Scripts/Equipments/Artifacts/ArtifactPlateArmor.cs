@@ -19,13 +19,13 @@ public class ArtifactPlateArmor : Artifact {
         Description:
             NextLevelIndex switch {
                 0 => $"<nobr>"
-                   + $"The character gets additional <color=#f40>Armor</color> but gets degreasing <color=#f40>Movement Speed</color>."
+                   + $"The character gets additional <color=#f40>Armor</color> but gets decreasing <color=#f40>Movement Speed</color>."
                    + $"\n"
                    + $"\nIncreasing Armor : <color=#f40>{armorAmount[0]}</color>"
                    + $"\nDecreasing Speed : <color=#f40>{decreasingSpeed[0]*100}%</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"The character gets additional <color=#f40>Armor</color> but gets degreasing <color=#f40>Movement Speed</color>."
+                   + $"The character gets additional <color=#f40>Armor</color> but gets decreasing <color=#f40>Movement Speed</color>."
                    + $"\n"
                    + $"\nIncreasing Armor : <color=#f40>{armorAmount[level-1]}</color> > <color=#f40>{armorAmount[NextLevelIndex]}</color>"
                    + $"\nDecreasing Speed : <color=#f40>{decreasingSpeed[level-1]*100}%</color> > <color=#f40>{decreasingSpeed[NextLevelIndex]*100}%</color>"

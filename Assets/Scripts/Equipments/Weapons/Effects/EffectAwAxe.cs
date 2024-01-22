@@ -39,6 +39,7 @@ public class EffectAwAxe : EffectProjectile {
     protected override void OnEnable() {
         base.OnEnable();
         
+        flyingTime = originWeapon.MaxFlyingTime;
         velocity = transform.up * flyingSpeed;
         maxVelocity = flyingSpeed * 0.5f;
         isReturning = false;

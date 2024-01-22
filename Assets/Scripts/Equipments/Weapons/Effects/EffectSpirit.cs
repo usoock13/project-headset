@@ -6,6 +6,8 @@ public class EffectSpirit : MonoBehaviour {
     [SerializeField] private WeaponSpirit originWeapon;
     public bool IsRunning   { get; private set; } = false;
 
+    [SerializeField] private Transform landingStrip;
+
     private Transform target;
     
     private float maxVelocity = 8f;
@@ -17,6 +19,8 @@ public class EffectSpirit : MonoBehaviour {
 
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private SpriteRenderer render;
+    [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private ParticleSystem particle;
 
     private float Damage => originWeapon.Damage;
     private float Acceleration => originWeapon.Acceleration;
@@ -55,11 +59,16 @@ public class EffectSpirit : MonoBehaviour {
 
     public void Run() {
         IsRunning = true;
+        trailRenderer.enabled = true;
+        particle.Play();
         battery = originWeapon.RunningTime;
+        transform.SetParent(null);
     }
 
     public void Stop() { // 03
         IsRunning = false;
+        trailRenderer.enabled = false;
+        particle.Stop();
         hitMonsters.Clear();
         StartCoroutine(ChargeCoroutine());
     }
@@ -68,11 +77,13 @@ public class EffectSpirit : MonoBehaviour {
         Vector3 start = transform.position;
         float offset = 0;
         while(offset < 1) {
-            transform.position = Vector2.Lerp(start, originWeapon.transform.position, Mathf.Pow(offset, 3));
+            transform.position = Vector2.Lerp(start, landingStrip.position, Mathf.Pow(offset, 3));
             offset += Time.deltaTime;
             yield return null;
         }
-        transform.position = originWeapon.transform.position;
+        transform.position = landingStrip.position;
+        transform.SetParent(landingStrip);
+
         yield return new WaitForSeconds(originWeapon.ChargeTime);
         originWeapon.Waitings.Enqueue(this);
     }

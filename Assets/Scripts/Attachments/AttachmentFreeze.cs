@@ -7,7 +7,7 @@ public class AttachmentFreeze : Attachment {
 
     public float duration  = 1f;
     private float lifetime = 0;
-    private Color attachColor = new Color(.2f, .6f, 1f);
+    [SerializeField] private Color attachColor = new Color(.2f, .6f, 1f);
 
     private Coroutine detachCoroutine;
     

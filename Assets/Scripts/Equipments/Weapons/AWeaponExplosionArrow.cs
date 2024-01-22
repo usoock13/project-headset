@@ -31,8 +31,22 @@ public class AWeaponExplosionArrow : Weapon {
         Name: "The Locksmith",
         Description: 
             NextLevelIndex switch {
-                _ => $"<nobr>조준 방향으로 화살을 빠르게 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"화살이 <color=#f40>{arrowBombCount[NextLevelIndex]}번</color> 적중할 때마다 조준 방향으로 폭발 화살을 발사합니다. 폭발 화살은 적에게 적중하면 폭발하여 주변 적에게 <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"Shoot several arrows. Each time arrows hit monster a few times, character shoot a explosion arrow."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}</color>"
+                   + $"\nHit for Explosion Arrow : <color=#f40>{arrowBombCount[0]}</color>"
+                   + $"\nExplosion Damage : <color=#f40>{bombStaticDamage[0]}+{bombDamageCoef[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Shoot several arrows. Each time arrows hit monster a few times, character shoot a explosion arrow."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}</color>"
+                   + $"\nHit for Explosion Arrow : <color=#f40>{arrowBombCount[level-1]}</color> > <color=#f40>{arrowBombCount[NextLevelIndex]}</color>"
+                   + $"\nExplosion Damage : <color=#f40>{bombStaticDamage[level-1]}+{bombDamageCoef[level-1]*100}%</color> > <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -40,8 +54,22 @@ public class AWeaponExplosionArrow : Weapon {
         Name: "열쇠공",
         Description: 
             NextLevelIndex switch {
-                _ => $"<nobr>조준 방향으로 화살을 빠르게 발사해 적중한 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-                + $"화살이 <color=#f40>{arrowBombCount[NextLevelIndex]}번</color> 적중할 때마다 조준 방향으로 폭발 화살을 발사합니다. 폭발 화살은 적에게 적중하면 폭발하여 주변 적에게 <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"여러개의 화살을 발사합니다. 화살이 일정 횟수 몬스터에게 적중할 때 마다 폭발하는 화살을 추가로 발사합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}</color>"
+                   + $"\n폭발 화살을 위한 적중 수 : <color=#f40>{arrowBombCount[0]}</color>"
+                   + $"\n폭발 피해량 : <color=#f40>{bombStaticDamage[0]}+{bombDamageCoef[0]*100}%</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"여러개의 화살을 발사합니다. 화살이 일정 횟수 몬스터에게 적중할 때 마다 폭발하는 화살을 추가로 발사합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}</color>"
+                   + $"\n폭발 화살을 위한 적중 수 : <color=#f40>{arrowBombCount[level-1]}</color> > <color=#f40>{arrowBombCount[NextLevelIndex]}</color>"
+                   + $"\n폭발 피해량 : <color=#f40>{bombStaticDamage[level-1]}+{bombDamageCoef[level-1]*100}%</color> > <color=#f40>{bombStaticDamage[NextLevelIndex]}+{bombDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

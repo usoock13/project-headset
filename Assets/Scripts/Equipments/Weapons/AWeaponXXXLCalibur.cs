@@ -29,15 +29,43 @@ public class AWeaponXXXLCalibur : Weapon {
         Icon: _weaponIcon,
         Name: "The Inquisitor",
         Description: 
-              $"<nobr>XXXL급 범위로 주변을 크게 휘둘러 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-            + $"이후 검을 좁은 범위에 내리쳐 <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Swing a giant sword horizontally and vertically to damage great."
+                   + $"\n"
+                   + $"\nHorizontal Damage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nVertical Damage : <color=#f40>{secondStaticDamage[0]}+{secondDamageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Swing a giant sword horizontally and vertically to damage great."
+                   + $"\n"
+                   + $"\nHorizontal Damage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nVertical Damage : <color=#f40>{secondStaticDamage[level-1]}+{secondDamageCoef[level-1]*100}%</color> > <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "이단심판관",
         Description: 
-              $"<nobr>XXXL급 범위로 주변을 크게 휘둘러 적중한 모든 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-            + $"이후 검을 좁은 범위에 내리쳐 <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"거대한 검을 가로세로로 휘둘러 큰 피해를 가합니다."
+                   + $"\n"
+                   + $"\n가로 피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n세로 피해량 : <color=#f40>{secondStaticDamage[0]}+{secondDamageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"거대한 검을 가로세로로 휘둘러 큰 피해를 가합니다."
+                   + $"\n"
+                   + $"\n가로 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n세로 피해량 : <color=#f40>{secondStaticDamage[level-1]}+{secondDamageCoef[level-1]*100}%</color> > <color=#f40>{secondStaticDamage[NextLevelIndex]}+{secondDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Weapon Information
 

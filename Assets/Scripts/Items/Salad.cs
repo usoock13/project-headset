@@ -8,7 +8,7 @@ public class Salad : Item {
         Icon: _icon,
         Name: "Salad",
         Description:
-            $"즉시 캐릭터의 스킬 게이지를 50% 회복시킵니다."
+            $"Charge character's skill gauge 50%."
     );
     protected override ItemInformation InformationKO => new ItemInformation(
         Icon: _icon,

@@ -12,6 +12,7 @@ public class AWeaponMultiUseAxe : Weapon {
     private float[] damageCoef = new float[MAX_LEVEL]   { 0.40f,   0.40f,   0.40f,   0.40f,   0.40f, }; // 피해 계수
 
     protected override float AttackInterval => 2.5f;
+    public float MaxFlyingTime => 15f;
     public float Damage => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     #endregion Weapon Status
 
@@ -23,7 +24,18 @@ public class AWeaponMultiUseAxe : Weapon {
         Name: "The Piece Maker",
         Description: 
             NextLevelIndex switch {
-                _       => $"<nobr><color=#f40>{AttackInterval}초</color>에 한 번 조준 방향을 향해 절단용 부메랑을 던져 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 매초 가합니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"Throw a spinning axe to damage monsters. Axe flys around character until the character catch it."
+                   + $"\n"
+                   + $"\nDPS : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nMax Flying Time : <color=#f40>{MaxFlyingTime}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Throw a spinning axe to damage monsters. Axe flys around character until the character catch it."
+                   + $"\n"
+                   + $"\nDPS : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nMax Flying Time : <color=#f40>{MaxFlyingTime}sec</color>"
+                   + $"</nobr>",
             }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
@@ -31,7 +43,18 @@ public class AWeaponMultiUseAxe : Weapon {
         Name: "피스메이커",
         Description: 
             NextLevelIndex switch {
-                _       => $"<nobr><color=#f40>{AttackInterval}초</color>에 한 번 조준 방향을 향해 절단용 부메랑을 던져 범위 내의 적에게 <color=#f40>{damageCoef[NextLevelIndex]*100}%</color>의 피해를 매초 가합니다.</nobr>"
+                0 => $"<nobr>"
+                   + $"회전하는 도끼를 던져 몬스터에게 피해를 가합니다. 도끼는 캐릭터가 잡기 전까지 캐릭터 주변을 날아다닙니다."
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n최대 비행 시간 : <color=#f40>{MaxFlyingTime}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"회전하는 도끼를 던져 몬스터에게 피해를 가합니다. 도끼는 캐릭터가 잡기 전까지 캐릭터 주변을 날아다닙니다."
+                   + $"\n"
+                   + $"\n초당 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n최대 비행 시간 : <color=#f40>{MaxFlyingTime}초</color>"
+                   + $"</nobr>",
             }
     );
     #endregion Weapon Information

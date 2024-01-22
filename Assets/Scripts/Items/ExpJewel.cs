@@ -28,13 +28,13 @@ public class ExpJewel : Item {
         Icon: _icon,
         Name: "Experience Jewel",
         Description:
-            $" 강해지기 위한 경험치를 {givingExp}만큼 얻을 수 있는 보석입니다."
+            $"The jewel to get <color=#f40>{givingExp} EXP</color>/"
     );
     protected override ItemInformation InformationKO => new ItemInformation(
         Icon: _icon,
         Name: "경험의 보석",
         Description:
-            $" 강해지기 위한 경험치를 {givingExp}만큼 얻을 수 있는 보석입니다."
+            $"<color=#f40>{givingExp}의 경험치</color>를 제공하는 보석입니다."
     );
 
     private const int SPLIT_SPRITE_BORDER_1 = 50;

@@ -24,13 +24,13 @@ public class WeaponSanctuary : Weapon {
         Description:
             NextLevelIndex switch {
                 0 => "<nobr>"
-                  + $"Spread the holy area and continuous damage monsters in the area."
+                  + $"Spread the holy area that continuous damage monsters in the area."
                   + $"\n"
                   + $"\nDPS : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                   + $"\nStaggering Time : <color=#f40>{hittingDelay[0]}</color>"
                   + $"</nobr>",
                 _ => "<nobr>"
-                  + $"Spread the holy area and continuous damage monsters in the area."
+                  + $"Spread the holy area that continuous damage monsters in the area."
                   + $"\n"
                   + $"\nDPS : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                   + $"\nStaggering Time : <color=#f40>{hittingDelay[level-1]}</color> > <color=#f40>{hittingDelay[NextLevelIndex]}</color>"

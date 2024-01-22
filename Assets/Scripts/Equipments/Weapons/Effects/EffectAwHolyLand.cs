@@ -50,7 +50,6 @@ public class EffectAwHolyLand : MonoBehaviour {
                     var attachment = originWeapon.RepentancePooler.OutPool().GetComponent<Attachment>();
                     if(monster.TryGetAttachment(attachment.AttachmentType, out var already)) {
                         monster.ReleaseAttachment(already);
-                        print("already");
                     }
                     monster.TakeAttachment(attachment);
 

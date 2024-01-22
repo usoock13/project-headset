@@ -47,19 +47,63 @@ public class AWeaponMagicPen : Weapon {
         Icon: _weaponIcon,
         Name: "The Bestseller",
         Description: 
-              $"<nobr>"
-            + $"마술 만연필로 조준 방향을 휘저어 매초 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-            + $"<color=#f40>때때로 걸작이 등장해 도움을 받을 수 있습니다!</color>"
-            + "</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Swing a pen to damage monsters hit. Sometime the <color=#f40>MASTERPIECE</color> appears to assist the character."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"\n<color=#f40>[MASTERPIECE]</color>"
+                   + $"\n<color=#f40>Bomb</color> : Explode to damage monster around it."
+                   + $"\n<color=#f40>Goblin</color> : Go around the character to damage monsters touched."
+                   + $"\n<color=#f40>First Aid</color> : Create meets."
+                   + $"\n<color=#f40>Food</color> : Create a salad."
+                   + $"\n<color=#f40>Piggy</color> : Create some Keso."
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Swing a pen to damage monsters hit. Sometime the <color=#f40>MASTERPIECE</color> appears to assist the character."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttack Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"\n<color=#f40>[MASTERPIECE]</color>"
+                   + $"\n<color=#f40>Bomb</color> : Explode to damage monster around it."
+                   + $"\n<color=#f40>Goblin</color> : Go around the character to damage monsters touched."
+                   + $"\n<color=#f40>First Aid</color> : Create meets."
+                   + $"\n<color=#f40>Food</color> : Create a salad."
+                   + $"\n<color=#f40>Piggy</color> : Create some Keso."
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "베스트셀러",
         Description: 
-              $"<nobr>"
-            + $"마술 만연필로 조준 방향을 휘저어 매초 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-            + $"<color=#f40>때때로 걸작이 등장해 도움을 받을 수 있습니다!</color>"
-            + "</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"펜을 휘둘러 몬스터에게 피해를 가합니다. 때때로 <color=#f40>걸작</color>이 등장해 캐릭터를 돕습니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"\n<color=#f40>[걸작]</color>"
+                   + $"\n<color=#f40>폭탄</color> : 폭발하여 주변 몬스터에게 피해를 가합니다."
+                   + $"\n<color=#f40>고블릭</color> : 플레이어 주변을 돌아다니며 닿은 몬스터에게 피해를 가합니다."
+                   + $"\n<color=#f40>구급키트</color> : 고기를 생성합니다."
+                   + $"\n<color=#f40>음식</color> : 샐러드를 생성합니다."
+                   + $"\n<color=#f40>저금통</color> : 케소를 생성합니다."
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"펜을 휘둘러 몬스터에게 피해를 가합니다. 때때로 <color=#f40>걸작</color>이 등장해 캐릭터를 돕습니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"\n<color=#f40>[걸작]</color>"
+                   + $"\n<color=#f40>폭탄</color> : 폭발하여 주변 몬스터에게 피해를 가합니다."
+                   + $"\n<color=#f40>고블릭</color> : 플레이어 주변을 돌아다니며 닿은 몬스터에게 피해를 가합니다."
+                   + $"\n<color=#f40>구급키트</color> : 고기를 생성합니다."
+                   + $"\n<color=#f40>음식</color> : 샐러드를 생성합니다."
+                   + $"\n<color=#f40>저금통</color> : 케소를 생성합니다."
+                   + $"</nobr>",
+            }
     );
     #endregion Weapon Information
 
@@ -135,7 +179,7 @@ public class AWeaponMagicPen : Weapon {
                 break;
             case 2:
                 DrawingPooler.OutPool(transform.position + _Character.attackArrow.up * 2f, Quaternion.identity)
-                    .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.BoonFoods);
+                    .GetComponent<EffectAwRoughDrawing>()?.Active(EffectAwRoughDrawing.DrawnObject.Food);
                 lineOfMasterpiece = MASTERPIECE_COOLDOWN;
                 break;
             case 3:

@@ -44,7 +44,7 @@ public class EffectAwRoughDrawing : MonoBehaviour {
     public enum DrawnObject {
         Bomb,
         FirstAid,
-        BoonFoods,
+        Food,
         Goblin,
         Keso,
     }
@@ -55,7 +55,7 @@ public class EffectAwRoughDrawing : MonoBehaviour {
             StartCoroutine(BombCoroutine());
         } else if(type == DrawnObject.FirstAid) {
             StartCoroutine(FirstAidCoroutine());
-        } else if(type == DrawnObject.BoonFoods) {
+        } else if(type == DrawnObject.Food) {
             StartCoroutine(SaladCoroutine());
         } else if(type == DrawnObject.Keso) {
             StartCoroutine(KesoCoroutine());

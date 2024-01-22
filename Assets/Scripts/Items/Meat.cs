@@ -8,7 +8,7 @@ public class Meat : Item {
         Icon: _icon,
         Name: "Meat",
         Description:
-            "즉시 캐릭터 체력을 30%를 회복시킵니다."
+            "Heal character's HP 30%."
     );
     protected override ItemInformation InformationKO => new ItemInformation(
         Icon: _icon,

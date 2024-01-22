@@ -8,13 +8,13 @@ public class Keso : Item {
         Icon: _icon,
         Name: "Keso",
         Description:
-            "<nobr>어디에서나 균등한 가치를 보장 받을 수 있는 대륙 공용 화폐입니다. 캐릭터를 고용하고 훈련시키기 위해 사용할 수 있습니다.</nobr>"
+            "<nobr>The common currency. It can be used for a variety of uses.</nobr>"
     );
     protected override ItemInformation InformationKO => new ItemInformation(
         Icon: _icon,
         Name: "케소",
         Description:
-            "<nobr>어디에서나 균등한 가치를 보장 받을 수 있는 대륙 공용 화폐입니다. 캐릭터를 고용하고 훈련시키기 위해 사용할 수 있습니다.</nobr>"
+            "<nobr>공용 화폐입니다. 다양한 사용처에 활용될 수 있습니다.</nobr>"
     );
 
     [SerializeField] private Sprite[] spriteList;

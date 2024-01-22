@@ -36,23 +36,47 @@ public class AweaponHolyLand : Weapon {
         Icon: _weaponIcon,
         Name: "The Canaan",
         Description: 
-              $"<nobr>"
-            + $"거룩한 땅을 펼쳐 매초 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-            + $"영역 안에서 적이 <color=#f40>{killCountToSummon[NextLevelIndex]}</color>번 처치될 때마다, 적을 추격하여 매 초 <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 빛의 기사를 소환합니다."
-            + $"빛의 기사는 {AllyDuration}초간 지속됩니다."
-            + $"이 무기는 공격 속도에 영향을 받지 않습니다."
-            + $"</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"Spread the Promised Land that continuous damage monsters in the area. During Character not walking the area extends. Each time monsters defeated in area a few times, the believer that asists the character is summoned."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\nAttakc Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"\nBeliever Damage : <color=#f40>{allyStaticDamage[0]}+{allyDamageCoef[0]*100}%</color>"
+                   + $"\nBeliever Duration : <color=#f40>{AllyDuration}sec</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"Spread the Promised Land that continuous damage monsters in the area. During Character not walking the area extends. Each time monsters defeated in area a few times, the believer that asists the character is summoned."
+                   + $"\n"
+                   + $"\nDamage : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nAttakc Interval : <color=#f40>{AttackInterval}sec</color>"
+                   + $"\nBeliever Damage : <color=#f40>{allyStaticDamage[level-1]}+{allyDamageCoef[level-1]*100}%</color> > <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\nBeliever Duration : <color=#f40>{AllyDuration}sec</color>"
+                   + $"</nobr>",
+            }
     );
     protected override EquipmentInformation InformationKO => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "가나안",
         Description: 
-              $"<nobr>"
-            + $"거룩한 땅을 펼쳐 매초 범위 내의 적에게 <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>의 피해를 가합니다.\n"
-            + $"영역 안에서 적이 <color=#f40>{killCountToSummon[NextLevelIndex]}</color>번 처치될 때마다, 적을 추격하여 매 초 <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]}%</color>의 피해를 가하는 빛의 기사를 소환합니다."
-            + $"빛의 기사는 {AllyDuration}초간 지속됩니다."
-            + $"이 무기는 공격 속도에 영향을 받지 않습니다."
-            + $"</nobr>"
+            NextLevelIndex switch {
+                0 => $"<nobr>"
+                   + $"약속의 땅을 펼쳐 범위 안의 몬스터에게 피해를 가합니다. 영역은 캐릭터가 걷지 않으면 점점 넓어집니다. 몬스터가 영역 내에게 일정 횟수 처치 될 때 마다 캐릭터를 돕는 신자가 소환합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"\n신자 피해량 : <color=#f40>{allyStaticDamage[0]}+{allyDamageCoef[0]*100}%</color>"
+                   + $"\n신자 지속 시간 : <color=#f40>{AllyDuration}초</color>"
+                   + $"</nobr>",
+                _ => $"<nobr>"
+                   + $"약속의 땅을 펼쳐 범위 안의 몬스터에게 피해를 가합니다. 영역은 캐릭터가 걷지 않으면 점점 넓어집니다. 몬스터가 영역 내에게 일정 횟수 처치 될 때 마다 캐릭터를 돕는 신자가 소환합니다."
+                   + $"\n"
+                   + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n공격 주기 : <color=#f40>{AttackInterval}초</color>"
+                   + $"\n신자 피해량 : <color=#f40>{allyStaticDamage[level-1]}+{allyDamageCoef[level-1]*100}%</color> > <color=#f40>{allyStaticDamage[NextLevelIndex]}+{allyDamageCoef[NextLevelIndex]*100}%</color>"
+                   + $"\n신자 지속 시간 : <color=#f40>{AllyDuration}초</color>"
+                   + $"</nobr>",
+            }
     );
     #endregion Weapon Information
 
