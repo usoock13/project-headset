@@ -47,7 +47,8 @@ public class EffectHallyKnight : MonoBehaviour
         while(true) {
             var inners = new List<Collider2D>();
             var filter = new ContactFilter2D() {
-                layerMask = targetLayer.value
+                layerMask = targetLayer.value,
+                useLayerMask = true,
             };
             Physics2D.OverlapCollider(collider, filter, inners);
             for(int i=0; i<inners.Count; i++) {

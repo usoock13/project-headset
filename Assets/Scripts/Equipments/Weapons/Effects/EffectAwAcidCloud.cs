@@ -25,6 +25,7 @@ public class EffectAwAcidCloud : MonoBehaviour {
             var inners = new List<Collider2D>();
             var filter = new ContactFilter2D() {
                 layerMask = targetLayer.value,
+                useLayerMask = true,
             };
             Physics2D.OverlapCollider(collider, filter, inners);
             

@@ -27,7 +27,8 @@ public class EffectWhip : MonoBehaviour {
             collider: attackCollider,
             contactFilter:
                 new ContactFilter2D() {
-                    layerMask = 1<<targetLayer
+                    layerMask = targetLayer.value,
+                    useLayerMask = true,
                 }, 
             results: inners
         );

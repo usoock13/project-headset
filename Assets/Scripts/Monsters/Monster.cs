@@ -150,7 +150,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     #endregion IDamageable Implements
     
     #region Unity events
-    protected void Awake() {
+    protected virtual void Awake() {
         movement ??= GetComponent<Movement>();
         stateMachine ??= GetComponent<StateMachine>();
         spriteRenderer ??= GetComponent<SpriteRenderer>();

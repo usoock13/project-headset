@@ -33,7 +33,8 @@ public class EffectXXXLStrike : MonoBehaviour {
     private void SecondAttack() {
         var inners = new List<Collider2D>();
         var filter = new ContactFilter2D() {
-            layerMask = targetLayer
+            layerMask = targetLayer,
+            useLayerMask = true,
         };
         secondAttackArea.OverlapCollider(filter, inners);
         for(int i=0; i<inners.Count; i++) {

@@ -18,9 +18,6 @@ public class ExpJewel : Item {
             spriteRenderer.sprite = spriteList[0];
         }
     }
-    
-    private bool isGround = false;
-    private Transform getter = null;
 
     [SerializeField] private Sprite _icon;
 
