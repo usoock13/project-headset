@@ -17,7 +17,6 @@ public class AttachmentBleed : Attachment {
     private Coroutine damageCoroutine;
     
     public override void OnAttached(IAttachmentsTakeable target) {
-        base.OnAttached(target);
         lifetime = 0;
         attachmentLevel = originWeapon.CurrentLevel;
 
@@ -28,7 +27,6 @@ public class AttachmentBleed : Attachment {
         #endregion Monster Target Implements
     }
     public override void OnDetached(IAttachmentsTakeable target) {
-        base.OnDetached(target);
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);
     }

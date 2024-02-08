@@ -17,12 +17,8 @@ public abstract class Attachment : MonoBehaviour {
     public string Description => _description;
     public string Abstract => _abstract;
 
-    public virtual void OnAttached(IAttachmentsTakeable target) {
-        onAttached?.Invoke(this);
-    }
-    public virtual void OnDetached(IAttachmentsTakeable target) {
-        onDetached?.Invoke(this);
-    }
+    public abstract void OnAttached(IAttachmentsTakeable target);
+    public abstract void OnDetached(IAttachmentsTakeable target);
     public static bool operator == (Attachment a, Attachment b) {
         if(a is null || b is null)
             return a is null&&b is null ? true : false;

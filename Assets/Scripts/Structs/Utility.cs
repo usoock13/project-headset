@@ -1,4 +1,5 @@
 namespace Utility {
+    using System;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -30,6 +31,14 @@ namespace Utility {
             // transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + -90f));
             transform.up = worldPosition - new Vector2(transform.position.x, transform.position.y);
         }
+    }
+    
+    class WaitForCondition : CustomYieldInstruction {
+        Func<bool> condition;
+        public WaitForCondition(Func<bool> condition) {
+            this.condition = condition;
+        }
+        public override bool keepWaiting => !condition.Invoke();
     }
 
     public interface IMultiLanguage {

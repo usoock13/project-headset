@@ -12,7 +12,6 @@ public class AttachmentFreeze : Attachment {
     private Coroutine detachCoroutine;
     
     public override void OnAttached(IAttachmentsTakeable target) {
-        base.OnAttached(target);
         lifetime = 0;
 
         #region Monster Target Implements
@@ -24,7 +23,6 @@ public class AttachmentFreeze : Attachment {
         #endregion Monster Target Implements
     }
     public override void OnDetached(IAttachmentsTakeable target) {
-        base.OnDetached(target);
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
             targetMonster.ColorManager?.RemoveColor(attachColor);
             targetMonster.RemoveSpeedModifier(GetSpeedModifier);

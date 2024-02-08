@@ -6,8 +6,7 @@ public class WeaponMaliciousFlask : Weapon {
     [SerializeField] private EffectMaliciousFlask flaskEffect;
     [SerializeField] private AttachmentSlowPoison attachmentSlowPoison;
     private ObjectPooler effectPooler;
-    private ObjectPooler attachmentPooler;
-    public AttachmentSlowPoison AfterAttahcment => attachmentPooler.OutPool().GetComponent<AttachmentSlowPoison>();
+    public ObjectPooler AttachmentPooler { get; private set; }
     
     #region Weapon Status
     private const int MAX_LEVEL = 5;
@@ -79,14 +78,10 @@ public class WeaponMaliciousFlask : Weapon {
                     StartCoroutine(InPoolCoroutine(effectPooler, projectile.gameObject));
                 };
         });
-        attachmentPooler = new ObjectPooler(
+        AttachmentPooler = new ObjectPooler(
             poolingObject: attachmentSlowPoison.gameObject,
-            parent: this.transform,
-            onCreated: (gobj) => {
-                gobj.GetComponent<AttachmentSlowPoison>().onDetached += (attachment) => {
-                    attachmentPooler.InPool(gobj);
-                };
-            });
+            parent: this.transform
+        );
     }
     private IEnumerator InPoolCoroutine(ObjectPooler pooler, GameObject effect) {
         yield return new WaitForSeconds(5f);

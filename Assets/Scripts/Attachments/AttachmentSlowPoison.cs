@@ -17,7 +17,6 @@ public class AttachmentSlowPoison : Attachment {
     private Coroutine damageCoroutine;
     
     public override void OnAttached(IAttachmentsTakeable target) {
-        base.OnAttached(target);
         lifetime = 0;
         attachmentLevel = originWeapon.CurrentLevel;
 
@@ -30,13 +29,13 @@ public class AttachmentSlowPoison : Attachment {
         #endregion Monster Target Implements
     }
     public override void OnDetached(IAttachmentsTakeable target) {
-        base.OnDetached(target);
         if(target.GameObject.TryGetComponent(out Monster targetMonster)) {
             targetMonster.GetComponent<SpriteColorManager>()?.RemoveColor(attachedColor);
             targetMonster.RemoveSpeedModifier(GetSpeedModifier);
         }
         if(damageCoroutine != null)
             StopCoroutine(damageCoroutine);
+        originWeapon.AttachmentPooler.InPool(this.gameObject);
     }
     private IEnumerator DamageCoroutine(Monster target) {
         while(lifetime < duration) {

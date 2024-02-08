@@ -12,7 +12,6 @@ public class AttachmentRepentance : Attachment {
     private Coroutine livingCoroutine;
     
     public override void OnAttached(IAttachmentsTakeable target) {
-        base.OnAttached(target);
         
         if(target.GameObject.TryGetComponent(out Monster monster)) {
             owner = monster;
@@ -20,7 +19,6 @@ public class AttachmentRepentance : Attachment {
         }
     }
     public override void OnDetached(IAttachmentsTakeable target) {
-        base.OnDetached(target);
         if(livingCoroutine != null)
             StopCoroutine(livingCoroutine);
         owner.onDie -= OnMonsterDie;

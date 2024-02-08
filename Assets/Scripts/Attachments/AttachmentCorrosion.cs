@@ -17,8 +17,6 @@ public class AttachmentCorrosion : Attachment {
     private Coroutine damageCoroutine;
     
     public override void OnAttached(IAttachmentsTakeable target) {
-        base.OnAttached(target);
-        
         lifetime = 0;
         duplicatingCount = 1;
         
@@ -31,8 +29,7 @@ public class AttachmentCorrosion : Attachment {
     }
     public override void OnDetached(IAttachmentsTakeable target) {
         duplicatingCount = 0;
-
-        base.OnDetached(target);
+        
         if(target.GameObject.TryGetComponent(out Monster monster)) {
             monster.RemoveSpeedModifier(GetSpeedModifier);
             monster.GetComponent<SpriteColorManager>()?.RemoveColor(attachedColor);

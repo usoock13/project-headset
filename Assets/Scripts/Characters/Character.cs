@@ -51,6 +51,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }}
     protected float staminaForDodge = 100f;
 
+    public bool canMove = true;
+
     public float MaxSp => maxSp;
     public float currentSP { get; protected set; } = 0;
     protected float defaultRecoveringSP = 1f;
@@ -150,6 +152,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     #endregion Status
 
     protected Vector2 moveDirection;
+    public Vector2 MoveDirection => moveDirection;
     protected Vector2 MoveVector => moveDirection.normalized * MoveSpeed;
 
     protected Vector2 attackingDirection;
@@ -279,7 +282,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     
     public void SetMoveDirection(Vector2 direction) {
         moveDirection = direction;
-        if(!CurrentState.Compare(dodgeState))
+        if(canMove
+        && !CurrentState.Compare(dodgeState))
             stateMachine.ChangeState(BasicState);
     }
     

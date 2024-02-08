@@ -55,7 +55,7 @@ public class EffectMaliciousFlask : EffectProjectile {
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster target)
             && target.isArrive) {
-                AttachmentSlowPoison attachment = originWeapon.AfterAttahcment;
+                var attachment = originWeapon.AttachmentPooler.OutPool().GetComponent<AttachmentSlowPoison>();
                 if(target.TryGetAttachment(attachment.AttachmentType, out Attachment already)) // Duplicate Attaching
                     target.ReleaseAttachment(already);
                 target.TakeAttachment(attachment);
