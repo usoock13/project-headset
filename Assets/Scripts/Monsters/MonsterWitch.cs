@@ -57,6 +57,8 @@ public class MonsterWitch : Monster {
     private float stormDamage = 50f;
     #endregion Skill Status
 
+    private Queue<float> hpRatioForCast04 = new Queue<float>(new[] { 0.75f, 0.50f, 0.25f });
+
     protected override void Awake() {
         base.Awake();
 
@@ -87,7 +89,8 @@ public class MonsterWitch : Monster {
         base.InitializeStates();
         
         #region Chase
-        chaseState.onStay += () => {
+        chaseState.onActive += (prev) => {
+            SelecteNextSkill();
             spriteAnimator.ChangeAnimation(ANIMATION_CHASE);
         };
         chaseState.onStay += () => {
@@ -126,7 +129,9 @@ public class MonsterWitch : Monster {
     }
 
     private IEnumerator CastCoroutine() {
-        yield return new WaitForCondition(() => skillGauge >= nextSkill.cost);
+        yield return new WaitForCondition(() => {
+            return stateMachine.Compare(chaseState)  &&  skillGauge >= nextSkill.cost;
+        });
         // Wait for skill gauge reach to next skill's cost.
 
         if(!stateMachine.Compare(CAST_STATES_TAG)
@@ -134,18 +139,13 @@ public class MonsterWitch : Monster {
             skillGauge -= nextSkill.cost;
             stateMachine.ChangeState(nextSkill.state);
 
-            SelecteNextSkill();
             StartCoroutine(CastCoroutine());
         }
     }
 
     private void SelecteNextSkill() {
-        /*  */
-        nextSkill = (0, cast04State);
-        return;
-        /*  */
         if(isArrive) {
-            int choise = /* UnityEngine.Random.Range(0, 8) */7;
+            int choise = UnityEngine.Random.Range(0, 8);
             nextSkill  = choise switch {
                 <= 3 => (skillCost01, cast01State), // 0, 1, 2, 3
                 <= 6 => (skillCost02, cast02State), // 4, 5, 6
@@ -309,6 +309,7 @@ public class MonsterWitch : Monster {
         amount = DeductShiled(amount);
         if(amount <= 0)
             return;
+        OnDamage(amount);
         base.TakeDamage(amount);
     }
 
@@ -322,5 +323,13 @@ public class MonsterWitch : Monster {
         if(HasShield)
             return;
         base.TakeForce(force * 0.1f, duration);
+    }
+
+    private void OnDamage(float amount) {
+        if(hpRatioForCast04.Count > 0
+        && hpRatioForCast04.Peek() > currentHp / maxHp) {
+            hpRatioForCast04.Dequeue();
+            stateMachine.ChangeState(cast04State);
+        }
     }
 }

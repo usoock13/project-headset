@@ -12,14 +12,18 @@ public class EffectBranchOfInkStorm : MonoBehaviour {
 
     private bool isActive = false;
 
+    private Coroutine activeCoroutine;
+
     public void Active(float delay) {
         isActive = true;
         spriteRenderer.enabled = false;
-        StartCoroutine(AttackCoroutine(delay));
+        activeCoroutine = StartCoroutine(AttackCoroutine(delay));
     }
     public void Inactive() {
         isActive = false;
         spriteRenderer.enabled = false;
+        if(activeCoroutine != null)
+            StopCoroutine(activeCoroutine);
     }
 
     private IEnumerator AttackCoroutine(float delay) {

@@ -17,6 +17,8 @@ public class EffectInkStorm : MonoBehaviour {
     private float rotateSpeed = 0;
     private float maxRotateSpeed = 30f;
     private float chargingTime = 2.5f;
+
+    private Coroutine activeCoroutine;
     
     [SerializeField] private EffectBranchOfInkStorm[] branches;
 
@@ -24,11 +26,13 @@ public class EffectInkStorm : MonoBehaviour {
         this.damagePerSecond = dps;
         transform.rotation = Quaternion.identity;
         gameObject.SetActive(true);
-        StartCoroutine(ActiveCoroutine());
+        activeCoroutine = StartCoroutine(ActiveCoroutine());
     }
 
     public void Inactive() {
         isActive = false;
+        if(activeCoroutine != null)
+            StopCoroutine(activeCoroutine);
         for(int i=0; i<branches.Length; i++)
             branches[i].Inactive();
     }
