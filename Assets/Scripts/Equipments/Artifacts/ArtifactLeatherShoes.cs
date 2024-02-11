@@ -6,7 +6,7 @@ public class ArtifactLeatherShoes : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] extraSpeed = new float[] {  0.20f,   0.40f,   0.60f,   0.80f,   1.00f };
+    private float[] extraSpeed = new float[] {  0.20f,   0.30f,   0.40f,   0.50f,   0.60f };
     #endregion Artifact Status
 
     #region Artifact Information

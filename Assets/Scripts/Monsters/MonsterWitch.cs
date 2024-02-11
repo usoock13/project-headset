@@ -22,6 +22,8 @@ public class MonsterWitch : Monster {
 
     private (float cost, State state) nextSkill;
 
+    private Coroutine castingCoroutine;
+
     private readonly float skillCost02 = 4f;
     private readonly float skillCost01 = 3f;
     private readonly float skillCost03 = 5f;
@@ -158,7 +160,10 @@ public class MonsterWitch : Monster {
     #region Cast Ink Blast
     private void Cast01() {
         skillGauge -= skillCost01;
-        StartCoroutine(CastInkBlastsCoroutine());
+
+        if(castingCoroutine != null)
+            StopCoroutine(castingCoroutine);
+        castingCoroutine = StartCoroutine(CastInkBlastsCoroutine());
     }
     private IEnumerator CastInkBlastsCoroutine() {
         Vector3 start = transform.position;
@@ -180,7 +185,9 @@ public class MonsterWitch : Monster {
 
     #region Cast Eraser
     private void Cast02() {
-        StartCoroutine(EraserCoroutine());
+        if(castingCoroutine != null)
+            StopCoroutine(castingCoroutine);
+        castingCoroutine = StartCoroutine(EraserCoroutine());
     }
     private IEnumerator EraserCoroutine() {
         spriteAnimator.ChangeAnimation(ANIMATION_CAST_02);
@@ -198,7 +205,9 @@ public class MonsterWitch : Monster {
 
     #region Cast Summoning Pawns
     private void Cast03() {
-        StartCoroutine(SummonPawns());
+        if(castingCoroutine != null)
+            StopCoroutine(castingCoroutine);
+        castingCoroutine = StartCoroutine(SummonPawns());
     }
 
     private IEnumerator SummonPawns() {
@@ -206,7 +215,7 @@ public class MonsterWitch : Monster {
                           ? Quaternion.AngleAxis(UnityEngine.Random.Range(0, 8) * 90f, Vector3.forward) * Vector2.up
                           : TargetCharacter.MoveDirection;
         Vector2 point = TargetCharacter.transform.position + (moveDir * 3f);
-        
+
         PawnsPooler.OutPool(point + new Vector2(moveDir.y, -moveDir.x) *  0.5f, Quaternion.identity).GetComponent<EffectPawn>().Active(pawnDamage, PawnsPooler);
         PawnsPooler.OutPool(point + new Vector2(moveDir.y, -moveDir.x) * -0.5f, Quaternion.identity).GetComponent<EffectPawn>().Active(pawnDamage, PawnsPooler);
         yield return new WaitForSeconds(0.25f);
@@ -215,11 +224,17 @@ public class MonsterWitch : Monster {
         yield return new WaitForSeconds(0.25f);
         PawnsPooler.OutPool(point + new Vector2(moveDir.y, -moveDir.x) *  2.5f, Quaternion.identity).GetComponent<EffectPawn>().Active(pawnDamage, PawnsPooler);
         PawnsPooler.OutPool(point + new Vector2(moveDir.y, -moveDir.x) * -2.5f, Quaternion.identity).GetComponent<EffectPawn>().Active(pawnDamage, PawnsPooler);
+
+        yield return new WaitForSeconds(1.0f);
+        stateMachine.ChangeState(chaseState);
     }
     #endregion Cast Summoning Pawns
 
     #region Cast Ink Storm
     private void Cast04() {
+        if(castingCoroutine != null)
+            StopCoroutine(castingCoroutine);
+
         IncreaseShield(maxHp * shieldRatio);
         effectInkStorm.Active(stormDamage);
         StartCoroutine(SubCastCoroutine01());
