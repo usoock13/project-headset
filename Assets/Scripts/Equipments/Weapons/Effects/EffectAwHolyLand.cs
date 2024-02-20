@@ -55,7 +55,7 @@ public class EffectAwHolyLand : MonoBehaviour {
 
                     monster.TakeDamage(Damage);
                     if(HittingDelay > 0)
-                        monster.TakeAttackDelay(HittingDelay);
+                        monster.TakeStagger(HittingDelay);
 
                     GameManager.instance.Character.OnAttackMonster(monster);
                 }

@@ -77,7 +77,7 @@ public class EffectAwRoughDrawing : MonoBehaviour {
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(BombDamage);
-                monster.TakeAttackDelay(1.5f);
+                monster.TakeStagger(1.5f);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * 3f, 1.5f);
                 GameManager.instance.Character.OnAttackMonster(monster);
             }

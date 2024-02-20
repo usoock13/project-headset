@@ -996,7 +996,19 @@ MonoBehaviour:
     m_ActionId: efa066d0-2a88-43b4-b844-5f2951b731ff
     m_ActionName: PlayerActions/Fix Arrow[/Keyboard/z]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2486477413569248814}
+        m_TargetAssemblyTypeName: CharacterInputSystem, Assembly-CSharp
+        m_MethodName: ActiveSkill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f53e799f-1194-49e6-a36e-eee53c9fa69e
     m_ActionName: PlayerActions/Active Skill[/Keyboard/x]
   - m_PersistentCalls:

@@ -35,7 +35,7 @@ public class EffectSpikeTrap : MonoBehaviour {
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(damagePerSecond * damageInterval);
-                monster.TakeAttackDelay(HittingDelay);
+                monster.TakeStagger(HittingDelay);
                 GameManager.instance.Character.OnAttackMonster(monster);
             }
         }

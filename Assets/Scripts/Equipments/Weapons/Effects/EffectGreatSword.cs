@@ -21,7 +21,7 @@ public class EffectGreatSword : MonoBehaviour {
         foreach(Collider2D inner in inners) {
             var target = inner.GetComponent<Monster>();
             target.TakeDamage(originWeapon.Damage);
-            target.TakeAttackDelay(hitDelay);
+            target.TakeStagger(hitDelay);
             target.TakeForce(transform.up * attackForceScalar, hitDelay);
             GameManager.instance.Character.OnAttackMonster(target);
         }

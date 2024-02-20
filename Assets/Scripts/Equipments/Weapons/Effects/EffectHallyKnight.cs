@@ -54,7 +54,7 @@ public class EffectHallyKnight : MonoBehaviour
             for(int i=0; i<inners.Count; i++) {
                 if(inners[i].TryGetComponent(out Monster monster)) {
                     monster.TakeDamage(damage * attackInterval);
-                    monster.TakeAttackDelay(attackDelay);
+                    monster.TakeStagger(attackDelay);
 
                     GameManager.instance.Character.OnAttackMonster(monster);
                 }

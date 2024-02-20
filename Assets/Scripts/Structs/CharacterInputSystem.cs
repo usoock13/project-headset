@@ -32,10 +32,14 @@ public class CharacterInputSystem : MonoBehaviour {
         }
     }
     public void OnDodge(InputAction.CallbackContext context) {
-            character.DodgeToward();
+        character.DodgeToward();
     }
     public void ToggleMouse(InputAction.CallbackContext context) {
         if(context.performed)
             character.ToggleMouseAiming();
+    }
+    public void ActiveSkill(InputAction.CallbackContext context) {
+        if(context.performed)
+            character.ActiveSkill();
     }
 }

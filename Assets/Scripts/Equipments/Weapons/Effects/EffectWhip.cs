@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EffectWhip : MonoBehaviour {
     public WeaponWhip originWeapon;
-    [SerializeField] private float distance = 2;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private PolygonCollider2D attackCollider;
@@ -42,7 +41,7 @@ public class EffectWhip : MonoBehaviour {
                 Vector2 attackForce = transform.right * Mathf.Sin( Mathf.Atan2(dir.y, dir.x) ) * distance;
 
                 monster.TakeDamage(originWeapon.Damage);
-                monster.TakeAttackDelay(originWeapon.HittingDelay);
+                monster.TakeStagger(originWeapon.HittingDelay);
                 if(swipeDir * Mathf.Atan2(dir.y, dir.x) < 0)
                     monster.TakeForce(attackForce, 0.5f);
                 GameManager.instance.Character.OnAttackMonster(monster);

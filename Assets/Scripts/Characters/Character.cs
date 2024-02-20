@@ -75,15 +75,14 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Sprite DefaultSprite => defaultSprite;
     public abstract string CharacterName { get; }
     [SerializeField] private HeadmountCharacter headmountCharacter;
-    [SerializeField] public HeadmountCharacter HeadmountCharacter => headmountCharacter;
+    [SerializeField] private Skill activeSkill;
+    public HeadmountCharacter HeadmountCharacter => headmountCharacter;
     #endregion Character Information
 
     private ItemCollector itemCollector;
     public ItemCollector ItemCollector {
         get { return itemCollector; }
-        set { 
-            itemCollector = value;
-        }
+        set { itemCollector = value; }
     }
 
     [SerializeField] protected StateMachine stateMachine;
@@ -230,7 +229,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp((int) (MaxExp * 0.5f));
         if(Input.GetKeyDown(KeyCode.O))
-            print($"{MoveSpeed} / {RecoveringStaminaPerSecond}");
+            StageManager.CameraDirector.ShakeCamera(2, 2);
         #endif
         /* << FOR TEST */
         RecoverStamina(Time.deltaTime * RecoveringStaminaPerSecond);
@@ -437,7 +436,13 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
         StageUIManager.ActiveHitEffectUI();
     }
-    public void TakeAttackDelay(float amount) {
+    public void ConsumeHP(float amount) {
+        currentHp -= amount;
+        if(currentHp <= 0)
+            currentHp = 1;
+        StatusUI.UpdateHpSlider(currentHp / maxHp);
+    }
+    public void TakeStagger(float amount) {
         throw new NotImplementedException();
         if(CurrentState.Compare(dieState))
             return;
@@ -465,6 +470,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(currentSP < maxSp)
             currentSP = Mathf.Min(currentSP + amount, maxStamina);
         StatusUI.UpdateSpSlider(currentSP / maxSp);
+    }
+
+    public void ActiveSkill() {
+        GameManager.instance.StageManager.CameraDirector.PlaySkillCinematics();
+        activeSkill?.Active();
     }
     
     private void Die() {

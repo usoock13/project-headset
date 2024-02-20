@@ -85,7 +85,7 @@ public class WeaponColdSpear : Weapon {
         );
     }
     protected override void Attack() {
-        var instance = EffectPooler.OutPool(transform.position + Vector3.up * 0.5f, _Character.attackArrow.rotation);
+        EffectPooler.OutPool(transform.position + Vector3.up * 0.5f, _Character.attackArrow.rotation);
         _Character.OnAttack();
     }
 }

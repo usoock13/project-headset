@@ -67,7 +67,7 @@ public class EffectAwFireball : MonoBehaviour {
             Vector3 characterPoint = GameManager.instance.Character.transform.position;
             Vector2 forceDir = (monsters[i].transform.position - characterPoint).normalized;
             monsters[i].TakeDamage(originWeapon.Damage);
-            monsters[i].TakeAttackDelay(hittingDelay);
+            monsters[i].TakeStagger(hittingDelay);
             monsters[i].TakeForce(forceDir * attackForce, hittingDelay);
             GameManager.instance.Character.OnAttackMonster(monsters[i]);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponMaliciousFlask : Weapon {
     [SerializeField] private EffectMaliciousFlask flaskEffect;
     [SerializeField] private AttachmentSlowPoison attachmentSlowPoison;
-    private ObjectPooler effectPooler;
+    public ObjectPooler FlaskPooler { get; private set; }
     public ObjectPooler AttachmentPooler { get; private set; }
     
     #region Weapon Status
@@ -70,25 +70,17 @@ public class WeaponMaliciousFlask : Weapon {
     #endregion Weapon Information
 
     private void Awake() {
-        effectPooler = new ObjectPooler(
+        FlaskPooler = new ObjectPooler(
             poolingObject: flaskEffect.gameObject,
-            parent: this.transform,
-            onCreated: (gobj) => {
-                gobj.GetComponent<EffectMaliciousFlask>().onDisappear += (projectile) => {
-                    StartCoroutine(InPoolCoroutine(effectPooler, projectile.gameObject));
-                };
-        });
+            parent: this.transform
+        );
         AttachmentPooler = new ObjectPooler(
             poolingObject: attachmentSlowPoison.gameObject,
             parent: this.transform
         );
     }
-    private IEnumerator InPoolCoroutine(ObjectPooler pooler, GameObject effect) {
-        yield return new WaitForSeconds(5f);
-        pooler.InPool(effect);
-    }
     protected override void Attack() {
-        GameObject flaskInstance = effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
+        GameObject flaskInstance = FlaskPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
         var effect = flaskInstance.GetComponent<EffectMaliciousFlask>();
         effect.originWeapon = this;
         _Character.OnAttack();

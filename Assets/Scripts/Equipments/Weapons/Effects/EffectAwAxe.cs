@@ -69,7 +69,7 @@ public class EffectAwAxe : EffectProjectile {
             for(int i=0; i<inners.Length; i++) {
                 if(inners[i].TryGetComponent(out Monster monster)) {
                     monster.TakeDamage(Damage * hitInterval);
-                    monster.TakeAttackDelay(attackDelay);
+                    monster.TakeStagger(attackDelay);
                 }
             }
             yield return new WaitForSeconds(hitInterval);
@@ -81,7 +81,6 @@ public class EffectAwAxe : EffectProjectile {
     }
 
     protected override void Disappear() {
-        base.Disappear();
         originWeapon.EffectPooler.InPool(this.gameObject);
         StopAllCoroutines();
     }

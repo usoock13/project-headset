@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-public class EffectProjectile : MonoBehaviour {
+public abstract class EffectProjectile : MonoBehaviour {
     [SerializeField] protected float flyingTime = 3f;
     [SerializeField] protected float lifetime = 0;
-
-    public Action<EffectProjectile> onDisappear;
 
     protected virtual void OnEnable() {
         lifetime = 0;
@@ -17,7 +15,5 @@ public class EffectProjectile : MonoBehaviour {
             Disappear();
         }
     }
-    protected virtual void Disappear() {
-        onDisappear?.Invoke(this);
-    }
+    protected abstract void Disappear();
 }

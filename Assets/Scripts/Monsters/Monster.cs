@@ -7,13 +7,13 @@ using UnityEngine.Events;
 [RequireComponent(typeof(SpriteAnimator))]
 [RequireComponent(typeof(StateMachine))]
 public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable {
-    private Character targetCharacter;
-    protected Character TargetCharacter {
+    private Transform targetCharacter;
+    public Transform TargetCharacter {
         get {
-            targetCharacter ??= GameManager.instance.Character;
+            targetCharacter ??= GameManager.instance.Character.transform;
             return targetCharacter;
         }
-        set { targetCharacter ??= value; }
+        set { targetCharacter = value; }
     }
     protected StageManager _StageManager => GameManager.instance.StageManager;
     
@@ -108,7 +108,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     }
 
 
-    public virtual void TakeAttackDelay(float second) {
+    public virtual void TakeStagger(float second) {
         float reduced = second / Toughness;
         if(reduced > 0.1f) {
             takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(reduced));
@@ -239,7 +239,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
 
     private IEnumerator UpdateTargetPoint() {
         while(isArrive) {
-            targetDirection = (TargetCharacter.transform.position - transform.position).normalized;
+            targetDirection = (TargetCharacter.position - transform.position).normalized;
             yield return new WaitForSeconds(.7f);
         }
     }

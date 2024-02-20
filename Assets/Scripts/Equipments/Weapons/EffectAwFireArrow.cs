@@ -22,13 +22,12 @@ public class EffectAwFireArrow : EffectProjectile {
         && other.TryGetComponent(out Monster monster)) {
             monster.TakeDamage(originWeapon.ArrowDamage);
             monster.TakeForce(transform.up * 0.5f, 0.5f);
-            monster.TakeAttackDelay(.4f);
+            monster.TakeStagger(.4f);
             Disappear();
         }
     }
 
     protected override void Disappear() {
-        base.Disappear();
         originWeapon.ArrowPooler.InPool(this.gameObject);
     }
 }

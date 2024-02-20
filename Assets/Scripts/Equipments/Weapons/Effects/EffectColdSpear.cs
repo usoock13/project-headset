@@ -10,6 +10,8 @@ public class EffectColdSpear : EffectProjectile {
     [SerializeField] private CircleBounds damageAreaBounds;
     [SerializeField] private SpriteRenderer projectileRenderer;
 
+    private List<GameObject> createdSideEffects;
+
     private void Start() {
         if(originWeapon == null) {
             Debug.LogError($"{this.gameObject.name}'s 'origin weapon' variable is not definded.\nThis game object will be destoyed.");
@@ -20,6 +22,7 @@ public class EffectColdSpear : EffectProjectile {
         base.OnEnable();
         projectileRenderer.enabled = true;
         isActive = true;
+        createdSideEffects = new List<GameObject>();
     }
     protected override void Update() {
         if(isActive) {
@@ -40,40 +43,39 @@ public class EffectColdSpear : EffectProjectile {
                     monster.ReleaseAttachment(already);
                 attch.duration = originWeapon.FreezeTime;
                 monster.TakeAttachment(attch);
-                originWeapon.SideEffectPooler.OutPool(monster.transform.position, Quaternion.identity);
+                createdSideEffects.Add( originWeapon.SideEffectPooler.OutPool(monster.transform.position, Quaternion.identity) );
                 GameManager.instance.Character.OnAttackMonster(monster);
             }
         }
     }
     protected override void Disappear() {
-        base.Disappear();
         projectileRenderer.enabled = false;
         isActive = false;
+        StartCoroutine(InPoolCoroutine());
     }
 
-    private void AttackArea() {
-        Vector2 center = (Vector2)(transform.position + (Vector3)(transform.localToWorldMatrix * damageAreaBounds.center));
-        Collider2D[] inners = Physics2D.OverlapCircleAll(center, damageAreaBounds.radius, targetLayer);
-        for(int i=0; i<inners.Length; i++) {
-            if(inners[i].TryGetComponent(out Monster monster)
-            && monster.isArrive) {
-                monster.TakeDamage(originWeapon.Damage);
-                var attch = originWeapon.AttachmentPooler.OutPool(this.transform.position, Quaternion.identity).GetComponent<AttachmentFreeze>();
-                if(monster.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
-                    monster.ReleaseAttachment(already);
-                attch.duration = originWeapon.FreezeTime;
-                monster.TakeAttachment(attch);
-                originWeapon.SideEffectPooler.OutPool(monster.transform.position, Quaternion.identity);
-                GameManager.instance.Character.OnAttackMonster(monster);
-            }
-        }
-    }
-    private IEnumerator InPoolSideEffect(GameObject effect) {
-        yield return new WaitForSeconds(3f);
-        originWeapon.SideEffectPooler.InPool(effect);
-    }
-    private void OnDrawGizmosSelected() {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(damageAreaBounds.center, damageAreaBounds.radius);
+    // private void AttackArea() {
+    //     Vector2 center = (Vector2)(transform.position + (Vector3)(transform.localToWorldMatrix * damageAreaBounds.center));
+    //     Collider2D[] inners = Physics2D.OverlapCircleAll(center, damageAreaBounds.radius, targetLayer);
+    //     for(int i=0; i<inners.Length; i++) {
+    //         if(inners[i].TryGetComponent(out Monster monster)
+    //         && monster.isArrive) {
+    //             monster.TakeDamage(originWeapon.Damage);
+    //             var attch = originWeapon.AttachmentPooler.OutPool(this.transform.position, Quaternion.identity).GetComponent<AttachmentFreeze>();
+    //             if(monster.TryGetAttachment(attch.AttachmentType, out Attachment already)) // Duplicate Attaching
+    //                 monster.ReleaseAttachment(already);
+    //             attch.duration = originWeapon.FreezeTime;
+    //             monster.TakeAttachment(attch);
+    //             originWeapon.SideEffectPooler.OutPool(monster.transform.position, Quaternion.identity);
+    //             GameManager.instance.Character.OnAttackMonster(monster);
+    //         }
+    //     }
+    // }
+    
+    private IEnumerator InPoolCoroutine() {
+        yield return new WaitForSeconds(2f);
+        for(int i=0; i<createdSideEffects.Count; i++)
+            originWeapon.SideEffectPooler.InPool(createdSideEffects[i]);
+        originWeapon.EffectPooler.InPool(gameObject);
     }
 }

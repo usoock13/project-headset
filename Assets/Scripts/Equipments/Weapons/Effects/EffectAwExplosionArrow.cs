@@ -52,7 +52,7 @@ public class EffectAwExplosionArrow : EffectProjectile {
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(Damage);
-                monster.TakeAttackDelay(hittingDelay);
+                monster.TakeStagger(hittingDelay);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * 4f, hittingDelay);
                 GameManager.instance.Character.OnAttackMonster(monster);
             }
@@ -66,7 +66,6 @@ public class EffectAwExplosionArrow : EffectProjectile {
     }
 
     protected override void Disappear() {
-        base.Disappear();
         originWeapon.ExplosionEffectPooler.InPool(this.gameObject);
     }
 }

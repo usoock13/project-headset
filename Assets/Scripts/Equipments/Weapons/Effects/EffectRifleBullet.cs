@@ -37,7 +37,7 @@ public class EffectRifleBullet : EffectProjectile {
         && !hitMonsters.Contains(other.gameObject)) {
             if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeAttackDelay(hittingDelay);
+                target.TakeStagger(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);
@@ -48,7 +48,6 @@ public class EffectRifleBullet : EffectProjectile {
         }
     }
     protected override void Disappear() {
-        base.Disappear();
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

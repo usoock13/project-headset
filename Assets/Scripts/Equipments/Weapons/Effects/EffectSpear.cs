@@ -23,7 +23,7 @@ public class EffectSpear : MonoBehaviour {
         foreach(Collider2D inner in inners) {
             if(inner.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeAttackDelay(hitDelay);
+                target.TakeStagger(hitDelay);
                 target.TakeForce((inner.transform.position - originWeapon.transform.position).normalized * attackForce, hitDelay);
                 GameManager.instance.Character.OnAttackMonster(target);
             }

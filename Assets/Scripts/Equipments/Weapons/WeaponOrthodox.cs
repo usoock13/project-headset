@@ -5,7 +5,6 @@ using UnityEngine;
 public class WeaponOrthodox : Weapon {
     [SerializeField] private EffectStraightPunch punchEffect;
     public ObjectPooler EffectPooler { get; private set; }
-    [SerializeField] float attackRange = .5f;
 
     [SerializeField] private ItemAwake itemAwake;
     

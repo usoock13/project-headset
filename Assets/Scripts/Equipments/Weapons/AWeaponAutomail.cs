@@ -130,7 +130,7 @@ public class AWeaponAutomail : Weapon {
         for(int i=0; i<inners.Length; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(ExplosionDamage);
-                monster.TakeAttackDelay(2f);
+                monster.TakeStagger(2f);
                 monster.TakeForce((inners[i].transform.position - transform.position).normalized * 15f, 2f);
                 _Character.OnAttackMonster(monster);
             }

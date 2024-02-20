@@ -28,7 +28,9 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private StageUIManager stageUIManager;
     public StageUIManager StageUIManager => stageUIManager;
 
-    [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject characterCamera;
+    [SerializeField] private CameraDirector cameraDirector;
+    public CameraDirector CameraDirector => cameraDirector;
 
     #region Item
     [SerializeField] private ItemCollector itemCollector;
@@ -76,8 +78,8 @@ public class StageManager : MonoBehaviour {
         character.InitializeCharacter();
         InitializeUI();
         
-        mainCamera.transform.SetParent(character.transform);
-        mainCamera.transform.localPosition = new Vector3(0, 0, mainCamera.transform.position.z);
+        characterCamera.transform.SetParent(character.transform);
+        characterCamera.transform.localPosition = new Vector3(0, 0, characterCamera.transform.position.z);
         // Set Camera
         
         character.ItemCollector = itemCollector;
@@ -186,12 +188,16 @@ public class StageManager : MonoBehaviour {
         IncreaseKillScore();
     }
     public void PauseGame(bool pause) {
+        isGamePause = pause;
         Time.timeScale = pause ? 0 : 1;
         // if(pause)
         //     PlayerInput.actions.actionMaps[0].Disable();
         // else
         //     PlayerInput.actions.actionMaps[0].Enable();
-        isGamePause = pause;
+    }
+    static public void SetTimeScale(float scale) {
+        if(!isGamePause)
+            Time.timeScale = scale;
     }
     public void PrintDamageNumber(Vector2 point, string number) {
         this.PrintDamageNumber(point, number, Color.white);

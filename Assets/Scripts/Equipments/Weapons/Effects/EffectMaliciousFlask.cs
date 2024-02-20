@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class EffectMaliciousFlask : EffectProjectile {
@@ -43,11 +43,15 @@ public class EffectMaliciousFlask : EffectProjectile {
         }
     }
     protected override void Disappear() {
-        base.Disappear();
         flaskSpriteRenderer.enabled = false;
         explosionEffect.Play();
         AttackArea();
         isActive = false;
+        StartCoroutine(InPoolCoroutine());
+    }
+    private IEnumerator InPoolCoroutine() {
+        yield return new WaitForSeconds(3f);
+        originWeapon.FlaskPooler.InPool(this.gameObject);
     }
     private void AttackArea() {
         Vector2 center = (Vector2)(transform.position + (Vector3)(transform.localToWorldMatrix * damageAreaBounds.center));

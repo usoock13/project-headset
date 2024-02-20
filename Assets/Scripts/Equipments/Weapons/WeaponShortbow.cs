@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WeaponShortbow : Weapon {
     [SerializeField] private EffectShortbow shortbowEffect;
-    private ObjectPooler effectPooler;
+    public ObjectPooler ArrowPooler { get; private set; }
     
     [SerializeField] private ItemAwake itemAwake;
     
@@ -69,15 +69,8 @@ public class WeaponShortbow : Weapon {
     );
 
     private void Awake() {
-        effectPooler = new ObjectPooler(
+        ArrowPooler = new ObjectPooler(
             poolingObject: shortbowEffect.gameObject,
-            onCreated: (gobj) => {
-                var effect = gobj.GetComponent<EffectShortbow>();
-                effect.originWeapon = this;
-                effect.onDisappear += (projectile) => {
-                    effectPooler.InPool(projectile.gameObject);
-                };
-            },
             parent: this.transform,
             count: 100, 
             restoreCount: 50
@@ -85,7 +78,7 @@ public class WeaponShortbow : Weapon {
     }
     protected override void Attack() {
         for(int i=0; i<ArrowQuantity; i++) {
-            GameObject arrowInstance = effectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
+            GameObject arrowInstance = ArrowPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
             float aimJitter = UnityEngine.Random.Range(-7f, 7f);
             arrowInstance.transform.Rotate(Vector3.forward, aimJitter);
             _Character.OnAttack();

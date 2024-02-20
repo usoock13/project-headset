@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Meat : Item {
     [SerializeField] private Sprite _icon;
-
+    
     protected override ItemInformation InformationEN => new ItemInformation(
         Icon: _icon,
         Name: "Meat",

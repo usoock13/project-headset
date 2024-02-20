@@ -39,7 +39,7 @@ public class EffectXXXLSlash : MonoBehaviour {
         for(int i=0; i<inners.Count; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(FirstDamage);
-                monster.TakeAttackDelay(fAttackDelay);
+                monster.TakeStagger(fAttackDelay);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * fForceScalar);
                 GameManager.instance.Character.OnAttackMonster(monster);
             }

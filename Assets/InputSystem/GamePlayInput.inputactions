@@ -186,6 +186,17 @@
                 },
                 {
                     "name": "",
+                    "id": "64fc00fa-813a-48a5-a64c-0e01f379fae5",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Active Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6646fbc0-2b22-4e99-93a1-bf58879eaf3a",
                     "path": "<Keyboard>/space",
                     "interactions": "",

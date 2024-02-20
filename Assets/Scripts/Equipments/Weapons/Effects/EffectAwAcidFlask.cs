@@ -38,7 +38,6 @@ public class EffectAwAcidFlask : EffectProjectile {
     }
 
     protected override void Disappear() {
-        base.Disappear();
         isFlying = false;
         explosionParticle.Play();
         renderer.enabled = false;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Keso : Item {
     [SerializeField] private Sprite _icon;
-
+    
     protected override ItemInformation InformationEN => new ItemInformation(
         Icon: _icon,
         Name: "Keso",

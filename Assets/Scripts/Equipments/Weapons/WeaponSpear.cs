@@ -8,7 +8,7 @@ public class WeaponSpear : Weapon {
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
-    private float[] interval = new float[MAX_LEVEL]         {   1.2f,    1.2f,    1.0f,    1.0f,    1.0f,  }; // 공격 간격
+    private float[] interval = new float[MAX_LEVEL]         {   1.4f,    1.2f,    1.0f,    1.0f,    1.0f,  }; // 공격 간격
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.5f,    0.5f,    0.5f,    0.5f,    0.5f,  }; // 피해 계수
     private float[] staticDamage = new float[MAX_LEVEL]     {    15f,     15f,     30f,     30f,     50f,  }; // 고정 피해량
     protected override float AttackInterval => interval[level-1];

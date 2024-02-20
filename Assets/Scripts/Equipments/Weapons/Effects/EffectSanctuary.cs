@@ -28,7 +28,7 @@ public class EffectSanctuary : MonoBehaviour {
                 if(inners[i].TryGetComponent(out Monster target)) {
                     target.TakeDamage(Damage * ATTACK_INTERVAL);
                     if(HittingDelay > 0)
-                        target.TakeAttackDelay(HittingDelay);
+                        target.TakeStagger(HittingDelay);
                     GameManager.instance.Character.OnAttackMonster(target);
                 }
             }

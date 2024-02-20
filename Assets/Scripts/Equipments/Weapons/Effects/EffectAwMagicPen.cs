@@ -18,7 +18,7 @@ public class EffectAwMagicPen : MonoBehaviour {
         && other.TryGetComponent(out Monster monster)) {
             hitMonsters.Add(monster);
             monster.TakeDamage(originWeapon.Damage);
-            monster.TakeAttackDelay(0.6f);
+            monster.TakeStagger(0.6f);
             monster.TakeForce(transform.up * 1f, 0.6f);
         }
     }

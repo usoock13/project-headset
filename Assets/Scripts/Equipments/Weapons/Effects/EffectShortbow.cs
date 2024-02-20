@@ -33,12 +33,16 @@ public class EffectShortbow : EffectProjectile {
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeAttackDelay(hittingDelay);
+                target.TakeStagger(hittingDelay);
                 target.TakeForce(transform.up * .2f, hittingDelay);
                 isActive = false;
                 Disappear();
                 GameManager.instance.Character.OnAttackMonster(target);
             }
         }
+    }
+
+    protected override void Disappear() {
+        originWeapon.ArrowPooler.InPool(this.gameObject);
     }
 }

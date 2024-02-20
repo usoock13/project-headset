@@ -167,7 +167,7 @@ public class MonsterWitch : Monster {
     }
     private IEnumerator CastInkBlastsCoroutine() {
         Vector3 start = transform.position;
-        Vector3 point = TargetCharacter.transform.position;
+        Vector3 point = TargetCharacter.position;
         for(int i=1; i<=5; i++) {
             CastInkBlast(transform.position, point - start + new Vector3(i-2, 3-i, 0));
             yield return new WaitForSeconds(0.2f);
@@ -198,8 +198,8 @@ public class MonsterWitch : Monster {
         stateMachine.ChangeState(chaseState);
     }
     private void SummonEraser() {
-        var eft = EraserPooler.OutPool(TargetCharacter.transform.position, Quaternion.identity);
-        eft.GetComponent<EffectEraser>()?.Active(eraserDPS, EraserPooler, TargetCharacter.transform);
+        var eft = EraserPooler.OutPool(TargetCharacter.position, Quaternion.identity);
+        eft.GetComponent<EffectEraser>()?.Active(eraserDPS, EraserPooler, TargetCharacter);
     }
     #endregion Cast Eraser
 
@@ -211,10 +211,11 @@ public class MonsterWitch : Monster {
     }
 
     private IEnumerator SummonPawns() {
-        Vector3 moveDir = TargetCharacter.MoveDirection == Vector2.zero
+        var character = TargetCharacter.GetComponent<Character>();
+        Vector3 moveDir = character.MoveDirection == Vector2.zero
                           ? Quaternion.AngleAxis(UnityEngine.Random.Range(0, 8) * 90f, Vector3.forward) * Vector2.up
-                          : TargetCharacter.MoveDirection;
-        Vector2 point = TargetCharacter.transform.position + (moveDir * 3f);
+                          : character.MoveDirection;
+        Vector2 point = TargetCharacter.position + (moveDir * 3f);
 
         PawnsPooler.OutPool(point + new Vector2(moveDir.y, -moveDir.x) *  0.5f, Quaternion.identity).GetComponent<EffectPawn>().Active(pawnDamage, PawnsPooler);
         PawnsPooler.OutPool(point + new Vector2(moveDir.y, -moveDir.x) * -0.5f, Quaternion.identity).GetComponent<EffectPawn>().Active(pawnDamage, PawnsPooler);
@@ -279,7 +280,7 @@ public class MonsterWitch : Monster {
         #endregion Rotate 'Target Point Modifier'
 
         #region Accelerate the Witch
-        Vector3 targetPoint = TargetCharacter.transform.position + targetPointModifier;
+        Vector3 targetPoint = TargetCharacter.position + targetPointModifier;
         Vector2 dir = (targetPoint - transform.position).normalized;
         currentSpeed += Time.deltaTime * moveSpeed * dir;
         currentSpeed = currentSpeed.magnitude > maxSpeed ? currentSpeed.normalized * maxSpeed : currentSpeed;
@@ -289,7 +290,7 @@ public class MonsterWitch : Monster {
     }
     private void FlyWithCurrentVelocity() {
         movement.Translate(currentSpeed * Time.deltaTime);
-        LookAt2D(transform.position.x - TargetCharacter.transform.position.x);
+        LookAt2D(transform.position.x - TargetCharacter.position.x);
     }
 
     private void IncreaseShield(float amount) {
@@ -306,10 +307,10 @@ public class MonsterWitch : Monster {
 
         shieldAmount -= damage;
         if(shieldAmount >= 0) {
-            _StageManager.PrintDamageNumber(transform.position, ((int) damage).ToString(), new Color(0.02f, 0.02f, 0.02f, 1f));
+            _StageManager.PrintDamageNumber(transform.position, ((int) damage).ToString(), new Color(0.32f, 0.32f, 0.32f, 1f));
             return 0;
         } else {
-            _StageManager.PrintDamageNumber(transform.position, ((int) damage + shieldAmount).ToString(), new Color(0.02f, 0.02f, 0.02f, 1f));
+            _StageManager.PrintDamageNumber(transform.position, ((int) damage + shieldAmount).ToString(), new Color(0.32f, 0.32f, 0.32f, 1f));
             shieldRenderer.enabled = false;
             OnShieldBreaks();
             return -shieldAmount;
@@ -328,7 +329,7 @@ public class MonsterWitch : Monster {
         base.TakeDamage(amount);
     }
 
-    public override void TakeAttackDelay(float second) {
+    public override void TakeStagger(float second) {
         if(HasShield)
             return;
         StartCoroutine(TakeBitDelayCoroutine());

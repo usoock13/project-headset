@@ -35,7 +35,7 @@ public class EffectAwNormalArrow : EffectProjectile {
         && 1<<other.gameObject.layer == targetLayer.value) {
             if(other.TryGetComponent(out Monster target)) {
                 target.TakeDamage(Damage);
-                target.TakeAttackDelay(hittingDelay);
+                target.TakeStagger(hittingDelay);
                 target.TakeForce(transform.up * .2f, hittingDelay);
                 isActive = false;
                 originWeapon.OnAttackMonster();
@@ -46,7 +46,6 @@ public class EffectAwNormalArrow : EffectProjectile {
     }
 
     protected override void Disappear() {
-        base.Disappear();
         originWeapon.NormalEffectPooler.InPool(this.gameObject);
     }
 }

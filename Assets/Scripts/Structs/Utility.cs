@@ -30,6 +30,7 @@ namespace Utility {
             // float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             // transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + -90f));
             transform.up = worldPosition - new Vector2(transform.position.x, transform.position.y);
+            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
         }
     }
     

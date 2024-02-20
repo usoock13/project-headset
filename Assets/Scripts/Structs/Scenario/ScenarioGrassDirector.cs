@@ -28,7 +28,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
     }
     
     protected override void InitializeScenario() {
-        return;
+        // return;
         monsterPoolerMap = new Dictionary<string, ObjectPooler> {
             {
                 monsterWolf.MonsterType,

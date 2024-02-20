@@ -55,7 +55,7 @@ public class EffectFlyingAxe : EffectProjectile {
             Monster target;
             if(other.TryGetComponent<Monster>(out target)) {
                 target.TakeDamage(Damage);
-                target.TakeAttackDelay(hittingDelay);
+                target.TakeStagger(hittingDelay);
                 target.TakeForce(transform.up * 1f, hittingDelay);
                 hitMonsters.Add(other.gameObject);
                 GameManager.instance.Character.OnAttackMonster(target);
@@ -67,7 +67,6 @@ public class EffectFlyingAxe : EffectProjectile {
     }
 
     protected override void Disappear() {
-        base.Disappear();
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

@@ -40,7 +40,7 @@ public class EffectXXXLStrike : MonoBehaviour {
         for(int i=0; i<inners.Count; i++) {
             if(inners[i].TryGetComponent(out Monster monster)) {
                 monster.TakeDamage(SecondDamage);
-                monster.TakeAttackDelay(sAttackDelay);
+                monster.TakeStagger(sAttackDelay);
                 monster.TakeForce((monster.transform.position - transform.position).normalized * sForceScalar);
                 GameManager.instance.Character.OnAttackMonster(monster);
             }

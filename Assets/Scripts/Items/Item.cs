@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 
 public abstract class Item : MonoBehaviour, IPlayerGettable {
-    public Action<Item> onGetItem;
-
     protected record ItemInformation(Sprite Icon, string Name, string Description);
 
     protected abstract ItemInformation InformationEN { get; }
@@ -65,7 +63,7 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
         
         float randomAngle = UnityEngine.Random.Range(0, 360);
         Vector2 origin = transform.position;
-        Vector2 dest = Quaternion.AngleAxis(randomAngle, Vector3.forward) * Vector2.up * UnityEngine.Random.Range(.5f, 1.5f);
+        Vector2 dest = Quaternion.AngleAxis(randomAngle, Vector3.forward) * Vector2.up * UnityEngine.Random.Range(1.0f, 1.5f);
         float offset = 0;
         while(offset < 1) {
             transform.position = Vector2.Lerp(origin, origin + dest, offset);
@@ -91,7 +89,7 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
             Disappear();
         }
     }
-    protected void Disappear() {
+    public void Disappear() {
         gameObject.SetActive(false);
         currentState = ItemState.Stored;
         StopAllCoroutines();
@@ -107,7 +105,6 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
         currentState = ItemState.Dropped;
     }
     public virtual void OnGotten() {
-        onGetItem?.Invoke(this);
         if(pullCoroutine != null)
             StopCoroutine(pullCoroutine);
         GameManager.instance.StageManager.OnGetItem(this);
