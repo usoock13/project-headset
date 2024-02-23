@@ -230,6 +230,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             this.GetExp((int) (MaxExp * 0.5f));
         if(Input.GetKeyDown(KeyCode.O))
             StageManager.CameraDirector.ShakeCamera(2, 2);
+        if(Input.GetKeyDown(KeyCode.P))
+            StageManager.CameraDirector.ShakeCameraCurved(2, 2);
         #endif
         /* << FOR TEST */
         RecoverStamina(Time.deltaTime * RecoveringStaminaPerSecond);

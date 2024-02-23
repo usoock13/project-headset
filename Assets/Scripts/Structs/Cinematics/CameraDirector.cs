@@ -17,6 +17,9 @@ public class CameraDirector : MonoBehaviour {
 
     #region Shake Character's Camera
     private Coroutine shakeCoroutine;
+    public void LockNoise(bool state) {
+        noise.enabled = !state;
+    }
     public void ShakeCamera(float time, float scale) {
         if(noise == null) {
             Debug.LogWarning("Can not found noise in the virtual camera.");
@@ -25,13 +28,23 @@ public class CameraDirector : MonoBehaviour {
 
         if(shakeCoroutine != null)
             StopCoroutine(shakeCoroutine);
-        shakeCoroutine = StartCoroutine(ShakeCoroutine(time, scale));
+        shakeCoroutine = StartCoroutine(ShakeCoroutine(time, scale, false));
     }
-    private IEnumerator ShakeCoroutine(float time, float scale) {
+    public void ShakeCameraCurved(float time, float scale) {
+        if(noise == null) {
+            Debug.LogWarning("Can not found noise in the virtual camera.");
+            return;
+        }
+
+        if(shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
+        shakeCoroutine = StartCoroutine(ShakeCoroutine(time, scale, true));
+    }
+    private IEnumerator ShakeCoroutine(float time, float scale, bool curved) {
         float offset = 0;
         float step = scale / time;
         while(offset < time) {
-            noise.m_AmplitudeGain = scale - offset * step;
+            noise.m_AmplitudeGain = scale - (curved ? offset * step : 0);
             offset += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }

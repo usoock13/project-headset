@@ -54,6 +54,7 @@ public class SkillCinematics : MonoBehaviour {
     private IEnumerator CinematicCoroutine() {
         motionBlur.active = true;
         chromaticAberration.active = true;
+        GameManager.instance.StageManager.CameraDirector.LockNoise(true);
 
         float offset = 0;
         StageManager.SetTimeScale(0.1f);
@@ -69,6 +70,7 @@ public class SkillCinematics : MonoBehaviour {
 
         motionBlur.active = false;
         chromaticAberration.active = false;
+        GameManager.instance.StageManager.CameraDirector.LockNoise(false);
         StageManager.SetTimeScale(1);
 
         offset = 0;

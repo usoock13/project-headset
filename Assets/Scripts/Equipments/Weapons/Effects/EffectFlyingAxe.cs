@@ -5,6 +5,8 @@ using UnityEngine;
 public class EffectFlyingAxe : EffectProjectile {
     public WeaponAxe originWeapon;
 
+    private bool isActive = false;
+
     [SerializeField] private float flyingSpeed = 22f;
     private float Damage => originWeapon.Damage;
     private float Scale => originWeapon.ProjectileScale;
@@ -31,6 +33,8 @@ public class EffectFlyingAxe : EffectProjectile {
     }
     protected override void OnEnable() {
         base.OnEnable();
+        isActive = true;
+
         hitCount = 0;
         hitMonsters.Clear();
         if(currentLevel != originWeapon.CurrentLevel) {
@@ -67,6 +71,9 @@ public class EffectFlyingAxe : EffectProjectile {
     }
 
     protected override void Disappear() {
-        originWeapon.EffectPooler.InPool(this.gameObject);
+        if(isActive) {
+            isActive = false;
+            originWeapon.EffectPooler.InPool(this.gameObject);
+        }
     }
 }
