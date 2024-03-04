@@ -3,9 +3,17 @@ using UnityEngine;
 
 public class AbilityMage : Ability {
     [SerializeField] private Sprite icon;
-    public override Sprite Icon => icon;
-    public override string Name => "마나 처리 운용 기능사";
-    public override string Description => "<nobr>스킬 게이지 회복 속도가 증가합니다.</nobr>";
+
+    protected override (Sprite icon, string name, string description) InformationEN => (
+        icon: this.icon,
+        name: "Mana Management",
+        description: "<nobr>Recovery of skill gauge increases.</nobr>"
+    );
+    protected override (Sprite icon, string name, string description) InformationKO => (
+        icon: this.icon,
+        name: "마나 운용",
+        description: "<nobr>스킬 게이지 회복 속도가 증가합니다.</nobr>"
+    );
 
     public override void OnTaken(Character character) {
         character.extraRecoveringSp += GetExtraRecoveringSP;

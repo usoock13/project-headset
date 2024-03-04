@@ -3,9 +3,17 @@ using UnityEngine;
 
 public class AbilityWarriors : Ability {
     [SerializeField] private Sprite icon;
-    public override Sprite Icon => icon;
-    public override string Name => "근성";
-    public override string Description => "<nobr>체력이 적으면 받는 피해가 감소합니다.</nobr>";
+
+    protected override (Sprite icon, string name, string description) InformationEN => (
+        icon: this.icon,
+        name: "Tenacity",
+        description: "<nobr>The less hp she has, the less damage she get.</nobr>"
+    );
+    protected override (Sprite icon, string name, string description) InformationKO => (
+        icon: this.icon,
+        name: "근성",
+        description: "<nobr>체력이 적을수록 받는 피해가 감소합니다.</nobr>"
+    );
 
     public override void OnTaken(Character character) {
         character.extraArmor += GetAdditionalArmor;

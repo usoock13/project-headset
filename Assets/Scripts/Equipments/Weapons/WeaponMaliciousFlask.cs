@@ -50,7 +50,7 @@ public class WeaponMaliciousFlask : Weapon {
         Description:
             CurrentLevel switch {
                 0 => $"<nobr>"
-                   + $"독이 든 플라스크를 던집니다. 플라스크는 몬스터와 충돌하거나 사거리 끝에 도달하면 깨지며 범위 내의 적에게 '둔화 독'을 부착합니다."
+                   + $"독이 든 플라스크를 던집니다. 플라스크는 몬스터와 충돌하거나 사거리 끝에 도달하면 깨지며 범위 내의 몬스터에게 '둔화 독'을 부착합니다."
                    + $"\n"
                    + $"\n초당 피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[0]}sec</color>"
@@ -58,7 +58,7 @@ public class WeaponMaliciousFlask : Weapon {
                    + $"\n지속 시간 : <color=#f40>3sec</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"독이 든 플라스크를 던집니다. 플라스크는 몬스터와 충돌하거나 사거리 끝에 도달하면 깨지며 범위 내의 적에게 '둔화 독'을 부착합니다."
+                   + $"독이 든 플라스크를 던집니다. 플라스크는 몬스터와 충돌하거나 사거리 끝에 도달하면 깨지며 범위 내의 몬스터에게 '둔화 독'을 부착합니다."
                    + $"\n"
                    + $"\n초당 피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\n공격 주기 : <color=#f40>{interval[level-1]}sec</color> > <color=#f40>{interval[NextLevelIndex]}sec</color>"

@@ -3,9 +3,18 @@ using UnityEngine;
 
 public class AbilityAdventurer : Ability {
     [SerializeField] private Sprite icon;
-    public override Sprite Icon => icon;
-    public override string Name => "모험심";
-    public override string Description => "<nobr>적을 공격하거나 피해를 입으면 일정 확률오 경험치 보석이 떨어집니다.</nobr>";
+
+    protected override (Sprite icon, string name, string description) InformationEN => (
+        icon: this.icon,
+        name: "Adventurous",
+        description: "<nobr>When she takes damage or deals damage to monster, EXP jewels drops.</nobr>"
+    );
+    protected override (Sprite icon, string name, string description) InformationKO => (
+        icon: this.icon,
+        name: "모험심",
+        description: "<nobr>몬스터를 공격하거나 피해를 입으면 일정 확률로 경험치 보석이 떨어집니다.</nobr>"
+    );
+
     private const int EXP_AMOUNT = 10;
  
     public override void OnTaken(Character character) {

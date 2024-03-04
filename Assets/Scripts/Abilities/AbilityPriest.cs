@@ -2,6 +2,19 @@ using System;
 using UnityEngine;
 
 public class AbilityPriest : Ability {
+    [SerializeField] private Sprite icon;
+
+    protected override (Sprite icon, string name, string description) InformationEN => (
+        icon: this.icon,
+        name: "Pray",
+        description: "<nobr>Every 2 seconds, she takes heal her HP.</nobr>"
+    );
+    protected override (Sprite icon, string name, string description) InformationKO => (
+        icon: this.icon,
+        name: "기도",
+        description: "<nobr>이동하지 않는 2초마다 체력을 회복합니다.</nobr>"
+    );
+
     private float timeToHeal = 2f;
     private float standingTime = 0;
     private float cooldown = 0;
@@ -9,11 +22,6 @@ public class AbilityPriest : Ability {
     [SerializeField] private ParticleSystem healParticle;
 
     private Character owner;
-
-    [SerializeField] private Sprite icon;
-    public override Sprite Icon => icon;
-    public override string Name => "기도";
-    public override string Description => $"<nobr>이동하지 않는 2초마다 체력을 회복합니다.</nobr>";
 
     public override void OnTaken(Character character) {
         owner = character;

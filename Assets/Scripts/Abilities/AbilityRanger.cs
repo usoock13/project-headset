@@ -5,9 +5,16 @@ using UnityEngine;
 public class AbilityRanger : Ability {
     private Sprite icon;
 
-    public override Sprite Icon => icon;
-    public override string Name => "호다닥";
-    public override string Description => "<nobr>피해를 받으면 짧은 시간동안 이동속도가 증가합니다.</nobr>";
+    protected override (Sprite icon, string name, string description) InformationEN => (
+        icon: this.icon,
+        name: "Run away!",
+        description: "<nobr>When she takes damage, get the additional MOVE SPEED.</nobr>"
+    );
+    protected override (Sprite icon, string name, string description) InformationKO => (
+        icon: this.icon,
+        name: "호다닥!",
+        description: "<nobr>피해를 받으면 짧은 시간동안 이동속도가 증가합니다.</nobr>"
+    );
 
     private bool isActive = false;
     private float duration = 1.5f;

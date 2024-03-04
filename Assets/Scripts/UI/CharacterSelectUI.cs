@@ -39,6 +39,12 @@ public class CharacterSelectUI : MonoBehaviour {
     [SerializeField] private TMP_Text skillName;
     [SerializeField] private TMP_Text skillDescription;
 
+    [Header("Status Informations")]
+    [SerializeField] private TMP_Text informationPower;
+    [SerializeField] private TMP_Text informationHP;
+    [SerializeField] private TMP_Text informationArmor;
+    [SerializeField] private TMP_Text informationMoveSpeed;
+
     [Header("Without Headmount")]
     [SerializeField] private Image weaponCover;
     [SerializeField] private Image skillCover;
@@ -64,11 +70,11 @@ public class CharacterSelectUI : MonoBehaviour {
             int index = i;
             choiseItems[i].targetButton.onClick.AddListener(() => { SelectCharacter(index); });
         }
-        OnMouseEnterInSelection(0);
+        ChangeInformation(0);
         choiseItemButtons[0].Select();
     }
 
-    public void OnMouseEnterInSelection(int index) {
+    public void ChangeInformation(int index) {
         Character target = characterList[index];
         basicWeaponIcon.sprite = target.BasicWeaponInfo.icon;
         basicWeaponName.text = target.BasicWeaponInfo.name;
@@ -83,6 +89,11 @@ public class CharacterSelectUI : MonoBehaviour {
         skillIcon.sprite = target.SkillInfo.icon;
         skillName.text = target.SkillInfo.name;
         skillDescription.text = target.SkillInfo.description;
+
+        informationPower.text     = target.DefaultPower.ToString();
+        informationHP.text        = target.MaxHp.ToString();
+        informationArmor.text     = target.DefaultArmor.ToString();
+        informationMoveSpeed.text = target.DefaultMoveSpeed.ToString();
     }
 
     public void SelectCharacter(int index) {

@@ -266,7 +266,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1662,7 +1678,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -4
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1849,15 +1865,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
-  m_sharedMaterial: {fileID: -8682773866890592331, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
+  m_sharedMaterial: {fileID: 461231829049090049, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280492835
-  m_fontColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+    rgba: 4281611316
+  m_fontColor: {r: 0.20392157, g: 0.20392157, b: 0.20392157, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2615,6 +2631,10 @@ MonoBehaviour:
   skillIcon: {fileID: 165107533}
   skillName: {fileID: 587804629}
   skillDescription: {fileID: 2026343046}
+  informationPower: {fileID: 652596530}
+  informationHP: {fileID: 575328713}
+  informationArmor: {fileID: 415059081}
+  informationMoveSpeed: {fileID: 842761382}
   weaponCover: {fileID: 519786097}
   skillCover: {fileID: 741282886}
 --- !u!1 &575328711
@@ -2679,15 +2699,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
-  m_sharedMaterial: {fileID: -8682773866890592331, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
+  m_sharedMaterial: {fileID: 461231829049090049, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280492835
-  m_fontColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+    rgba: 4281611316
+  m_fontColor: {r: 0.20392157, g: 0.20392157, b: 0.20392157, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3119,7 +3139,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -4
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3354,15 +3374,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 15
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
-  m_sharedMaterial: {fileID: -8682773866890592331, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
+  m_sharedMaterial: {fileID: 461231829049090049, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280492835
-  m_fontColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+    rgba: 4281611316
+  m_fontColor: {r: 0.20392157, g: 0.20392157, b: 0.20392157, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3791,7 +3811,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4614,15 +4650,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
-  m_sharedMaterial: {fileID: -8682773866890592331, guid: 29c7910335e88ff488015b9497b90ef0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
+  m_sharedMaterial: {fileID: 461231829049090049, guid: ad06b72a99f88244d9c5aa3ec706905f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280492835
-  m_fontColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+    rgba: 4281611316
+  m_fontColor: {r: 0.20392157, g: 0.20392157, b: 0.20392157, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4832,7 +4868,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9761,7 +9813,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -11728,7 +11796,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12751,7 +12835,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13113,7 +13213,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13266,7 +13382,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 542958099}
           m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-          m_MethodName: OnMouseEnterInSelection
+          m_MethodName: ChangeInformation
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 542958099}
+          m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
+          m_MethodName: ChangeInformation
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
