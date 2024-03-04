@@ -8,7 +8,14 @@ public class CharacterRanger : Character {
     const string ANIMATION_WALK = "Ranger Walk";
     #endregion Animation Clips
 
-    public override string CharacterName => "정찰대원";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Ranger",
+             "Korean (ko)" => "정찰대원",
+
+                         _ => "Ranger",
+        };
+    }}
 
     protected override void InitializeStates() {
         base.InitializeStates();

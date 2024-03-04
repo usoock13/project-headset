@@ -20,6 +20,30 @@ public class CharacterSelectUI : MonoBehaviour {
     [SerializeField] private HeadmountCharacterShower[] headmountCharacters;
     [SerializeField] private TMP_Text selectedCountText;
 
+    #region Character's Information
+    [Header("Basic Weapon")]
+    [SerializeField] private Image basicWeaponIcon;
+    [SerializeField] private TMP_Text basicWeaponName;
+
+    [Header("Awaken Weapon")]
+    [SerializeField] private Image awakenWeaponIcon;
+    [SerializeField] private TMP_Text awakenWeaponName;
+
+    [Header("Ability Weapon")]
+    [SerializeField] private Image abilityIcon;
+    [SerializeField] private TMP_Text abilityName;
+    [SerializeField] private TMP_Text abilityDescription;
+
+    [Header("Skill Weapon")]
+    [SerializeField] private Image skillIcon;
+    [SerializeField] private TMP_Text skillName;
+    [SerializeField] private TMP_Text skillDescription;
+
+    [Header("Without Headmount")]
+    [SerializeField] private Image weaponCover;
+    [SerializeField] private Image skillCover;
+    #endregion Character's Information
+
     #region Unity Events
     private void Start() {
         InitializeChoise();
@@ -40,6 +64,25 @@ public class CharacterSelectUI : MonoBehaviour {
             int index = i;
             choiseItems[i].targetButton.onClick.AddListener(() => { SelectCharacter(index); });
         }
+        OnMouseEnterInSelection(0);
+        choiseItemButtons[0].Select();
+    }
+
+    public void OnMouseEnterInSelection(int index) {
+        Character target = characterList[index];
+        basicWeaponIcon.sprite = target.BasicWeaponInfo.icon;
+        basicWeaponName.text = target.BasicWeaponInfo.name;
+
+        awakenWeaponIcon.sprite = target.AwakenWeaponInfo.icon;
+        awakenWeaponName.text = target.AwakenWeaponInfo.name;
+
+        abilityIcon.sprite = target.HeadmountCharacter.HeadAbility.Icon;
+        abilityName.text = target.HeadmountCharacter.HeadAbility.Name;
+        abilityDescription.text = target.HeadmountCharacter.HeadAbility.Description;
+
+        skillIcon.sprite = target.SkillInfo.icon;
+        skillName.text = target.SkillInfo.name;
+        skillDescription.text = target.SkillInfo.description;
     }
 
     public void SelectCharacter(int index) {
@@ -47,12 +90,16 @@ public class CharacterSelectUI : MonoBehaviour {
         if(!selectedCharacters.Contains(target)) {
             if(selectedCharacters.Count < CHARACTER_SELECT_LIMIT) {
                 selectedCharacters.Add(target);
-            } else {
+            }/*  else {
                 throw new NotImplementedException("캐릭터 선택 카운트 한도 초과");
-            }
+            } */
         } else {
             selectedCharacters.Remove(target);
         }
+        
+        weaponCover.enabled = selectedCharacters.Count>0;
+        skillCover.enabled = selectedCharacters.Count>0;
+
         GameManager.instance.SelectedCharacters = selectedCharacters;
         UpdateSelectedCharacterViewer();
     }

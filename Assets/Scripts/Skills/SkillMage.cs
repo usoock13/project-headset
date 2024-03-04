@@ -4,14 +4,14 @@ public class SkillMage : Skill {
     #region Skill Information
     [SerializeField] private Sprite _icon;
 
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "Final Spark",
             Description: "Mage opens a portal erupts light to burns monsters."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "최후의 섬광",

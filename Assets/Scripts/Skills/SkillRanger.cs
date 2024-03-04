@@ -7,14 +7,14 @@ using Utility;
 public class SkillRanger : Skill {
     #region Skill Information
     [SerializeField] private Sprite _icon;
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "Arrow Storm",
             Description: "Ranger's arrows rage like storm."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "폭풍 화살",

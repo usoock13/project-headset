@@ -6,14 +6,14 @@ using UnityEngine;
 public class SkillWarrior : Skill {
     #region Skill Information
     [SerializeField] private Sprite _icon;
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "Blade Storm",
             Description: "Warrior spins with her sword NO MERCY to attack around her."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "회전회워리어",

@@ -5,7 +5,7 @@ public class AbilityWarriors : Ability {
     [SerializeField] private Sprite icon;
     public override Sprite Icon => icon;
     public override string Name => "근성";
-    public override string Description => "<nbr>체력이 적으면 받는 피해가 감소합니다.</nbr>";
+    public override string Description => "<nobr>체력이 적으면 받는 피해가 감소합니다.</nobr>";
 
     public override void OnTaken(Character character) {
         character.extraArmor += GetAdditionalArmor;

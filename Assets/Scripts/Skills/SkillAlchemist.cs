@@ -5,14 +5,14 @@ using UnityEngine;
 public class SkillAlchemist : Skill {
     #region Skill Information
     [SerializeField] private Sprite _icon;
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "Reconstruct",
             Description: "Alchemist reconstruct items around her to BOMB."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "재구성",

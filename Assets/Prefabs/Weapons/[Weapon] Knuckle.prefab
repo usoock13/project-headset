@@ -4935,7 +4935,7 @@ GameObject:
   - component: {fileID: 4673326878481562618}
   - component: {fileID: 35642202144724696}
   m_Layer: 0
-  m_Name: '[Weapon] Orthodox'
+  m_Name: '[Weapon] Knuckle'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

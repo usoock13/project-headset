@@ -10,7 +10,14 @@ public class CharacterAdventurer : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "모험가";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Adventurer",
+             "Korean (ko)" => "모험가",
+
+                         _ => "Adventurer",
+        };
+    }}
     #endregion Character Information
 
     protected override void InitializeStates() {

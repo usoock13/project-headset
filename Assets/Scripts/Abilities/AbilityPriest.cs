@@ -13,7 +13,7 @@ public class AbilityPriest : Ability {
     [SerializeField] private Sprite icon;
     public override Sprite Icon => icon;
     public override string Name => "기도";
-    public override string Description => $"<nbr>이동하지 않는 2초마다 체력을 회복합니다.</nbr>";
+    public override string Description => $"<nobr>이동하지 않는 2초마다 체력을 회복합니다.</nobr>";
 
     public override void OnTaken(Character character) {
         owner = character;

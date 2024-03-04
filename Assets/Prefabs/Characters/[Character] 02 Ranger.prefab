@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1854368909079229216}
-  isActive: 0
   _icon: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -563,8 +562,8 @@ MonoBehaviour:
   characterInputSystem: {fileID: 1559421102479851112}
   canMove: 1
   levelRewardCount: 0
-  headmountCharacter: {fileID: 6532912784264961680}
   activeSkill: {fileID: 4111697592435676632}
+  headmountCharacter: {fileID: 6532912784264961680}
   stateMachine: {fileID: 3973744097422266915}
   movement: {fileID: 3973744097703175857}
   dodgeParticle: {fileID: 3508031363089572728}
@@ -583,7 +582,8 @@ MonoBehaviour:
   statusDefaultArmor: 8
   increasingPower: 0.8
   increasingHP: 5.5
-  basicWeapon: {fileID: -3919815677109160991, guid: a0741043c1d8ed244889e2c4f9a7ea6f, type: 3}
+  basicWeaponPrefab: {fileID: -3919815677109160991, guid: a0741043c1d8ed244889e2c4f9a7ea6f, type: 3}
+  awakenWeaponPrefab: {fileID: 7469227184000369546, guid: 38ec9d4e5069ee845bbf9c28608e4313, type: 3}
   defaultSprite: {fileID: 21300000, guid: 49251e57d13460d4288f6bf4bdb50c0d, type: 3}
   handLampLight: {fileID: 3076683220489727271}
 --- !u!4 &314634670080285087 stripped

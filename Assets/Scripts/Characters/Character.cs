@@ -74,8 +74,12 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     #region Character Information
     public Sprite DefaultSprite => defaultSprite;
     public abstract string CharacterName { get; }
-    [SerializeField] private HeadmountCharacter headmountCharacter;
+
     [SerializeField] private Skill activeSkill;
+    public (Sprite icon, string name, string description) SkillInfo => 
+        (activeSkill.Icon, activeSkill.Name, activeSkill.Description);
+
+    [SerializeField] private HeadmountCharacter headmountCharacter;
     public HeadmountCharacter HeadmountCharacter => headmountCharacter;
     #endregion Character Information
 
@@ -190,7 +194,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     [SerializeField] protected float increasingPower = 0.2f;
     [SerializeField] protected float increasingHP = 2f;
     
-    [SerializeField] protected Weapon basicWeapon;
+    [SerializeField] protected Weapon basicWeaponPrefab;
+    [SerializeField] protected Weapon awakenWeaponPrefab;
+    public (Sprite icon, string name) BasicWeaponInfo => (basicWeaponPrefab.Icon, basicWeaponPrefab.Name);
+    public (Sprite icon, string name) AwakenWeaponInfo => (awakenWeaponPrefab.Icon, awakenWeaponPrefab.Name);
+
     [SerializeField] private Sprite defaultSprite;
 
     public float DefaultPower => statusDefaultPower;
@@ -220,7 +228,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public void InitializeCharacter() {
         currentHp = maxHp;
         currentStamina = maxStamina;
-        StageManager.EquipmentsManager.AddBasicWeapon(basicWeapon);
+        StageManager.EquipmentsManager.AddBasicWeapon(basicWeaponPrefab);
         havingAttachment = new List<Attachment>();
     }
     private void Update() {

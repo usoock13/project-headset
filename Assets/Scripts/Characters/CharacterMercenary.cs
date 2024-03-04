@@ -10,7 +10,14 @@ public class CharacterMercenary : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "용병";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Mercenary",
+             "Korean (ko)" => "용병",
+
+                         _ => "Mercenary",
+        };
+    }}
     #endregion Character Information
 
     protected override void InitializeStates() {

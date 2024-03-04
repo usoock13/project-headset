@@ -10,7 +10,14 @@ public class CharacterFighter : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "무투가";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Fighter",
+             "Korean (ko)" => "무투가",
+
+                         _ => "Fighter",
+        };
+    }}
     #endregion Character Information
 
     protected override void InitializeStates() {

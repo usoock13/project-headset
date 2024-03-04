@@ -5,7 +5,7 @@ public class AbilityAlchemist : Ability {
     [SerializeField] private Sprite icon;
     public override Sprite Icon => icon;
     public override string Name => "황금 발견";
-    public override string Description => "<nbr>케소를 획득하면 금액에 비례하여 경험치를 획득합니다.</nbr>";
+    public override string Description => "<nobr>케소를 획득하면 금액에 비례하여 경험치를 획득합니다.</nobr>";
 
     public override void OnTaken(Character character) {
         character.onGetItem += OnGetItem;

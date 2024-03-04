@@ -5,8 +5,7 @@ public class AbilityAdventurer : Ability {
     [SerializeField] private Sprite icon;
     public override Sprite Icon => icon;
     public override string Name => "모험심";
-    public override string Description => "<nbr>적을 공격하면 낮은 확률로 경험치 보석이 떨어집니다.\n"
-                                        + "적에게 피해를 입으면 보다 높은 확률로 경험치 보석이 떨어집니다.</nbr>";
+    public override string Description => "<nobr>적을 공격하거나 피해를 입으면 일정 확률오 경험치 보석이 떨어집니다.</nobr>";
     private const int EXP_AMOUNT = 10;
  
     public override void OnTaken(Character character) {

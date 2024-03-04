@@ -4,14 +4,14 @@ using UnityEngine;
 public class SkillMercenary : Skill {
     #region Skill Information
     [SerializeField] private Sprite _icon;
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "Indomitable",
             Description: "Mercenary get the IMMUNITY from any injuries."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "불굴",

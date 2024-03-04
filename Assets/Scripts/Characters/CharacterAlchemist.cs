@@ -10,7 +10,14 @@ public class CharacterAlchemist : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "연금술사";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Alchemist",
+             "Korean (ko)" => "연금술사",
+
+                         _ => "Alchemist",
+        };
+    }}
     #endregion Character Information
 
     protected override void InitializeStates() {

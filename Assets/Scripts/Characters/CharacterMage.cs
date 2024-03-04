@@ -9,7 +9,14 @@ public class CharacterMage : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "마법사";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Mage",
+             "Korean (ko)" => "마법사",
+
+                         _ => "Mage",
+        };
+    }}
     
     #endregion Character Information
 

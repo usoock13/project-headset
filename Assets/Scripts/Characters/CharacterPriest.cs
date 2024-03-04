@@ -9,7 +9,14 @@ public class CharacterPriest : Character {
     #endregion Animation Clips
 
     #region Character Information
-    public override string CharacterName => "성직자";
+    public override string CharacterName { get {
+        return GameManager.instance.SelectedLocale.LocaleName switch {
+            "English (en)" => "Priest",
+             "Korean (ko)" => "성직자",
+
+                         _ => "Priest",
+        };
+    }}
     
     #endregion Character Information
 

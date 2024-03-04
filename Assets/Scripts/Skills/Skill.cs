@@ -5,10 +5,10 @@ public abstract class Skill : MonoBehaviour {
     [SerializeField] protected Character character;
     protected float cost = 100f;
 
-    protected record SkillInformation(Sprite Icon, string Name, string Description);
+    public record SkillInformation(Sprite Icon, string Name, string Description);
     
-    protected abstract SkillInformation InformationEN { get; }
-    protected abstract SkillInformation InformationKO { get; }
+    public abstract SkillInformation InformationEN { get; }
+    public abstract SkillInformation InformationKO { get; }
 
     public Sprite Icon { get => 
         GameManager.instance.SelectedLocale.LocaleName switch {

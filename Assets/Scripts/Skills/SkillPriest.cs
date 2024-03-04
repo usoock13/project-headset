@@ -3,14 +3,14 @@ using UnityEngine;
 public class SkillPriest : Skill {
     #region Skill Information
     [SerializeField] private Sprite _icon;
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "God Bless",
             Description: "Priest get the near-immortal POWER from omnipotent blessing of the god."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "신의 축복",

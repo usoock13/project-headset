@@ -5,14 +5,14 @@ public class SkillFighter : Skill {
     #region Skill Information
     private bool isActive = false;
     [SerializeField] private Sprite _icon;
-    protected override SkillInformation InformationEN { get => 
+    public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "Break Limit",
             Description: "Fighter gets HUGE speed in exchange for to release half of HP."
         );
     }
-    protected override SkillInformation InformationKO { get => 
+    public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
             Name: "한계 돌파",
