@@ -56,7 +56,7 @@ public class WeaponLightningDagger : Weapon {
         Description:
             NextLevelIndex switch {
                 0 => $"<nobr>"
-                   + $"번개가 흐르는 단검을 던집니다. 몬스터가 단검에 맞으면 번개가 발생해 주변 적에게 튕기며 피해를 가합니다."
+                   + $"번개가 흐르는 단검을 던집니다. 몬스터가 단검에 맞으면 번개가 발생해 주변 몬스터에게 튕기며 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[0]}+{damageCoef[0]*100}%</color>"
                    + $"\n번개 피해량 : <color=#f40>{chainingStaticDamage[0]}+{chainingDamageCoef[0]*100}%</color>"
@@ -64,7 +64,7 @@ public class WeaponLightningDagger : Weapon {
                    + $"\n튕기는 횟수 : <color=#f40>{chainingCount[0]}</color>"
                    + $"</nobr>",
                 _ => $"<nobr>"
-                   + $"번개가 흐르는 단검을 던집니다. 몬스터가 단검에 맞으면 번개가 발생해 주변 적에게 튕기며 피해를 가합니다."
+                   + $"번개가 흐르는 단검을 던집니다. 몬스터가 단검에 맞으면 번개가 발생해 주변 몬스터에게 튕기며 피해를 가합니다."
                    + $"\n"
                    + $"\n피해량 : <color=#f40>{staticDamage[level-1]}+{damageCoef[level-1]*100}%</color> > <color=#f40>{staticDamage[NextLevelIndex]}+{damageCoef[NextLevelIndex]*100}%</color>"
                    + $"\n번개 피해량 : <color=#f40>{chainingStaticDamage[level-1]}+{chainingDamageCoef[level-1]*100}%</color> > <color=#f40>{chainingStaticDamage[NextLevelIndex]}+{chainingDamageCoef[NextLevelIndex]*100}%</color>"

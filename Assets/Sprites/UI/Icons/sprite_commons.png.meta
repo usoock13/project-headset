@@ -355,6 +355,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: sprite_commons_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff2e13c7a9770f64488ebfff98b4b7f3
+      internalID: -1641043820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_commons_13
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97f27e56731ea1d41ba1176b10b922c2
+      internalID: -2104046178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -368,6 +410,7 @@ TextureImporter:
     nameFileIdTable:
       sprite_commons_6: 1803172493
       sprite_commons_1: 2134087002
+      sprite_commons_12: -1641043820
       sprite_commons_7: -320034439
       sprite_commons_0: 1513753180
       sprite_commons_9: -987656414
@@ -378,6 +421,7 @@ TextureImporter:
       sprite_commons_11: 796829314
       sprite_commons_3: 1981910703
       sprite_commons_4: -1716811298
+      sprite_commons_13: -2104046178
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

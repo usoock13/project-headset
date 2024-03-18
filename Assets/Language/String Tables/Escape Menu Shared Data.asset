@@ -23,6 +23,26 @@ MonoBehaviour:
     m_Key: em_close
     m_Metadata:
       m_Items: []
+  - m_Id: 25419018737086464
+    m_Key: em_apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25419146210373632
+    m_Key: em_effect_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25419228406149120
+    m_Key: em_bgm_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25419232847917056
+    m_Key: em_language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25419352742096896
+    m_Key: em_full_screen
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

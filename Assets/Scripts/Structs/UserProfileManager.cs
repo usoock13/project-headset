@@ -1,13 +1,15 @@
 using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 
 public class UserProfileManager {
-    public  UserProfile Profile { get; private set; }
+    private UserProfile profile;
 
     private string saveDir = Application.persistentDataPath + "\\headset\\Save Data\\";
     private string saveFileName = "userProfile.json";
+    
+    public int HavingKeso => profile.currentKeso;
+    public bool[] UnlockCharacterList => profile.unlockRharacterList;
 
     public UserProfileManager() {
         LoadFromLocal();
@@ -15,10 +17,10 @@ public class UserProfileManager {
     public void IncreaseKeso(int amount) {
         try {
             checked {
-                Profile.currentKeso += amount;
+                profile.currentKeso += amount;
             }
         } catch {
-            Profile.currentKeso = int.MaxValue;
+            profile.currentKeso = int.MaxValue;
         }
         SaveToLocal();
     }
@@ -27,7 +29,7 @@ public class UserProfileManager {
         if(Directory.Exists(saveDir) && File.Exists(path)) {
             var sr = new StreamReader(path);
             string json = sr.ReadToEnd();
-            Profile = JsonUtility.FromJson<UserProfile>(json);
+            profile = JsonUtility.FromJson<UserProfile>(json);
         } else {
             CreateNewSaveData();
         }
@@ -37,7 +39,7 @@ public class UserProfileManager {
             CreateNewSaveData();
         }
         StreamWriter sw = new StreamWriter(saveDir + saveFileName);
-        string json = JsonUtility.ToJson(Profile);
+        string json = JsonUtility.ToJson(profile);
         sw.WriteLine(json);
         sw.Close();
     }
@@ -50,12 +52,20 @@ public class UserProfileManager {
         sw.Close();
     }
 
-    public class UserProfile {
+    public void SaveGameSetting(SettingManager.GameSetting setting) {
+        string json = JsonUtility.ToJson(setting);
+        Debug.Log(json);
+        /* 
+            TODO : save as file. (setting.json)
+         */
+    }
+
+    private class UserProfile {
         public int currentKeso;
-        public bool[] characterUnlockedList;
+        public bool[] unlockRharacterList;
         public UserProfile() {
             this.currentKeso = 0;
-            this.characterUnlockedList = new bool[8];
+            this.unlockRharacterList = new bool[8];
         }
     }
 }

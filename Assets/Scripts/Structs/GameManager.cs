@@ -31,7 +31,10 @@ public class GameManager : MonoBehaviour {
         set { selectedCharacters = value; }
     }
 
-    private Locale _selectedLocale;
+    [SerializeField] private EscapeMenuUI escapeMenuUI;
+
+    public SettingManager SettingManager { get; private set; } = new SettingManager();
+
     public Locale SelectedLocale => LocalizationSettings.SelectedLocale;
     public string LangCodeEN => LocalizationEditorSettings.GetLocale("en").LocaleName;
     public string LangCodeKO => LocalizationEditorSettings.GetLocale("ko").LocaleName;
@@ -45,5 +48,12 @@ public class GameManager : MonoBehaviour {
 
         if(_userProfileManager == null)
             _userProfileManager = new UserProfileManager();
+    }
+
+    public void OpenEscapeMenu() {
+        if(!escapeMenuUI.gameObject.activeInHierarchy)
+            escapeMenuUI.Open();
+        else
+            escapeMenuUI.Close();
     }
 }
