@@ -56,7 +56,7 @@ public class CharacterSelectUI : MonoBehaviour {
     #region Unity Events
     private void Start() {
         InitializeChoise();
-        LocalizationSettings.SelectedLocaleChanged += (locale) => { InitializeChoise(); };
+        LocalizationSettings.SelectedLocaleChanged += (locale) => { OnSelectedLocaleChange(); };
         UpdateSelectedCharacterViewer();
     }
     #endregion Unity Events
@@ -75,6 +75,12 @@ public class CharacterSelectUI : MonoBehaviour {
         ChangeInformation(0);
         choiseItemButtons[0].Select();
 
+        for(int i=0; i<choiseItems.Length && i<characterList.Length; i++) {
+            SetChoise(i, characterList[i]);
+        }
+    }
+
+    private void OnSelectedLocaleChange() {
         for(int i=0; i<choiseItems.Length && i<characterList.Length; i++) {
             SetChoise(i, characterList[i]);
         }
