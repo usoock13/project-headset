@@ -14,7 +14,11 @@ public class GameManager : MonoBehaviour {
         set { stageManager ??= value; }
     }
     private UserProfileManager _userProfileManager;
-    public UserProfileManager ProfileManager => _userProfileManager;
+    public UserProfileManager ProfileManager { get {
+        if(_userProfileManager == null)
+            _userProfileManager = new UserProfileManager();
+        return _userProfileManager;
+    }}
     
     public Character Character {
         get { return stageManager.Character; }
@@ -31,6 +35,9 @@ public class GameManager : MonoBehaviour {
         set { selectedCharacters = value; }
     }
 
+    [SerializeField] private SoundManager _soundManager;
+    public SoundManager SoundManager => _soundManager;
+
     [SerializeField] private EscapeMenuUI escapeMenuUI;
 
     public SettingManager SettingManager { get; private set; } = new SettingManager();
@@ -45,9 +52,14 @@ public class GameManager : MonoBehaviour {
         else
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+        
+        SettingManager.LoadSetting();
+        StartCoroutine(SettingManager.SynchronizeSetting());
+    }
 
-        if(_userProfileManager == null)
-            _userProfileManager = new UserProfileManager();
+    public void QuitGame() {
+        Application.Quit();
+        /* I will make this... */
     }
 
     public void OpenEscapeMenu() {

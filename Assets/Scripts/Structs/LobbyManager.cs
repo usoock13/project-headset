@@ -4,14 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour {
-    [SerializeField] private IntroUI introUI;
     [SerializeField] private CharacterSelectUI characterSelectUI;
     [SerializeField] private GameObject introUIGobj;
 
     [SerializeField] private TMP_Text kesoAmount;
 
+    [SerializeField] private AudioClip clickIntroClip;
+    [SerializeField] private AudioClip clickButtonClip;
+
+    [SerializeField] private AudioClip lobbyBgmClip;
+
+    private SoundManager SoundManager => GameManager.instance.SoundManager;
+
     private void Start() {
         InitializeUIs();
+        SoundManager.PlayBGM(lobbyBgmClip);
     }
 
     private void InitializeUIs() {
@@ -21,7 +28,9 @@ public class LobbyManager : MonoBehaviour {
     public void OnClickIntroUI() {
         ShowIntroUI(false);
         ShowCharacterSelectUI(true);
+        SoundManager.PlayEffect(clickIntroClip);
     }
+
     public void OnClickGameStartButton() {
         SceneManager.LoadScene(1);
     }
@@ -35,9 +44,9 @@ public class LobbyManager : MonoBehaviour {
     private void UpdateKesoAmount(int amount) {
         kesoAmount.text = amount.ToString();
     }
-
-    private void OnClickBackButton() {
+    
+    public void OnClickBackButton() {
         characterSelectUI.gameObject.SetActive(false);
-        introUI.gameObject.SetActive(true);
+        introUIGobj.SetActive(true);
     }
 }

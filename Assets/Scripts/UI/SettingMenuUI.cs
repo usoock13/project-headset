@@ -30,6 +30,7 @@ public class SettingMenuUI : MonoBehaviour {
             volumeBGM = SettingManager.VolumeBGM,
             language = SettingManager.Language,
         };
+        BringSettingToUI();
     }
 
     private void InitializeUI() {
@@ -55,6 +56,15 @@ public class SettingMenuUI : MonoBehaviour {
         languageButtonText.text = languageList[currentLanguage];
 
         SettingManager.Language = currentLanguage;
+    }
+    
+    public void BringSettingToUI() {
+        // SettingManager.LoadSetting();
+        fullScreenToggle.isOn = SettingManager.IsFullScreen;
+        effectSlider.value = SettingManager.VolumeEffect;
+        bgmSlider.value = SettingManager.VolumeBGM;
+        currentLanguage = SettingManager.Language;
+        languageButtonText.text = languageList[currentLanguage];
     }
 
     public void OnClickApplyButton() {

@@ -1,13 +1,11 @@
-using System;
 using System.IO;
 using UnityEngine;
 
 public class UserProfileManager {
     private UserProfile profile;
 
-    private string saveDir = Application.persistentDataPath + "\\headset\\Save Data\\";
     private string saveFileName = "userProfile.json";
-    
+
     public int HavingKeso => profile.currentKeso;
     public bool[] UnlockCharacterList => profile.unlockRharacterList;
 
@@ -24,40 +22,27 @@ public class UserProfileManager {
         }
         SaveToLocal();
     }
+
     private void LoadFromLocal() {
-        string path = saveDir + saveFileName;
-        if(Directory.Exists(saveDir) && File.Exists(path)) {
-            var sr = new StreamReader(path);
-            string json = sr.ReadToEnd();
+        string json = FileManager.LoadJson(saveFileName);
+        if(json == null || json == "")
+            profile = new UserProfile();
+        else
             profile = JsonUtility.FromJson<UserProfile>(json);
-        } else {
-            CreateNewSaveData();
-        }
     }
+
     private void SaveToLocal() {
-        if(!Directory.Exists(saveDir) && !File.Exists(saveDir + saveFileName)) {
-            CreateNewSaveData();
-        }
-        StreamWriter sw = new StreamWriter(saveDir + saveFileName);
         string json = JsonUtility.ToJson(profile);
-        sw.WriteLine(json);
-        sw.Close();
-    }
-    private void CreateNewSaveData() {
-        if(!Directory.Exists(saveDir))
-            Directory.CreateDirectory(saveDir);
-        StreamWriter sw = new StreamWriter(saveDir + saveFileName);
-        string json = JsonUtility.ToJson(new UserProfile());
-        sw.WriteLine(json);
-        sw.Close();
+        FileManager.SaveJson(json, saveFileName);
     }
 
     public void SaveGameSetting(SettingManager.GameSetting setting) {
         string json = JsonUtility.ToJson(setting);
-        Debug.Log(json);
-        /* 
-            TODO : save as file. (setting.json)
-         */
+        PlayerPrefs.SetString("setting", json);
+    }
+
+    public string LoadGameSetting() {
+        return PlayerPrefs.GetString("setting") ?? null;
     }
 
     private class UserProfile {

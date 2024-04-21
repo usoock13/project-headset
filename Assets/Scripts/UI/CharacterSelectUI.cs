@@ -5,6 +5,7 @@ using TMPro;
 using System.Collections.Generic;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.Localization.Settings;
 
 public class CharacterSelectUI : MonoBehaviour {
     [SerializeField] private Character[] characterList;
@@ -50,15 +51,16 @@ public class CharacterSelectUI : MonoBehaviour {
     [SerializeField] private Image skillCover;
     #endregion Character's Information
 
+    [SerializeField] private AudioClip clickButtonClip;
+
     #region Unity Events
     private void Start() {
         InitializeChoise();
-        for(int i=0; i<choiseItems.Length && i<characterList.Length; i++) {
-            SetChoise(i, characterList[i]);
-        }
+        LocalizationSettings.SelectedLocaleChanged += (locale) => { InitializeChoise(); };
         UpdateSelectedCharacterViewer();
     }
     #endregion Unity Events
+    
     private void InitializeChoise() {
         choiseItems = new ChoiseItem[choiseItemButtons.Length];
         for(int i=0; i<choiseItemButtons.Length; i++) {
@@ -72,6 +74,10 @@ public class CharacterSelectUI : MonoBehaviour {
         }
         ChangeInformation(0);
         choiseItemButtons[0].Select();
+
+        for(int i=0; i<choiseItems.Length && i<characterList.Length; i++) {
+            SetChoise(i, characterList[i]);
+        }
     }
 
     public void ChangeInformation(int index) {
@@ -113,6 +119,8 @@ public class CharacterSelectUI : MonoBehaviour {
 
         GameManager.instance.SelectedCharacters = selectedCharacters;
         UpdateSelectedCharacterViewer();
+
+        GameManager.instance.SoundManager.PlayEffect(clickButtonClip);
     }
 
     private void UpdateSelectedCharacterViewer() {

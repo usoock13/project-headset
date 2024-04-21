@@ -23,6 +23,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ko
     - Preload
+  - m_GUID: 8325c5d5337f3424785598820fdf9ed6
+    m_Address: Setting Menu_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    - Preload
+  - m_GUID: 47327c8c2f968fa44945630de8cce2b4
+    m_Address: Lobby UI_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b8c32654c89bb5c488ff707d412bc09e, type: 2}
   m_SchemaSet:

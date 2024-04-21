@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class EscapeMenuUI : MonoBehaviour {
-    private SettingMenuUI settingMenu;
+    [SerializeField] private SettingMenuUI settingMenu;
 
     public void Open() {
         this.gameObject.SetActive(true);
