@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using Utility;
 
 [RequireComponent(typeof(StateMachine))]
 public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeable {
@@ -111,7 +112,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Func<Character, float> extraAttackSpeed;
     public Func<Character, float> extraArmor;
 
-    public Func<Monster, float, bool> attackBlocker; // Monster : Origin of attack // float : Damage amount
+    public Func<GameObject, float, bool> attackBlocker; // GameObject : Origin of attack // float : Damage amount
     #endregion Extra Status
 
     #region Calculated Status
@@ -158,6 +159,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public Vector2 MoveDirection => moveDirection;
     protected Vector2 MoveVector => moveDirection.normalized * MoveSpeed;
 
+    private bool isArrowLocked = false;
     protected Vector2 attackingDirection;
     public bool arrowIsFixed { get; protected set; } = false;
     private bool aimWithMouse = false;
@@ -208,7 +210,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public float DefaultRecoveringStamina => defaultRecoveringStamina;
 
     #region Character Events
-    public Action<Character, Monster, float> onTakeAttack;
+    public Action<Character, GameObject, float> onTakeAttack;
     public Action<Character, float> onTakeDamage;
     public Action<Character> onAttack;
     public Action<Character, Monster> onAttackMonster;
@@ -256,7 +258,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             MoveToward(MoveVector * Time.deltaTime);
             if(!aimWithMouse && !arrowIsFixed) {
                 attackingDirection = moveDirection;
-                RotateArrow(moveDirection);
+                RotateArrowKeyboad(moveDirection);
             }
         };
         #endregion Initialize Move State
@@ -320,7 +322,10 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         spritesParent.localScale =  new Vector3(flip? -1 : 1, org.y, org.z);
     }
     
-    private void RotateArrow(Vector2 direction) {
+    private void RotateArrowKeyboad(Vector2 direction) {
+        if(isArrowLocked)
+            return;
+
         float rotateSpeed = 1080f;
         float rotateDir = 1f;
         float currentAngle = attackArrow.transform.rotation.eulerAngles.z;
@@ -338,12 +343,21 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     }
 
     private void RotateArrowWithMouse() {
-        if(aimWithMouse) {
+        if(aimWithMouse && !isArrowLocked) {
             Vector2 screenPos = (Camera.main.WorldToScreenPoint(attackArrow.transform.position));
             attackDirection = attackArrow.transform.rotation * Vector2.up;
             var point = new Vector2(Input.mousePosition.x - screenPos.x, Input.mousePosition.y - screenPos.y);
             attackArrow.eulerAngles = new Vector3(0, 0, (Mathf.Atan2( point.y, point.x ) - Mathf.PI/2) * Mathf.Rad2Deg);
         }
+    }
+
+    public void RotateArrow(Vector2 direction) {
+        Vector2 position2d = attackArrow.transform.position;
+        attackArrow.LookAtWithUp(position2d + direction);
+    }
+
+    public void LockAttackArrow(bool locked) {
+        isArrowLocked = locked;
     }
 
     public void ToggleMouseAiming() {
@@ -419,32 +433,32 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public void OnKillMonster(Monster monster) {
         onKillMonster?.Invoke(this, monster);
     }
-
-    public void TakeAttack(Monster origin, float amount) {
-        if(CurrentState.Compare(dieState)
-        || CanBlockAttack(origin, amount))
-            return;
-        TakeDamage(amount);
-        onTakeAttack?.Invoke(this, origin, amount);
-    }
-    private bool CanBlockAttack(Monster origin, float amount) {
+    
+    private bool CanBlockAttack(GameObject origin, float amount) {
         Delegate[] blockers = attackBlocker?.GetInvocationList();
         if(blockers != null)
             for(int i=0; i<blockers.Length; i++) {
-                if(((Func<Monster, float, bool>) blockers[i]).Invoke(origin, amount))
+                if(((Func<GameObject, float, bool>) blockers[i]).Invoke(origin, amount))
                     return true;
             }
         return false;
-    }
-    public void TakeDamage(float amount) {
-        float finalDamage = (100 - Armor)/100 * amount;
-        currentHp -= finalDamage;
-        StatusUI.UpdateHpSlider(currentHp / maxHp);
-        onTakeDamage?.Invoke(this, finalDamage);
-        if(currentHp <= 0)
-            Die();
-        StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
-        StageUIManager.ActiveHitEffectUI();
+    }   
+    public void TakeDamage(float amount, GameObject origin=null) {
+        if(origin.TryGetComponent(out Monster monster)) {
+            if(CurrentState.Compare(dieState)
+            || CanBlockAttack(origin, amount))
+                return;
+
+            float finalDamage = (100 - Armor)/100 * amount;
+            currentHp -= finalDamage;
+            StatusUI.UpdateHpSlider(currentHp / maxHp);
+            onTakeDamage?.Invoke(this, finalDamage);
+            if(currentHp <= 0)
+                Die();
+            StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
+            StageUIManager.ActiveHitEffectUI();
+            onTakeAttack?.Invoke(this, origin, amount);
+        }
     }
     public void ConsumeHP(float amount) {
         currentHp -= amount;
@@ -452,12 +466,12 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
             currentHp = 1;
         StatusUI.UpdateHpSlider(currentHp / maxHp);
     }
-    public void TakeStagger(float amount) {
+    public void TakeStagger(float second, GameObject origin=null) {
         throw new NotImplementedException();
         if(CurrentState.Compare(dieState))
             return;
     }
-    public void TakeForce(Vector2 force, float duration=.25f) {
+    public void TakeForce(Vector2 force, float duration=.25f, GameObject origin=null) {
         throw new NotImplementedException();
         if(CurrentState.Compare(dieState))
             return;

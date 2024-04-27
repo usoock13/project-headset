@@ -10,6 +10,8 @@ public abstract class Skill : MonoBehaviour {
     public abstract SkillInformation InformationEN { get; }
     public abstract SkillInformation InformationKO { get; }
 
+    [SerializeField] protected AudioClip castingSound;
+
     public Sprite Icon { get => 
         GameManager.instance.SelectedLocale.LocaleName switch {
             "English (en)" => InformationEN.Icon,

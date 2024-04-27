@@ -14,7 +14,7 @@ public class SkillAdventurer : Skill {
         new SkillInformation(
             Icon: _icon,
             Name: "환영",
-            Description: "모험가가 진짜와 구별할 수 없는 완벽한 환영을 소환합니다."
+            Description: "모험가가 진짜와 구별할 수 없는 완벽한 환영을 소환g."
         );
     }
     #endregion Skill Information

@@ -65,6 +65,8 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private Light2D globalLight;
     [SerializeField] private Color sunLightColor = Color.white;
     [SerializeField] private Color moonLightColor = Color.gray;
+
+    [SerializeField] private AudioClip stageBgmClip;
     
     private void Awake() {
         if(GameManager.instance.StageManager == null)
@@ -90,6 +92,8 @@ public class StageManager : MonoBehaviour {
         MeatPooler = new ObjectPooler(meatOrigin.gameObject, null, null, parent: this.transform);
         kesoPooler = new ObjectPooler(kesoOrigin.gameObject, null, null, null, parent: this.transform);
         saladPooler = new ObjectPooler(saladOrigin.gameObject, null, null, parent: this.transform);
+
+        GameManager.instance.SoundManager.PlayBGM(stageBgmClip);
     }
 
     public void IncreaseStageLevel(float amount) {

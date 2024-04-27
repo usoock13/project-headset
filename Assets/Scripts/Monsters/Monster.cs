@@ -99,7 +99,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         monster.TakeForce(transform.up * 1f, hittingDelay);
         
     */
-    public virtual void TakeDamage(float amount) {
+    public virtual void TakeDamage(float amount, GameObject origin=null) {
         float damage = amount * DamageScale;
         currentHp -= damage;
         if(currentHp <= 0)
@@ -108,7 +108,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     }
 
 
-    public virtual void TakeStagger(float second) {
+    public virtual void TakeStagger(float second, GameObject origin=null) {
         float reduced = second / Toughness;
         if(reduced > 0.1f) {
             takeAttackDelayCoroutine = StartCoroutine(TakeAttackDelayCoroutine(reduced));
@@ -129,7 +129,7 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
         material?.SetFloat("_Hit_Effect_Scale", 0);
     }
 
-    public virtual void TakeForce(Vector2 force, float duration=.25f) {
+    public virtual void TakeForce(Vector2 force, float duration=.25f, GameObject origin=null) {
         force = Toughness == 0  ?  force  :  force / Toughness;
         duration = Toughness == 0  ?  duration  :  duration / Toughness;
         takeForceCoroutine = StartCoroutine(TakeForceCoroutine(force, duration));

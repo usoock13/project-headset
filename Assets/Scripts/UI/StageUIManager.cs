@@ -42,8 +42,8 @@ public class StageUIManager : MonoBehaviour {
     }
     private IEnumerator TimeCoroutine() {
         while(true) {
-            int m = (int)(Time.time / 60);
-            int s = (int)Time.time % 60;
+            int m = (int)(Time.timeSinceLevelLoad / 60);
+            int s = (int)Time.timeSinceLevelLoad % 60;
             string str = $"{m:D2}:{s:D2}";
             elapsedTime.text = str;
             yield return new WaitForSeconds(1f);

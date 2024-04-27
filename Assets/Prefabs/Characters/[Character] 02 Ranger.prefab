@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1854368909079229216}
+  castingSound: {fileID: 8300000, guid: 109bc2af98e9e6f4f8667b492bb9d0b7, type: 3}
   _icon: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -55,6 +56,7 @@ MonoBehaviour:
   timeForOneCycle: 0.3
   arrowPrefab: {fileID: 3045032195089685657}
   trailRenderer: {fileID: 823878225398264038}
+  arrowSound: {fileID: 8300000, guid: 35b6da8481c11e1408dee9688dfc5576, type: 3}
 --- !u!1 &874485322464477136
 GameObject:
   m_ObjectHideFlags: 0

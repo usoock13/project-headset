@@ -292,6 +292,7 @@ MonoBehaviour:
   shortbowEffect: {fileID: 8874935607287703643}
   itemAwake: {fileID: 6623415511889860347}
   _weaponIcon: {fileID: 679180364, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  arrowSound: {fileID: 8300000, guid: 35b6da8481c11e1408dee9688dfc5576, type: 3}
 --- !u!1 &6753284933765840865
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,77 +7,44 @@ public class SkillMercenary : Skill {
     public override SkillInformation InformationEN { get => 
         new SkillInformation(
             Icon: _icon,
-            Name: "Indomitable",
-            Description: "Mercenary get the IMMUNITY from any injuries."
+            Name: "Ecstasy",
+            Description: "Mercenary loses aiming ability and gets a VERY high attack speed for a short time."
         );
     }
     public override SkillInformation InformationKO { get => 
         new SkillInformation(
             Icon: _icon,
-            Name: "불굴",
-            Description: "용병이 모든 피해로부터 면역을 얻습니다."
+            Name: "무아지경",
+            Description: "용병이 잠깐동안 조준 능력을 상실하고 매우 높은 공격 속도를 얻습니다."
         );
     }
     #endregion Skill Information
 
-    [SerializeField] private float immunityDuration = 4f;
-    [SerializeField] private float barrierDuration = 10f;
-    [SerializeField] private SpriteRenderer immuneRenderer;
-    [SerializeField] private SpriteRenderer barrierRenderer;
-
-    private bool immune = false;
-    private float barrier = 0f;
-    private float accumulatedDamage = 0f;
+    [SerializeField] private float duration = 4f;
+    [SerializeField] private ParticleSystem effectParticle;
 
     private Coroutine inactiveCoroutine;
 
     public override void Active() {
-        accumulatedDamage = 0;
-
-        character.attackBlocker += MercenarysBlocker;
-
-        immune = true;
-        immuneRenderer.enabled = true;
-
         if(inactiveCoroutine != null)
             StopCoroutine(inactiveCoroutine);
         inactiveCoroutine = StartCoroutine(InactiveCorouine());
     }
 
     private IEnumerator InactiveCorouine() {
-        yield return new WaitForSeconds(immunityDuration);
-        immune = false;
-        immuneRenderer.enabled = false;
-        
-        if(accumulatedDamage != 0 ) {
-            barrier = accumulatedDamage;
-            barrierRenderer.enabled = true;
-            yield return new WaitForSeconds(barrierDuration);
-            barrierRenderer.enabled = false;
+        float time = 0;
+        Vector2 dir = Vector2.up;
+        character.extraAttackSpeed += GetExtraAttackSpeed;
+        character.LockAttackArrow(true);
+        while(time < duration) {
+            dir = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward) * dir;
+            character.RotateArrow(dir);
+            yield return new WaitForSeconds(0.1f);
+            time += 0.1f;
         }
-        character.attackBlocker -= MercenarysBlocker;
+        character.LockAttackArrow(false);
+        character.extraAttackSpeed -= GetExtraAttackSpeed;
     }
-
-    private bool MercenarysBlocker(Monster monster, float damage) {
-        if(immune) {
-            accumulatedDamage += damage;
-            GameManager.instance.StageManager.PrintDamageNumber(transform.position, "IMMUNE");
-            return true;
-        } else {
-            if(barrier <= 0)
-                return false;
-            else {
-                barrier -= damage;
-                GameManager.instance.StageManager.PrintDamageNumber(transform.position, damage.ToString(), new Color(1f, 0.5f, 0.5f));
-                
-                monster.TakeDamage(damage * 2f);
-                monster.TakeStagger(0.1f);
-
-                if(barrier <= 0)
-                    barrierRenderer.enabled = false;
-
-                return true;
-            }
-        }
-    }
+    
+    private float GetExtraAttackSpeed(Character character) => 9f;
 }

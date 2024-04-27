@@ -321,7 +321,7 @@ public class MonsterWitch : Monster {
         stateMachine.ChangeState(chaseState);
     }
 
-    public override void TakeDamage(float amount) {
+    public override void TakeDamage(float amount, GameObject origin=null) {
         amount = DeductShiled(amount);
         if(amount <= 0)
             return;
@@ -329,13 +329,13 @@ public class MonsterWitch : Monster {
         base.TakeDamage(amount);
     }
 
-    public override void TakeStagger(float second) {
+    public override void TakeStagger(float second, GameObject origin=null) {
         if(HasShield)
             return;
         StartCoroutine(TakeBitDelayCoroutine());
     }
 
-    public override void TakeForce(Vector2 force, float duration) {
+    public override void TakeForce(Vector2 force, float duration=0.25f, GameObject origin=null) {
         if(HasShield)
             return;
         base.TakeForce(force * 0.1f, duration);

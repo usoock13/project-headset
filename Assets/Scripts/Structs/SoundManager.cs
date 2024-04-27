@@ -16,7 +16,6 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void PlayEffect(AudioClip clip) {
-        effectAudioSource.Stop();
         effectAudioSource.PlayOneShot(clip);
     }
 

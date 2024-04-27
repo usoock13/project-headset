@@ -86,7 +86,7 @@ public class ArtifactHolyBox : Artifact {
         if(inactiveCoroutine !=null)
             StopCoroutine(inactiveCoroutine);
     }
-    public bool TakeAttackHandler(Monster target, float amount) {
+    public bool TakeAttackHandler(GameObject target, float amount) {
         if(isActive) {
             GameManager.instance.StageManager.PrintDamageNumber(transform.position, $"BLOCK", new Color(1f, 1f, .25f));
             inactiveCoroutine = StartCoroutine(InactiveCoroutine());

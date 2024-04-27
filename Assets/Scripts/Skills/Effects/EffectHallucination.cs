@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,18 @@ public class EffectHallucination : MonoBehaviour, IDamageable {
         StartCoroutine(TauntCoroutine());
     }
 
-    public void TakeDamage(float amount) {
+    public void TakeDamage(float amount, GameObject origin=null) {
         hp -= amount;
+        GameManager.instance.StageManager.PrintDamageNumber(transform.position, amount.ToString("N1"));
         if(hp <= 0)
             Disapear();
     }
-    public void TakeForce(Vector2 force, float duration = 0.25F) {}
-    public void TakeStagger(float second) {}
+    public void TakeStagger(float second, GameObject origin=null) {
+        throw new NotImplementedException();
+    }
+    public void TakeForce(Vector2 force, float duration = 0.25F, GameObject origin=null) {
+        throw new NotImplementedException();
+    }
 
     private void Disapear() {
         this.gameObject.SetActive(false);

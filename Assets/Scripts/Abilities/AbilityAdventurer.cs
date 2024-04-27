@@ -31,7 +31,7 @@ public class AbilityAdventurer : Ability {
             GameManager.instance.StageManager.CreateExp(character.transform.position, EXP_AMOUNT);
         }
     }
-    private void OnTakeAttack(Character character, Monster origin, float amount) {
+    private void OnTakeAttack(Character character, GameObject origin, float amount) {
         float probability = UnityEngine.Random.Range(0, 100);
         if(probability <= 20) {
             GameManager.instance.StageManager.CreateExp(origin.transform.position, EXP_AMOUNT);

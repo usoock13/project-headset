@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class MonsterBasic : Monster {
@@ -55,14 +56,14 @@ public class MonsterBasic : Monster {
     }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == TargetCharacter.tag) {
-            var character = other.gameObject.GetComponent<Character>();
-            HitChracter(character);
+            if(other.gameObject.TryGetComponent(out Character character))
+                HitChracter(character);
         }
     }
     private void HitChracter(Character character) {
         if(canAttack) {
             canAttack = false;
-            character?.TakeAttack(this, AttackPower);
+            character?.TakeDamage(AttackPower);
             StartCoroutine(AttackCoroutine());
         }
     }

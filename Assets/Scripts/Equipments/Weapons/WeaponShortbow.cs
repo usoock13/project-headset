@@ -25,6 +25,8 @@ public class WeaponShortbow : Weapon {
     #region Weapon Information
     [SerializeField] private Sprite _weaponIcon;
 
+    [SerializeField] private AudioClip arrowSound;
+
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
         Name: "Shortbow",
@@ -77,6 +79,7 @@ public class WeaponShortbow : Weapon {
         );
     }
     protected override void Attack() {
+        GameManager.instance.SoundManager.PlayEffect(arrowSound);
         for(int i=0; i<ArrowQuantity; i++) {
             GameObject arrowInstance = ArrowPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
             float aimJitter = UnityEngine.Random.Range(-7f, 7f);

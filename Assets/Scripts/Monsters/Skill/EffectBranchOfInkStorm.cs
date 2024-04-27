@@ -42,7 +42,7 @@ public class EffectBranchOfInkStorm : MonoBehaviour {
             Physics2D.OverlapCollider(areaCollider, filter, inners);
             for(int i=0; i<inners.Count; i++) {
                 if(inners[i].TryGetComponent(out Character character)) {
-                    character.TakeDamage(origin.DPS * origin.Interval);
+                    character.TakeDamage(origin.DPS * origin.Interval, this.gameObject);
                 }
             }
             yield return new WaitForSeconds(origin.Interval);
