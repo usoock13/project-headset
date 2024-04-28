@@ -107,7 +107,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(120, () => {
             SpawnMonster(monsterBear, 10);
-            _StageManager.IncreaseStageLevel(0.5f);
+            _StageManager.IncreaseStageLevel(1.0f);
             _StageManager.ChangeDayNight(false);
         })); // # 03
 
@@ -119,9 +119,19 @@ public class ScenarioGrassDirector : ScenarioDirector {
                 }
             }
             StartCoroutine(AutoSpawn());
+        })); // # 04 
+
+        scenarios.Add(new Scenario(240, () => {
+            IEnumerator AutoSpawn() {
+                while(!bossIsSummoned) {
+                    SpawnDefaultMonster(monsterBear, 3);
+                    yield return new WaitForSeconds(2f);
+                }
+            }
+            StartCoroutine(AutoSpawn());
             _StageManager.IncreaseStageLevel(-0.5f);
             _StageManager.ChangeDayNight(true);
-        })); // # 04 (Extra temporary spawn to test)
+        })); // # 05
     }
 
     public void SummonBoss() {
