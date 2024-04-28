@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &115573014993955040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8634798278286003102}
+  - component: {fileID: 2442014058109876460}
+  m_Layer: 0
+  m_Name: '[Item] Awake Weapon!'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8634798278286003102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115573014993955040}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2633602284415047366}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2442014058109876460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115573014993955040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55aecf3e1b8ca7f43a372519084a6321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 934931997, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  _itemNameEN: 'Awaken Spear : The Bestseller'
+  _itemNameKO: "\uAC01\uC131 \uC7A5\uCC3D : \uBCA0\uC2A4\uD2B8\uC140\uB7EC"
+  oldWeapon: {fileID: 2633602284415047361}
+  newWeapon: {fileID: 5092265396621724286}
 --- !u!1 &2633602284415047360
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +79,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2633602286047343308}
+  - {fileID: 8634798278286003102}
+  - {fileID: 5092265396621724287}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,6 +100,7 @@ MonoBehaviour:
   extraInformation: 
   effectOrigin: {fileID: 2633602286047343299}
   _weaponIcon: {fileID: 86461542, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  itemAwake: {fileID: 2442014058109876460}
 --- !u!1 &2633602284536739383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4985,3 +5037,80 @@ SortingGroup:
   m_SortingLayerID: -2028446011
   m_SortingLayer: 3
   m_SortingOrder: 0
+--- !u!1001 &8999924092508927261
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2633602284415047366}
+    m_Modifications:
+    - target: {fileID: 4201149416467316577, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_Name
+      value: '[Awaken Weapon] The Bestseller'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316577, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+--- !u!114 &5092265396621724286 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4201149416467316579, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+  m_PrefabInstance: {fileID: 8999924092508927261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe30ba90f3f146c4496dbd0cb8e747e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5092265396621724287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4201149416467316578, guid: 4e0ac02a7cf10e04b975e6b3a4250143, type: 3}
+  m_PrefabInstance: {fileID: 8999924092508927261}
+  m_PrefabAsset: {fileID: 0}

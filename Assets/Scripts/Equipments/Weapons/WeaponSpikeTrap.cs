@@ -12,7 +12,7 @@ public class WeaponSpikeTrap : Weapon {
     private float[] damageCoef = new float[MAX_LEVEL]       {   0.25f,   0.30f,   0.35f,   0.40f,   0.45f,  }; // 피해 계수
     private float[] staticDamage = new float[MAX_LEVEL]     {     10f,     13f,     16f,     19f,     22f,  }; // 고정 피해량
     private float[] trapScale = new float[MAX_LEVEL]        {      1f,      1f,      1f,    1.2f,    1.5f,  }; // 덫 크기
-    protected override float AttackInterval => 5f;
+    protected override float AttackInterval => 3f;
 
     public float DamagePerSecond => damageCoef[level-1] * _Character.Power + staticDamage[level-1];
     public float Duration => 5f;

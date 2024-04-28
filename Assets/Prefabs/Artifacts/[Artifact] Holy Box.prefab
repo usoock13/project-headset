@@ -48,7 +48,7 @@ MonoBehaviour:
   level: 0
   extraInformation: 
   effectRenderer: {fileID: 4326084042486686692}
-  _icon: {fileID: -1036015940, guid: b87bd5af24cf80141a679deafb5ea3e3, type: 3}
+  _icon: {fileID: -1890116160, guid: b87bd5af24cf80141a679deafb5ea3e3, type: 3}
 --- !u!1 &4326084042486686690
 GameObject:
   m_ObjectHideFlags: 0

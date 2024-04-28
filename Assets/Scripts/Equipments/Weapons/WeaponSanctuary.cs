@@ -16,7 +16,9 @@ public class WeaponSanctuary : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+
     [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private ItemAwake itemAwake;
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
@@ -63,5 +65,17 @@ public class WeaponSanctuary : Weapon {
     public override void OnEquipped() {
         base.OnEquipped();
         effects.gameObject.SetActive(true);
+    }
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterPriest) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
     }
 }

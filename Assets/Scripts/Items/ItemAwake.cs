@@ -31,4 +31,6 @@ public class ItemAwake : Item {
         GameManager.instance.StageManager.EquipmentsManager.RemoveEquipmentFromList(oldWeapon);
         GameManager.instance.StageManager.EquipmentsManager.RemoveBonusItemFromList(this);
     }
+    
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

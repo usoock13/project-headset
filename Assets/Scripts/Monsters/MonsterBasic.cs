@@ -56,11 +56,11 @@ public class MonsterBasic : Monster {
     }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == TargetCharacter.tag) {
-            if(other.gameObject.TryGetComponent(out Character character))
-                HitChracter(character);
+            if(other.gameObject.TryGetComponent(out IDamageable target))
+                AttackTarget(target);
         }
     }
-    private void HitChracter(Character character) {
+    private void AttackTarget(IDamageable character) {
         if(canAttack) {
             canAttack = false;
             character?.TakeDamage(AttackPower);

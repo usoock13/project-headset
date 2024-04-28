@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Unity.Collections;
 using UnityEngine;
 using Utility;
 
@@ -40,6 +37,7 @@ public class MonsterWitch : Monster {
     [SerializeField] private GameObject effectEraser;
     [SerializeField] private GameObject effectPawn;
     [SerializeField] private EffectInkStorm effectInkStorm;
+    [SerializeField] private EffectCenterOfMass effectCenterOfMass;
     [SerializeField] private GameObject attachmentStun;
 
     private float shieldRatio = 0.50f;
@@ -238,11 +236,13 @@ public class MonsterWitch : Monster {
 
         IncreaseShield(maxHp * shieldRatio);
         effectInkStorm.Active(stormDamage);
+        effectCenterOfMass.Active();
         StartCoroutine(SubCastCoroutine01());
         StartCoroutine(SubCastCoroutine02());
     }
     private void InactiveInkStorm() {
         effectInkStorm.Inactive();
+        effectCenterOfMass.Inactive();
     }
     private IEnumerator SubCastCoroutine01() {
         yield return new WaitForSeconds(2.5f);

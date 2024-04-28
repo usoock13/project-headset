@@ -102,4 +102,6 @@ public class AWeaponBlaze : Weapon {
             effects[i].Active();
         }
     }
+    
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

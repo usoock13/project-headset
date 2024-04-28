@@ -106,4 +106,6 @@ public class AWeaponExplosionArrow : Weapon {
             _Character.OnAttack();
         }
     }
+    
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

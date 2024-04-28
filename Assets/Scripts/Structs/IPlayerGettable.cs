@@ -8,4 +8,6 @@ public interface IPlayerGettable {
     #endregion Information for UI
 
     public abstract void OnGotten();
+
+    public abstract bool Filter();
 }

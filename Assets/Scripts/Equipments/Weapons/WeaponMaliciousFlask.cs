@@ -19,7 +19,9 @@ public class WeaponMaliciousFlask : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+
     [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private ItemAwake itemAwake;
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
@@ -90,5 +92,17 @@ public class WeaponMaliciousFlask : Weapon {
     }
     public float GetSlowAmount(int level) {
         return slowAmount[level-1];
+    }
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterAlchemist) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   extraInformation: 
-  _icon: {fileID: 0}
+  _icon: {fileID: -107857924, guid: b87bd5af24cf80141a679deafb5ea3e3, type: 3}

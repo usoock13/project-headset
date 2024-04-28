@@ -152,4 +152,5 @@ public class AWeaponAutomail : Weapon {
         base.OnGotten();
         Overload = 0;
     }
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

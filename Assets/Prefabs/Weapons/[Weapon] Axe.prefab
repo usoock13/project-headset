@@ -118,6 +118,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7052259632966506093}
+  - {fileID: 3296942889493384838}
+  - {fileID: 2879676184677100773}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -137,6 +139,7 @@ MonoBehaviour:
   extraInformation: 
   projectile: {fileID: 7761718321036466269}
   _weaponIcon: {fileID: 1779788115, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  itemAwake: {fileID: 4317237319600333670}
 --- !u!1 &3334924724209516986
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,3 +224,129 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5178629576313879961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3296942889493384838}
+  - component: {fileID: 4317237319600333670}
+  m_Layer: 0
+  m_Name: '[Item] Awake Weapon!'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3296942889493384838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178629576313879961}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3232903881723159892}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4317237319600333670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178629576313879961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55aecf3e1b8ca7f43a372519084a6321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 1148539457, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  _itemNameEN: 'Awaken Knuckle : The Judgement'
+  _itemNameKO: "\uAC01\uC131 \uB3C4\uB07C : \uD53C\uC2A4\uBA54\uC774\uCEE4"
+  oldWeapon: {fileID: 2740440719906952877}
+  newWeapon: {fileID: 4869069123541191995}
+--- !u!1001 &1948159399425145692
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3232903881723159892}
+    m_Modifications:
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974906, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_Name
+      value: '[Awaken Weapon] The Piece Maker'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395489723502974906, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+--- !u!4 &2879676184677100773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4395489723502974905, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+  m_PrefabInstance: {fileID: 1948159399425145692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4869069123541191995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6384741104556455527, guid: 35b5c37a9a7fce846b8a0592c755485e, type: 3}
+  m_PrefabInstance: {fileID: 1948159399425145692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a16a9f5846b4f44b1450a1e6a73d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

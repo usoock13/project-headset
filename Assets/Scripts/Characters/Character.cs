@@ -55,7 +55,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
     public bool canMove = true;
 
     public float MaxSp => maxSp;
-    public float currentSP { get; protected set; } = 0;
+    public float CurrentSP { get; protected set; } = 0;
     protected float defaultRecoveringSP = 1f;
     public Func<Character, float> extraRecoveringSp;
     protected float RecoveringSpPerSecond { get {
@@ -407,11 +407,6 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         target.transform.SetParent(StageManager.EquipmentsManager.transform);
     }
     
-    private void ConsumeStamina(float amount) {
-        currentStamina = Mathf.Max(currentStamina - amount, 0);
-        StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
-    }
-    
     public void GetExp(int amount) {
         currentExp += amount;
         if(currentExp >= MaxExp)
@@ -444,21 +439,19 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         return false;
     }   
     public void TakeDamage(float amount, GameObject origin=null) {
-        if(origin.TryGetComponent(out Monster monster)) {
-            if(CurrentState.Compare(dieState)
-            || CanBlockAttack(origin, amount))
-                return;
+        if(CurrentState.Compare(dieState)
+        || CanBlockAttack(origin, amount))
+            return;
 
-            float finalDamage = (100 - Armor)/100 * amount;
-            currentHp -= finalDamage;
-            StatusUI.UpdateHpSlider(currentHp / maxHp);
-            onTakeDamage?.Invoke(this, finalDamage);
-            if(currentHp <= 0)
-                Die();
-            StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
-            StageUIManager.ActiveHitEffectUI();
-            onTakeAttack?.Invoke(this, origin, amount);
-        }
+        float finalDamage = (100 - Armor)/100 * amount;
+        currentHp -= finalDamage;
+        StatusUI.UpdateHpSlider(currentHp / maxHp);
+        onTakeDamage?.Invoke(this, finalDamage);
+        if(currentHp <= 0)
+            Die();
+        StageManager.PrintDamageNumber(transform.position, ((int) finalDamage).ToString(), Color.red);
+        StageUIManager.ActiveHitEffectUI();
+        onTakeAttack?.Invoke(this, origin, amount);
     }
     public void ConsumeHP(float amount) {
         currentHp -= amount;
@@ -491,12 +484,24 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
     }
     public void RecoverSkillGauge(float amount) {
-        if(currentSP < maxSp)
-            currentSP = Mathf.Min(currentSP + amount, maxStamina);
-        StatusUI.UpdateSpSlider(currentSP / maxSp);
+        if(CurrentSP < maxSp)
+            CurrentSP = Mathf.Min(CurrentSP + amount, maxStamina);
+        StatusUI.UpdateSpSlider(CurrentSP / maxSp);
+    }
+    
+    private void ConsumeStamina(float amount) {
+        currentStamina = Mathf.Max(currentStamina - amount, 0);
+        StatusUI.UpdateStaminaSlider(currentStamina / maxStamina);
+    }
+    private void ConsumeSP(float amount) {
+        CurrentSP = Mathf.Max(CurrentSP - amount, 0);
+        StatusUI.UpdateSpSlider(CurrentSP / maxSp);
     }
 
     public void ActiveSkill() {
+        if(CurrentSP < activeSkill.Cost)
+            return;
+        ConsumeSP(activeSkill.Cost);
         GameManager.instance.StageManager.CameraDirector.PlaySkillCinematics();
         activeSkill?.Active();
     }

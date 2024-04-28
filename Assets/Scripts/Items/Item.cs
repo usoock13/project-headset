@@ -104,11 +104,16 @@ public abstract class Item : MonoBehaviour, IPlayerGettable {
         }
         currentState = ItemState.Dropped;
     }
+
     public virtual void OnGotten() {
         if(pullCoroutine != null)
             StopCoroutine(pullCoroutine);
         GameManager.instance.StageManager.OnGetItem(this);
     }
+    public virtual bool Filter() {
+        return true;
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D other) {
         if(currentState == ItemState.Dropped
         || currentState == ItemState.Pulled) {

@@ -98,4 +98,6 @@ public class AWeaponAcidFlask : Weapon {
         FlaskPooler.OutPool(transform.position, _Character.attackArrow.rotation);
         _Character.OnAttack();
     }
+
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

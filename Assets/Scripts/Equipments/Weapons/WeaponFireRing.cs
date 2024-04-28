@@ -16,7 +16,9 @@ public class WeaponFireRing : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+
     [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private ItemAwake itemAwake;
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
@@ -77,6 +79,15 @@ public class WeaponFireRing : Weapon {
         for( int i=0; i<(level>=5?6:3); i++ ) {
             effects[i].gameObject.SetActive(true);
             effects[i].Active();
+        }
+
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterMage) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
         }
     }
 }

@@ -7,8 +7,6 @@ public class WeaponShortbow : Weapon {
     [SerializeField] private EffectShortbow shortbowEffect;
     public ObjectPooler ArrowPooler { get; private set; }
     
-    [SerializeField] private ItemAwake itemAwake;
-    
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
@@ -26,6 +24,7 @@ public class WeaponShortbow : Weapon {
     [SerializeField] private Sprite _weaponIcon;
 
     [SerializeField] private AudioClip arrowSound;
+    [SerializeField] private ItemAwake itemAwake;
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,

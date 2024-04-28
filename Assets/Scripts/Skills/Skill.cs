@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour {
     [SerializeField] protected Character character;
     protected float cost = 100f;
+    public float Cost => character?.MaxSp ?? cost;
 
     public record SkillInformation(Sprite Icon, string Name, string Description);
     

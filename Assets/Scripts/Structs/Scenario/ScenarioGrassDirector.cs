@@ -20,6 +20,8 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
     private bool bossIsSummoned = false;
 
+    [SerializeField] private AudioClip bossRoundBgm;
+
     protected override void Update() {
         base.Update();
         
@@ -82,8 +84,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(3, () => {
             IEnumerator AutoSpawn() {
-                SpawnMonster(monsterBear, 10);
-                while(!bossIsSummoned && Time.time < 30) {
+                while(!bossIsSummoned && Time.timeSinceLevelLoad < 30) {
 
                     SpawnDefaultMonster(monsterBat, 3);
                     SpawnDefaultMonster(monsterWolf, 1);
@@ -95,7 +96,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
         scenarios.Add(new Scenario(30, () => {
             IEnumerator AutoSpawn() {
-                while(!bossIsSummoned && Time.time < 120) {
+                while(!bossIsSummoned && Time.timeSinceLevelLoad < 120) {
                     SpawnDefaultMonster(monsterGoblin, 4);
                     SpawnDefaultMonster(monsterGoblinRider, 1);
                     yield return new WaitForSeconds(3f);
@@ -104,7 +105,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
             StartCoroutine(AutoSpawn());
         })); // # 02
 
-        scenarios.Add(new Scenario(60, () => {
+        scenarios.Add(new Scenario(120, () => {
             SpawnMonster(monsterBear, 10);
             _StageManager.IncreaseStageLevel(0.5f);
             _StageManager.ChangeDayNight(false);
@@ -125,11 +126,22 @@ public class ScenarioGrassDirector : ScenarioDirector {
 
     public void SummonBoss() {
         bossIsSummoned = true;
+        GameManager.instance.SoundManager.PlayBGM(bossRoundBgm);
         /* 
             Actually summon boss.
         */
         MonsterWitch boss = Instantiate(bossMonsterWitch, bossSummonPoint.position, Quaternion.identity);
         boss.gameObject.SetActive(true);
+
+        /* __temporary >> */
+        IEnumerator AutoSpawn() {
+            while(boss.GetComponent<MonsterWitch>().isArrive) {
+                SpawnDefaultMonster(monsterBear, 8);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        StartCoroutine(AutoSpawn());
+        /* << __temporary */
     }
 
     protected void SpawnDefaultMonster(Monster monster, int number) {

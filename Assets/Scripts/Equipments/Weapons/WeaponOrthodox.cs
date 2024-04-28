@@ -6,8 +6,6 @@ public class WeaponOrthodox : Weapon {
     [SerializeField] private EffectStraightPunch punchEffect;
     public ObjectPooler EffectPooler { get; private set; }
 
-    [SerializeField] private ItemAwake itemAwake;
-    
     #region Weapon Status
     private const int MAX_LEVEL = 5;
     public override int MaxLevel { get { return MAX_LEVEL; } }
@@ -20,7 +18,9 @@ public class WeaponOrthodox : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+
     [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private ItemAwake itemAwake;
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,

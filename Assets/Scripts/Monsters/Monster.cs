@@ -10,13 +10,14 @@ public abstract class Monster : MonoBehaviour, IDamageable, IAttachmentsTakeable
     private Transform targetCharacter;
     public Transform TargetCharacter {
         get {
-            targetCharacter ??= GameManager.instance.Character.transform;
+            if(targetCharacter==null || !targetCharacter.gameObject.activeSelf)
+                targetCharacter = GameManager.instance.Character.transform;
             return targetCharacter;
         }
         set { targetCharacter = value; }
     }
     protected StageManager _StageManager => GameManager.instance.StageManager;
-    
+
     public GameObject GameObject => this.gameObject;
 
     [SerializeField] protected Movement movement;

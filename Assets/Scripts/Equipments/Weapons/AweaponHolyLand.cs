@@ -131,4 +131,6 @@ public class AweaponHolyLand : Weapon {
         extraInformation = (killCountToSummon[level-1] - killCount).ToString();
         GameManager.instance.StageManager.StageUIManager.UpdateWeaponList();
     }
+
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

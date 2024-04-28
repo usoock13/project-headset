@@ -70,4 +70,6 @@ public class AWeaponMultiUseAxe : Weapon {
         EffectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
         _Character.OnAttack();
     }
+
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

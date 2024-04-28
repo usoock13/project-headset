@@ -194,4 +194,6 @@ public class AWeaponMagicPen : Weapon {
                 break;
         }
     }
+
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

@@ -5,8 +5,8 @@ public class ArtifactHandOfGlory : Artifact {
     #region Artifact Status
     const int MAX_LEVEL = 5;
     public override int MaxLevel => MAX_LEVEL;
-    private float[] staticDamage = new float[] {  15f,   20f,   25f,   30f,   35f };
-    private float[] damageCoef = new float[]   { 0.1f,  0.1f,  0.1f,  0.1f,  0.1f };
+    private float[] staticDamage = new float[] {   15f,    20f,    25f,    30f,    35f };
+    private float[] damageCoef = new float[]   { 0.10f,  0.12f,  0.14f,  0.16f,  0.18f };
 
     public float Damage => staticDamage[level-1] + damageCoef[level-1] * _Character.Power;
     private float characterDamageRatio = .3f;

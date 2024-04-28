@@ -55,13 +55,13 @@ public class EquipmentManager : MonoBehaviour {
         List<Equipment> remainingEquipments = new List<Equipment>();    // all equipments character is not having
 
         weaponCandidates = havingWeapons.Where((Weapon weapon) => {
-            return weapon.CurrentLevel < weapon.MaxLevel;
+            return weapon.CurrentLevel < weapon.MaxLevel && weapon.Filter();
         }).ToList();
         if(havingWeapons.Count<MAX_ARTIFACTS_COUNT)
             remainingEquipments.AddRange(remainingWeapons);
 
         artifactCandidates = havingArtifacts.Where((Artifact artifact) => {
-            return artifact.CurrentLevel < artifact.MaxLevel;
+            return artifact.CurrentLevel < artifact.MaxLevel && artifact.Filter();
         }).ToList();
         if(havingArtifacts.Count<MAX_ARTIFACTS_COUNT)
             remainingEquipments.AddRange(remainingArtifacts);
@@ -74,8 +74,11 @@ public class EquipmentManager : MonoBehaviour {
         candidates.AddRange(artifactCandidates.GetRange(0, Math.Min(artifactCandidates.Count, number)));
         candidates.AddRange(remainingEquipments.GetRange(0, Math.Min(remainingEquipments.Count, number)));
 
-        bonusChoises.Shuffle();
-        candidates.Add(bonusChoises[0]);
+        var filteredBonus = bonusChoises.Where((Item item) => {
+            return item.Filter();
+        }).ToList();
+        filteredBonus.Shuffle();
+        candidates.Add(filteredBonus[0]);
 
         while(candidates.Count < number) { // Fill as much item as lack into the candidate list.
             candidates.Add(bonusChoises[0]);

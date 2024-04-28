@@ -104,4 +104,6 @@ public class AWeaponXXXLCalibur : Weapon {
         base.OnTakeOff();
         StopAllCoroutines();
     }
+
+    public override bool Filter() => GameManager.instance.StageManager.Character.level >= 20;
 }

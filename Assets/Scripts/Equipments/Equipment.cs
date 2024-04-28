@@ -68,4 +68,8 @@ public abstract class Equipment : MonoBehaviour, IPlayerGettable {
     public override string ToString() {
         return this.Name;
     }
+    
+    public virtual bool Filter() {
+        return true;
+    }
 }

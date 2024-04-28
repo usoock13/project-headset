@@ -151,6 +151,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7052259632966506093}
+  - {fileID: 3549032786624162044}
+  - {fileID: 6198755040991286271}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -181,3 +183,130 @@ MonoBehaviour:
   extraInformation: 
   effects: {fileID: 7646554343292359711}
   _weaponIcon: {fileID: 1205168664, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  itemAwake: {fileID: 359314699026248822}
+--- !u!1 &8862537977832503616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3549032786624162044}
+  - component: {fileID: 359314699026248822}
+  m_Layer: 0
+  m_Name: '[Item] Awake Weapon!'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3549032786624162044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862537977832503616}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3232903881723159892}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &359314699026248822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862537977832503616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55aecf3e1b8ca7f43a372519084a6321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 635293794, guid: 8d38231d6a916164caee9fe11a6feba7, type: 3}
+  _itemNameEN: 'Awaken Knuckle : The Judgement'
+  _itemNameKO: "\uAC01\uC131 \uC131\uC5ED : \uAC00\uB098\uC548"
+  oldWeapon: {fileID: 1979608027561476996}
+  newWeapon: {fileID: 6198755040991286270}
+--- !u!1001 &1128565872352800596
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3232903881723159892}
+    m_Modifications:
+    - target: {fileID: 6462417458778422440, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_Name
+      value: '[Awaken Weapon] The Canaan'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422440, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5c057af57d347345978835ef105780d, type: 3}
+--- !u!114 &6198755040991286270 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6462417458778422442, guid: f5c057af57d347345978835ef105780d, type: 3}
+  m_PrefabInstance: {fileID: 1128565872352800596}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab93bee19fd08a459acc336f15b94c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &6198755040991286271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6462417458778422443, guid: f5c057af57d347345978835ef105780d, type: 3}
+  m_PrefabInstance: {fileID: 1128565872352800596}
+  m_PrefabAsset: {fileID: 0}

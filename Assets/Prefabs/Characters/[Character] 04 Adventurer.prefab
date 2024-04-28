@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1106996911317530082}
   - component: {fileID: 7507085222910259824}
+  - component: {fileID: 4548298427779165799}
   - component: {fileID: 3221789618459788946}
+  - component: {fileID: 8524743757793147438}
   m_Layer: 0
   m_Name: '[Particle System] Taunt Effect'
   m_TagString: Untagged
@@ -4798,6 +4800,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!58 &4548298427779165799
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243769385637581741}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5
 --- !u!199 &3221789618459788946
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4870,6 +4888,27 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!50 &8524743757793147438
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243769385637581741}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &5055402849465624209
 GameObject:
   m_ObjectHideFlags: 0
@@ -4976,7 +5015,7 @@ GameObject:
   - component: {fileID: 3546639922232894223}
   - component: {fileID: 7222938671750539604}
   - component: {fileID: 7420884163136513344}
-  - component: {fileID: 9091569139453408436}
+  - component: {fileID: 1019594654971255313}
   - component: {fileID: 4370848105529240119}
   m_Layer: 3
   m_Name: '[Effect] Hallucination'
@@ -5066,10 +5105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   origin: {fileID: 762799048233209399}
-  tauntArea: {fileID: 9091569139453408436}
+  tauntArea: {fileID: 4548298427779165799}
   particle: {fileID: 7507085222910259824}
---- !u!58 &9091569139453408436
-CircleCollider2D:
+--- !u!61 &1019594654971255313
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5081,9 +5120,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.06250001}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.48, y: 0.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!50 &4370848105529240119
 Rigidbody2D:
   serializedVersion: 4

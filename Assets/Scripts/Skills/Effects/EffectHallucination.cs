@@ -20,7 +20,7 @@ public class EffectHallucination : MonoBehaviour, IDamageable {
 
     public void TakeDamage(float amount, GameObject origin=null) {
         hp -= amount;
-        GameManager.instance.StageManager.PrintDamageNumber(transform.position, amount.ToString("N1"));
+        GameManager.instance.StageManager.PrintDamageNumber(transform.position, amount.ToString("N0"));
         if(hp <= 0)
             Disapear();
     }

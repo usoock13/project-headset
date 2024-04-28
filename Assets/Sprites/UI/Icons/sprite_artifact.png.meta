@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon_ati_0
+      name: sprite_artifact_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fad6d327689a694e842240f87efaf5c
-      internalID: 1057290014
+      spriteID: 4d2a45e054aedcf40868bc40d33e5f4a
+      internalID: 614243220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_1
+      name: sprite_artifact_1
       rect:
         serializedVersion: 2
         x: 48
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab87bab804d1764bbbf8dd3cebe228e
-      internalID: 484759549
+      spriteID: 08cbe95a7270780469d4a177ed110180
+      internalID: -2039431465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_2
+      name: sprite_artifact_2
       rect:
         serializedVersion: 2
         x: 96
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 749ae4bc15e730a4c82d644d547564e7
-      internalID: -1861850445
+      spriteID: 43b104060197f3d43823122ee8d97498
+      internalID: 640319605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_3
+      name: sprite_artifact_3
       rect:
         serializedVersion: 2
         x: 144
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f4306f51bba8244a80b42c46ccc5e78
-      internalID: -75427112
+      spriteID: ecea26697a0eb7e4d96d389619191074
+      internalID: 274029585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_4
+      name: sprite_artifact_4
       rect:
         serializedVersion: 2
         x: 192
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8aa2aa6d448eb3d4b9639abae4e42c91
-      internalID: -788683051
+      spriteID: cb885e78cd3b76f4494a0a2a00a5c17f
+      internalID: -1607129420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_5
+      name: sprite_artifact_5
       rect:
         serializedVersion: 2
         x: 0
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 650bea305f69d21438cb01bc6cda6ba4
-      internalID: -1391170694
+      spriteID: 1b23cbdc8f986904ca79522be7195ce2
+      internalID: 2045380343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_6
+      name: sprite_artifact_6
       rect:
         serializedVersion: 2
         x: 48
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f9a80cb8787f764f975378ae5f94b4b
-      internalID: -1036015940
+      spriteID: bb4da48d55e9ddc479f6ba221fa73954
+      internalID: -1890116160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_7
+      name: sprite_artifact_7
       rect:
         serializedVersion: 2
         x: 96
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6c18eacd205ca947b50af1479cb5b19
-      internalID: -1028142690
+      spriteID: 07bdc3588dc184e458dfd21c575f15fa
+      internalID: 2011032732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_8
+      name: sprite_artifact_8
       rect:
         serializedVersion: 2
         x: 144
@@ -286,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c9bd78be6fee18489d4915312b16a78
-      internalID: -710181063
+      spriteID: f567850414a9c5c41bae3d492db0080d
+      internalID: 245974733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_9
+      name: sprite_artifact_9
       rect:
         serializedVersion: 2
         x: 192
@@ -307,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cc61ceaf0dac7e459374fdc4cb1619d
-      internalID: 1923839740
+      spriteID: 91ef44af8b892e44293b49ed132d9953
+      internalID: 1393696894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_ati_10
+      name: sprite_artifact_10
       rect:
         serializedVersion: 2
         x: 0
@@ -328,8 +328,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8af8ca3e74fa73d4da22b6058a40a36f
-      internalID: -55560066
+      spriteID: 4d9714f9797781e459cc790a9adfa1f2
+      internalID: -301021421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_artifact_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17e3ccfdd93a0e94c80ad6ba4d809ea1
+      internalID: 1322606696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_artifact_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 271fd9996fc154a49aadc9de14d5a702
+      internalID: 1748460192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_artifact_13
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8942c5b3f068018428ab2d349c45fed7
+      internalID: -107857924
       vertices: []
       indices: 
       edges: []
@@ -345,17 +408,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      icon_ati_10: -55560066
-      icon_ati_6: -1036015940
-      icon_ati_1: 484759549
-      icon_ati_9: 1923839740
-      icon_ati_0: 1057290014
-      icon_ati_3: -75427112
-      icon_ati_5: -1391170694
-      icon_ati_2: -1861850445
-      icon_ati_7: -1028142690
-      icon_ati_4: -788683051
-      icon_ati_8: -710181063
+      sprite_artifact_3: 274029585
+      sprite_artifact_5: 2045380343
+      sprite_artifact_8: 245974733
+      sprite_artifact_0: 614243220
+      sprite_artifact_2: 640319605
+      sprite_artifact_11: 1322606696
+      sprite_artifact_6: -1890116160
+      sprite_artifact_12: 1748460192
+      sprite_artifact_1: -2039431465
+      sprite_artifact_7: 2011032732
+      sprite_artifact_13: -107857924
+      sprite_artifact_9: 1393696894
+      sprite_artifact_10: -301021421
+      sprite_artifact_4: -1607129420
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

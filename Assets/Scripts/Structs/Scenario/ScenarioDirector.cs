@@ -39,7 +39,7 @@ public abstract class ScenarioDirector : MonoBehaviour {
     }
     protected virtual void Update() {
         if(order < scenarios.Count
-        && Time.time >= next.time) {
+        && Time.timeSinceLevelLoad >= next.time) {
             next.action?.Invoke();
             order ++;
             if(order < scenarios.Count)

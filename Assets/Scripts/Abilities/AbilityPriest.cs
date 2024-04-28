@@ -15,10 +15,10 @@ public class AbilityPriest : Ability {
         description: "<nobr>이동하지 않는 2초마다 체력을 회복합니다.</nobr>"
     );
 
-    private float timeToHeal = 2f;
+    private float timeToHeal = 1f;
     private float standingTime = 0;
     private float cooldown = 0;
-    [SerializeField] private float healAmount = 3f;
+    [SerializeField] private float healAmount = 5f;
     [SerializeField] private ParticleSystem healParticle;
 
     private Character owner;

@@ -21,7 +21,9 @@ public class WeaponAxe : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+    
     [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private ItemAwake itemAwake;
     
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
@@ -79,5 +81,17 @@ public class WeaponAxe : Weapon {
     protected override void Attack() {
         EffectPooler.OutPool(_Character.attackArrow.position, _Character.attackArrow.rotation);
         _Character.OnAttack();
+    }
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterMercenary) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
     }
 }

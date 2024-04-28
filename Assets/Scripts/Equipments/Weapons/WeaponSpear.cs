@@ -16,7 +16,9 @@ public class WeaponSpear : Weapon {
     #endregion Weapon Status
 
     #region Weapon Information
+
     [SerializeField] private Sprite _weaponIcon;
+    [SerializeField] private ItemAwake itemAwake;
 
     protected override EquipmentInformation InformationEN => new EquipmentInformation(
         Icon: _weaponIcon,
@@ -71,5 +73,17 @@ public class WeaponSpear : Weapon {
     private IEnumerator InPoolEffect(float delay, GameObject effect, ObjectPooler pooler) {
         yield return new WaitForSeconds(delay);
         pooler.InPool(effect);
+    }
+
+    protected override void OnLevelUp() {
+        base.OnLevelUp();
+        if(level == MaxLevel) {
+            foreach(Character character in GameManager.instance.StageManager.Party) {
+                if(character is CharacterAdventurer) {
+                    GameManager.instance.StageManager.EquipmentsManager.AddBonusItemAtList(itemAwake);
+                    break;
+                }
+            }
+        }
     }
 }
