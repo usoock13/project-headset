@@ -23,6 +23,18 @@ MonoBehaviour:
     m_Key: lu_press_any_key
     m_Metadata:
       m_Items: []
+  - m_Id: 2643052638040064
+    m_Key: lu_weapons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2643130949890048
+    m_Key: lu_ability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2643135622344704
+    m_Key: li_skill
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

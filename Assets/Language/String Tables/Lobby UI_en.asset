@@ -26,6 +26,18 @@ MonoBehaviour:
     m_Localized: '[ Click anywhere to start the game ]'
     m_Metadata:
       m_Items: []
+  - m_Id: 2643052638040064
+    m_Localized: Weapons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2643130949890048
+    m_Localized: Ability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2643135622344704
+    m_Localized: Skill
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
