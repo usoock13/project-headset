@@ -4,6 +4,8 @@ using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour {
     [SerializeField] private AudioSource effectAudioSource;
     [SerializeField] private AudioSource bgmAudioSource;
+
+    [SerializeField] public AudioClip skillAudioClip;
     
     public float VolumeEffect {
         get => Mathf.Clamp(effectAudioSource.volume, 0, 1);

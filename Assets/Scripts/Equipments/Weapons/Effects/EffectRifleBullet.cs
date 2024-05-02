@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectRifleBullet : EffectProjectile {
+    private bool isActive = false;
     public WeaponRifle originWeapon;
     private float Damage => originWeapon.Damage;
     private float flyingSpeed = 36f;
@@ -23,7 +24,8 @@ public class EffectRifleBullet : EffectProjectile {
         }
     }
     protected override void Update() {
-        base.Update();
+        if(isActive)
+            base.Update();
         transform.Translate(Vector2.up * flyingSpeed * Time.deltaTime);
     }
     protected override void OnEnable() {
@@ -31,6 +33,7 @@ public class EffectRifleBullet : EffectProjectile {
         hitCount = 0;
         hitMonsters.Clear();
         trailRenderer.Clear();
+        isActive = true;
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(1<<other.gameObject.layer == targetLayer.value
@@ -48,6 +51,7 @@ public class EffectRifleBullet : EffectProjectile {
         }
     }
     protected override void Disappear() {
+        isActive = false;
         originWeapon.EffectPooler.InPool(this.gameObject);
     }
 }

@@ -221,6 +221,8 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
 
     [SerializeField] private Light2D handLampLight;
 
+    [SerializeField] private AudioClip castingSkillSound;
+
     #region Unity Events
     protected void Awake() {
         movement ??= GetComponent<Movement>();
@@ -239,7 +241,7 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         if(Input.GetKeyDown(KeyCode.L))
             this.GetExp((int) (MaxExp * 0.5f));
         if(Input.GetKeyDown(KeyCode.O))
-            StageManager.CameraDirector.ShakeCamera(2, 2);
+            RecoverSkillGauge(100);
         if(Input.GetKeyDown(KeyCode.P))
             StageManager.CameraDirector.ShakeCameraCurved(2, 2);
         #endif
@@ -498,10 +500,11 @@ public abstract class Character : MonoBehaviour, IDamageable, IAttachmentsTakeab
         StatusUI.UpdateSpSlider(CurrentSP / maxSp);
     }
 
-    public void ActiveSkill() {
+    public void CastSkill() {
         if(CurrentSP < activeSkill.Cost)
             return;
         ConsumeSP(activeSkill.Cost);
+        GameManager.instance.SoundManager.PlayEffect(GameManager.instance.SoundManager.skillAudioClip);
         GameManager.instance.StageManager.CameraDirector.PlaySkillCinematics();
         activeSkill?.Active();
     }

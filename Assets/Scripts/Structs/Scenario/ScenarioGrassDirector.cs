@@ -21,6 +21,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
     private bool bossIsSummoned = false;
 
     [SerializeField] private AudioClip bossRoundBgm;
+    [SerializeField] private GameObject summoningBossArea;
 
     protected override void Update() {
         base.Update();
@@ -132,6 +133,10 @@ public class ScenarioGrassDirector : ScenarioDirector {
             _StageManager.IncreaseStageLevel(-0.5f);
             _StageManager.ChangeDayNight(true);
         })); // # 05
+
+        scenarios.Add(new Scenario(15, () => {
+            MakeSummonArea();
+        })); // # test
     }
 
     public void SummonBoss() {
@@ -146,7 +151,7 @@ public class ScenarioGrassDirector : ScenarioDirector {
         /* __temporary >> */
         IEnumerator AutoSpawn() {
             while(boss.GetComponent<MonsterWitch>().isArrive) {
-                SpawnDefaultMonster(monsterBear, 8);
+                SpawnDefaultMonster(monsterBear, 5);
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -184,5 +189,13 @@ public class ScenarioGrassDirector : ScenarioDirector {
             return result;
         }
         return null;
+    }
+
+    private void MakeSummonArea() {
+        Vector2 spawnPoint = RandomDirection * spawnDistance + (Vector2)Character.transform.position;
+        spawnPoint.x = Mathf.Clamp(spawnPoint.x, mapLeftBottom.x, mapRightTop.x);
+        spawnPoint.y = Mathf.Clamp(spawnPoint.y, mapLeftBottom.y, mapRightTop.y);
+        summoningBossArea.transform.position = spawnPoint;
+        summoningBossArea.SetActive(true);
     }
 }

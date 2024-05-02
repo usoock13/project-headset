@@ -40,6 +40,6 @@ public class CharacterInputSystem : MonoBehaviour {
     }
     public void ActiveSkill(InputAction.CallbackContext context) {
         if(context.performed)
-            character.ActiveSkill();
+            character.CastSkill();
     }
 }

@@ -33,6 +33,7 @@ public class EffectGlory : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     private IEnumerator AttackNextFrame() {
+        yield return new WaitForSeconds(.23f);
         DamageArea();
         yield return new WaitForSeconds(.15f);
         DamageArea();

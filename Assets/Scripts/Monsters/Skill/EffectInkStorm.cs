@@ -35,6 +35,7 @@ public class EffectInkStorm : MonoBehaviour {
             StopCoroutine(activeCoroutine);
         for(int i=0; i<branches.Length; i++)
             branches[i].Inactive();
+        gameObject.SetActive(false);
     }
 
     private IEnumerator ActiveCoroutine() {

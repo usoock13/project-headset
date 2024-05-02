@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 19506508}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 521297985467334478, guid: edddbd92ed6512440a30572faf0fd11b, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2127,6 +2127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectAudioSource: {fileID: 3164301160709329311}
   bgmAudioSource: {fileID: 19506510}
+  skillAudioClip: {fileID: 8300000, guid: 109bc2af98e9e6f4f8667b492bb9d0b7, type: 3}
 --- !u!1 &1199198868
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,12 +4156,12 @@ AudioSource:
   m_GameObject: {fileID: 2405160366360083669}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 521297985467334478, guid: edddbd92ed6512440a30572faf0fd11b, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

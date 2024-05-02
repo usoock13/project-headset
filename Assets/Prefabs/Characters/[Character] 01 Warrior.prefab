@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4460229513932856381}
   - component: {fileID: 2518447902791908782}
   - component: {fileID: 5659826994200025640}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: '[Skill] Blade Storm'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1189640632873005873}
+  castingSound: {fileID: 0}
   _icon: {fileID: 0}
   attackCollider: {fileID: 1844224250174757649}
   particle: {fileID: 4460229513932856381}
@@ -110,9 +111,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 5.5
 --- !u!198 &4460229513932856381
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4932,7 +4933,7 @@ ParticleSystemRenderer:
   m_NormalDirection: 1
   m_ShadowBias: 0
   m_RenderAlignment: 0
-  m_Pivot: {x: -0.01, y: 0.03, z: 0}
+  m_Pivot: {x: -0.01, y: -0.02, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
@@ -4958,7 +4959,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7911905204375329170}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

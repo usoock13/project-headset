@@ -63,9 +63,8 @@ public class SkillRanger : Skill {
         float time = 0;
         float term = timeForOneCycle / arrowsPerCycle;
         Vector2 dir = Vector2.up;
-        GameManager.instance.SoundManager.PlayEffect(castingSound);
-        GameManager.instance.SoundManager.PlayEffect(arrowSound);
         while(time < timeForOneCycle * cycle) {
+            GameManager.instance.SoundManager.PlayEffect(arrowSound);
             var arrow = ArrowPooler.OutPool(new Vector2(transform.position.x, transform.position.y) + dir, Quaternion.identity);
             arrow.transform.LookAtWithUp(new Vector2(arrow.transform.position.x, arrow.transform.position.y) + dir);
 
